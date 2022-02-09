@@ -11,4 +11,5 @@ This is a Stripes modules providing an administrative interface to the Index Dat
 ## See also
 
 * [Notes on implementing the Harvester Admin UI](doc/notes.md)
+* [Notes on UI requirements](doc/ui.md)
 
