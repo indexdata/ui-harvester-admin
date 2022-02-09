@@ -11,6 +11,9 @@ Source code:
 * [`mod-harvester-admin` source code](https://github.com/indexdata/mod-harvester-admin)
 * [`mod-harvester-admin` OpenAPI specification](https://github.com/indexdata/mod-harvester-admin/blob/master/src/main/resources/openapi/harvester-admin-0.1.yaml)
 
+Tools:
+* [`api-lint`](https://dev.folio.org/guides/api-lint/)
+
 Administration:
 * [Jira issue for logging hours on UI work](https://jira.indexdata.com/browse/FOL-35)
 
