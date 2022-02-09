@@ -1,4 +1,4 @@
-# Notes on implementing the Harvester Admin UI
+# Links on implementing the Harvester Admin UI
 
 Specifications:
 * [_Data Harvesting and Integration Platform_ document](https://docs.google.com/document/d/17noB1LJykxZNN69usucvKhSu8vnOaiH2zSN0Wef9JBE/edit#)
