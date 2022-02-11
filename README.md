@@ -6,10 +6,11 @@ This software is distributed under the terms of the Apache License, Version 2.0.
 
 ## Overview
 
-This is a Stripes modules providing an administrative interface to the Index Data Harvester by communicating with [`mod-harvester-admin`](https://github.com/indexdata/mod-harvester-admin).
+This is a Stripes UI modules providing an administrative interface to the Index Data Harvester by communicating with [`mod-harvester-admin`](https://github.com/indexdata/mod-harvester-admin).
 
 ## See also
 
+* [The corresponding server-side module](https://github.com/indexdata/mod-harvester-admin)
 * [Links on implementing the Harvester Admin UI](doc/links.md)
 * [Notes on UI requirements](doc/ui.md)
 
