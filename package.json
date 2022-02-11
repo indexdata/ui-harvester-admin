@@ -1,0 +1,232 @@
+{
+  "name": "@folio/courses",
+  "version": "5.0.0",
+  "description": "Maintain courses and reserve items for them",
+  "repository": "https://github.com/folio-org/ui-courses",
+  "license": "Apache-2.0",
+  "main": "src/index.js",
+  "scripts": {
+    "test-folio-snapshot": "cypress run --config baseUrl=https://folio-snapshot.dev.folio.org",
+    "start": "stripes serve --port 3001",
+    "test-running-service": "cypress run",
+    "test-new-ui": "stripes serve --okapi https://folio-snapshot-okapi.dev.folio.org --port 3001 & wait-on http://localhost:3001 && cypress run; kill $!",
+    "test": "stripes serve --coverage --port 3001 --okapi http://localhost:3002 & pid1=$! && env LOGCAT=startup yakbak-proxy -i -x -n & pid2=$! && wait-on http://localhost:3001 && cypress run; kill $pid1 $pid2",
+    "regenerate": "stripes serve --port 3001 --okapi http://localhost:3002 & pid1=$! && rm -rf tapes && env LOGCAT=startup yakbak-proxy -i -x https://folio-snapshot-okapi.dev.folio.org & pid2=$! && wait-on http://localhost:3001 && cypress run; kill $pid1 $pid2",
+    "coverage-summary": "nyc report --reporter=text-summary",
+    "coverage": "nyc report --reporter=text",
+    "lsof": "lsof -P -i :3001 -i :3002 || true",
+    "kill": "yarn lsof | awk '{print $2}' | egrep '^[0-9]+$' | xargs kill",
+    "lint": "eslint .",
+    "formatjs-compile": "formatjs compile-folder --ast --format simple ./translations/ui-courses ./translations/ui-courses/compiled",
+    "fix": "test -f node_modules/@babel/plugin-proposal-decorators/package.json || yarn add --dev @cypress/code-coverage",
+    "clean-up-nyc-output": "echo 'This is useful if you are seeing errors generating coverage reports at the end of tests' && rm -rf .nyc_output",
+    "postinstall-and-test": "yarn fix && yarn test"
+  },
+  "stripes": {
+    "actsAs": [
+      "app",
+      "settings"
+    ],
+    "displayName": "ui-courses.meta.title",
+    "route": "/cr",
+    "queryResource": "query",
+    "icons": [
+      {
+        "name": "app",
+        "alt": "Maintain courses and reserve items for them",
+        "title": "Courses"
+      }
+    ],
+    "okapiInterfaces": {
+      "course-reserves-storage": "0.2",
+      "term-storage": "0.1",
+      "department-storage": "0.1",
+      "course-type-storage": "0.1",
+      "processing-status-storage": "0.1",
+      "copyright-status-storage": "0.1",
+      "role-storage": "0.1",
+      "locations": "3.0",
+      "item-storage": "7.1 8.0 9.0",
+      "loan-types": "2.2"
+    },
+    "permissionSets": [
+      {
+        "permissionName": "module.courses.enabled",
+        "displayName": "UI: courses module is enabled",
+        "visible": false
+      },
+      {
+        "permissionName": "settings.courses.enabled",
+        "displayName": "Settings (courses): display list of settings pages",
+        "subPermissions": [
+          "settings.enabled"
+        ],
+        "visible": false
+      },
+      {
+        "permissionName": "ui-courses.all",
+        "replaces": [
+          "course-reserves.all"
+        ],
+        "displayName": "Courses: All permissions",
+        "description": "The highest level is CRUD Course Reserves which allows the user to maintain courses, items, instructors, cross listed courses, etc.",
+        "subPermissions": [
+          "ui-courses.maintain-courses",
+          "ui-courses.maintain-items",
+          "ui-courses.maintain-settings",
+          "course-reserves-storage.all"
+        ],
+        "visible": true
+      },
+      {
+        "permissionName": "ui-courses.read-all",
+        "replaces": [
+          "course-reserves.read-all"
+        ],
+        "displayName": "Courses: Read all",
+        "description": "Allows user read only access to Courses and Reserves",
+        "subPermissions": [
+          "module.courses.enabled",
+          "course-reserves-storage.courses.read",
+          "course-reserves-storage.courselistings.read",
+          "course-reserves-storage.reserves.read",
+          "course-reserves-storage.terms.read",
+          "course-reserves-storage.course-types.read",
+          "course-reserves-storage.departments.read",
+          "course-reserves-storage.processing-statuses.read",
+          "course-reserves-storage.copyright-statuses.read",
+          "course-reserves-storage.roles.read",
+          "inventory-storage.locations.collection.get",
+          "inventory.items.collection.get"
+        ],
+        "visible": true
+      },
+      {
+        "permissionName": "ui-courses.read-add-edit",
+        "replaces": [
+          "course-reserves.read-add-edit"
+        ],
+        "displayName": "Courses: Read, add, and edit courses",
+        "description": "Allows user the ability to read, add and edit Course Records - but not to delete. (Does not include item add, edit and remove)",
+        "subPermissions": [
+          "ui-courses.read-all",
+          "course-reserves-storage.courses.item.post",
+          "course-reserves-storage.courses.item.put",
+          "course-reserves-storage.courselistings.item.post",
+          "course-reserves-storage.courselistings.item.put",
+          "course-reserves-storage.courselisting.courses.item.post",
+          "course-reserves-storage.courselistings.courses.item.put",
+          "course-reserves-storage.courselistings.instructors.item.post",
+          "course-reserves-storage.courselistings.instructors.item.put",
+          "course-reserves-storage.courselistings.instructors.item.delete"
+        ],
+        "visible": true
+      },
+      {
+        "permissionName": "ui-courses.maintain-courses",
+        "displayName": "Courses: Read, add, edit, and delete courses",
+        "description": "Allows user the ability to fully edit and delete Course Records.",
+        "subPermissions": [
+          "ui-courses.read-all",
+          "ui-courses.read-add-edit",
+          "course-reserves-storage.courses.item.delete",
+          "course-reserves-storage.courselistings.item.delete",
+          "course-reserves-storage.courselistings.courses.item.delete",
+          "course-reserves-storage.courselistings.reserves.item.delete"
+        ],
+        "visible": true
+      },
+      {
+        "permissionName": "ui-courses.add-edit-items",
+        "displayName": "Courses: Add and edit a courses' reserved items",
+        "description": "This permission allows a user to add and edit items on a course",
+        "subPermissions": [
+          "ui-courses.read-all",
+          "course-reserves-storage.reserves.item.post",
+          "course-reserves-storage.reserves.item.put",
+          "course-reserves-storage.courselistings.reserves.item.put",
+          "course-reserves-storage.courselistings.reserves.item.post",
+          "inventory-storage.locations.collection.get",
+          "inventory.items.collection.get",
+          "inventory-storage.loan-types.collection.get",
+          "inventory-storage.items.item.get",
+          "inventory-storage.items.item.put"
+        ],
+        "visible": true
+      },
+      {
+        "permissionName": "ui-courses.maintain-items",
+        "replaces": [
+          "course-reserves.maintain-items"
+        ],
+        "displayName": "Courses: Add, edit, and remove a courses' reserved items",
+        "description": "This permission allows a user to add, edit, and remove items on a course",
+        "subPermissions": [
+          "ui-courses.read-all",
+          "ui-courses.add-edit-items",
+          "course-reserves-storage.reserves.write",
+          "course-reserves-storage.courselistings.reserves.item.delete"
+        ],
+        "visible": true
+      },
+      {
+        "permissionName": "ui-courses.maintain-settings",
+        "replaces": [
+          "course-reserves.maintain-settings"
+        ],
+        "displayName": "Settings (Courses): Can create, edit and delete course settings",
+        "description": "This permission allows the user to Create, edit and delete all Course Settings",
+        "subPermissions": [
+          "settings.courses.enabled",
+          "course-reserves-storage.terms.write",
+          "course-reserves-storage.course-types.write",
+          "course-reserves-storage.departments.write",
+          "course-reserves-storage.processing-statuses.write",
+          "course-reserves-storage.copyright-statuses.write",
+          "course-reserves-storage.roles.write"
+        ],
+        "visible": true
+      }
+    ]
+  },
+  "dependencies": {
+    "final-form-set-field-data": "^1.0.2",
+    "ky": "^0.23.0",
+    "lodash": "^4.17.15",
+    "query-string": "^6.0.0",
+    "react-final-form": "^6.3.0",
+    "react-hot-loader": "^4.3.12"
+  },
+  "peerDependencies": {
+    "@folio/plugin-find-user": "^5.0.0||^6.0.0",
+    "@folio/stripes": "^7.0.0",
+    "prop-types": "*",
+    "react": "*",
+    "react-intl": "*",
+    "react-query": "^3.12.0",
+    "react-router": "*",
+    "react-router-dom": "*"
+  },
+  "devDependencies": {
+    "@cypress/code-coverage": "^3.9.11",
+    "@folio/eslint-config-stripes": "~5.3.0",
+    "@folio/stripes": "^7.0.0",
+    "@folio/stripes-cli": "^2.4.0",
+    "@formatjs/cli": "^4.2.6",
+    "babel-eslint": "^10.1.0",
+    "cypress": "^6.4.0",
+    "eslint": "^6.2.1",
+    "eslint-plugin-cypress": "^2.11.1",
+    "localforage": "^1.7.4",
+    "react": "^16.8.6",
+    "react-intl": "^5.7.0",
+    "react-query": "^3.12.0",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    "wait-on": "^5.0.1",
+    "yakbak-proxy": "^1.6.0"
+  },
+  "optionalDependencies": {
+    "@folio/plugin-create-inventory-records": "^2.1.0"
+  }
+}
