@@ -1,4 +1,12 @@
 {
     "meta.title": "Harvester admin",
+
+    "permission.harvester-admin.read-jobs": "",
+    "permission.harvester-admin.maintain-jobs": "",
+    "permission.harvester-admin.maintain-all-jobs": "",
+    "permission.harvester-admin.maintain-pipelines": "",
+    "permission.ui-harvester-admin.all": "",
+
+
     "SENTINEL": "SENTINEL"
 }

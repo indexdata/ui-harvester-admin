@@ -51,13 +51,43 @@
         "visible": false
       },
       {
-        "permissionName": "ui-harvester-admin.all",
-        "replaces": [
-          "harvester-admin.all"
+        "permissionName": "ui-harvester-admin.read-jobs",
+        "displayName": "Harvester admin: see what jobs exist, their status, etc.",
+        "subPermissions": [
+          "module.harvester-admin.enabled"
         ],
+        "visible": true
+      },
+      {
+        "permissionName": "ui-harvester-admin.maintain-jobs",
+        "displayName": "Harvester admin: see, start and stop jobs",
+        "subPermissions": [
+          "ui-harvester-admin.read-jobs"
+        ],
+        "visible": true
+      },
+      {
+        "permissionName": "ui-harvester-admin.maintain-all-jobs",
+        "displayName": "Harvester admin: see, start and stop jobs for all customers",
+        "subPermissions": [
+          "ui-harvester-admin.maintain-jobs"
+        ],
+        "visible": true
+      },
+      {
+        "permissionName": "ui-harvester-admin.maintain-pipelines",
+        "displayName": "Harvester admin: maintain pipeline stages and pipelines",
+        "subPermissions": [
+          "module.harvester-admin.enabled"
+        ],
+        "visible": true
+      },
+      {
+        "permissionName": "ui-harvester-admin.all",
         "displayName": "Harvester admin: All permissions",
         "subPermissions": [
-          "module.harvester-admin.enabled",
+          "ui-harvester-admin.maintain-all-jobs",
+          "ui-harvester-admin.maintain-pipelines",
           "settings.harvester-admin.enabled"
         ],
         "visible": true
