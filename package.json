@@ -53,9 +53,9 @@
       {
         "permissionName": "ui-harvester-admin.all",
         "replaces": [
-          "course-reserves.all"
+          "harvester-admin.all"
         ],
-        "displayName": "Harvester-Admin: All permissions",
+        "displayName": "Harvester admin: All permissions",
         "subPermissions": [
           "module.harvester-admin.enabled",
           "settings.harvester-admin.enabled"
