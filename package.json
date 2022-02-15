@@ -115,5 +115,8 @@
     "react-intl": "^5.7.0",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0"
+  },
+  "resolutions": {
+    "postcss-custom-properties": "12.0.0"
   }
 }
