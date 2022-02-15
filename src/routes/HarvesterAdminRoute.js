@@ -12,22 +12,29 @@ const HarvesterAdminRoute = () => {
     return <ErrorMessage message={error} />;
   }
 
-  okapiKy('harvester-admin/harvestables')
-    .then(res => {
-      console.log('success:', res);
-      setData(res);
-    }).catch(err => {
-      console.log('failure:', err.toString());
-      err.response.text().then(text => {
-        setError(<><b>{err.toString()}</b>: {text}</>);
-      });
-    });
-
   if (!data) {
+    okapiKy('harvester-admin/harvestables')
+      .then(res => {
+        console.log('success:', res);
+        res.json().then(json => setData(json));
+      }).catch(err => {
+        console.log('failure:', err.toString());
+        err.response.text().then(text => {
+          setError(<><b>{err.toString()}</b>: {text}</>);
+        });
+      });
+
     return <LoadingPane />;
   }
 
-  return 'HarvesterAdmin route';
+  return (
+    <>
+      <h1>HarvesterAdmin route</h1>
+      <pre>
+        {JSON.stringify(data, null, 2)}
+      </pre>
+    </>
+  );
 };
 
 export default HarvesterAdminRoute;
