@@ -7,6 +7,8 @@ $ cd mod-harvester-admin
 $ mvn install
 $ csh
 % setenv harvester.host palci-harvester.reshare.indexdata.com
+% setenv harvester.auth.basic.username someguy
+% setenv harvester.auth.basic.password swordfish
 % java -jar target/mod-harvester-admin-fat.jar
 ```
 Leave this running.
