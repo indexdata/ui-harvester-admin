@@ -7,7 +7,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "stripes serve --port 3003 --okapi http://ironman:9130 --hasAllPerms",
-    "lint": "eslint ."
+    "lint": "eslint -f unix ."
   },
   "stripes": {
     "actsAs": [
@@ -95,6 +95,7 @@
     ]
   },
   "dependencies": {
+    "react-hot-loader": "^4.3.12"
   },
   "peerDependencies": {
     "@folio/stripes": "^7.0.0",
@@ -105,12 +106,11 @@
     "react-router-dom": "*"
   },
   "devDependencies": {
-    "@folio/eslint-config-stripes": "~5.3.0",
+    "@babel/eslint-parser": "^7.15.0",
+    "@folio/eslint-config-stripes": "~6.1.0",
     "@folio/stripes": "^7.0.0",
     "@folio/stripes-cli": "^2.4.0",
-    "babel-eslint": "^10.1.0",
     "eslint": "^6.2.1",
-    "eslint-plugin-cypress": "^2.11.1",
     "react": "^16.8.6",
     "react-intl": "^5.7.0",
     "react-router": "^5.2.0",
