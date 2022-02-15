@@ -39,5 +39,5 @@ $ curl -w '\n' -d @target/DiscoveryDescriptor-template.json http://localhost:913
 $ curl -w '\n' -d @target/TenantModuleDescriptor-template.json http://localhost:9130/_/proxy/tenants/diku/modules
 ```
 
-Now you can run Stripes against the VM's Okapi on http://localhost:9130 and the side-loaded harvester-admin module will be available, as you can verify in the **Software versions** at (for example) http://localhost:3003/settings/about
+Now you can run Stripes against the VM's Okapi on http://localhost:9130 and the side-loaded harvester-admin module will be available, as you can verify by going to the **Software versions** at (for example) http://localhost:3003/settings/about and searching within the page for `mod-harvester-admin`.
 
