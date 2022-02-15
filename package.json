@@ -95,7 +95,8 @@
     ]
   },
   "dependencies": {
-    "react-hot-loader": "^4.3.12"
+    "react-hot-loader": "^4.3.12",
+    "use-deep-compare": "^1.1.0"
   },
   "peerDependencies": {
     "@folio/stripes": "^7.0.0",
