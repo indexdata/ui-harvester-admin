@@ -15,7 +15,7 @@
       "settings"
     ],
     "displayName": "ui-harvester-admin.meta.title",
-    "route": "/cr",
+    "route": "/ha",
     "queryResource": "query",
     "icons": [
       {
