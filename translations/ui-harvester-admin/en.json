@@ -1,6 +1,7 @@
 {
     "meta.title": "Harvester admin",
 
+    "error": "Something went wrong",
     "settings.nullSettings": "Null settings",
 
     "permission.harvester-admin.read-jobs": "",
