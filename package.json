@@ -54,7 +54,8 @@
         "permissionName": "ui-harvester-admin.read-jobs",
         "displayName": "Harvester admin: see what jobs exist, their status, etc.",
         "subPermissions": [
-          "module.harvester-admin.enabled"
+          "module.harvester-admin.enabled",
+          "harvester-admin.harvestables.collection.get"
         ],
         "visible": true
       },
