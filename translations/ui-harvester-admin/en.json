@@ -10,5 +10,15 @@
     "permission.harvester-admin.maintain-pipelines": "",
     "permission.ui-harvester-admin.all": "",
 
+    "harvestables.column.name": "Name",
+    "harvestables.column.id": "ID",
+    "harvestables.column.enabled": "Enabled?",
+    "harvestables.column.jobClass": "Job class",
+    "harvestables.column.currentStatus": "Current status",
+
+    "harvestables.column.jobClass.OaiPmhResource": "OAI-PMH",
+    "harvestables.column.jobClass.XmlBulkResource": "XML bulk",
+    "harvestables.column.jobClass.HarvestConnectorResource": "Harvest connector",
+
     "SENTINEL": "SENTINEL"
 }
