@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { LoadingPane, MultiColumnList } from '@folio/stripes/components';
 import { SearchAndSortQuery } from '@folio/stripes/smart-components';
+import ErrorMessage from '../util/ErrorMessage';
 
 
 function Harvestables({
@@ -10,11 +11,13 @@ function Harvestables({
   query, // eslint-disable-line no-unused-vars
   source,
   mutator, // eslint-disable-line no-unused-vars
+  error,
   hasLoaded,
   onNeedMoreData
 }) {
   const count = source ? source.totalCount() : 0;
 
+  if (error) return <ErrorMessage message={error} />;
   if (!hasLoaded) return <LoadingPane />;
 
   return (
@@ -72,6 +75,7 @@ Harvestables.propTypes = {
       update: PropTypes.func.isRequired,
     }).isRequired,
   }).isRequired,
+  error: PropTypes.string,
   hasLoaded: PropTypes.bool.isRequired,
   onNeedMoreData: PropTypes.func.isRequired,
 };

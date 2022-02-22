@@ -37,6 +37,8 @@ function HarvestablesRoute({ stripes, resources, mutator }) {
   }
 
   const handleNeedMoreData = () => source.fetchMore(RESULT_COUNT_INCREMENT);
+
+  const error = resources.harvestables.failed ? resources.harvestables.failed.message : undefined;
   const hasLoaded = resources.harvestables.hasLoaded; // XXX may need to inspect .url instead
 
   return <Harvestables
@@ -46,6 +48,7 @@ function HarvestablesRoute({ stripes, resources, mutator }) {
     query={resources.query}
     source={source}
     mutator={mutator}
+    error={error}
     hasLoaded={hasLoaded}
     onNeedMoreData={handleNeedMoreData}
   />;
@@ -58,6 +61,7 @@ HarvestablesRoute.manifest = Object.freeze({
   harvestables: {
     type: 'okapi',
     path: 'harvester-admin/harvestables',
+    throwErrors: false,
     records: 'harvestables',
     recordsRequired: '%{resultCount}',
     perRequest: RESULT_COUNT_INCREMENT,
@@ -80,6 +84,12 @@ HarvestablesRoute.propTypes = {
   resources: PropTypes.shape({
     query: PropTypes.object.isRequired,
     harvestables: PropTypes.shape({
+      failed: PropTypes.oneOfType([
+        PropTypes.bool,
+        PropTypes.shape({
+          message: PropTypes.string.isRequired,
+        })
+      ]).isRequired,
       hasLoaded: PropTypes.bool.isRequired,
       records: PropTypes.arrayOf(
         PropTypes.object.isRequired,
