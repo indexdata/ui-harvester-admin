@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { stripesConnect } from '@folio/stripes/core';
 import { makeQueryFunction, StripesConnectedSource } from '@folio/stripes/smart-components';
-import HarvesterAdmin from '../views/HarvesterAdmin';
+import Harvestables from '../views/Harvestables';
 
 
 const INITIAL_RESULT_COUNT = 10;
@@ -27,7 +27,7 @@ const searchableIndexes = [
 ];
 
 
-function HarvesterAdminRoute({ stripes, resources, mutator }) {
+function HarvestablesRoute({ stripes, resources, mutator }) {
   let [source, setSource] = useState(); // eslint-disable-line prefer-const
   if (!source) {
     source = new StripesConnectedSource({ resources, mutator }, stripes.logger, 'reportTitles');
@@ -39,7 +39,7 @@ function HarvesterAdminRoute({ stripes, resources, mutator }) {
   const handleNeedMoreData = () => source.fetchMore(RESULT_COUNT_INCREMENT);
   const hasLoaded = resources.harvestables.hasLoaded; // XXX may need to inspect .url instead
 
-  return <HarvesterAdmin
+  return <Harvestables
     data={{
       harvestables: resources.harvestables.records,
     }}
@@ -52,7 +52,7 @@ function HarvesterAdminRoute({ stripes, resources, mutator }) {
 }
 
 
-HarvesterAdminRoute.manifest = Object.freeze({
+HarvestablesRoute.manifest = Object.freeze({
   query: { initialValue: {} },
   resultCount: { initialValue: INITIAL_RESULT_COUNT },
   harvestables: {
@@ -73,7 +73,7 @@ HarvesterAdminRoute.manifest = Object.freeze({
 });
 
 
-HarvesterAdminRoute.propTypes = {
+HarvestablesRoute.propTypes = {
   stripes: PropTypes.shape({
     logger: PropTypes.object.isRequired,
   }).isRequired,
@@ -90,4 +90,4 @@ HarvesterAdminRoute.propTypes = {
 };
 
 
-export default stripesConnect(HarvesterAdminRoute);
+export default stripesConnect(HarvestablesRoute);

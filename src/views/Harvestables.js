@@ -5,7 +5,7 @@ import { LoadingPane, MultiColumnList } from '@folio/stripes/components';
 import { SearchAndSortQuery } from '@folio/stripes/smart-components';
 
 
-function HarvesterAdmin({
+function Harvestables({
   data,
   query, // eslint-disable-line no-unused-vars
   source,
@@ -56,7 +56,7 @@ function HarvesterAdmin({
 }
 
 
-HarvesterAdmin.propTypes = {
+Harvestables.propTypes = {
   data: PropTypes.shape({
     harvestables: PropTypes.arrayOf(
       PropTypes.shape({
@@ -77,4 +77,4 @@ HarvesterAdmin.propTypes = {
 };
 
 
-export default HarvesterAdmin;
+export default Harvestables;

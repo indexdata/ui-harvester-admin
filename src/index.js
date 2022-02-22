@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Switch } from 'react-router-dom';
 import { Route as NestedRoute } from '@folio/stripes/core';
 import Settings from './settings';
-import HarvesterAdminRoute from './routes/HarvesterAdminRoute';
+import HarvestablesRoute from './routes/HarvestablesRoute';
 
 class HarvesterAdminApp extends React.Component {
   static propTypes = {
@@ -25,7 +25,7 @@ class HarvesterAdminApp extends React.Component {
 
     return (
       <Switch>
-        <NestedRoute path={`${path}`} exact component={HarvesterAdminRoute} />
+        <NestedRoute path={`${path}`} exact component={HarvestablesRoute} />
       </Switch>
     );
   }
