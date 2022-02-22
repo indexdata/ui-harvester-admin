@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Switch } from 'react-router-dom';
+import { Switch, Redirect } from 'react-router-dom';
 import { Route as NestedRoute } from '@folio/stripes/core';
 import Settings from './settings';
 import HarvestablesRoute from './routes/HarvestablesRoute';
+import StoragesRoute from './routes/StoragesRoute';
 
 class HarvesterAdminApp extends React.Component {
   static propTypes = {
@@ -25,7 +26,9 @@ class HarvesterAdminApp extends React.Component {
 
     return (
       <Switch>
-        <NestedRoute path={`${path}`} exact component={HarvestablesRoute} />
+        <Redirect exact from={path} to={`${path}/harvestables`} />
+        <NestedRoute path={`${path}/harvestables`} exact component={HarvestablesRoute} />
+        <NestedRoute path={`${path}/storages`} exact component={StoragesRoute} />
       </Switch>
     );
   }
