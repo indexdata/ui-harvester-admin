@@ -15,7 +15,10 @@ const ErrorMessage = ({ message }) => (
 );
 
 ErrorMessage.propTypes = {
-  message: PropTypes.object.isRequired,
+  message: PropTypes.oneOfType([
+    PropTypes.string.isRequired,
+    PropTypes.object.isRequired,
+  ]).isRequired,
 };
 
 export default ErrorMessage;
