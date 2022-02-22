@@ -12,6 +12,8 @@
 
     "nav.harvestables": "Harvest jobs",
     "nav.storages": "Storage engines",
+    "nav.pipelines": "Transformation pipelines",
+    "nav.steps": "Transformation steps",
 
     "harvestables.column.name": "Name",
     "harvestables.column.id": "ID",
