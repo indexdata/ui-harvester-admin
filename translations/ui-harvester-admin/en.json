@@ -10,6 +10,9 @@
     "permission.harvester-admin.maintain-pipelines": "",
     "permission.ui-harvester-admin.all": "",
 
+    "nav.harvestables": "Harvest jobs",
+    "nav.storages": "Storage engines",
+
     "harvestables.column.name": "Name",
     "harvestables.column.id": "ID",
     "harvestables.column.enabled": "Enabled?",
