@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { LoadingPane, MultiColumnList } from '@folio/stripes/components';
-import { SearchAndSortQuery } from '@folio/stripes/smart-components';
+import { AppIcon } from '@folio/stripes/core';
+import { LoadingPane, Paneset, Pane, MultiColumnList } from '@folio/stripes/components';
+import { ColumnManager, SearchAndSortQuery } from '@folio/stripes/smart-components';
+import HarvestablesSearchPane from '../search/HarvestablesSearchPane';
 import ErrorMessage from '../util/ErrorMessage';
 
 
@@ -20,37 +22,65 @@ function Harvestables({
   if (error) return <ErrorMessage message={error} />;
   if (!hasLoaded) return <LoadingPane />;
 
+  const columnMapping = {
+    name: <FormattedMessage id="ui-harvester-admin.harvestables.column.name" />,
+    id: <FormattedMessage id="ui-harvester-admin.harvestables.column.id" />,
+    enabled: <FormattedMessage id="ui-harvester-admin.harvestables.column.enabled" />,
+    jobClass: <FormattedMessage id="ui-harvester-admin.harvestables.column.jobClass" />,
+    currentStatus: <FormattedMessage id="ui-harvester-admin.harvestables.column.currentStatus" />,
+  };
+
   return (
     <SearchAndSortQuery initialSearchState={{ query: '' }}>
       {
         (sasqParams) => {
           return (
-            <MultiColumnList
-              id="list-harvestables"
-              virtualize
-              visibleColumns={['name', 'id', 'enabled', 'jobClass', 'currentStatus']}
-              columnMapping={{
-                name: <FormattedMessage id="ui-harvester-admin.harvestables.column.name" />,
-                id: <FormattedMessage id="ui-harvester-admin.harvestables.column.id" />,
-                enabled: <FormattedMessage id="ui-harvester-admin.harvestables.column.enabled" />,
-                jobClass: <FormattedMessage id="ui-harvester-admin.harvestables.column.jobClass" />,
-                currentStatus: <FormattedMessage id="ui-harvester-admin.harvestables.column.currentStatus" />,
-              }}
-              columnWidths={{
-                name: '400px',
-                id: '100px',
-                enabled: '100px',
-                jobClass: '150px',
-                currentStatus: '140px',
-              }}
-              formatter={{
-                jobClass: r => <FormattedMessage id={`ui-harvester-admin.harvestables.column.jobClass.${r.jobClass}`} />,
-              }}
-              contentData={data.harvestables}
-              totalCount={count}
-              onHeaderClick={sasqParams.onSort}
-              onNeedMoreData={onNeedMoreData}
-            />
+            <Paneset id="harvestables-paneset">
+              <HarvestablesSearchPane
+                {...sasqParams}
+                source={source}
+              />
+              <ColumnManager
+                id="harvestable-visible-columns"
+                columnMapping={columnMapping}
+                excludeKeys={['name']}
+              >
+                {({ renderColumnsMenu, visibleColumns }) => (
+                  <Pane
+                    appIcon={<AppIcon app="harvester-admin" />}
+                    defaultWidth="fill"
+                    padContent={false}
+                    paneTitle={<FormattedMessage id="ui-harvester-admin.nav.harvestables" />}
+                    actionMenu={() => (
+                      <>
+                        {renderColumnsMenu}
+                      </>
+                    )}
+                  >
+                    <MultiColumnList
+                      id="list-harvestables"
+                      virtualize
+                      visibleColumns={visibleColumns}
+                      columnMapping={columnMapping}
+                      columnWidths={{
+                        name: '400px',
+                        id: '100px',
+                        enabled: '100px',
+                        jobClass: '150px',
+                        currentStatus: '140px',
+                      }}
+                      formatter={{
+                        jobClass: r => <FormattedMessage id={`ui-harvester-admin.harvestables.column.jobClass.${r.jobClass}`} />,
+                      }}
+                      contentData={data.harvestables}
+                      totalCount={count}
+                      onHeaderClick={sasqParams.onSort}
+                      onNeedMoreData={onNeedMoreData}
+                    />
+                  </Pane>
+                )}
+              </ColumnManager>
+            </Paneset>
           );
         }
       }
