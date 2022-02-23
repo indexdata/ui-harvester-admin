@@ -10,9 +10,9 @@ import ErrorMessage from '../util/ErrorMessage';
 
 function Harvestables({
   data,
-  query, // eslint-disable-line no-unused-vars
+  query,
   source,
-  mutator, // eslint-disable-line no-unused-vars
+  mutator,
   error,
   hasLoaded,
   onNeedMoreData
@@ -39,6 +39,8 @@ function Harvestables({
               <HarvestablesSearchPane
                 {...sasqParams}
                 source={source}
+                query={query}
+                mutator={mutator}
               />
               <ColumnManager
                 id="harvestable-visible-columns"
