@@ -25,7 +25,6 @@
     "harvestables.column.jobClass.XmlBulkResource": "XML bulk",
     "harvestables.column.jobClass.HarvestConnectorResource": "Harvest connector",
 
-    "harvestables.index.allFields": "All fields",
     "harvestables.index.name": "Name",
     "harvestables.index.id": "ID",
     "harvestables.index.message": "Message",

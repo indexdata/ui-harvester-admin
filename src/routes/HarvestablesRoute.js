@@ -1,21 +1,14 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { stripesConnect } from '@folio/stripes/core';
-import { makeQueryFunction, StripesConnectedSource } from '@folio/stripes/smart-components';
+import { StripesConnectedSource } from '@folio/stripes/smart-components';
 import Harvestables from '../views/Harvestables';
 
 
 const INITIAL_RESULT_COUNT = 10;
 const RESULT_COUNT_INCREMENT = 10;
 
-const sortMap = {
-  name: 'name',
-  id: 'id',
-  enabled: 'enabled',
-  jobClass: 'jobClass',
-  currentStatus: 'currentStatus',
-};
-
+/*
 const filterConfig = [];
 
 const searchableIndexes = [
@@ -25,6 +18,7 @@ const searchableIndexes = [
   'jobClass',
   'currentStatus',
 ];
+*/
 
 
 function HarvestablesRoute({ stripes, resources, mutator }) {
@@ -66,12 +60,15 @@ HarvestablesRoute.manifest = Object.freeze({
     recordsRequired: '%{resultCount}',
     perRequest: RESULT_COUNT_INCREMENT,
     params: {
-      query: makeQueryFunction(
-        'cql.allRecords=1',
-        searchableIndexes.map(index => `${index}="%{query.query}*"`).join(' or '),
-        sortMap,
-        filterConfig,
-      ),
+      query: (qp, _pc, _rd, logger) => {
+        let ret;
+        if (qp.query) ret = `${qp.qindex}=${qp.query}`;
+        logger.log('action', 'in query maker qp =', qp, '-->', ret);
+        return ret;
+      },
+      orderBy: (qp, _pc, _rd, _logger, _props) => {
+        return qp.sort;
+      }
     },
   },
 });

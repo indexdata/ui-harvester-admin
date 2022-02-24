@@ -8,7 +8,6 @@ import css from './Harvestables.css';
 
 // Value gets set into the `qindex` parameter of the UI URL, and used in the generated back-end query
 const rawSearchableIndexes = [
-  { label: 'allFields', value: '' },
   { label: 'name', value: 'name' },
   { label: 'id', value: 'id' },
   { label: 'message', value: 'message' },
