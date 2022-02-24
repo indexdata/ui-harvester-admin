@@ -13,5 +13,6 @@ This is a Stripes UI modules providing an administrative interface to the Index 
 * [The corresponding server-side module](https://github.com/indexdata/mod-harvester-admin)
 * [Links on implementing the Harvester Admin UI](doc/links.md)
 * [Notes on UI requirements](doc/ui.md)
+* [The harvester query language](doc/query-language.md)
 * [Running `ui-harvester-admin` against a local backend](doc/running.md)
 
