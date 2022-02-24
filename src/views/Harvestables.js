@@ -38,7 +38,6 @@ function Harvestables({
             <Paneset id="harvestables-paneset">
               <HarvestablesSearchPane
                 {...sasqParams}
-                source={source}
                 query={query}
                 mutator={mutator}
               />

@@ -24,7 +24,6 @@ function HarvestablesSearchPane(props) {
     onSubmitSearch,
     resetAll,
     searchField,
-    source,
     query,
     mutator,
   } = props;
@@ -62,7 +61,6 @@ function HarvestablesSearchPane(props) {
                 searchableIndexes={searchableIndexes}
                 selectedIndex={query.qindex}
                 value={searchValue.query}
-                loading={source ? source.pending() : true}
                 marginBottom0
                 onChangeIndex={onChangeIndex}
                 onChange={searchHandlers.query}
@@ -112,7 +110,6 @@ HarvestablesSearchPane.propTypes = {
   searchField: PropTypes.any, // eslint-disable-line react/forbid-prop-types
 
   // Passed explicitly by <Harvestables>
-  source: PropTypes.object,
   query: PropTypes.object.isRequired,
   mutator: PropTypes.shape({
     query: PropTypes.shape({
