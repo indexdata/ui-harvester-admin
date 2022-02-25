@@ -52,6 +52,10 @@ function HarvestablesSearchPane(props) {
     value: tag,
     label: intl.formatMessage({ id: `ui-harvester-admin.harvestables.column.jobClass.${tag}` }),
   }));
+  const currentStatusDataOptions = ['NEW', 'OK', 'WARN', 'ERROR', 'RUNNING', 'FINISHED', 'KILLED'].map(tag => ({
+    value: tag,
+    label: intl.formatMessage({ id: `ui-harvester-admin.harvestables.column.currentStatus.${tag}` }),
+  }));
 
   const renderFilter = (field, dataOptions) => (
     <Select
@@ -116,6 +120,11 @@ function HarvestablesSearchPane(props) {
         {renderFilter('jobClass', [
           { value: NO_VALUE, label: intl.formatMessage({ id: 'ui-harvester-admin.no-value' }) },
           ...jobClassDataOptions
+        ])}
+
+        {renderFilter('currentStatus', [
+          { value: NO_VALUE, label: intl.formatMessage({ id: 'ui-harvester-admin.no-value' }) },
+          ...currentStatusDataOptions
         ])}
 
         <div className={css.resetButtonWrap}>

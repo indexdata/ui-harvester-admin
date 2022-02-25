@@ -29,6 +29,14 @@
     "harvestables.column.jobClass.XmlBulkResource": "XML bulk",
     "harvestables.column.jobClass.HarvestConnectorResource": "Harvest connector",
 
+    "harvestables.column.currentStatus.NEW": "New",
+    "harvestables.column.currentStatus.OK": "OK",
+    "harvestables.column.currentStatus.WARN": "Warning",
+    "harvestables.column.currentStatus.ERROR": "Error",
+    "harvestables.column.currentStatus.RUNNING": "Running",
+    "harvestables.column.currentStatus.FINISHED": "Finished",
+    "harvestables.column.currentStatus.KILLED": "Killed",
+
     "harvestables.index.name": "Name",
     "harvestables.index.id": "ID",
     "harvestables.index.message": "Message",
