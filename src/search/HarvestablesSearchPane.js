@@ -10,16 +10,6 @@ import css from './Harvestables.css';
 const NO_VALUE = 'NO';
 
 
-// Value gets set into the `qindex` parameter of the UI URL, and used in the generated back-end query
-const rawSearchableIndexes = [
-  { label: 'name', value: 'name' },
-  { label: 'id', value: 'id' },
-  { label: 'message', value: 'message' },
-  // XXX More to follow
-];
-let searchableIndexes;
-
-
 function HarvestablesSearchPane(props) {
   const {
     searchValue,
@@ -40,11 +30,9 @@ function HarvestablesSearchPane(props) {
   };
 
   const intl = useIntl();
-  if (!searchableIndexes) {
-    searchableIndexes = rawSearchableIndexes.map(x => (
-      { value: x.value, label: intl.formatMessage({ id: `ui-harvester-admin.harvestables.index.${x.label}` }) }
-    ));
-  }
+  const searchableIndexes = ['name', 'id', 'message'].map(x => (
+    { value: x, label: intl.formatMessage({ id: `ui-harvester-admin.harvestables.index.${x}` }) }
+  ));
 
   const filterStruct = parseFilters(query.filters);
 
