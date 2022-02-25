@@ -48,33 +48,30 @@ function HarvestablesSearchPane(props) {
 
   const filterStruct = parseFilters(query.filters);
 
-  const enabledDataOptions = ['true', 'false'].map(tag => ({
-    value: tag,
-    label: intl.formatMessage({ id: `ui-harvester-admin.harvestables.column.enabled.${tag}` }),
-  }));
-  const jobClassDataOptions = ['OaiPmhResource', 'XmlBulkResource', 'HarvestConnectorResource'].map(tag => ({
-    value: tag,
-    label: intl.formatMessage({ id: `ui-harvester-admin.harvestables.column.jobClass.${tag}` }),
-  }));
-  const currentStatusDataOptions = ['NEW', 'OK', 'WARN', 'ERROR', 'RUNNING', 'FINISHED', 'KILLED'].map(tag => ({
-    value: tag,
-    label: intl.formatMessage({ id: `ui-harvester-admin.harvestables.column.currentStatus.${tag}` }),
-  }));
+  const renderFilter = (field, optionTags) => {
+    const dataOptions = optionTags.map(tag => ({
+      value: tag,
+      label: intl.formatMessage({ id: `ui-harvester-admin.harvestables.column.${field}.${tag}` }),
+    }));
 
-  const renderFilter = (field, dataOptions) => (
-    <Select
-      label={intl.formatMessage({ id: `ui-harvester-admin.harvestables.column.${field}` })}
-      dataOptions={dataOptions}
-      value={filterStruct[field] && filterStruct[field][0]}
-      onChange={(e) => {
-        const val = e.target.value;
-        const fs2 = { ...filterStruct };
-        delete fs2[field];
-        if (val !== NO_VALUE) fs2[field] = [val];
-        updateQuery({ filters: deparseFilters(fs2) });
-      }}
-    />
-  );
+    return (
+      <Select
+        label={intl.formatMessage({ id: `ui-harvester-admin.harvestables.column.${field}` })}
+        dataOptions={[
+          { value: NO_VALUE, label: intl.formatMessage({ id: 'ui-harvester-admin.no-value' }) },
+          ...dataOptions
+        ]}
+        value={filterStruct[field] && filterStruct[field][0]}
+        onChange={(e) => {
+          const val = e.target.value;
+          const fs2 = { ...filterStruct };
+          delete fs2[field];
+          if (val !== NO_VALUE) fs2[field] = [val];
+          updateQuery({ filters: deparseFilters(fs2) });
+        }}
+      />
+    );
+  };
 
   return (
     <Pane
@@ -115,20 +112,9 @@ function HarvestablesSearchPane(props) {
           </Button>
         </div>
 
-        {renderFilter('enabled', [
-          { value: NO_VALUE, label: intl.formatMessage({ id: 'ui-harvester-admin.no-value' }) },
-          ...enabledDataOptions,
-        ])}
-
-        {renderFilter('jobClass', [
-          { value: NO_VALUE, label: intl.formatMessage({ id: 'ui-harvester-admin.no-value' }) },
-          ...jobClassDataOptions
-        ])}
-
-        {renderFilter('currentStatus', [
-          { value: NO_VALUE, label: intl.formatMessage({ id: 'ui-harvester-admin.no-value' }) },
-          ...currentStatusDataOptions
-        ])}
+        {renderFilter('enabled', ['true', 'false'])}
+        {renderFilter('jobClass', ['OaiPmhResource', 'XmlBulkResource', 'HarvestConnectorResource'])}
+        {renderFilter('currentStatus', ['NEW', 'OK', 'WARN', 'ERROR', 'RUNNING', 'FINISHED', 'KILLED'])}
 
         <div className={css.resetButtonWrap}>
           <Button
