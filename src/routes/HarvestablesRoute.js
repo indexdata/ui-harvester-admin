@@ -59,9 +59,7 @@ HarvestablesRoute.manifest = Object.freeze({
         }
 
         if (conditions.length === 0) return undefined;
-        const ret = conditions.join(' or '); // Not supported on back-end, but hey-ho
-        logger.log('action', 'in query maker qp =', qp, '-->', ret);
-        return ret;
+        return conditions.join(' or '); // Not supported on back-end, but hey-ho
       },
       orderBy: (qp, _pc, _rd, _logger, _props) => {
         return qp.sort;
