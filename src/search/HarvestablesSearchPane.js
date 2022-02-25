@@ -53,6 +53,21 @@ function HarvestablesSearchPane(props) {
     label: intl.formatMessage({ id: `ui-harvester-admin.harvestables.column.jobClass.${tag}` }),
   }));
 
+  const renderFilter = (field, dataOptions) => (
+    <Select
+      label={intl.formatMessage({ id: `ui-harvester-admin.harvestables.column.${field}` })}
+      dataOptions={dataOptions}
+      value={filterStruct[field] && filterStruct[field][0]}
+      onChange={(e) => {
+        const val = e.target.value;
+        const fs2 = { ...filterStruct };
+        delete fs2[field];
+        if (val !== NO_VALUE) fs2[field] = [val];
+        updateQuery({ filters: deparseFilters(fs2) });
+      }}
+    />
+  );
+
   return (
     <Pane
       defaultWidth="20%"
@@ -92,38 +107,16 @@ function HarvestablesSearchPane(props) {
           </Button>
         </div>
 
-        <Select
-          label={intl.formatMessage({ id: 'ui-harvester-admin.harvestables.column.enabled' })}
-          dataOptions={[
-            { value: NO_VALUE, label: intl.formatMessage({ id: 'ui-harvester-admin.no-value' }) },
-            { value: 'true', label: intl.formatMessage({ id: 'ui-harvester-admin.harvestables.column.enabled.yes' }) },
-            { value: 'false', label: intl.formatMessage({ id: 'ui-harvester-admin.harvestables.column.enabled.no' }) },
-          ]}
-          value={filterStruct.enabled && filterStruct.enabled[0]}
-          onChange={(e) => {
-            const val = e.target.value;
-            const fs2 = { ...filterStruct };
-            delete fs2.enabled;
-            if (val !== NO_VALUE) fs2.enabled = [val];
-            updateQuery({ filters: deparseFilters(fs2) });
-          }}
-        />
+        {renderFilter('enabled', [
+          { value: NO_VALUE, label: intl.formatMessage({ id: 'ui-harvester-admin.no-value' }) },
+          { value: 'true', label: intl.formatMessage({ id: 'ui-harvester-admin.harvestables.column.enabled.yes' }) },
+          { value: 'false', label: intl.formatMessage({ id: 'ui-harvester-admin.harvestables.column.enabled.no' }) },
+        ])}
 
-        <Select
-          label={intl.formatMessage({ id: 'ui-harvester-admin.harvestables.column.jobClass' })}
-          dataOptions={[
-            { value: NO_VALUE, label: intl.formatMessage({ id: 'ui-harvester-admin.no-value' }) },
-            ...jobClassDataOptions
-          ]}
-          value={filterStruct.jobClass && filterStruct.jobClass[0]}
-          onChange={(e) => {
-            const val = e.target.value;
-            const fs2 = { ...filterStruct };
-            delete fs2.jobClass;
-            if (val !== NO_VALUE) fs2.jobClass = [val];
-            updateQuery({ filters: deparseFilters(fs2) });
-          }}
-        />
+        {renderFilter('jobClass', [
+          { value: NO_VALUE, label: intl.formatMessage({ id: 'ui-harvester-admin.no-value' }) },
+          ...jobClassDataOptions
+        ])}
 
         <div className={css.resetButtonWrap}>
           <Button
