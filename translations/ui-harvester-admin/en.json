@@ -22,8 +22,8 @@
     "harvestables.column.jobClass": "Job class",
     "harvestables.column.currentStatus": "Current status",
 
-    "harvestables.column.enabled.yes": "Yes",
-    "harvestables.column.enabled.no": "No",
+    "harvestables.column.enabled.true": "Yes",
+    "harvestables.column.enabled.false": "No",
 
     "harvestables.column.jobClass.OaiPmhResource": "OAI-PMH",
     "harvestables.column.jobClass.XmlBulkResource": "XML bulk",

@@ -65,13 +65,15 @@ function Harvestables({
                       columnMapping={columnMapping}
                       columnWidths={{
                         name: '400px',
-                        id: '100px',
-                        enabled: '100px',
+                        id: '80px',
+                        enabled: '80px',
                         jobClass: '150px',
                         currentStatus: '140px',
                       }}
                       formatter={{
+                        enabled: r => <FormattedMessage id={`ui-harvester-admin.harvestables.column.enabled.${r.enabled}`} />,
                         jobClass: r => <FormattedMessage id={`ui-harvester-admin.harvestables.column.jobClass.${r.jobClass}`} />,
+                        currentStatus: r => <FormattedMessage id={`ui-harvester-admin.harvestables.column.currentStatus.${r.currentStatus}`} />,
                       }}
                       contentData={data.harvestables}
                       totalCount={count}
