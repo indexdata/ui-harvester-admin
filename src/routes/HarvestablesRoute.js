@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { stripesConnect } from '@folio/stripes/core';
-import { StripesConnectedSource } from '@folio/stripes/smart-components';
+import { StripesConnectedSource, parseFilters } from '@folio/stripes/smart-components';
 import Harvestables from '../views/Harvestables';
 
 
@@ -49,8 +49,17 @@ HarvestablesRoute.manifest = Object.freeze({
     perRequest: RESULT_COUNT_INCREMENT,
     params: {
       query: (qp, _pc, _rd, logger) => {
-        let ret;
-        if (qp.query) ret = `${qp.qindex || 'name'}=${qp.query}`;
+        const conditions = [];
+        if (qp.query) conditions.push(`${qp.qindex || 'name'}=${qp.query}`);
+        if (qp.filters) {
+          const o = parseFilters(qp.filters);
+          Object.keys(o).sort().forEach(key => {
+            conditions.push(`${key}=${o[key][0]}`);
+          });
+        }
+
+        if (conditions.length === 0) return undefined;
+        const ret = conditions.join(' or '); // Not supported on back-end, but hey-ho
         logger.log('action', 'in query maker qp =', qp, '-->', ret);
         return ret;
       },

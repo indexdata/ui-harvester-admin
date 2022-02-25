@@ -29,6 +29,11 @@
     "harvestables.index.id": "ID",
     "harvestables.index.message": "Message",
 
+    "harvestables.enabled": "Enabled?",
+    "harvestables.enabled.no-value": "-",
+    "harvestables.enabled.yes": "Yes",
+    "harvestables.enabled.no": "No",
+
     "searchInputLabel": "XXX searchInputLabel",
 
     "SENTINEL": "SENTINEL"

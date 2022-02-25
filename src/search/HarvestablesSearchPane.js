@@ -2,8 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useIntl, FormattedMessage } from 'react-intl';
 import { useStripes } from '@folio/stripes/core';
-import { Button, Icon, Pane, SearchField } from '@folio/stripes/components';
+import { Button, Icon, Pane, SearchField, Select } from '@folio/stripes/components';
+import { parseFilters, deparseFilters } from '@folio/stripes/smart-components';
 import css from './Harvestables.css';
+
+
+const NO_VALUE = 'NO';
 
 
 // Value gets set into the `qindex` parameter of the UI URL, and used in the generated back-end query
@@ -41,6 +45,9 @@ function HarvestablesSearchPane(props) {
       { value: x.value, label: intl.formatMessage({ id: `ui-harvester-admin.harvestables.index.${x.label}` }) }
     ));
   }
+
+  const filterStruct = parseFilters(query.filters);
+  const enabledValue = filterStruct.enabled && filterStruct.enabled[0];
 
   return (
     <Pane
@@ -80,6 +87,24 @@ function HarvestablesSearchPane(props) {
             <FormattedMessage id="stripes-smart-components.search" />
           </Button>
         </div>
+
+        <Select
+          label={intl.formatMessage({ id: 'ui-harvester-admin.harvestables.enabled' })}
+          dataOptions={[
+            { value: NO_VALUE, label: intl.formatMessage({ id: 'ui-harvester-admin.harvestables.enabled.no-value' }) },
+            { value: 'true', label: intl.formatMessage({ id: 'ui-harvester-admin.harvestables.enabled.yes' }) },
+            { value: 'false', label: intl.formatMessage({ id: 'ui-harvester-admin.harvestables.enabled.no' }) },
+          ]}
+          value={enabledValue}
+          onChange={(e) => {
+            const val = e.target.value;
+            const fs2 = { ...filterStruct };
+            delete fs2.enabled;
+            if (val !== NO_VALUE) fs2.enabled = [val];
+            mutator.query.update({ filters: deparseFilters(fs2) });
+          }}
+        />
+
         <div className={css.resetButtonWrap}>
           <Button
             buttonStyle="none"
