@@ -89,11 +89,11 @@ function HarvestablesSearchPane(props) {
         </div>
 
         <Select
-          label={intl.formatMessage({ id: 'ui-harvester-admin.harvestables.enabled' })}
+          label={intl.formatMessage({ id: 'ui-harvester-admin.harvestables.column.enabled' })}
           dataOptions={[
-            { value: NO_VALUE, label: intl.formatMessage({ id: 'ui-harvester-admin.harvestables.enabled.no-value' }) },
-            { value: 'true', label: intl.formatMessage({ id: 'ui-harvester-admin.harvestables.enabled.yes' }) },
-            { value: 'false', label: intl.formatMessage({ id: 'ui-harvester-admin.harvestables.enabled.no' }) },
+            { value: NO_VALUE, label: intl.formatMessage({ id: 'ui-harvester-admin.harvestables.column.enabled.no-value' }) },
+            { value: 'true', label: intl.formatMessage({ id: 'ui-harvester-admin.harvestables.column.enabled.yes' }) },
+            { value: 'false', label: intl.formatMessage({ id: 'ui-harvester-admin.harvestables.column.enabled.no' }) },
           ]}
           value={enabledValue}
           onChange={(e) => {

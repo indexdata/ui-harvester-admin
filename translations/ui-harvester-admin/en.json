@@ -21,6 +21,10 @@
     "harvestables.column.jobClass": "Job class",
     "harvestables.column.currentStatus": "Current status",
 
+    "harvestables.column.enabled.no-value": "-",
+    "harvestables.column.enabled.yes": "Yes",
+    "harvestables.column.enabled.no": "No",
+
     "harvestables.column.jobClass.OaiPmhResource": "OAI-PMH",
     "harvestables.column.jobClass.XmlBulkResource": "XML bulk",
     "harvestables.column.jobClass.HarvestConnectorResource": "Harvest connector",
@@ -28,11 +32,6 @@
     "harvestables.index.name": "Name",
     "harvestables.index.id": "ID",
     "harvestables.index.message": "Message",
-
-    "harvestables.enabled": "Enabled?",
-    "harvestables.enabled.no-value": "-",
-    "harvestables.enabled.yes": "Yes",
-    "harvestables.enabled.no": "No",
 
     "searchInputLabel": "XXX searchInputLabel",
 
