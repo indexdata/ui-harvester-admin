@@ -47,7 +47,11 @@ function HarvestablesSearchPane(props) {
   }
 
   const filterStruct = parseFilters(query.filters);
-  const enabledValue = filterStruct.enabled && filterStruct.enabled[0];
+
+  const jobClassDataOptions = ['OaiPmhResource', 'XmlBulkResource', 'HarvestConnectorResource'].map(tag => ({
+    value: tag,
+    label: intl.formatMessage({ id: `ui-harvester-admin.harvestables.column.jobClass.${tag}` }),
+  }));
 
   return (
     <Pane
@@ -91,16 +95,32 @@ function HarvestablesSearchPane(props) {
         <Select
           label={intl.formatMessage({ id: 'ui-harvester-admin.harvestables.column.enabled' })}
           dataOptions={[
-            { value: NO_VALUE, label: intl.formatMessage({ id: 'ui-harvester-admin.harvestables.column.enabled.no-value' }) },
+            { value: NO_VALUE, label: intl.formatMessage({ id: 'ui-harvester-admin.no-value' }) },
             { value: 'true', label: intl.formatMessage({ id: 'ui-harvester-admin.harvestables.column.enabled.yes' }) },
             { value: 'false', label: intl.formatMessage({ id: 'ui-harvester-admin.harvestables.column.enabled.no' }) },
           ]}
-          value={enabledValue}
+          value={filterStruct.enabled && filterStruct.enabled[0]}
           onChange={(e) => {
             const val = e.target.value;
             const fs2 = { ...filterStruct };
             delete fs2.enabled;
             if (val !== NO_VALUE) fs2.enabled = [val];
+            updateQuery({ filters: deparseFilters(fs2) });
+          }}
+        />
+
+        <Select
+          label={intl.formatMessage({ id: 'ui-harvester-admin.harvestables.column.jobClass' })}
+          dataOptions={[
+            { value: NO_VALUE, label: intl.formatMessage({ id: 'ui-harvester-admin.no-value' }) },
+            ...jobClassDataOptions
+          ]}
+          value={filterStruct.jobClass && filterStruct.jobClass[0]}
+          onChange={(e) => {
+            const val = e.target.value;
+            const fs2 = { ...filterStruct };
+            delete fs2.jobClass;
+            if (val !== NO_VALUE) fs2.jobClass = [val];
             updateQuery({ filters: deparseFilters(fs2) });
           }}
         />

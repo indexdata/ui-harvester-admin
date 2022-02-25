@@ -1,6 +1,7 @@
 {
     "meta.title": "Harvester admin",
 
+    "no-value": "-",
     "error": "Something went wrong",
     "settings.nullSettings": "Null settings",
 
@@ -21,7 +22,6 @@
     "harvestables.column.jobClass": "Job class",
     "harvestables.column.currentStatus": "Current status",
 
-    "harvestables.column.enabled.no-value": "-",
     "harvestables.column.enabled.yes": "Yes",
     "harvestables.column.enabled.no": "No",
 
