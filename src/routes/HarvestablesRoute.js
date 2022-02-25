@@ -62,7 +62,7 @@ HarvestablesRoute.manifest = Object.freeze({
     params: {
       query: (qp, _pc, _rd, logger) => {
         let ret;
-        if (qp.query) ret = `${qp.qindex}=${qp.query}`;
+        if (qp.query) ret = `${qp.qindex || 'name'}=${qp.query}`;
         logger.log('action', 'in query maker qp =', qp, '-->', ret);
         return ret;
       },

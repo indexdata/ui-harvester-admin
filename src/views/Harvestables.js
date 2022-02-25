@@ -31,7 +31,7 @@ function Harvestables({
   };
 
   return (
-    <SearchAndSortQuery initialSearchState={{ query: '' }}>
+    <SearchAndSortQuery>
       {
         (sasqParams) => {
           return (

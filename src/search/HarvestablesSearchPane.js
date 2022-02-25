@@ -101,7 +101,7 @@ function HarvestablesSearchPane(props) {
 HarvestablesSearchPane.propTypes = {
   // Passed as SASQ parameters
   searchValue: PropTypes.shape({
-    query: PropTypes.string.isRequired,
+    query: PropTypes.string,
   }).isRequired,
   getSearchHandlers: PropTypes.func.isRequired,
   onSubmitSearch: PropTypes.func.isRequired,
