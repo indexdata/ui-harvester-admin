@@ -48,6 +48,10 @@ function HarvestablesSearchPane(props) {
 
   const filterStruct = parseFilters(query.filters);
 
+  const enabledDataOptions = ['true', 'false'].map(tag => ({
+    value: tag,
+    label: intl.formatMessage({ id: `ui-harvester-admin.harvestables.column.enabled.${tag}` }),
+  }));
   const jobClassDataOptions = ['OaiPmhResource', 'XmlBulkResource', 'HarvestConnectorResource'].map(tag => ({
     value: tag,
     label: intl.formatMessage({ id: `ui-harvester-admin.harvestables.column.jobClass.${tag}` }),
@@ -113,8 +117,7 @@ function HarvestablesSearchPane(props) {
 
         {renderFilter('enabled', [
           { value: NO_VALUE, label: intl.formatMessage({ id: 'ui-harvester-admin.no-value' }) },
-          { value: 'true', label: intl.formatMessage({ id: 'ui-harvester-admin.harvestables.column.enabled.yes' }) },
-          { value: 'false', label: intl.formatMessage({ id: 'ui-harvester-admin.harvestables.column.enabled.no' }) },
+          ...enabledDataOptions,
         ])}
 
         {renderFilter('jobClass', [
