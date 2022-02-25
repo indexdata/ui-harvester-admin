@@ -12,7 +12,7 @@ function Harvestables({
   data,
   query,
   source,
-  mutator,
+  updateQuery,
   error,
   hasLoaded,
   onNeedMoreData
@@ -39,7 +39,7 @@ function Harvestables({
               <HarvestablesSearchPane
                 {...sasqParams}
                 query={query}
-                mutator={mutator}
+                updateQuery={updateQuery}
               />
               <ColumnManager
                 id="harvestable-visible-columns"
@@ -101,11 +101,7 @@ Harvestables.propTypes = {
   source: PropTypes.shape({
     totalCount: PropTypes.func.isRequired,
   }),
-  mutator: PropTypes.shape({
-    query: PropTypes.shape({
-      update: PropTypes.func.isRequired,
-    }).isRequired,
-  }).isRequired,
+  updateQuery:PropTypes.func.isRequired,
   error: PropTypes.string,
   hasLoaded: PropTypes.bool.isRequired,
   onNeedMoreData: PropTypes.func.isRequired,

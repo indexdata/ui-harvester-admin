@@ -28,7 +28,7 @@ function HarvestablesSearchPane(props) {
     resetAll,
     searchField,
     query,
-    mutator,
+    updateQuery,
   } = props;
   const searchHandlers = getSearchHandlers();
 
@@ -36,7 +36,7 @@ function HarvestablesSearchPane(props) {
   const onChangeIndex = (e) => {
     const qindex = e.target.value;
     stripes.logger.log('action', `changed query-index to '${qindex}'`);
-    mutator.query.update({ qindex });
+    updateQuery({ qindex });
   };
 
   const intl = useIntl();
@@ -101,7 +101,7 @@ function HarvestablesSearchPane(props) {
             const fs2 = { ...filterStruct };
             delete fs2.enabled;
             if (val !== NO_VALUE) fs2.enabled = [val];
-            mutator.query.update({ filters: deparseFilters(fs2) });
+            updateQuery({ filters: deparseFilters(fs2) });
           }}
         />
 
@@ -135,11 +135,7 @@ HarvestablesSearchPane.propTypes = {
 
   // Passed explicitly by <Harvestables>
   query: PropTypes.object.isRequired,
-  mutator: PropTypes.shape({
-    query: PropTypes.shape({
-      update: PropTypes.func.isRequired,
-    }).isRequired,
-  }).isRequired,
+  updateQuery:PropTypes.func.isRequired,
 };
 
 

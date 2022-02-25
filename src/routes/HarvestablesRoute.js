@@ -29,7 +29,7 @@ function HarvestablesRoute({ stripes, resources, mutator }) {
     }}
     query={resources.query}
     source={source}
-    mutator={mutator}
+    updateQuery={mutator.query.update}
     error={error}
     hasLoaded={hasLoaded}
     onNeedMoreData={handleNeedMoreData}
@@ -90,7 +90,11 @@ HarvestablesRoute.propTypes = {
       ),
     }),
   }).isRequired,
-  mutator: PropTypes.object,
+  mutator: PropTypes.shape({
+    query: PropTypes.shape({
+      update: PropTypes.func.isRequired,
+    }).isRequired,
+  }).isRequired,
 };
 
 
