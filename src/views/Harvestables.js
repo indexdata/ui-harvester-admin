@@ -5,7 +5,7 @@ import { AppIcon } from '@folio/stripes/core';
 import { LoadingPane, Paneset, Pane, MultiColumnList } from '@folio/stripes/components';
 import { ColumnManager, SearchAndSortQuery } from '@folio/stripes/smart-components';
 import HarvestablesSearchPane from '../search/HarvestablesSearchPane';
-import ErrorMessage from '../util/ErrorMessage';
+import ErrorMessage from '../components/ErrorMessage';
 
 
 function Harvestables({
