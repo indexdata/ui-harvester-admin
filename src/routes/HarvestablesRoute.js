@@ -8,18 +8,6 @@ import Harvestables from '../views/Harvestables';
 const INITIAL_RESULT_COUNT = 10;
 const RESULT_COUNT_INCREMENT = 10;
 
-/*
-const filterConfig = [];
-
-const searchableIndexes = [
-  'name',
-  'id',
-  'enabled',
-  'jobClass',
-  'currentStatus',
-];
-*/
-
 
 function HarvestablesRoute({ stripes, resources, mutator }) {
   let [source, setSource] = useState(); // eslint-disable-line prefer-const
