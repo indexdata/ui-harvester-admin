@@ -48,7 +48,7 @@ HarvestablesRoute.manifest = Object.freeze({
     recordsRequired: '%{resultCount}',
     perRequest: RESULT_COUNT_INCREMENT,
     params: {
-      query: (qp, _pc, _rd, logger) => {
+      query: (qp) => {
         const conditions = [];
         if (qp.query) conditions.push(`${qp.qindex || 'name'}=${qp.query}`);
         if (qp.filters) {
