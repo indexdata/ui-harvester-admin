@@ -42,21 +42,15 @@ function manuallyFilterAndSort(query, raw) {
 
   if (sortKeys.length === 0) return filtered;
 
-  console.log('sort =', sort, '=', JSON.stringify(sortKeys), 'for', filtered.length, 'records');
   return filtered.sort((a, b) => {
-    console.log(`comparing rec ${a.n} with rec ${b.n}`);
     for (let i = 0; i < sortKeys.length; i++) {
       const { key, descending } = sortKeys[i];
-      if (a[key] === b[key]) {
-        console.log(' ', '-- '.repeat(i), `comparing key #${i} ${key}: recs ${a.n} and ${b.n} match '${b[key]}': skipping`);
-        continue; // eslint-disable-line no-continue
-      }
+      if (a[key] === b[key]) continue; // eslint-disable-line no-continue
       const tmp = a[key] < b[key] ? -1 : 1;
-      const res = descending ? -tmp : tmp;
-      console.log(' ', '-- '.repeat(i), `comparing key #${i} ${key}: rec ${a.n} '${a[key]}' with rec ${b.n} '${b[key]}' -> ${res}`);
-      return res;
+      return descending ? -tmp : tmp;
     }
-    console.log(` recs ${a.n} and ${b.n} sort equal`);
+
+    // All keys were equal in value
     return 0;
   });
 }
