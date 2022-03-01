@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useIntl, FormattedMessage } from 'react-intl';
 import { useStripes } from '@folio/stripes/core';
 import { Button, Icon, Pane, SearchField, Select } from '@folio/stripes/components';
-import { parseFilters, deparseFilters } from '@folio/stripes/smart-components';
+import { parseFilters, deparseFilters, MultiSelectionFilter } from '@folio/stripes/smart-components';
 import css from './Harvestables.css';
 
 
@@ -36,11 +36,26 @@ function HarvestablesSearchPane(props) {
 
   const filterStruct = parseFilters(query.filters);
 
-  const renderFilter = (field, optionTags) => {
+  const renderFilter = (field, optionTags, isMulti) => {
     const dataOptions = optionTags.map(tag => ({
       value: tag,
       label: intl.formatMessage({ id: `ui-harvester-admin.harvestables.column.${field}.${tag}` }),
     }));
+
+    if (isMulti) {
+      return (
+        <MultiSelectionFilter
+          name={`multifilter-${field}`}
+          label={intl.formatMessage({ id: `ui-harvester-admin.harvestables.column.${field}` })}
+          dataOptions={dataOptions}
+          selectedValues={filterStruct[field]}
+          onChange={(group) => {
+            const fs2 = { ...filterStruct, [field]: group.values };
+            updateQuery({ filters: deparseFilters(fs2) });
+          }}
+        />
+      );
+    }
 
     return (
       <Select
@@ -102,7 +117,7 @@ function HarvestablesSearchPane(props) {
 
         {renderFilter('enabled', ['true', 'false'])}
         {renderFilter('jobClass', ['OaiPmhResource', 'XmlBulkResource', 'HarvestConnectorResource'])}
-        {renderFilter('currentStatus', ['NEW', 'OK', 'WARN', 'ERROR', 'RUNNING', 'FINISHED', 'KILLED'])}
+        {renderFilter('currentStatus', ['NEW', 'OK', 'WARN', 'ERROR', 'RUNNING', 'FINISHED', 'KILLED'], true)}
 
         <div className={css.resetButtonWrap}>
           <Button
