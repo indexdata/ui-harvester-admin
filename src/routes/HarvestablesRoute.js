@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { stripesConnect } from '@folio/stripes/core';
-import { StripesConnectedSource, parseFilters } from '@folio/stripes/smart-components';
+import { StripesConnectedSource } from '@folio/stripes/smart-components';
 import Harvestables from '../views/Harvestables';
 
 
-const INITIAL_RESULT_COUNT = 10;
-const RESULT_COUNT_INCREMENT = 10;
+const INITIAL_RESULT_COUNT = 500;
+const RESULT_COUNT_INCREMENT = 500;
 
 
 function HarvestablesRoute({ stripes, resources, mutator }) {
@@ -51,18 +51,28 @@ HarvestablesRoute.manifest = Object.freeze({
       query: (qp) => {
         const conditions = [];
         if (qp.query) conditions.push(`${qp.qindex || 'name'}=${qp.query}`);
+
+        /*
+        // Due to back-end limitations, filters can't be handled at
+        // the same time as the main query. Instead we will handle
+        // filtering client-side.
         if (qp.filters) {
           const o = parseFilters(qp.filters);
           Object.keys(o).sort().forEach(key => {
             conditions.push(`${key}=${o[key][0]}`);
           });
         }
+        */
 
         if (conditions.length === 0) return undefined;
         return conditions.join(' or '); // Not supported on back-end, but hey-ho
       },
-      orderBy: (qp, _pc, _rd, _logger, _props) => {
-        return qp.sort;
+      orderBy: (_qp) => {
+        // We could use qp.sort, but there are all sorts of back-end
+        // limitations: only certain fields can be sorted, only the
+        // first of multiple keys can be made desceding (by prepending
+        // "~"), so instead we sort client-side.
+        return undefined;
       }
     },
   },

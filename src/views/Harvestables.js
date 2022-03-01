@@ -3,9 +3,63 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { AppIcon } from '@folio/stripes/core';
 import { LoadingPane, Paneset, Pane, MultiColumnList } from '@folio/stripes/components';
-import { ColumnManager, SearchAndSortQuery } from '@folio/stripes/smart-components';
+import { parseFilters, ColumnManager, SearchAndSortQuery } from '@folio/stripes/smart-components';
 import HarvestablesSearchPane from '../search/HarvestablesSearchPane';
 import ErrorMessage from '../components/ErrorMessage';
+
+
+function parseSort(sort) {
+  if (sort === undefined || sort === '') return [];
+  return sort.split(',').map(s => (
+    s.startsWith('-') ?
+      { key: s.substring(1), descending: true } :
+      { key: s, descending: false }
+  ));
+}
+
+/*
+ * Server-side limitations mean that queries submitted to
+ * mod-harvester-admin cannot include filtering criteria and that the
+ * data returned is not sorted according to the `orderBy`
+ * parameter. Since the total size of the data-set is small, we do the
+ * filtering and sorting by hand here in the display component.
+ *
+ * DO NOT TRY THIS AT HOME.
+ */
+function manuallyFilterAndSort(query, raw) {
+  const { filters, sort } = query;
+  const filterStruct = parseFilters(filters);
+  const sortKeys = parseSort(sort);
+
+  // console.log('filters =', filters, '=', filterStruct);
+  const filtered = raw.filter(entry => {
+    // XXX for now!
+    if (entry.id === '302503') { entry.n = 1; return true; }
+    if (entry.id === '315503') { entry.n = 2; return true; }
+    if (entry.id === '324500') { entry.n = 3; return true; }
+    return false;
+  });
+
+  if (sortKeys.length === 0) return filtered;
+
+  console.log('sort =', sort, '=', JSON.stringify(sortKeys), 'for', filtered.length, 'records');
+  return filtered.sort((a, b) => {
+    console.log(`comparing rec ${a.n} with rec ${b.n}`);
+    for (let i = 0; i < sortKeys.length; i++) {
+      const { key, descending } = sortKeys[i];
+      if (a[key] === b[key]) {
+        console.log(' ', '-- '.repeat(i), `comparing key #${i} ${key}: recs ${a.n} and ${b.n} match '${b[key]}': skipping`);
+        continue; // eslint-disable-line no-continue
+      }
+      const tmp = a[key] < b[key] ? -1 : 1;
+      const res = descending ? -tmp : tmp;
+      console.log(' ', '-- '.repeat(i), `comparing key #${i} ${key}: rec ${a.n} '${a[key]}' with rec ${b.n} '${b[key]}' -> ${res}`);
+      return res;
+    }
+    console.log(` recs ${a.n} and ${b.n} sort equal`);
+    return 0;
+  });
+}
 
 
 function Harvestables({
@@ -30,6 +84,7 @@ function Harvestables({
     currentStatus: <FormattedMessage id="ui-harvester-admin.harvestables.column.currentStatus" />,
   };
 
+  const harvestables = manuallyFilterAndSort(query, data.harvestables);
   return (
     <SearchAndSortQuery>
       {
@@ -75,7 +130,7 @@ function Harvestables({
                         jobClass: r => <FormattedMessage id={`ui-harvester-admin.harvestables.column.jobClass.${r.jobClass}`} />,
                         currentStatus: r => <FormattedMessage id={`ui-harvester-admin.harvestables.column.currentStatus.${r.currentStatus}`} />,
                       }}
-                      contentData={data.harvestables}
+                      contentData={harvestables}
                       totalCount={count}
                       onHeaderClick={sasqParams.onSort}
                       onNeedMoreData={onNeedMoreData}
