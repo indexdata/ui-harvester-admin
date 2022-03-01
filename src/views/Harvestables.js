@@ -31,13 +31,14 @@ function manuallyFilterAndSort(query, raw) {
   const filterStruct = parseFilters(filters);
   const sortKeys = parseSort(sort);
 
-  // console.log('filters =', filters, '=', filterStruct);
+  const filterKeys = Object.keys(filterStruct).sort();
   const filtered = raw.filter(entry => {
-    // XXX for now!
-    if (entry.id === '302503') { entry.n = 1; return true; }
-    if (entry.id === '315503') { entry.n = 2; return true; }
-    if (entry.id === '324500') { entry.n = 3; return true; }
-    return false;
+    for (let i = 0; i < filterKeys.length; i++) {
+      const key = filterKeys[i];
+      const values = filterStruct[key];
+      if (values.indexOf(entry[key]) === -1) return false;
+    }
+    return true;
   });
 
   if (sortKeys.length === 0) return filtered;
