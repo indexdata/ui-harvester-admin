@@ -61,14 +61,12 @@ function manuallyFilterAndSort(query, raw) {
 function Harvestables({
   data,
   query,
-  source,
+  resultCount,
   updateQuery,
   error,
   hasLoaded,
   onNeedMoreData
 }) {
-  const count = source ? source.totalCount() : 0;
-
   if (error) return <ErrorMessage message={error} />;
   if (!hasLoaded) return <LoadingPane />;
 
@@ -103,6 +101,7 @@ function Harvestables({
                     defaultWidth="fill"
                     padContent={false}
                     paneTitle={<FormattedMessage id="ui-harvester-admin.nav.harvestables" />}
+                    paneSub={<FormattedMessage id="ui-harvester-admin.resultCount" values={{ count: resultCount }} />}
                     actionMenu={() => (
                       <>
                         {renderColumnsMenu}
@@ -127,7 +126,7 @@ function Harvestables({
                         currentStatus: r => <FormattedMessage id={`ui-harvester-admin.harvestables.column.currentStatus.${r.currentStatus}`} />,
                       }}
                       contentData={harvestables}
-                      totalCount={count}
+                      totalCount={resultCount}
                       onHeaderClick={sasqParams.onSort}
                       onNeedMoreData={onNeedMoreData}
                       onRowClick={(event, rec) => updateQuery({ recId: rec.id })}
@@ -153,9 +152,7 @@ Harvestables.propTypes = {
     ).isRequired,
   }).isRequired,
   query: PropTypes.object.isRequired,
-  source: PropTypes.shape({
-    totalCount: PropTypes.func.isRequired,
-  }),
+  resultCount: PropTypes.number,
   updateQuery:PropTypes.func.isRequired,
   error: PropTypes.string,
   hasLoaded: PropTypes.bool.isRequired,

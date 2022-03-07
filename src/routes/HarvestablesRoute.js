@@ -28,7 +28,7 @@ function HarvestablesRoute({ stripes, resources, mutator }) {
       harvestables: resources.harvestables.records,
     }}
     query={resources.query}
-    source={source}
+    resultCount={resources.harvestables.other?.totalRecords}
     updateQuery={mutator.query.update}
     error={error}
     hasLoaded={hasLoaded}
@@ -96,6 +96,9 @@ HarvestablesRoute.propTypes = {
       records: PropTypes.arrayOf(
         PropTypes.object.isRequired,
       ),
+      other: PropTypes.shape({
+        totalRecords: PropTypes.number.isRequired,
+      }),
     }),
   }).isRequired,
   mutator: PropTypes.shape({

@@ -3,6 +3,7 @@
 
     "no-value": "-",
     "error": "Something went wrong",
+    "resultCount": "{count, number} {count, plural, one {record found} other {records found}}",
     "settings.nullSettings": "Null settings",
 
     "permission.harvester-admin.read-jobs": "",
