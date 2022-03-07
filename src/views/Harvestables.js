@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { AppIcon } from '@folio/stripes/core';
 import { LoadingPane, Paneset, Pane, MultiColumnList } from '@folio/stripes/components';
 import { parseFilters, ColumnManager, SearchAndSortQuery } from '@folio/stripes/smart-components';
+import FullHarvestableLoader from '../routes/FullHarvestableLoader';
 import HarvestablesSearchPane from '../search/HarvestablesSearchPane';
 import ErrorMessage from '../components/ErrorMessage';
 
@@ -129,10 +130,12 @@ function Harvestables({
                       totalCount={count}
                       onHeaderClick={sasqParams.onSort}
                       onNeedMoreData={onNeedMoreData}
+                      onRowClick={(event, rec) => updateQuery({ recId: rec.id })}
                     />
                   </Pane>
                 )}
               </ColumnManager>
+              {query.recId && <FullHarvestableLoader recId={query.recId} />}
             </Paneset>
           );
         }
