@@ -26,8 +26,12 @@ FullHarvestableLoader.manifest = Object.freeze({
 
 FullHarvestableLoader.propTypes = {
   recId: PropTypes.string.isRequired,
-  resources: PropTypes.object.isRequired, // XXX be more detailed
-  mutator: PropTypes.object.isRequired, // XXX be more detailed
+  resources: PropTypes.shape({}).isRequired,
+  mutator: PropTypes.shape({
+    query: PropTypes.shape({
+      update: PropTypes.func.isRequired,
+    }).isRequired,
+  }).isRequired,
 };
 
 export default stripesConnect(FullHarvestableLoader);
