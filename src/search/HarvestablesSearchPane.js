@@ -12,6 +12,7 @@ const NO_VALUE = 'NO';
 
 function HarvestablesSearchPane(props) {
   const {
+    defaultWidth,
     searchValue,
     getSearchHandlers,
     onSubmitSearch,
@@ -78,7 +79,7 @@ function HarvestablesSearchPane(props) {
 
   return (
     <Pane
-      defaultWidth="20%"
+      defaultWidth={defaultWidth}
       paneTitle={<FormattedMessage id="stripes-smart-components.searchAndFilter" />}
     >
       <form onSubmit={onSubmitSearch}>
@@ -148,6 +149,7 @@ HarvestablesSearchPane.propTypes = {
   searchField: PropTypes.any, // eslint-disable-line react/forbid-prop-types
 
   // Passed explicitly by <Harvestables>
+  defaultWidth: PropTypes.string.isRequired,
   query: PropTypes.object.isRequired,
   updateQuery:PropTypes.func.isRequired,
 };

@@ -87,6 +87,7 @@ function Harvestables({
             <Paneset id="harvestables-paneset">
               <HarvestablesSearchPane
                 {...sasqParams}
+                defaultWidth="20%"
                 query={query}
                 updateQuery={updateQuery}
               />
@@ -134,7 +135,7 @@ function Harvestables({
                   </Pane>
                 )}
               </ColumnManager>
-              {query.recId && <FullHarvestableLoader recId={query.recId} />}
+              {query.recId && <FullHarvestableLoader defaultWidth="60%" recId={query.recId} />}
             </Paneset>
           );
         }

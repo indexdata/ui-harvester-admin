@@ -2,17 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { stripesConnect } from '@folio/stripes/core';
 import { Pane } from '@folio/stripes/components';
+import FullHarvestable from '../views/FullHarvestable';
 
-const FullHarvestableLoader = ({ recId, resources, mutator }) => (
+const FullHarvestableLoader = ({ defaultWidth, recId, resources, mutator }) => (
   <Pane
     dismissible
     onClose={() => mutator.query.update({ recId: null })}
-    defaultWidth="40%"
+    defaultWidth={defaultWidth}
     paneTitle={`record ${recId}`}
   >
-    <pre>
-      {JSON.stringify(resources, null, 2)}
-    </pre>
+    <FullHarvestable resource={resources.harvestable} />
   </Pane>
 );
 
@@ -25,8 +24,11 @@ FullHarvestableLoader.manifest = Object.freeze({
 });
 
 FullHarvestableLoader.propTypes = {
+  defaultWidth: PropTypes.string.isRequired,
   recId: PropTypes.string.isRequired,
-  resources: PropTypes.shape({}).isRequired,
+  resources: PropTypes.shape({
+    harvestable: PropTypes.shape({}).isRequired,
+  }).isRequired,
   mutator: PropTypes.shape({
     query: PropTypes.shape({
       update: PropTypes.func.isRequired,
