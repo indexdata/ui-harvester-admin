@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Loading, Accordion, Row, Col, KeyValue } from '@folio/stripes/components';
 import { CKV, RCKV } from '../../components/CKV';
+import ErrorMessage from '../../components/ErrorMessage';
 import OaiPmhSection from './OaiPmhSection';
+import XmlBulkSection from './XmlBulkSection';
 
 
 const FullHarvestable = ({ resource }) => {
@@ -56,7 +58,13 @@ const FullHarvestable = ({ resource }) => {
         <RCKV rec={rec} tag="id" />
       </Accordion>
 
-      <OaiPmhSection rec={rec} />
+      {
+        rec.type === 'oaiPmh' ?
+          <OaiPmhSection rec={rec} /> :
+          rec.type === 'xmlBulk' ?
+            <XmlBulkSection rec={rec} /> :
+            <ErrorMessage message={`Unknown type '${rec.type}'`} />
+      }
 
       <Accordion
         id="full-harvester-general"
@@ -91,6 +99,7 @@ FullHarvestable.propTypes = {
     hasLoaded: PropTypes.bool.isRequired,
     records: PropTypes.arrayOf(
       PropTypes.shape({
+        type: PropTypes.string.isRequired,
         json: PropTypes.string, // not required
         // ... and lots of other fields that ESLint doesn't care about
       }).isRequired,
