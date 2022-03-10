@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { Accordion } from '@folio/stripes/components';
 import { RCKV } from '../../components/CKV';
 
-const OaiPmhSection = ({ rec }) => (
+const XmlBulkSection = ({ rec }) => (
   <Accordion
     id="full-harvester-xml"
     label={<FormattedMessage id="ui-harvester-admin.harvestables.field.type.xmlBulk" />}
@@ -27,8 +27,8 @@ const OaiPmhSection = ({ rec }) => (
   </Accordion>
 );
 
-OaiPmhSection.propTypes = {
+XmlBulkSection.propTypes = {
   rec: PropTypes.object.isRequired,
 };
 
-export default OaiPmhSection;
+export default XmlBulkSection;
