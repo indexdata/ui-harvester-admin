@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Loading, Accordion, Row, Col, KeyValue } from '@folio/stripes/components';
-import { CKV, RCKV } from '../components/CKV';
+import { CKV, RCKV } from '../../components/CKV';
 
 
 const FullHarvestable = ({ resource }) => {
