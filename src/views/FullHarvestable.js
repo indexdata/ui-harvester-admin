@@ -40,13 +40,12 @@ const FullHarvestable = ({ resource }) => {
         <RCKV rec={rec} tag="scheduleString" />
         <RCKV rec={rec} tag="transformationPipeline" />
         <RCKV rec={rec} tag="laxParsing" />
-        {/* XXX encoding override */}
+        <RCKV rec={rec} tag="encoding" />
         <RCKV rec={rec} tag="storage.name" />
-        {/* XXX storage batch limit */}
-        {/* XXX stored records */}
+        <RCKV rec={rec} tag="storageBatchLimit" />
         <RCKV rec={rec} tag="cacheEnabled" />
         <RCKV rec={rec} tag="storeOriginal" />
-        {/* XXX Limit record number to */}
+        <RCKV rec={rec} tag="recordLimit" />
         <RCKV rec={rec} tag="timeout" />
         <RCKV rec={rec} tag="logLevel" />
         <RCKV rec={rec} tag="failedRecordsLogging" />
@@ -55,7 +54,14 @@ const FullHarvestable = ({ resource }) => {
         <RCKV rec={rec} tag="mailAddress" />
         <RCKV rec={rec} tag="mailLevel" />
         <RCKV rec={rec} tag="constantFields" />
-        {/* XXX Extra configuration (JSON) */}
+        <Row>
+          <Col xs={12}>
+            <KeyValue
+              label={<FormattedMessage id="ui-harvester-admin.harvestables.field.json" />}
+              value={<pre>{JSON.stringify(rec.json, null, 2)}</pre>}
+            />
+          </Col>
+        </Row>
         <RCKV rec={rec} tag="id" />
       </Accordion>
 
@@ -68,7 +74,7 @@ const FullHarvestable = ({ resource }) => {
         <RCKV rec={rec} tag="oaiSetName" />
         <RCKV rec={rec} tag="metadataPrefix" />
         <RCKV rec={rec} tag="dateFormat" />
-        {/* XXX Harvest from (yyyy-MM-dd) */}
+        <RCKV rec={rec} tag="fromDate" />
         <RCKV rec={rec} tag="untilDate" />
         <RCKV rec={rec} tag="resumptionToken" />
         <RCKV rec={rec} tag="clearRtOnError" />
@@ -109,7 +115,10 @@ FullHarvestable.propTypes = {
   resource: PropTypes.shape({
     hasLoaded: PropTypes.bool.isRequired,
     records: PropTypes.arrayOf(
-      PropTypes.shape({}).isRequired,
+      PropTypes.shape({
+        json: PropTypes.string, // not required
+        // ... and lots of other fields that ESLint doesn't care about
+      }).isRequired,
     ),
   }).isRequired,
 };
