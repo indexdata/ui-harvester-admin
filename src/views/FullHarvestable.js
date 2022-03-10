@@ -2,18 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Loading, Accordion, Row, Col, KeyValue } from '@folio/stripes/components';
+import { CKV, RCKV } from '../components/CKV';
 
-const CKV = ({ rec, tag, xs }) => ( // eslint-disable-line react/prop-types
-  <Col xs={xs}>
-    <KeyValue label={<FormattedMessage id={`ui-harvester-admin.harvestables.field.${tag}`} />} value={rec[tag]} />
-  </Col>
-);
-
-const RCKV = (props) => (
-  <Row>
-    <CKV {...props} xs={12} />
-  </Row>
-);
 
 const FullHarvestable = ({ resource }) => {
   if (!resource.hasLoaded) return <Loading />;
