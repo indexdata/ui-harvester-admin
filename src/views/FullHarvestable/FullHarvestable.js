@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Loading, Accordion, Row, Col, KeyValue } from '@folio/stripes/components';
 import { CKV, RCKV } from '../../components/CKV';
+import OaiPmhSection from './OaiPmhSection';
 
 
 const FullHarvestable = ({ resource }) => {
@@ -55,23 +56,7 @@ const FullHarvestable = ({ resource }) => {
         <RCKV rec={rec} tag="id" />
       </Accordion>
 
-      <Accordion
-        id="full-harvester-general"
-        label={<FormattedMessage id="ui-harvester-admin.harvestables.field.type.oaiPmh" />}
-      >
-        <RCKV rec={rec} tag="type" />
-        <RCKV rec={rec} tag="url" />
-        <RCKV rec={rec} tag="oaiSetName" />
-        <RCKV rec={rec} tag="metadataPrefix" />
-        <RCKV rec={rec} tag="dateFormat" />
-        <RCKV rec={rec} tag="fromDate" />
-        <RCKV rec={rec} tag="untilDate" />
-        <RCKV rec={rec} tag="resumptionToken" />
-        <RCKV rec={rec} tag="clearRtOnError" />
-        <RCKV rec={rec} tag="keepPartial" />
-        <RCKV rec={rec} tag="retryCount" />
-        <RCKV rec={rec} tag="retryWait" />
-      </Accordion>
+      <OaiPmhSection rec={rec} />
 
       <Accordion
         id="full-harvester-general"
