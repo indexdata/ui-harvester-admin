@@ -80,8 +80,8 @@ const FullHarvestable = ({ resource }) => {
           label={<FormattedMessage id="ui-harvester-admin.harvestables.heading.status" />}
         >
           <Row>
-            <CKV rec={rec} tag="currentStatus" xs={4} />
-            <CKV rec={rec} tag="initiallyHarvested" xs={8} />
+            <CKV rec={rec} tag="currentStatus" xs={6} />
+            <CKV rec={rec} tag="initiallyHarvested" xs={6} />
           </Row>
           <Row>
             <CKV rec={rec} tag="lastHarvestStarted" xs={6} />
