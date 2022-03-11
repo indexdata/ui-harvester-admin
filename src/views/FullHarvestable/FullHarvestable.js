@@ -9,9 +9,19 @@ import XmlBulkSection from './XmlBulkSection';
 import ConnectorSection from './ConnectorSection';
 
 
+const specificSections = {
+  oaiPmh: OaiPmhSection,
+  xmlBulk: XmlBulkSection,
+  connector: ConnectorSection,
+};
+
+
 const FullHarvestable = ({ resource }) => {
   if (!resource.hasLoaded) return <Loading />;
   const rec = resource.records[0];
+  const type = rec.type;
+  const ErrorSection = () => <ErrorMessage message={`Unknown type '${type}'`} />;
+  const SpecificSection = specificSections[type] || ErrorSection;
 
   return (
     <>
@@ -59,15 +69,7 @@ const FullHarvestable = ({ resource }) => {
         <RCKV rec={rec} tag="id" />
       </Accordion>
 
-      {
-        rec.type === 'oaiPmh' ?
-          <OaiPmhSection rec={rec} /> :
-          rec.type === 'xmlBulk' ?
-            <XmlBulkSection rec={rec} /> :
-            rec.type === 'connector' ?
-              <ConnectorSection rec={rec} /> :
-              <ErrorMessage message={`Unknown type '${rec.type}'`} />
-      }
+      <SpecificSection rec={rec} />
 
       <Accordion
         id="full-harvester-general"
