@@ -69,7 +69,6 @@ const FullHarvestable = ({ resource }) => {
               />
             </Col>
           </Row>
-          <RCKV rec={rec} tag="id" />
         </Accordion>
       }
 
