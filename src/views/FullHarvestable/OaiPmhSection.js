@@ -9,7 +9,6 @@ const OaiPmhSection = ({ rec }) => (
     id="full-harvester-oai"
     label={<FormattedMessage id="ui-harvester-admin.harvestables.field.type.oaiPmh" />}
   >
-    <RCKV rec={rec} tag="type" />
     <RCKV rec={rec} tag="url" />
     <RCKV rec={rec} tag="oaiSetName" />
     <RCKV rec={rec} tag="metadataPrefix" />

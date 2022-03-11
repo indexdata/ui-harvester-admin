@@ -9,7 +9,6 @@ const StatusSection = ({ rec }) => (
     id="full-harvester-status"
     label={<FormattedMessage id="ui-harvester-admin.harvestables.field.type.status" />}
   >
-    <RCKV rec={rec} tag="type" />
     <RCKV rec={rec} tag="id" />
     <RCKV rec={rec} tag="name" />
     <RCKV rec={rec} tag="scheduleString" />

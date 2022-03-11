@@ -9,7 +9,6 @@ const ConnectorSection = ({ rec }) => (
     id="full-harvester-connector"
     label={<FormattedMessage id="ui-harvester-admin.harvestables.field.type.connector" />}
   >
-    <RCKV rec={rec} tag="type" />
     <RCKV rec={rec} tag="connectorEngineUrlSetting.label" />
     <RCKV rec={rec} tag="engineParameters" />
     <RCKV rec={rec} tag="connectorRepoUrlSetting.label" />

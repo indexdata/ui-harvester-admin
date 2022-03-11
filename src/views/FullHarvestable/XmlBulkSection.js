@@ -9,7 +9,6 @@ const XmlBulkSection = ({ rec }) => (
     id="full-harvester-xml"
     label={<FormattedMessage id="ui-harvester-admin.harvestables.field.type.xmlBulk" />}
   >
-    <RCKV rec={rec} tag="type" />
     <RCKV rec={rec} tag="url" i18nTag="urls" />
     <RCKV rec={rec} tag="allowErrors" />
     <RCKV rec={rec} tag="overwrite" />
