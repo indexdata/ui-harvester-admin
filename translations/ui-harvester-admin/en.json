@@ -127,7 +127,7 @@
     "harvestables.field.sleep": "Delay between requests (milliseconds)",
     "harvestables.field.failedRetryCount": "Failed request retry count",
 
-    "harvestables.field.type.status": "Status specific information",
+    "harvestables.field.type.status": "General information",
     "harvestables.field.usageTags": "Filter, comma-separated list of usage tags",
     "harvestables.field.adminTags": "Filter, comma-separated list of admin tags",
     "harvestables.field.statusJobEnabled": "Status job enabled",
