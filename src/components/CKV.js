@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import get from 'lodash/get';
 import { FormattedMessage } from 'react-intl';
 import { Row, Col, KeyValue } from '@folio/stripes/components';
 
 export const CKV = ({ rec, tag, i18nTag, xs }) => (
   <Col xs={xs}>
-    <KeyValue label={<FormattedMessage id={`ui-harvester-admin.harvestables.field.${i18nTag || tag}`} />} value={rec[tag]} />
+    <KeyValue label={<FormattedMessage id={`ui-harvester-admin.harvestables.field.${i18nTag || tag}`} />} value={get(rec, tag)} />
   </Col>
 );
 

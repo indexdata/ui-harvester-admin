@@ -97,6 +97,7 @@
     ]
   },
   "dependencies": {
+    "lodash": "^4.17.0",
     "use-deep-compare": "^1.1.0"
   },
   "peerDependencies": {
