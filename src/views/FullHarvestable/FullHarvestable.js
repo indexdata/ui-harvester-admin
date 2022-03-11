@@ -6,6 +6,7 @@ import { CKV, RCKV } from '../../components/CKV';
 import ErrorMessage from '../../components/ErrorMessage';
 import OaiPmhSection from './OaiPmhSection';
 import XmlBulkSection from './XmlBulkSection';
+import ConnectorSection from './ConnectorSection';
 
 
 const FullHarvestable = ({ resource }) => {
@@ -63,7 +64,9 @@ const FullHarvestable = ({ resource }) => {
           <OaiPmhSection rec={rec} /> :
           rec.type === 'xmlBulk' ?
             <XmlBulkSection rec={rec} /> :
-            <ErrorMessage message={`Unknown type '${rec.type}'`} />
+            rec.type === 'connector' ?
+              <ConnectorSection rec={rec} /> :
+              <ErrorMessage message={`Unknown type '${rec.type}'`} />
       }
 
       <Accordion
