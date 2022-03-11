@@ -117,7 +117,7 @@ function HarvestablesSearchPane(props) {
         </div>
 
         {renderFilter('enabled', ['true', 'false'])}
-        {renderFilter('jobClass', ['OaiPmhResource', 'XmlBulkResource', 'HarvestConnectorResource'])}
+        {renderFilter('jobClass', ['OaiPmhResource', 'XmlBulkResource', 'HarvestConnectorResource', 'StatusResource'])}
         {renderFilter('currentStatus', ['NEW', 'OK', 'WARN', 'ERROR', 'RUNNING', 'FINISHED', 'KILLED'], true)}
 
         <div className={css.resetButtonWrap}>

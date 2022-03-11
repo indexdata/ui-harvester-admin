@@ -29,6 +29,7 @@
     "harvestables.column.jobClass.OaiPmhResource": "OAI-PMH",
     "harvestables.column.jobClass.XmlBulkResource": "XML bulk",
     "harvestables.column.jobClass.HarvestConnectorResource": "Harvest connector",
+    "harvestables.column.jobClass.StatusResource": "Status report",
 
     "harvestables.column.currentStatus.NEW": "New",
     "harvestables.column.currentStatus.OK": "OK",
