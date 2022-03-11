@@ -3,16 +3,16 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Row, Col, KeyValue } from '@folio/stripes/components';
 
-export const CKV = ({ rec, tag, fieldName, xs }) => (
+export const CKV = ({ rec, tag, i18nTag, xs }) => (
   <Col xs={xs}>
-    <KeyValue label={<FormattedMessage id={`ui-harvester-admin.harvestables.field.${tag}`} />} value={rec[fieldName || tag]} />
+    <KeyValue label={<FormattedMessage id={`ui-harvester-admin.harvestables.field.${i18nTag || tag}`} />} value={rec[tag]} />
   </Col>
 );
 
 CKV.propTypes = {
   rec: PropTypes.object.isRequired,
   tag: PropTypes.string.isRequired,
-  fieldName: PropTypes.string,
+  i18nTag: PropTypes.string, // if defined, use this translation tag instead of `tag`
   xs: PropTypes.number.isRequired,
 };
 
