@@ -127,6 +127,12 @@
     "harvestables.field.sleep": "Delay between requests (milliseconds)",
     "harvestables.field.failedRetryCount": "Failed request retry count",
 
+    "harvestables.field.type.status": "Status specific information",
+    "harvestables.field.usageTags": "Filter, comma-separated list of usage tags",
+    "harvestables.field.adminTags": "Filter, comma-separated list of admin tags",
+    "harvestables.field.statusJobEnabled": "Status job enabled",
+    "harvestables.field.customMailAddresses": "Custom e-mails addresses (multiple separated with comma)",
+
     "harvestables.heading.status": "Status information",
     "harvestables.field.statusInfo": "Status info:",
     "harvestables.field.currentStatus": "Current status:",

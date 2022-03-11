@@ -7,12 +7,14 @@ import ErrorMessage from '../../components/ErrorMessage';
 import OaiPmhSection from './OaiPmhSection';
 import XmlBulkSection from './XmlBulkSection';
 import ConnectorSection from './ConnectorSection';
+import StatusSection from './StatusSection';
 
 
 const specificSections = {
   oaiPmh: OaiPmhSection,
   xmlBulk: XmlBulkSection,
   connector: ConnectorSection,
+  status: StatusSection,
 };
 
 
