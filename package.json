@@ -64,7 +64,10 @@
         "permissionName": "ui-harvester-admin.maintain-jobs",
         "displayName": "Harvester admin: see, start and stop jobs",
         "subPermissions": [
-          "ui-harvester-admin.read-jobs"
+          "ui-harvester-admin.read-jobs",
+          "harvester-admin.harvestables.item.put",
+          "harvester-admin.harvestables.item.delete",
+          "harvester-admin.harvestables.item.post"
         ],
         "visible": true
       },

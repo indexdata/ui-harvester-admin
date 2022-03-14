@@ -17,6 +17,8 @@
     "nav.pipelines": "Transformation pipelines",
     "nav.steps": "Transformation steps",
 
+    "button.edit": "Edit",
+
     "harvestables.column.name": "Name",
     "harvestables.column.id": "ID",
     "harvestables.column.enabled": "Enabled?",

@@ -1,19 +1,44 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { stripesConnect } from '@folio/stripes/core';
-import { Pane } from '@folio/stripes/components';
+import { FormattedMessage } from 'react-intl';
+import { useStripes, stripesConnect } from '@folio/stripes/core';
+import { Pane, Button, Icon } from '@folio/stripes/components';
 import FullHarvestable from '../views/FullHarvestable';
 
-const FullHarvestableLoader = ({ defaultWidth, resources, mutator }) => (
-  <Pane
-    dismissible
-    onClose={() => mutator.query.update({ recId: null })}
-    defaultWidth={defaultWidth}
-    paneTitle={resources.harvestable.records[0]?.name}
-  >
-    <FullHarvestable resource={resources.harvestable} />
-  </Pane>
-);
+
+const FullHarvestableLoader = ({ defaultWidth, resources, mutator }) => {
+  const stripes = useStripes();
+  const actionMenu = () => {
+    if (!stripes.hasPerm('harvester-admin.harvestables.item.put')) return undefined;
+    return (
+      <Button
+        buttonStyle="dropdownItem"
+        data-test-actions-menu-edit
+        id="clickable-edit-harvestable"
+        onClick={() => {
+          mutator.query.update({ _path: 'harvestables/edit' });
+        }}
+      >
+        <Icon icon="edit">
+          <FormattedMessage id="ui-harvester-admin.button.edit" />
+        </Icon>
+      </Button>
+    );
+  };
+
+  return (
+    <Pane
+      dismissible
+      onClose={() => mutator.query.update({ recId: null })}
+      defaultWidth={defaultWidth}
+      paneTitle={resources.harvestable.records[0]?.name}
+      actionMenu={actionMenu}
+    >
+      <FullHarvestable resource={resources.harvestable} />
+    </Pane>
+  );
+};
+
 
 FullHarvestableLoader.manifest = Object.freeze({
   query: {},
@@ -22,6 +47,7 @@ FullHarvestableLoader.manifest = Object.freeze({
     path: 'harvester-admin/harvestables/!{recId}',
   },
 });
+
 
 FullHarvestableLoader.propTypes = {
   defaultWidth: PropTypes.string.isRequired,
@@ -41,5 +67,6 @@ FullHarvestableLoader.propTypes = {
     }).isRequired,
   }).isRequired,
 };
+
 
 export default stripesConnect(FullHarvestableLoader);
