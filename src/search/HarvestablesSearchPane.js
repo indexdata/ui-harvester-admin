@@ -16,7 +16,6 @@ function HarvestablesSearchPane(props) {
     searchValue,
     getSearchHandlers,
     onSubmitSearch,
-    resetAll,
     searchField,
     query,
     updateQuery,
@@ -125,7 +124,7 @@ function HarvestablesSearchPane(props) {
             buttonStyle="none"
             id="clickable-reset-all"
             disabled={false}
-            onClick={resetAll}
+            onClick={() => updateQuery({ query: undefined, sort: undefined, filters: undefined })}
           >
             <Icon icon="times-circle-solid">
               <FormattedMessage id="stripes-smart-components.resetAll" />
@@ -145,7 +144,6 @@ HarvestablesSearchPane.propTypes = {
   }).isRequired,
   getSearchHandlers: PropTypes.func.isRequired,
   onSubmitSearch: PropTypes.func.isRequired,
-  resetAll: PropTypes.func.isRequired,
   searchField: PropTypes.any, // eslint-disable-line react/forbid-prop-types
 
   // Passed explicitly by <Harvestables>
