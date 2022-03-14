@@ -50,7 +50,7 @@ HarvestablesRoute.manifest = Object.freeze({
     params: {
       query: (qp) => {
         const conditions = [];
-        if (qp.query) conditions.push(`${qp.qindex || 'name'}=${qp.query}`);
+        if (qp.query) conditions.push(`${qp.qindex || 'name'}=${qp.query}*`);
 
         /*
         // Due to back-end limitations, filters can't be handled at
