@@ -4,7 +4,6 @@ import { FormattedMessage } from 'react-intl';
 import { AppIcon } from '@folio/stripes/core';
 import { LoadingPane, Paneset, Pane, MultiColumnList } from '@folio/stripes/components';
 import { parseFilters, ColumnManager, SearchAndSortQuery } from '@folio/stripes/smart-components';
-import FullHarvestableLoader from '../routes/FullHarvestableLoader';
 import HarvestablesSearchPane from '../search/HarvestablesSearchPane';
 import ErrorMessage from '../components/ErrorMessage';
 
@@ -65,7 +64,8 @@ function Harvestables({
   updateQuery,
   error,
   hasLoaded,
-  onNeedMoreData
+  onNeedMoreData,
+  children,
 }) {
   if (error) return <ErrorMessage message={error} />;
   if (!hasLoaded) return <LoadingPane />;
@@ -130,12 +130,12 @@ function Harvestables({
                       totalCount={resultCount}
                       onHeaderClick={sasqParams.onSort}
                       onNeedMoreData={onNeedMoreData}
-                      onRowClick={(event, rec) => updateQuery({ recId: rec.id })}
+                      onRowClick={(event, rec) => updateQuery({ _path: `harvestables/${rec.id}` })}
                     />
                   </Pane>
                 )}
               </ColumnManager>
-              {query.recId && <FullHarvestableLoader defaultWidth="60%" recId={query.recId} />}
+              {children}
             </Paneset>
           );
         }
@@ -158,6 +158,7 @@ Harvestables.propTypes = {
   error: PropTypes.string,
   hasLoaded: PropTypes.bool.isRequired,
   onNeedMoreData: PropTypes.func.isRequired,
+  children: PropTypes.object,
 };
 
 

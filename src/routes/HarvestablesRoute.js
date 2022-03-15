@@ -9,7 +9,7 @@ const INITIAL_RESULT_COUNT = 500;
 const RESULT_COUNT_INCREMENT = 500;
 
 
-function HarvestablesRoute({ stripes, resources, mutator }) {
+function HarvestablesRoute({ stripes, resources, mutator, children }) {
   let [source, setSource] = useState(); // eslint-disable-line prefer-const
   if (!source) {
     source = new StripesConnectedSource({ resources, mutator }, stripes.logger, 'reportTitles');
@@ -23,17 +23,21 @@ function HarvestablesRoute({ stripes, resources, mutator }) {
   const error = resources.harvestables.failed ? resources.harvestables.failed.message : undefined;
   const hasLoaded = resources.harvestables.hasLoaded; // XXX may need to inspect .url instead
 
-  return <Harvestables
-    data={{
-      harvestables: resources.harvestables.records,
-    }}
-    query={resources.query}
-    resultCount={resources.harvestables.other?.totalRecords}
-    updateQuery={mutator.query.update}
-    error={error}
-    hasLoaded={hasLoaded}
-    onNeedMoreData={handleNeedMoreData}
-  />;
+  return (
+    <Harvestables
+      data={{
+        harvestables: resources.harvestables.records,
+      }}
+      query={resources.query}
+      resultCount={resources.harvestables.other?.totalRecords}
+      updateQuery={mutator.query.update}
+      error={error}
+      hasLoaded={hasLoaded}
+      onNeedMoreData={handleNeedMoreData}
+    >
+      {children}
+    </Harvestables>
+  );
 }
 
 
@@ -106,6 +110,7 @@ HarvestablesRoute.propTypes = {
       update: PropTypes.func.isRequired,
     }).isRequired,
   }).isRequired,
+  children: PropTypes.object.isRequired,
 };
 
 

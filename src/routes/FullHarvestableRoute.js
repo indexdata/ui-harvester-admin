@@ -6,7 +6,7 @@ import { Pane, Button, Icon } from '@folio/stripes/components';
 import FullHarvestable from '../views/FullHarvestable';
 
 
-const FullHarvestableLoader = ({ defaultWidth, resources, mutator }) => {
+const FullHarvestableRoute = ({ defaultWidth, resources, mutator, match }) => {
   const stripes = useStripes();
   const actionMenu = () => {
     if (!stripes.hasPerm('harvester-admin.harvestables.item.put')) return undefined;
@@ -16,7 +16,7 @@ const FullHarvestableLoader = ({ defaultWidth, resources, mutator }) => {
         data-test-actions-menu-edit
         id="clickable-edit-harvestable"
         onClick={() => {
-          mutator.query.update({ _path: 'harvestables/edit' });
+          mutator.query.update({ _path: `${match.params.recId}/edit` });
         }}
       >
         <Icon icon="edit">
@@ -29,7 +29,7 @@ const FullHarvestableLoader = ({ defaultWidth, resources, mutator }) => {
   return (
     <Pane
       dismissible
-      onClose={() => mutator.query.update({ recId: null })}
+      onClose={() => mutator.query.update({ _path: '../harvestables' })}
       defaultWidth={defaultWidth}
       paneTitle={resources.harvestable.records[0]?.name}
       actionMenu={actionMenu}
@@ -40,18 +40,17 @@ const FullHarvestableLoader = ({ defaultWidth, resources, mutator }) => {
 };
 
 
-FullHarvestableLoader.manifest = Object.freeze({
+FullHarvestableRoute.manifest = Object.freeze({
   query: {},
   harvestable: {
     type: 'okapi',
-    path: 'harvester-admin/harvestables/!{recId}',
+    path: 'harvester-admin/harvestables/:{recId}',
   },
 });
 
 
-FullHarvestableLoader.propTypes = {
-  defaultWidth: PropTypes.string.isRequired,
-  // recId: PropTypes.string.isRequired, // used only in manifest as !{recId}
+FullHarvestableRoute.propTypes = {
+  defaultWidth: PropTypes.string,
   resources: PropTypes.shape({
     harvestable: PropTypes.shape({
       records: PropTypes.arrayOf(
@@ -66,7 +65,16 @@ FullHarvestableLoader.propTypes = {
       update: PropTypes.func.isRequired,
     }).isRequired,
   }).isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      recId: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired
 };
 
 
-export default stripesConnect(FullHarvestableLoader);
+FullHarvestableRoute.defaultProps = {
+  defaultWidth: '60%',
+};
+
+export default stripesConnect(FullHarvestableRoute);

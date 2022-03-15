@@ -5,6 +5,7 @@ import { Route as NestedRoute } from '@folio/stripes/core';
 import Settings from './settings';
 import SwitchRoute from './routes/SwitchRoute';
 import HarvestablesRoute from './routes/HarvestablesRoute';
+import FullHarvestableRoute from './routes/FullHarvestableRoute';
 import StoragesRoute from './routes/StoragesRoute';
 
 class HarvesterAdminApp extends React.Component {
@@ -30,7 +31,9 @@ class HarvesterAdminApp extends React.Component {
         <Redirect exact from={path} to={`${path}/harvestables`} />
         <NestedRoute path={`${path}`} component={SwitchRoute}>
           <Switch>
-            <NestedRoute path={`${path}/harvestables`} exact component={HarvestablesRoute} />
+            <NestedRoute path={`${path}/harvestables`} component={HarvestablesRoute}>
+              <NestedRoute path={`${path}/harvestables/:recId`} exact component={FullHarvestableRoute} />
+            </NestedRoute>
             <NestedRoute path={`${path}/storages`} exact component={StoragesRoute} />
           </Switch>
         </NestedRoute>
