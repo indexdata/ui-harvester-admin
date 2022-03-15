@@ -15,7 +15,7 @@ function SwitchRoute({ location, children }) {
               <Button
                 key={`${name}`}
                 to={`/ha/${name}`}
-                buttonStyle={`${location.pathname === `/ha/${name}` ? 'primary' : 'default'}`}
+                buttonStyle={`${location.pathname.startsWith(`/ha/${name}`) ? 'primary' : 'default'}`}
                 aria-selected={location.pathname === `/ha/${name}`}
               >
                 <FormattedMessage id={`ui-harvester-admin.nav.${name}`} />
