@@ -6,6 +6,7 @@ import { LoadingPane, Paneset, Pane, MultiColumnList } from '@folio/stripes/comp
 import { parseFilters, ColumnManager, SearchAndSortQuery } from '@folio/stripes/smart-components';
 import HarvestablesSearchPane from '../search/HarvestablesSearchPane';
 import ErrorMessage from '../components/ErrorMessage';
+import packageInfo from '../../package';
 
 
 function parseSort(sort) {
@@ -130,7 +131,7 @@ function Harvestables({
                       totalCount={resultCount}
                       onHeaderClick={sasqParams.onSort}
                       onNeedMoreData={onNeedMoreData}
-                      onRowClick={(event, rec) => updateQuery({ _path: `harvestables/${rec.id}` })}
+                      onRowClick={(event, rec) => updateQuery({ _path: `${packageInfo.stripes.route}/harvestables/${rec.id}` })}
                     />
                   </Pane>
                 )}
@@ -158,7 +159,7 @@ Harvestables.propTypes = {
   error: PropTypes.string,
   hasLoaded: PropTypes.bool.isRequired,
   onNeedMoreData: PropTypes.func.isRequired,
-  children: PropTypes.object,
+  children: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
 };
 
 

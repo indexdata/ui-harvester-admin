@@ -7,7 +7,7 @@ import FullHarvestable from '../views/FullHarvestable';
 import packageInfo from '../../package';
 
 
-const FullHarvestableRoute = ({ defaultWidth, resources, mutator, match }) => {
+const EditHarvestableRoute = ({ defaultWidth, resources, mutator, match }) => {
   const stripes = useStripes();
   const actionMenu = () => {
     if (!stripes.hasPerm('harvester-admin.harvestables.item.put')) return undefined;
@@ -35,13 +35,14 @@ const FullHarvestableRoute = ({ defaultWidth, resources, mutator, match }) => {
       paneTitle={resources.harvestable.records[0]?.name}
       actionMenu={actionMenu}
     >
+      EDIT
       <FullHarvestable resource={resources.harvestable} />
     </Pane>
   );
 };
 
 
-FullHarvestableRoute.manifest = Object.freeze({
+EditHarvestableRoute.manifest = Object.freeze({
   query: {},
   harvestable: {
     type: 'okapi',
@@ -50,7 +51,7 @@ FullHarvestableRoute.manifest = Object.freeze({
 });
 
 
-FullHarvestableRoute.propTypes = {
+EditHarvestableRoute.propTypes = {
   defaultWidth: PropTypes.string,
   resources: PropTypes.shape({
     harvestable: PropTypes.shape({
@@ -74,8 +75,8 @@ FullHarvestableRoute.propTypes = {
 };
 
 
-FullHarvestableRoute.defaultProps = {
+EditHarvestableRoute.defaultProps = {
   defaultWidth: '60%',
 };
 
-export default stripesConnect(FullHarvestableRoute);
+export default stripesConnect(EditHarvestableRoute);
