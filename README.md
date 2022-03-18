@@ -15,4 +15,5 @@ This is a Stripes UI modules providing an administrative interface to the Index 
 * [Notes on UI requirements](doc/ui.md)
 * [The harvester query language](doc/query-language.md)
 * [Running `ui-harvester-admin` against a local backend](doc/running.md)
+* [Re-establishing permissions after changing the module descriptor](doc/permissions.md)
 
