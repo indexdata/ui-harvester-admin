@@ -1,22 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import get from 'lodash/get';
 import { stripesConnect } from '@folio/stripes/core';
-import { Pane } from '@folio/stripes/components';
-import FullHarvestable from '../views/FullHarvestable';
+import HarvestableForm from '../forms/HarvestableForm';
 import packageInfo from '../../package';
 
 
-const EditHarvestableRoute = ({ defaultWidth, resources, mutator }) => {
+const EditHarvestableRoute = ({ resources, mutator }) => {
+  const handleClose = () => {
+    mutator.query.update({ _path: `${packageInfo.stripes.route}/harvestables` });
+  };
+
+  const handleSubmit = (harvestable) => {
+    mutator.harvestable.PUT(harvestable)
+      .then(handleClose);
+  };
+
   return (
-    <Pane
-      dismissible
-      onClose={() => mutator.query.update({ _path: `${packageInfo.stripes.route}/harvestables` })}
-      defaultWidth={defaultWidth}
-      paneTitle={resources.harvestable.records[0]?.name}
-    >
-      EDIT
-      <FullHarvestable resource={resources.harvestable} />
-    </Pane>
+    <HarvestableForm
+      isLoading={resources.harvestable.isPending}
+      initialValues={get(resources, 'harvestable.records[0]', {})}
+      handlers={{ onClose: handleClose }}
+      onSubmit={handleSubmit}
+    />
   );
 };
 
@@ -31,9 +37,9 @@ EditHarvestableRoute.manifest = Object.freeze({
 
 
 EditHarvestableRoute.propTypes = {
-  defaultWidth: PropTypes.string,
   resources: PropTypes.shape({
     harvestable: PropTypes.shape({
+      isPending: PropTypes.bool.isRequired,
       records: PropTypes.arrayOf(
         PropTypes.shape({
           name: PropTypes.string.isRequired,
@@ -45,12 +51,11 @@ EditHarvestableRoute.propTypes = {
     query: PropTypes.shape({
       update: PropTypes.func.isRequired,
     }).isRequired,
+    harvestable: PropTypes.shape({
+      PUT: PropTypes.func.isRequired,
+    }).isRequired,
   }).isRequired,
 };
 
-
-EditHarvestableRoute.defaultProps = {
-  defaultWidth: '60%',
-};
 
 export default stripesConnect(EditHarvestableRoute);
