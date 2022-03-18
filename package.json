@@ -100,13 +100,16 @@
     ]
   },
   "dependencies": {
+    "final-form-set-field-data": "^1.0.2",
     "lodash": "^4.17.0",
+    "react-final-form": "^6.3.0",
     "use-deep-compare": "^1.1.0"
   },
   "peerDependencies": {
     "@folio/stripes": "^7.0.0",
     "prop-types": "*",
     "react": "*",
+    "react-dom": "*",
     "react-intl": "*",
     "react-router": "*",
     "react-router-dom": "*"
@@ -118,6 +121,7 @@
     "@folio/stripes-cli": "^2.4.0",
     "eslint": "^6.2.1",
     "react": "^16.8.6",
+    "react-dom": "^16.8.6",
     "react-intl": "^5.7.0",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0"
