@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { Field } from 'react-final-form';
 import { Accordion, Col, Row, TextField, TextArea } from '@folio/stripes/components';
 
-const CF = ({ tag, i18nTag, xs }) => (
+const CF = ({ tag, i18nTag, xs, ...rest }) => (
   <Col xs={xs}>
     <FormattedMessage id={`ui-harvester-admin.harvestables.field.${i18nTag || tag}`}>
       {placeholder => (
@@ -13,6 +13,7 @@ const CF = ({ tag, i18nTag, xs }) => (
           name={tag}
           label={placeholder}
           component={TextField}
+          {...rest}
         />
       )}
     </FormattedMessage>
@@ -66,21 +67,7 @@ const HarvestableFormGeneral = () => {
       <RCF tag="mailAddress" />
       <RCF tag="mailLevel" />
       <RCF tag="constantFields" />
-      <Row>
-        <Col xs={12}>
-          <FormattedMessage id="ui-harvester-admin.harvestables.field.json">
-            {placeholder => (
-              <Field
-                id="edit-harvestable-json"
-                name="json"
-                label={placeholder}
-                component={TextArea}
-                rows="6"
-              />
-            )}
-          </FormattedMessage>
-        </Col>
-      </Row>
+      <RCF tag="json" component={TextArea} rows="6" />
     </Accordion>
   );
 };
