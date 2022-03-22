@@ -2,28 +2,34 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Field } from 'react-final-form';
-import { Accordion, Col, Row, TextField } from '@folio/stripes/components';
+import { Accordion, Col, Row, TextField, TextArea } from '@folio/stripes/components';
 
-const RCF = ({ tag }) => (
-  <Row>
-    <Col xs={12}>
-      <FormattedMessage id={`ui-harvester-admin.harvestables.field.${tag}`}>
-        {placeholder => (
-          <Field
-            id={`edit-harvestable-${tag}`}
-            name={tag}
-            label={placeholder}
-            component={TextField}
-          />
-        )}
-      </FormattedMessage>
-    </Col>
-  </Row>
+const CF = ({ tag, i18nTag, xs }) => (
+  <Col xs={xs}>
+    <FormattedMessage id={`ui-harvester-admin.harvestables.field.${i18nTag || tag}`}>
+      {placeholder => (
+        <Field
+          id={`edit-harvestable-${tag}`}
+          name={tag}
+          label={placeholder}
+          component={TextField}
+        />
+      )}
+    </FormattedMessage>
+  </Col>
 );
 
-RCF.propTypes = {
+CF.propTypes = {
   tag: PropTypes.string.isRequired,
+  i18nTag: PropTypes.string, // if defined, use this translation tag instead of `tag`
+  xs: PropTypes.number.isRequired,
 };
+
+const RCF = (props) => (
+  <Row>
+    <CF {...props} xs={12} />
+  </Row>
+);
 
 const HarvestableFormGeneral = () => {
   return (
@@ -33,6 +39,48 @@ const HarvestableFormGeneral = () => {
     >
       <RCF tag="id" />
       <RCF tag="name" />
+      <RCF tag="serviceProvider" />
+      <Row>
+        <CF tag="usedBy" xs={6} />
+        <CF tag="managedBy" xs={6} />
+      </Row>
+      <RCF tag="openAccess" />
+      <RCF tag="description" />
+      <RCF tag="technicalNotes" />
+      <RCF tag="contactNotes" />
+      <RCF tag="enabled" />
+      <RCF tag="scheduleString" />
+      <RCF tag="transformationPipeline" />
+      <RCF tag="laxParsing" />
+      <RCF tag="encoding" />
+      <RCF tag="storage.name" />
+      <RCF tag="storageBatchLimit" />
+      <RCF tag="cacheEnabled" />
+      <RCF tag="storeOriginal" />
+      <RCF tag="recordLimit" />
+      <RCF tag="timeout" />
+      <RCF tag="logLevel" />
+      <RCF tag="failedRecordsLogging" />
+      <RCF tag="maxSavedFailedRecordsPerRun" />
+      <RCF tag="maxSavedFailedRecordsTotal" />
+      <RCF tag="mailAddress" />
+      <RCF tag="mailLevel" />
+      <RCF tag="constantFields" />
+      <Row>
+        <Col xs={12}>
+          <FormattedMessage id="ui-harvester-admin.harvestables.field.json">
+            {placeholder => (
+              <Field
+                id="edit-harvestable-json"
+                name="json"
+                label={placeholder}
+                component={TextArea}
+                rows="6"
+              />
+            )}
+          </FormattedMessage>
+        </Col>
+      </Row>
     </Accordion>
   );
 };
