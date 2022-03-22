@@ -3,7 +3,26 @@ import PropTypes from 'prop-types';
 import get from 'lodash/get';
 import { stripesConnect } from '@folio/stripes/core';
 import HarvestableForm from '../forms/HarvestableForm';
+import { booleanFields } from '../constants';
 import packageInfo from '../../package';
+
+
+function getInitialValues(resources) {
+  const values = get(resources, 'harvestable.records[0]', {});
+  const massaged = { ...values };
+
+  if (massaged.json && typeof massaged.json === 'object') {
+    massaged.json = JSON.stringify(massaged.json, null, 2);
+  }
+
+  booleanFields.forEach(tag => {
+    if (massaged[tag] !== undefined) {
+      massaged[tag] = (massaged[tag] === 'true');
+    }
+  });
+
+  return massaged;
+}
 
 
 const EditHarvestableRoute = ({ resources, mutator, match }) => {
@@ -11,21 +30,23 @@ const EditHarvestableRoute = ({ resources, mutator, match }) => {
     mutator.query.update({ _path: `${packageInfo.stripes.route}/harvestables/${match.params.recId}` });
   };
 
-  const handleSubmit = (harvestable) => {
-    mutator.harvestable.PUT(harvestable)
+  const handleSubmit = (record) => {
+    const massaged = { ...record };
+
+    booleanFields.forEach(tag => {
+      if (massaged[tag] !== undefined) {
+        massaged[tag] = massaged[tag] ? 'true' : 'false';
+      }
+    });
+
+    mutator.harvestable.PUT(massaged)
       .then(handleClose);
   };
-
-  const initialValues = get(resources, 'harvestable.records[0]', {});
-  const massaged = { ...initialValues };
-  if (massaged.json && typeof massaged.json === 'object') {
-    massaged.json = JSON.stringify(massaged.json, null, 2);
-  }
 
   return (
     <HarvestableForm
       isLoading={resources.harvestable.isPending}
-      initialValues={massaged}
+      initialValues={getInitialValues(resources)}
       handlers={{ onClose: handleClose }}
       onSubmit={handleSubmit}
     />
