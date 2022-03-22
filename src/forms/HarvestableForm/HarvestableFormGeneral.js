@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Field } from 'react-final-form';
-import { Accordion, Col, Row, TextField, TextArea } from '@folio/stripes/components';
+import { Accordion, Col, Row, TextField, Checkbox, TextArea } from '@folio/stripes/components';
 
 const CF = ({ tag, i18nTag, xs, ...rest }) => (
   <Col xs={xs}>
@@ -45,19 +45,19 @@ const HarvestableFormGeneral = () => {
         <CF tag="usedBy" xs={6} />
         <CF tag="managedBy" xs={6} />
       </Row>
-      <RCF tag="openAccess" />
+      <RCF tag="openAccess" component={Checkbox} type="checkbox" />
       <RCF tag="description" />
       <RCF tag="technicalNotes" />
       <RCF tag="contactNotes" />
-      <RCF tag="enabled" />
+      <RCF tag="enabled" component={Checkbox} type="checkbox" />
       <RCF tag="scheduleString" />
       <RCF tag="transformationPipeline" />
-      <RCF tag="laxParsing" />
+      <RCF tag="laxParsing" component={Checkbox} type="checkbox" />
       <RCF tag="encoding" />
       <RCF tag="storage.name" />
       <RCF tag="storageBatchLimit" />
-      <RCF tag="cacheEnabled" />
-      <RCF tag="storeOriginal" />
+      <RCF tag="cacheEnabled" component={Checkbox} type="checkbox" />
+      <RCF tag="storeOriginal" component={Checkbox} type="checkbox" />
       <RCF tag="recordLimit" />
       <RCF tag="timeout" />
       <RCF tag="logLevel" />
