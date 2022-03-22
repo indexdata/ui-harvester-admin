@@ -6,7 +6,7 @@ import { RCKV, CKV } from '../../components/CKV';
 
 const TrailerSection = ({ rec }) => (
   <Accordion
-    id="full-harvester-general"
+    id="harvestable-section-general"
     label={<FormattedMessage id="ui-harvester-admin.harvestables.heading.status" />}
   >
     <Row>

@@ -6,7 +6,7 @@ import { RCKV } from '../../components/CKV';
 
 const XmlBulkSection = ({ rec }) => (
   <Accordion
-    id="full-harvester-xml"
+    id="harvestable-section-xml"
     label={<FormattedMessage id="ui-harvester-admin.harvestables.field.type.xmlBulk" />}
   >
     <RCKV rec={rec} tag="url" i18nTag="urls" />

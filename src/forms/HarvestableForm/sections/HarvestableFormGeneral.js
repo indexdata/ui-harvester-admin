@@ -6,7 +6,7 @@ import { Accordion, Col, Row, TextField } from '@folio/stripes/components';
 const HarvestableFormGeneral = () => {
   return (
     <Accordion
-      id="full-harvester-form-general"
+      id="harvestable-form-general"
       label={<FormattedMessage id="ui-harvester-admin.harvestables.heading.general" />}
     >
       <div data-test-harvestable-info id="HarvestableFormGeneral">

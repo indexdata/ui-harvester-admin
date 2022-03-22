@@ -6,7 +6,7 @@ import { RCKV } from '../../components/CKV';
 
 const ConnectorSection = ({ rec }) => (
   <Accordion
-    id="full-harvester-connector"
+    id="harvestable-section-connector"
     label={<FormattedMessage id="ui-harvester-admin.harvestables.field.type.connector" />}
   >
     <RCKV rec={rec} tag="connectorEngineUrlSetting.label" />

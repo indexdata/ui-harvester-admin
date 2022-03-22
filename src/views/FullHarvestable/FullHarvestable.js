@@ -33,7 +33,7 @@ const FullHarvestable = ({ resource }) => {
       {type !== 'status' && <TrailerSection rec={rec} />}
 
       <Accordion
-        id="full-harvester-devinfo"
+        id="harvestable-section-devinfo"
         label={<FormattedMessage id="ui-harvester-admin.accordion.devinfo" />}
         closedByDefault
       >

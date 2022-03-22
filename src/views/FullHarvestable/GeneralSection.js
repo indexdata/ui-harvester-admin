@@ -6,7 +6,7 @@ import { RCKV, CKV } from '../../components/CKV';
 
 const GeneralSection = ({ rec }) => (
   <Accordion
-    id="full-harvester-general"
+    id="harvestable-section-general"
     label={<FormattedMessage id="ui-harvester-admin.harvestables.heading.general" />}
   >
     <RCKV rec={rec} tag="id" />
