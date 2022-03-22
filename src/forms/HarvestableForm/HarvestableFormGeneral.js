@@ -4,14 +4,14 @@ import { FormattedMessage } from 'react-intl';
 import { Field } from 'react-final-form';
 import { Accordion, Col, Row, TextField } from '@folio/stripes/components';
 
-const RCF = ({ fieldName }) => (
+const RCF = ({ tag }) => (
   <Row>
     <Col xs={12}>
-      <FormattedMessage id={`ui-harvester-admin.harvestables.field.${fieldName}`}>
+      <FormattedMessage id={`ui-harvester-admin.harvestables.field.${tag}`}>
         {placeholder => (
           <Field
-            id={`edit-harvestable-${fieldName}`}
-            name={fieldName}
+            id={`edit-harvestable-${tag}`}
+            name={tag}
             label={placeholder}
             component={TextField}
           />
@@ -22,7 +22,7 @@ const RCF = ({ fieldName }) => (
 );
 
 RCF.propTypes = {
-  fieldName: PropTypes.string.isRequired,
+  tag: PropTypes.string.isRequired,
 };
 
 const HarvestableFormGeneral = () => {
@@ -31,8 +31,8 @@ const HarvestableFormGeneral = () => {
       id="harvestable-form-general"
       label={<FormattedMessage id="ui-harvester-admin.harvestables.heading.general" />}
     >
-      <RCF fieldName="id" />
-      <RCF fieldName="name" />
+      <RCF tag="id" />
+      <RCF tag="name" />
     </Accordion>
   );
 };
