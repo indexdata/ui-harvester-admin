@@ -51,7 +51,6 @@ FullHarvestable.propTypes = {
     records: PropTypes.arrayOf(
       PropTypes.shape({
         type: PropTypes.string.isRequired,
-        json: PropTypes.string, // not required
         // ... and lots of other fields that ESLint doesn't care about
       }).isRequired,
     ),
@@ -59,11 +58,3 @@ FullHarvestable.propTypes = {
 };
 
 export default FullHarvestable;
-
-/*
-  // Not used
-  "allowErrors": "false",
-  "diskRun": "false",
-  "harvestImmediately": "false",
-  "overwrite": "false",
-*/
