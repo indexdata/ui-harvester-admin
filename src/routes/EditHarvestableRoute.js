@@ -16,10 +16,16 @@ const EditHarvestableRoute = ({ resources, mutator }) => {
       .then(handleClose);
   };
 
+  const initialValues = get(resources, 'harvestable.records[0]', {});
+  const massaged = { ...initialValues };
+  if (massaged.json && typeof massaged.json === 'object') {
+    massaged.json = JSON.stringify(massaged.json, null, 2);
+  }
+
   return (
     <HarvestableForm
       isLoading={resources.harvestable.isPending}
-      initialValues={get(resources, 'harvestable.records[0]', {})}
+      initialValues={massaged}
       handlers={{ onClose: handleClose }}
       onSubmit={handleSubmit}
     />
