@@ -31,10 +31,8 @@ const HarvestableFormGeneral = () => {
       id="harvestable-form-general"
       label={<FormattedMessage id="ui-harvester-admin.harvestables.heading.general" />}
     >
-      <div data-test-harvestable-info id="HarvestableFormGeneral">
-        <RCF fieldName="id" />
-        <RCF fieldName="name" />
-      </div>
+      <RCF fieldName="id" />
+      <RCF fieldName="name" />
     </Accordion>
   );
 };
