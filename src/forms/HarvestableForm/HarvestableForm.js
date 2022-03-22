@@ -13,7 +13,7 @@ import { AppIcon, TitleManager, withStripes } from '@folio/stripes/core';
 import stripesFinalForm from '@folio/stripes/final-form';
 import { isEqual } from 'lodash';
 import setFieldData from 'final-form-set-field-data'; // XXX do we need this?
-import { HarvestableFormInfo } from './sections';
+import { HarvestableFormGeneral } from './sections';
 
 const handleKeyCommand = (handler, { disabled } = {}) => {
   return (e) => {
@@ -124,7 +124,7 @@ class HarvestableForm extends React.Component {
         >
           <TitleManager record={title}>
             <form id="form-course">
-              <HarvestableFormInfo {...sectionProps} />
+              <HarvestableFormGeneral {...sectionProps} />
             </form>
           </TitleManager>
         </Pane>

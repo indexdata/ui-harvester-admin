@@ -3,9 +3,9 @@ import { FormattedMessage } from 'react-intl';
 import { Field } from 'react-final-form';
 import { Col, Row, TextField } from '@folio/stripes/components';
 
-const HarvestableFormInfo = () => {
+const HarvestableFormGeneral = () => {
   return (
-    <div data-test-harvestable-info id="HarvestableFormInfo">
+    <div data-test-harvestable-info id="HarvestableFormGeneral">
       <Row>
         <Col xs={4}>
           <FormattedMessage id="ui-harvester-admin.harvestables.field.id">
@@ -36,4 +36,4 @@ const HarvestableFormInfo = () => {
   );
 };
 
-export default HarvestableFormInfo;
+export default HarvestableFormGeneral;

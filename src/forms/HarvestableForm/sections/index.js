@@ -1,2 +1,2 @@
 // eslint-disable-next-line import/prefer-default-export
-export { default as HarvestableFormInfo } from './HarvestableFormInfo';
+export { default as HarvestableFormGeneral } from './HarvestableFormGeneral';
