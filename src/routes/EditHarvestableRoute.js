@@ -6,9 +6,9 @@ import HarvestableForm from '../forms/HarvestableForm';
 import packageInfo from '../../package';
 
 
-const EditHarvestableRoute = ({ resources, mutator }) => {
+const EditHarvestableRoute = ({ resources, mutator, match }) => {
   const handleClose = () => {
-    mutator.query.update({ _path: `${packageInfo.stripes.route}/harvestables` });
+    mutator.query.update({ _path: `${packageInfo.stripes.route}/harvestables/${match.params.recId}` });
   };
 
   const handleSubmit = (harvestable) => {
@@ -59,6 +59,11 @@ EditHarvestableRoute.propTypes = {
     }).isRequired,
     harvestable: PropTypes.shape({
       PUT: PropTypes.func.isRequired,
+    }).isRequired,
+  }).isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      recId: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
 };
