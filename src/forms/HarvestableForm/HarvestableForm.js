@@ -13,7 +13,7 @@ import { AppIcon, TitleManager, withStripes } from '@folio/stripes/core';
 import stripesFinalForm from '@folio/stripes/final-form';
 import { isEqual } from 'lodash';
 import setFieldData from 'final-form-set-field-data'; // XXX do we need this?
-import { HarvestableFormGeneral } from './sections';
+import HarvestableFormGeneral from './HarvestableFormGeneral';
 
 const handleKeyCommand = (handler, { disabled } = {}) => {
   return (e) => {
