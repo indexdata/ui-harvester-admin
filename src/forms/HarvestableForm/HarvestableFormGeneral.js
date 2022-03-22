@@ -1,7 +1,29 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Field } from 'react-final-form';
 import { Accordion, Col, Row, TextField } from '@folio/stripes/components';
+
+const RCF = ({ fieldName }) => (
+  <Row>
+    <Col xs={12}>
+      <FormattedMessage id={`ui-harvester-admin.harvestables.field.${fieldName}`}>
+        {placeholder => (
+          <Field
+            id={`edit-harvestable-${fieldName}`}
+            name={fieldName}
+            label={placeholder}
+            component={TextField}
+          />
+        )}
+      </FormattedMessage>
+    </Col>
+  </Row>
+);
+
+RCF.propTypes = {
+  fieldName: PropTypes.string.isRequired,
+};
 
 const HarvestableFormGeneral = () => {
   return (
@@ -10,34 +32,8 @@ const HarvestableFormGeneral = () => {
       label={<FormattedMessage id="ui-harvester-admin.harvestables.heading.general" />}
     >
       <div data-test-harvestable-info id="HarvestableFormGeneral">
-        <Row>
-          <Col xs={4}>
-            <FormattedMessage id="ui-harvester-admin.harvestables.field.id">
-              {placeholder => (
-                <Field
-                  id="edit-harvestable-id"
-                  name="id"
-                  label={placeholder}
-                  component={TextField}
-                />
-              )}
-            </FormattedMessage>
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={4}>
-            <FormattedMessage id="ui-harvester-admin.harvestables.field.name">
-              {placeholder => (
-                <Field
-                  id="edit-harvestable-name"
-                  name="name"
-                  label={placeholder}
-                  component={TextField}
-                />
-              )}
-            </FormattedMessage>
-          </Col>
-        </Row>
+        <RCF fieldName="id" />
+        <RCF fieldName="name" />
       </div>
     </Accordion>
   );
