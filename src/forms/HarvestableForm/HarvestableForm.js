@@ -13,7 +13,15 @@ import { AppIcon, TitleManager, withStripes } from '@folio/stripes/core';
 import stripesFinalForm from '@folio/stripes/final-form';
 import { isEqual } from 'lodash';
 import setFieldData from 'final-form-set-field-data'; // XXX do we need this?
+import ErrorMessage from '../../components/ErrorMessage';
 import HarvestableFormGeneral from './HarvestableFormGeneral';
+import HarvestableFormOaiPmh from './HarvestableFormOaiPmh';
+
+
+const specificSections = {
+  oaiPmh: HarvestableFormOaiPmh,
+};
+
 
 const handleKeyCommand = (handler, { disabled } = {}) => {
   return (e) => {
@@ -26,6 +34,7 @@ const handleKeyCommand = (handler, { disabled } = {}) => {
     }
   };
 };
+
 
 class HarvestableForm extends React.Component {
   static propTypes = {
@@ -94,6 +103,9 @@ class HarvestableForm extends React.Component {
     if (isLoading) return <LoadingPane />;
 
     const title = values.name;
+    const type = values.type;
+    const ErrorSection = () => <ErrorMessage message={`Unknown type '${type}'`} />;
+    const SpecificSection = specificSections[type] || ErrorSection;
 
     // XXX We probably don't need to pass this
     const sectionProps = { handlers, mutators, values };
@@ -125,6 +137,7 @@ class HarvestableForm extends React.Component {
           <TitleManager record={title}>
             <form id="form-course">
               <HarvestableFormGeneral {...sectionProps} />
+              <SpecificSection {...sectionProps} />
             </form>
           </TitleManager>
         </Pane>
