@@ -9,39 +9,37 @@ import FullHarvestableRoute from './routes/FullHarvestableRoute';
 import EditHarvestableRoute from './routes/EditHarvestableRoute';
 import StoragesRoute from './routes/StoragesRoute';
 
-class HarvesterAdminApp extends React.Component {
-  static propTypes = {
-    match: PropTypes.shape({
-      path: PropTypes.string.isRequired,
-    }).isRequired,
-    actAs: PropTypes.string.isRequired,
-  };
+const HarvesterAdminApp = (props) => {
+  const {
+    actAs,
+    match: { path }
+  } = props;
 
-  render() {
-    const {
-      actAs,
-      match: { path }
-    } = this.props;
-
-    if (actAs === 'settings') {
-      return <Settings {...this.props} />;
-    }
-
-    return (
-      <Switch>
-        <Redirect exact from={path} to={`${path}/harvestables`} />
-        <NestedRoute path={`${path}`} component={SwitchRoute}>
-          <Switch>
-            <NestedRoute path={`${path}/harvestables`} component={HarvestablesRoute}>
-              <NestedRoute path={`${path}/harvestables/:recId`} exact component={FullHarvestableRoute} />
-              <NestedRoute path={`${path}/harvestables/:recId/edit`} exact component={EditHarvestableRoute} />
-            </NestedRoute>
-            <NestedRoute path={`${path}/storages`} exact component={StoragesRoute} />
-          </Switch>
-        </NestedRoute>
-      </Switch>
-    );
+  if (actAs === 'settings') {
+    return <Settings {...props} />;
   }
-}
+
+  return (
+    <Switch>
+      <Redirect exact from={path} to={`${path}/harvestables`} />
+      <NestedRoute path={`${path}`} component={SwitchRoute}>
+        <Switch>
+          <NestedRoute path={`${path}/harvestables`} component={HarvestablesRoute}>
+            <NestedRoute path={`${path}/harvestables/:recId`} exact component={FullHarvestableRoute} />
+            <NestedRoute path={`${path}/harvestables/:recId/edit`} exact component={EditHarvestableRoute} />
+          </NestedRoute>
+          <NestedRoute path={`${path}/storages`} exact component={StoragesRoute} />
+        </Switch>
+      </NestedRoute>
+    </Switch>
+  );
+};
+
+HarvesterAdminApp.propTypes = {
+  match: PropTypes.shape({
+    path: PropTypes.string.isRequired,
+  }).isRequired,
+  actAs: PropTypes.string.isRequired,
+};
 
 export default HarvesterAdminApp;
