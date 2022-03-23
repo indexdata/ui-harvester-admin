@@ -1,36 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { Field } from 'react-final-form';
-import { Accordion, Col, Row, TextField, Checkbox, TextArea } from '@folio/stripes/components';
-
-const CF = ({ tag, i18nTag, xs, ...rest }) => (
-  <Col xs={xs}>
-    <FormattedMessage id={`ui-harvester-admin.harvestables.field.${i18nTag || tag}`}>
-      {placeholder => (
-        <Field
-          id={`edit-harvestable-${tag}`}
-          name={tag}
-          label={placeholder}
-          component={TextField}
-          {...rest}
-        />
-      )}
-    </FormattedMessage>
-  </Col>
-);
-
-CF.propTypes = {
-  tag: PropTypes.string.isRequired,
-  i18nTag: PropTypes.string, // if defined, use this translation tag instead of `tag`
-  xs: PropTypes.number.isRequired,
-};
-
-const RCF = (props) => (
-  <Row>
-    <CF {...props} xs={12} />
-  </Row>
-);
+import { Accordion, Row, Checkbox, TextArea } from '@folio/stripes/components';
+import { RCF, CF } from '../../components/CF';
 
 const HarvestableFormGeneral = () => {
   return (
