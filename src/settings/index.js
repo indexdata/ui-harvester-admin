@@ -1,11 +1,10 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Settings } from '@folio/stripes/smart-components';
-
 import NullSettings from './NullSettings';
 
-export default class HarvesterAdminSettings extends React.Component {
-  pages = [
+const HarvesterAdminSettings = (props) => {
+  const pages = [
     {
       route: 'null-settings',
       label: <FormattedMessage id="ui-harvester-admin.settings.nullSettings" />,
@@ -13,9 +12,9 @@ export default class HarvesterAdminSettings extends React.Component {
     },
   ];
 
-  render() {
-    return (
-      <Settings {...this.props} pages={this.pages} paneTitle={<FormattedMessage id="ui-harvester-admin.meta.title" />} />
-    );
-  }
-}
+  return (
+    <Settings {...props} pages={pages} paneTitle={<FormattedMessage id="ui-harvester-admin.meta.title" />} />
+  );
+};
+
+export default HarvesterAdminSettings;
