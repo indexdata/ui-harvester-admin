@@ -4,4 +4,6 @@ export const booleanFields = [
   'openAccess', 'enabled', 'laxParsing', 'cacheEnabled', 'storeOriginal',
   // OAI-PMH section
   'clearRtOnError', 'keepPartial',
+  // XML Bulk section
+  'allowErrors', 'overwrite', 'allowCondReq', 'recurse', 'passiveMode',
 ];

@@ -9,10 +9,12 @@ import setFieldData from 'final-form-set-field-data'; // XXX do we need this?
 import ErrorMessage from '../../components/ErrorMessage';
 import HarvestableFormGeneral from './HarvestableFormGeneral';
 import HarvestableFormOaiPmh from './HarvestableFormOaiPmh';
+import HarvestableFormXmlBulk from './HarvestableFormXmlBulk';
 
 
 const specificSections = {
   oaiPmh: HarvestableFormOaiPmh,
+  xmlBulk: HarvestableFormXmlBulk,
 };
 
 
