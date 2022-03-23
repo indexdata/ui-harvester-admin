@@ -1,14 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import {
-  HasCommand,
-  Button,
-  LoadingPane,
-  Pane,
-  PaneFooter,
-  checkScope
-} from '@folio/stripes/components';
+import { HasCommand, Button, LoadingPane, Pane, PaneFooter, checkScope } from '@folio/stripes/components';
 import { AppIcon, TitleManager, withStripes } from '@folio/stripes/core';
 import stripesFinalForm from '@folio/stripes/final-form';
 import { isEqual } from 'lodash';
@@ -25,13 +18,8 @@ const specificSections = {
 
 const handleKeyCommand = (handler, { disabled } = {}) => {
   return (e) => {
-    if (e) {
-      e.preventDefault();
-    }
-
-    if (!disabled) {
-      handler();
-    }
+    if (e) e.preventDefault();
+    if (!disabled) handler();
   };
 };
 
