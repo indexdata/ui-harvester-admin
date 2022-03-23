@@ -24,32 +24,18 @@ const handleKeyCommand = (handler, { disabled } = {}) => {
 };
 
 
-class HarvestableForm extends React.Component {
-  static propTypes = {
-    handlers: PropTypes.PropTypes.shape({
-      onClose: PropTypes.func.isRequired,
-    }),
-    handleSubmit: PropTypes.func.isRequired,
-    isLoading: PropTypes.bool,
-    form: PropTypes.object,
-    pristine: PropTypes.bool,
-    submitting: PropTypes.bool,
-    values: PropTypes.object,
-    stripes: PropTypes.shape({
-      config: PropTypes.shape({
-        showDevInfo: PropTypes.bool,
-      }).isRequired,
-    }).isRequired,
-  }
+const HarvestableForm = (props) => {
+  const {
+    isLoading,
+    handlers,
+    handleSubmit,
+    form: { mutators },
+    values = {},
+    pristine,
+    submitting
+  } = props;
 
-  renderPaneFooter() {
-    const {
-      handlers,
-      handleSubmit,
-      pristine,
-      submitting,
-    } = this.props;
-
+  function renderPaneFooter() {
     return (
       <PaneFooter
         renderStart={(
@@ -78,61 +64,69 @@ class HarvestableForm extends React.Component {
     );
   }
 
-  render() {
-    const {
-      isLoading,
-      handlers,
-      handleSubmit,
-      form: { mutators },
-      values = {},
-      pristine,
-      submitting
-    } = this.props;
-    if (isLoading) return <LoadingPane />;
+  if (isLoading) return <LoadingPane />;
 
-    const title = values.name;
-    const type = values.type;
-    const ErrorSection = () => <ErrorMessage message={`Unknown type '${type}'`} />;
-    const SpecificSection = specificSections[type] || ErrorSection;
+  const title = values.name;
+  const type = values.type;
+  const ErrorSection = () => <ErrorMessage message={`Unknown type '${type}'`} />;
+  const SpecificSection = specificSections[type] || ErrorSection;
 
-    // XXX We probably don't need to pass this
-    const sectionProps = { handlers, mutators, values };
+  // XXX We probably don't need to pass this
+  const sectionProps = { handlers, mutators, values };
 
-    const shortcuts = [
-      {
-        name: 'save',
-        handler: handleKeyCommand(handleSubmit, { disabled: pristine || submitting }),
-      },
-      {
-        name: 'cancel',
-        shortcut: 'esc',
-        handler: handleKeyCommand(handlers.onClose),
-      },
-    ];
+  const shortcuts = [
+    {
+      name: 'save',
+      handler: handleKeyCommand(handleSubmit, { disabled: pristine || submitting }),
+    },
+    {
+      name: 'cancel',
+      shortcut: 'esc',
+      handler: handleKeyCommand(handlers.onClose),
+    },
+  ];
 
-    return (
-      <HasCommand commands={shortcuts} isWithinScope={checkScope} scope={document.body}>
-        <Pane
-          appIcon={<AppIcon app="harvester-admin" />}
-          centerContent
-          defaultWidth="60%"
-          footer={this.renderPaneFooter()}
-          id="pane-harvestable-form"
-          paneTitle={title}
-          dismissible
-          onClose={handlers.onClose}
-        >
-          <TitleManager record={title}>
-            <form id="form-course">
-              <HarvestableFormGeneral {...sectionProps} />
-              <SpecificSection {...sectionProps} />
-            </form>
-          </TitleManager>
-        </Pane>
-      </HasCommand>
-    );
-  }
-}
+  return (
+    <HasCommand commands={shortcuts} isWithinScope={checkScope} scope={document.body}>
+      <Pane
+        appIcon={<AppIcon app="harvester-admin" />}
+        centerContent
+        defaultWidth="60%"
+        footer={renderPaneFooter()}
+        id="pane-harvestable-form"
+        paneTitle={title}
+        dismissible
+        onClose={handlers.onClose}
+      >
+        <TitleManager record={title}>
+          <form id="form-course">
+            <HarvestableFormGeneral {...sectionProps} />
+            <SpecificSection {...sectionProps} />
+          </form>
+        </TitleManager>
+      </Pane>
+    </HasCommand>
+  );
+};
+
+
+HarvestableForm.propTypes = {
+  handlers: PropTypes.PropTypes.shape({
+    onClose: PropTypes.func.isRequired,
+  }),
+  handleSubmit: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool,
+  form: PropTypes.object,
+  pristine: PropTypes.bool,
+  submitting: PropTypes.bool,
+  values: PropTypes.object,
+  stripes: PropTypes.shape({
+    config: PropTypes.shape({
+      showDevInfo: PropTypes.bool,
+    }).isRequired,
+  }).isRequired,
+};
+
 
 export default withStripes(stripesFinalForm({
   initialValuesEqual: (a, b) => isEqual(a, b),
