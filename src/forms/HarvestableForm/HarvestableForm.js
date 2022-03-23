@@ -10,11 +10,13 @@ import ErrorMessage from '../../components/ErrorMessage';
 import HarvestableFormGeneral from './HarvestableFormGeneral';
 import HarvestableFormOaiPmh from './HarvestableFormOaiPmh';
 import HarvestableFormXmlBulk from './HarvestableFormXmlBulk';
+import HarvestableFormConnector from './HarvestableFormConnector';
 
 
 const specificSections = {
   oaiPmh: HarvestableFormOaiPmh,
   xmlBulk: HarvestableFormXmlBulk,
+  connector: HarvestableFormConnector,
 };
 
 

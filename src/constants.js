@@ -6,4 +6,6 @@ export const booleanFields = [
   'clearRtOnError', 'keepPartial',
   // XML Bulk section
   'allowErrors', 'overwrite', 'allowCondReq', 'recurse', 'passiveMode',
+  // Connector section
+  // 'overwrite', 'allowErrors' both already included in XML Bulk section
 ];
