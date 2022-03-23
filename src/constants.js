@@ -8,4 +8,6 @@ export const booleanFields = [
   'allowErrors', 'overwrite', 'allowCondReq', 'recurse', 'passiveMode',
   // Connector section
   // 'overwrite', 'allowErrors' both already included in XML Bulk section
+  // Status section
+  // 'enabled' already included in General section
 ];

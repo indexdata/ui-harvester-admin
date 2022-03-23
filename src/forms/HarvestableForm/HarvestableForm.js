@@ -11,12 +11,14 @@ import HarvestableFormGeneral from './HarvestableFormGeneral';
 import HarvestableFormOaiPmh from './HarvestableFormOaiPmh';
 import HarvestableFormXmlBulk from './HarvestableFormXmlBulk';
 import HarvestableFormConnector from './HarvestableFormConnector';
+import HarvestableFormStatus from './HarvestableFormStatus';
 
 
 const specificSections = {
   oaiPmh: HarvestableFormOaiPmh,
   xmlBulk: HarvestableFormXmlBulk,
   connector: HarvestableFormConnector,
+  status: HarvestableFormStatus,
 };
 
 
@@ -104,7 +106,7 @@ const HarvestableForm = (props) => {
       >
         <TitleManager record={title}>
           <form id="form-course">
-            <HarvestableFormGeneral {...sectionProps} />
+            {type !== 'status' && <HarvestableFormGeneral {...sectionProps} />}
             <SpecificSection {...sectionProps} />
           </form>
         </TitleManager>
