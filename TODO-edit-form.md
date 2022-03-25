@@ -1,4 +1,4 @@
-# Work to be done in Harevstable editing forms
+# Work to be done in Harvestable editing forms
 
 In general, there are various dates that should be managed using a date-picker. The old harvester-admin UI doesn't do this, but of course we want to surpass it in this and other aspects. The following lists are the ways in which the present harvestable form is less functional than that of the legacy UI.
 
