@@ -17,3 +17,8 @@ This is a Stripes UI modules providing an administrative interface to the Index 
 * [Running `ui-harvester-admin` against a local backend](doc/running.md)
 * [Re-establishing permissions after changing the module descriptor](doc/permissions.md)
 
+And outside of this repository:
+
+* [Project UIHAADM](https://issues.folio.org/browse/UIHAADM) at the FOLIO issue tracker
+* [`mod-harvester-admin`](https://github.com/indexdata/mod-harvester-admin)
+
