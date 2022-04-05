@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, FormattedTime, FormattedDate } from 'react-intl';
 import { AppIcon } from '@folio/stripes/core';
 import { LoadingPane, Paneset, Pane, MultiColumnList } from '@folio/stripes/components';
 import { parseFilters, ColumnManager, SearchAndSortQuery } from '@folio/stripes/smart-components';
@@ -73,10 +73,12 @@ function Harvestables({
 
   const columnMapping = {
     name: <FormattedMessage id="ui-harvester-admin.harvestables.column.name" />,
-    id: <FormattedMessage id="ui-harvester-admin.harvestables.column.id" />,
+    currentStatus: <FormattedMessage id="ui-harvester-admin.harvestables.column.currentStatus" />,
+    lastHarvestFinished: <FormattedMessage id="ui-harvester-admin.harvestables.column.lastHarvestFinished" />,
     enabled: <FormattedMessage id="ui-harvester-admin.harvestables.column.enabled" />,
     jobClass: <FormattedMessage id="ui-harvester-admin.harvestables.column.jobClass" />,
-    currentStatus: <FormattedMessage id="ui-harvester-admin.harvestables.column.currentStatus" />,
+    id: <FormattedMessage id="ui-harvester-admin.harvestables.column.id" />,
+    message: <FormattedMessage id="ui-harvester-admin.harvestables.column.message" />,
   };
 
   const harvestables = manuallyFilterAndSort(query, data.harvestables);
@@ -120,12 +122,20 @@ function Harvestables({
                         id: '80px',
                         enabled: '80px',
                         jobClass: '150px',
-                        currentStatus: '140px',
+                        currentStatus: '80px',
                       }}
                       formatter={{
                         enabled: r => <FormattedMessage id={`ui-harvester-admin.harvestables.column.enabled.${r.enabled}`} />,
                         jobClass: r => <FormattedMessage id={`ui-harvester-admin.harvestables.column.jobClass.${r.jobClass}`} />,
                         currentStatus: r => <FormattedMessage id={`ui-harvester-admin.harvestables.column.currentStatus.${r.currentStatus}`} />,
+                        lastHarvestFinished: r => (
+                          <>
+                            <FormattedTime value={r.lastHarvestFinished} />
+                            {', '}
+                            <FormattedDate value={r.lastHarvestFinished} year="numeric" month="long" day="numeric" />
+                          </>
+                        ),
+                        message: r => r.message?.replace(/^ +/, '').replace(' ', '\n'),
                       }}
                       contentData={harvestables}
                       totalCount={resultCount}

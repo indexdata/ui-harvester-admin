@@ -20,10 +20,12 @@
     "button.edit": "Edit",
 
     "harvestables.column.name": "Name",
-    "harvestables.column.id": "ID",
+    "harvestables.column.currentStatus": "Status",
+    "harvestables.column.lastHarvestFinished": "Last harvest finished",
     "harvestables.column.enabled": "Enabled?",
     "harvestables.column.jobClass": "Job class",
-    "harvestables.column.currentStatus": "Current status",
+    "harvestables.column.id": "ID",
+    "harvestables.column.message": "Message",
 
     "harvestables.column.enabled.true": "Yes",
     "harvestables.column.enabled.false": "No",
