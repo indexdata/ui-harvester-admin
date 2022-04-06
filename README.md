@@ -10,15 +10,16 @@ This is a Stripes UI modules providing an administrative interface to the Index 
 
 ## See also
 
-* [The corresponding server-side module](https://github.com/indexdata/mod-harvester-admin)
+* [Routes and methods implemented by `mod-harvester-admin`](doc/routing.md)
 * [Links on implementing the Harvester Admin UI](doc/links.md)
 * [Notes on UI requirements](doc/ui.md)
 * [The harvester query language](doc/query-language.md)
 * [Running `ui-harvester-admin` against a local backend](doc/running.md)
 * [Re-establishing permissions after changing the module descriptor](doc/permissions.md)
+* [Very lightweight local issues database](doc/TODO.md)
 
 And outside of this repository:
 
 * [Project UIHAADM](https://issues.folio.org/browse/UIHAADM) at the FOLIO issue tracker
-* [`mod-harvester-admin`](https://github.com/indexdata/mod-harvester-admin)
+* [`mod-harvester-admin`](https://github.com/indexdata/mod-harvester-admin), the corresponding server-side module.
 
