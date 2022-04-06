@@ -4,8 +4,8 @@ In general, there are various dates that should be managed using a date-picker. 
 
 Statuses:
 * **TODO** -- it's on me
-* **NE** -- I need information from Niels-Erik
 * **BLOCKED** -- cannot be implemented against the present `mod-harvester-admin`
+* **@name** -- I need information or work from the named person before I can proceed
 * _(none)_ -- completed
 
 
