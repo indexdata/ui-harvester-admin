@@ -7,6 +7,7 @@ import { parseFilters, ColumnManager, SearchAndSortQuery } from '@folio/stripes/
 import HarvestablesSearchPane from '../search/HarvestablesSearchPane';
 import ErrorMessage from '../components/ErrorMessage';
 import packageInfo from '../../package';
+import css from './Harvestables.css';
 
 
 function parseSort(sort) {
@@ -135,7 +136,11 @@ function Harvestables({
                             <FormattedDate value={r.lastHarvestFinished} year="numeric" month="long" day="numeric" />
                           </>
                         ),
-                        message: r => r.message?.replace(/^ +/, '').replace(' ', '\n'),
+                        message: r => (
+                          <ul className={css.noDot}>
+                            {r.message?.split(' ').filter(s => !!s).map(s => <li>{s}</li>)}
+                          </ul>
+                        ),
                       }}
                       contentData={harvestables}
                       totalCount={resultCount}
