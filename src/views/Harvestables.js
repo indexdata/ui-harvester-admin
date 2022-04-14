@@ -114,6 +114,7 @@ function Harvestables({
                     )}
                   >
                     <MultiColumnList
+                      autosize
                       id="list-harvestables"
                       virtualize
                       visibleColumns={visibleColumns}
