@@ -4,6 +4,7 @@ I compared the current ui-harvester-admin UI with that of the legacy UI to deriv
 
 Statuses:
 * **TODO** -- it's on me
+* **done** -- recently completed, left around for the sense of achievement (will be deleted)
 * **BLOCKED** -- cannot be implemented against the present `mod-harvester-admin`
 * **@name** -- I need information or work from the named person before I can proceed
 * _(none)_ -- completed
@@ -12,15 +13,15 @@ Statuses:
 ## General section
 
 * **TODO** -- Dates should be managed using a date-picker. (The old harvester-admin UI doesn't do this, but of course we want to surpass it in this and other aspects.)
-* **TODO** -- Id: should be read-only
-* **TODO** -- Content Description: should be text-area
-* **TODO** -- Technical Notes: should be text-area
-* **TODO** -- Contact notes: should be text-area
+* **done** -- Id: should be read-only
+* **done** -- Content Description: should be text-area
+* **done** -- Technical Notes: should be text-area
+* **done** -- Contact notes: should be text-area
 * **TODO** -- Harvest schedule: should provide a schedule editor
 * **TODO** -- Transformation Pipeline: should provide a dropdown
 * **TODO** -- Storage: should provide a dropdown
-* **TODO** -- Log level: should provide a dropdown [1]
-* **TODO** -- Saving failed records: should provide a dropdown [3]
+* **done** -- Log level: should provide a dropdown [1]
+* **done** -- Saving failed records: should provide a dropdown [3]
 * **TODO** -- Send notification if severity at least: should provide a dropdown [2]
 
 
