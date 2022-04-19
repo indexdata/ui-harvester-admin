@@ -139,7 +139,7 @@ function Harvestables({
                         ),
                         message: r => (
                           <ul className={css.noDot}>
-                            {r.message?.split(' ').filter(s => !!s).map(s => <li>{s}</li>)}
+                            {r.message?.split(' ').filter(s => !!s).map((s, i) => <li key={i}>{s}</li>)}
                           </ul>
                         ),
                       }}
