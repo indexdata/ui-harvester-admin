@@ -145,5 +145,10 @@
     "harvestables.field.lastHarvestFinished": "Last harvest completed",
     "harvestables.field.lastUpdated": "Last updated",
 
+    "harvestables.field.failedRecordsLogging.NO_STORE": "Don't save failed records",
+    "harvestables.field.failedRecordsLogging.CLEAN_DIRECTORY": "Do save. Clean up directory first",
+    "harvestables.field.failedRecordsLogging.CREATE_OVERWRITE": "Do save. Overwrite existing files",
+    "harvestables.field.failedRecordsLogging.ADD_ALL": "Do save. Add numbered versions for existing files",
+
     "SENTINEL": "SENTINEL"
 }

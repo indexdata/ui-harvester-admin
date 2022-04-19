@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Accordion, Row, Checkbox, TextArea, Select } from '@folio/stripes/components';
 import { RCF, CF } from '../../components/CF';
 
@@ -7,12 +7,13 @@ const logLevels = ['TRACE', 'DEBUG', 'INFO', 'WARN', 'ERROR'].map(x => ({ value:
 
 const rawFailedRecords = ['NO_STORE', 'CLEAN_DIRECTORY', 'CREATE_OVERWRITE', 'ADD_ALL'];
 
-const failedRecords = rawFailedRecords.map(x => ({
-  value: x,
-  label: x // <span>${x} - <FormattedMessage id={`harvestables.field.failedRecordsLogging.${x}`} /></span>
-}));
-
 const HarvestableFormGeneral = () => {
+  const intl = useIntl();
+  const failedRecords = rawFailedRecords.map(x => ({
+    value: x,
+    label: x + ' - ' + intl.formatMessage({ id: `ui-harvester-admin.harvestables.field.failedRecordsLogging.${x}` }),
+  }));
+
   return (
     <Accordion
       id="harvestable-form-general"
