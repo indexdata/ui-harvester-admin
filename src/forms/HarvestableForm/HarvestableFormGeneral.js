@@ -1,14 +1,23 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Accordion, Row, Checkbox, TextArea } from '@folio/stripes/components';
+import { Accordion, Row, Checkbox, TextArea, Select } from '@folio/stripes/components';
 import { RCF, CF } from '../../components/CF';
+
+const logLevels = ['TRACE', 'DEBUG', 'INFO', 'WARN', 'ERROR'].map(x => ({ value: x, label: x }));
+
+const rawFailedRecords = ['NO_STORE', 'CLEAN_DIRECTORY', 'CREATE_OVERWRITE', 'ADD_ALL'];
+
+const failedRecords = rawFailedRecords.map(x => ({
+  value: x,
+  label: x // <span>${x} - <FormattedMessage id={`harvestables.field.failedRecordsLogging.${x}`} /></span>
+}));
 
 const HarvestableFormGeneral = () => (
   <Accordion
     id="harvestable-form-general"
     label={<FormattedMessage id="ui-harvester-admin.harvestables.heading.general" />}
   >
-    <RCF tag="id" />
+    <RCF tag="id" disabled />
     <RCF tag="name" />
     <RCF tag="serviceProvider" />
     <Row>
@@ -16,9 +25,9 @@ const HarvestableFormGeneral = () => (
       <CF tag="managedBy" xs={6} />
     </Row>
     <RCF tag="openAccess" component={Checkbox} type="checkbox" />
-    <RCF tag="description" />
-    <RCF tag="technicalNotes" />
-    <RCF tag="contactNotes" />
+    <RCF tag="description" component={TextArea} rows="4" />
+    <RCF tag="technicalNotes" component={TextArea} rows="4" />
+    <RCF tag="contactNotes" component={TextArea} rows="4" />
     <RCF tag="enabled" component={Checkbox} type="checkbox" />
     <RCF tag="scheduleString" />
     <RCF tag="transformationPipeline" />
@@ -30,8 +39,8 @@ const HarvestableFormGeneral = () => (
     <RCF tag="storeOriginal" component={Checkbox} type="checkbox" />
     <RCF tag="recordLimit" />
     <RCF tag="timeout" />
-    <RCF tag="logLevel" />
-    <RCF tag="failedRecordsLogging" />
+    <RCF tag="logLevel" component={Select} dataOptions={logLevels} />
+    <RCF tag="failedRecordsLogging" component={Select} dataOptions={failedRecords} />
     <RCF tag="maxSavedFailedRecordsPerRun" />
     <RCF tag="maxSavedFailedRecordsTotal" />
     <RCF tag="mailAddress" />
