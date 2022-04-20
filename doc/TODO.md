@@ -12,7 +12,7 @@ Statuses:
 
 ## General section
 
-* **TODO** -- Dates should be managed using a date-picker. (The old harvester-admin UI doesn't do this, but of course we want to surpass it in this and other aspects.)
+* **done** -- Dates should be managed using a date-picker. (The old harvester-admin UI doesn't do this, but of course we want to surpass it in this and other aspects.)
 * **done** -- Id: should be read-only
 * **done** -- Content Description: should be text-area
 * **done** -- Technical Notes: should be text-area
