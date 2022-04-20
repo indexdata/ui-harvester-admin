@@ -1,6 +1,6 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Accordion, Checkbox } from '@folio/stripes/components';
+import { Accordion, Checkbox, Datepicker } from '@folio/stripes/components';
 import { RCF } from '../../components/CF';
 
 const HarvestableFormConnector = () => (
@@ -17,11 +17,11 @@ const HarvestableFormConnector = () => (
     <RCF tag="password" />
     <RCF tag="proxy" />
     <RCF tag="initData" />
-    <RCF tag="fromDate" />
-    <RCF tag="untilDate" />
+    <RCF tag="fromDate" component={Datepicker} />
+    <RCF tag="untilDate" component={Datepicker} />
     <RCF tag="resumptionToken" i18nTag="startToken" />
-    <RCF tag="sleep" />
-    <RCF tag="retryCount" i18nTag="failedRetryCount" />
+    <RCF tag="sleep" type="number" />
+    <RCF tag="retryCount" i18nTag="failedRetryCount" type="number" />
     <RCF tag="allowErrors" component={Checkbox} type="checkbox" />
   </Accordion>
 );
