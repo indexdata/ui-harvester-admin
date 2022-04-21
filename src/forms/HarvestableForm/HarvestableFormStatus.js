@@ -8,7 +8,7 @@ const HarvestableFormStatus = () => (
     id="harvestable-form-status"
     label={<FormattedMessage id="ui-harvester-admin.harvestables.field.type.status" />}
   >
-    <RCF tag="id" />
+    <RCF tag="id" disabled />
     <RCF tag="name" />
     <RCF tag="scheduleString" />
     <RCF tag="usedBy" i18nTag="usageTags" />

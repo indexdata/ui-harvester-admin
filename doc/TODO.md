@@ -45,7 +45,7 @@ Statuses:
 
 ## Status section
 
-* **TODO** -- Id: should be read-only
+* **done** -- Id: should be read-only
 * **TODO** -- Harvest schedule: should provide a schedule editor
 
 ## Arising from screenshot analysis
