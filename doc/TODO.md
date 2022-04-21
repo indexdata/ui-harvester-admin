@@ -41,7 +41,7 @@ Statuses:
 
 * **BLOCKED** -- CF Engine: should be a dropdown [4]
 * **BLOCKED** -- CF Repository: should be a dropdown [4]
-* **TODO** -- Init Data: should be a text-area
+* **done** -- Init Data: should be a text-area
 
 ## Status section
 
