@@ -4,7 +4,7 @@ import { Accordion, Row, Checkbox, TextArea, Select } from '@folio/stripes/compo
 import { RCF, CF } from '../../components/CF';
 
 const logLevels = ['TRACE', 'DEBUG', 'INFO', 'WARN', 'ERROR'].map(x => ({ value: x, label: x }));
-
+const mailLevels = ['OK', 'WARN', 'ERROR'].map(x => ({ value: x, label: x }));
 const rawFailedRecords = ['NO_STORE', 'CLEAN_DIRECTORY', 'CREATE_OVERWRITE', 'ADD_ALL'];
 
 const HarvestableFormGeneral = () => {
@@ -46,7 +46,7 @@ const HarvestableFormGeneral = () => {
       <RCF tag="maxSavedFailedRecordsPerRun" />
       <RCF tag="maxSavedFailedRecordsTotal" />
       <RCF tag="mailAddress" />
-      <RCF tag="mailLevel" />
+      <RCF tag="mailLevel" component={Select} dataOptions={mailLevels} />
       <RCF tag="constantFields" />
       <RCF tag="json" component={TextArea} rows="6" />
     </Accordion>

@@ -22,7 +22,7 @@ Statuses:
 * **TODO** -- Storage: should provide a dropdown
 * **done** -- Log level: should provide a dropdown [1]
 * **done** -- Saving failed records: should provide a dropdown [3]
-* **TODO** -- Send notification if severity at least: should provide a dropdown [2]
+* **done** -- Send notification if severity at least: should provide a dropdown [2]
 
 
 ## OAI-PMH section
