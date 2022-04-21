@@ -19,32 +19,42 @@ const HarvestableFormGeneral = () => {
       id="harvestable-form-general"
       label={<FormattedMessage id="ui-harvester-admin.harvestables.heading.general" />}
     >
-      <RCF tag="id" disabled />
-      <RCF tag="name" />
-      <RCF tag="serviceProvider" />
+      <Row>
+        <CF tag="id" xs={2} disabled />
+        <CF tag="name" xs={6} />
+        <CF tag="serviceProvider" xs={4} />
+      </Row>
       <Row>
         <CF tag="usedBy" xs={6} />
         <CF tag="managedBy" xs={6} />
       </Row>
       <RCF tag="openAccess" component={Checkbox} type="checkbox" />
       <RCF tag="description" component={TextArea} rows="4" />
-      <RCF tag="technicalNotes" component={TextArea} rows="4" />
-      <RCF tag="contactNotes" component={TextArea} rows="4" />
-      <RCF tag="enabled" component={Checkbox} type="checkbox" />
-      <RCF tag="scheduleString" />
+      <Row>
+        <CF tag="technicalNotes" xs={6} component={TextArea} rows="4" />
+        <CF tag="contactNotes" xs={6} component={TextArea} rows="4" />
+      </Row>
+      <Row>
+        <CF tag="enabled" xs={4} component={Checkbox} type="checkbox" />
+        <CF tag="scheduleString" xs={8} />
+      </Row>
       <RCF tag="transformationPipeline" />
       <RCF tag="laxParsing" component={Checkbox} type="checkbox" />
       <RCF tag="encoding" />
       <RCF tag="storage.name" />
       <RCF tag="storageBatchLimit" />
-      <RCF tag="cacheEnabled" component={Checkbox} type="checkbox" />
-      <RCF tag="storeOriginal" component={Checkbox} type="checkbox" />
+      <Row>
+        <CF tag="cacheEnabled" xs={6} component={Checkbox} type="checkbox" />
+        <CF tag="storeOriginal" xs={6} component={Checkbox} type="checkbox" />
+      </Row>
       <RCF tag="recordLimit" />
       <RCF tag="timeout" />
       <RCF tag="logLevel" component={Select} dataOptions={logLevels} />
       <RCF tag="failedRecordsLogging" component={Select} dataOptions={failedRecords} />
-      <RCF tag="maxSavedFailedRecordsPerRun" />
-      <RCF tag="maxSavedFailedRecordsTotal" />
+      <Row>
+        <CF tag="maxSavedFailedRecordsPerRun" xs={6} type="number" />
+        <CF tag="maxSavedFailedRecordsTotal" xs={6} type="number" />
+      </Row>
       <RCF tag="mailAddress" />
       <RCF tag="mailLevel" component={Select} dataOptions={mailLevels} />
       <RCF tag="constantFields" />

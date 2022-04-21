@@ -56,7 +56,7 @@ Statuses:
 * **TODO** -- the set of fields to show/hide is _not_ persisted across sessions. That seems like a bug to me. I am pushing towards fixing this at the stripes-components level, starting with [STCOR-601, "Add facility for persistent storage of user preferences"](https://issues.folio.org/browse/STCOR-601).
 * **@gbv** -- The "General" section contains the fields that are relevant for all the different kinds of harvestable. If in fact some of them are _not_ relevant for XML harvests, then perhaps they are misplaced. Which fields fall into that category?
 * **@gbv** -- I can break the "General" section down into smaller sections, but I need your guidance on what the new groupings should be.
-* **TODO** -- cluster some fields together as multiple columns of a single row:
+* **done** -- cluster some fields together as multiple columns of a single row:
   * id + name + service provider
   * used by + managed by
   * technical notes + contact notes
@@ -64,8 +64,8 @@ Statuses:
   * user name + password
   * (in OAI-PMH section): harvest from + harvest until
   * (in OAI-PMH section) request retry count + delay before retry (seconds)
-  * (in XML section) cache on disk? + store original record content?
-  * (in XML section) maximum number of failed records saved next run + maximum number of failed records saved next total
+  * cache on disk? + store original record content?
+  * maximum number of failed records saved next run + maximum number of failed records saved next total
 * **@gbv** -- I would like much more detail on which fields should be grouped onto multi-column lines.
 * **TODO** -- the various list fields, whether comma-separated or space-separated (including OAI-PMH URLs), should be handled as lists on the UI side. See example in Inventory >> Instance record >> element "Subject"
 * **TODO** -- full-record display needs Actions menu with options to edit, delete, start, stop, and view log.
