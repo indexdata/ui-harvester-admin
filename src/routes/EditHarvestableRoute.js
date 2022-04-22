@@ -43,9 +43,12 @@ const EditHarvestableRoute = ({ resources, mutator, match }) => {
       .then(handleClose);
   };
 
+  const isLoading = (resources.harvestable.isPending ||
+                     resources.transformationPipelines.isPending);
+
   return (
     <HarvestableForm
-      isLoading={resources.harvestable.isPending || resources.transformationPipelines.isPending}
+      isLoading={isLoading}
       initialValues={getInitialValues(resources)}
       data={{
         transformationPipelines: resources.transformationPipelines.records,
