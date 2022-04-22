@@ -22,7 +22,7 @@ const GeneralSection = ({ rec }) => (
     <RCKV rec={rec} tag="contactNotes" />
     <RCKV rec={rec} tag="enabled" />
     <RCKV rec={rec} tag="scheduleString" />
-    <RCKV rec={rec} tag="transformationPipeline" />
+    <RCKV rec={rec} tag="transformation.name" i18nTag="transformationPipeline" />
     <RCKV rec={rec} tag="laxParsing" />
     <RCKV rec={rec} tag="encoding" />
     <RCKV rec={rec} tag="storage.name" />
