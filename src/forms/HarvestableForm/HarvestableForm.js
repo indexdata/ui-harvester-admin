@@ -119,7 +119,7 @@ const HarvestableForm = (props) => {
 
 HarvestableForm.propTypes = {
   data: PropTypes.shape({}).isRequired,
-  handlers: PropTypes.PropTypes.shape({
+  handlers: PropTypes.shape({
     onClose: PropTypes.func.isRequired,
   }),
   handleSubmit: PropTypes.func.isRequired,
