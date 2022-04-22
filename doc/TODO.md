@@ -35,6 +35,7 @@ Statuses:
 ## XML Bulk section
 
 * **TODO** -- URLs (space-separated): should be a text-area of 15 rows
+* **TODO** -- MARC XML transformation format (application/marc or application/tmarc): should be a checkbox, "Use TurboMARC".
 
 
 ## Connector section
