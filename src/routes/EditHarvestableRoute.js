@@ -76,9 +76,7 @@ EditHarvestableRoute.propTypes = {
     harvestable: PropTypes.shape({
       isPending: PropTypes.bool.isRequired,
       records: PropTypes.arrayOf(
-        PropTypes.shape({
-          name: PropTypes.string.isRequired,
-        }).isRequired,
+        PropTypes.shape({}).isRequired,
       ).isRequired,
     }).isRequired,
     transformationPipelines: PropTypes.shape({
