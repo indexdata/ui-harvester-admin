@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Accordion, Row, Checkbox, TextArea, Select } from '@folio/stripes/components';
 import { RCF, CF } from '../../components/CF';
@@ -7,12 +8,14 @@ const logLevels = ['TRACE', 'DEBUG', 'INFO', 'WARN', 'ERROR'].map(x => ({ value:
 const mailLevels = ['OK', 'WARN', 'ERROR'].map(x => ({ value: x, label: x }));
 const rawFailedRecords = ['NO_STORE', 'CLEAN_DIRECTORY', 'CREATE_OVERWRITE', 'ADD_ALL'];
 
-const HarvestableFormGeneral = () => {
+const HarvestableFormGeneral = ({ data }) => {
   const intl = useIntl();
   const failedRecords = rawFailedRecords.map(x => ({
     value: x,
     label: x + ' - ' + intl.formatMessage({ id: `ui-harvester-admin.harvestables.field.failedRecordsLogging.${x}` }),
   }));
+
+  const transformationPipelines = data.transformationPipelines.map(x => ({ value: x.id, label: x.name }));
 
   return (
     <Accordion
@@ -38,7 +41,7 @@ const HarvestableFormGeneral = () => {
         <CF tag="enabled" xs={4} component={Checkbox} type="checkbox" />
         <CF tag="scheduleString" xs={8} />
       </Row>
-      <RCF tag="transformationPipeline" />
+      <RCF tag="transformation.id" i18nTag="transformationPipeline" component={Select} dataOptions={transformationPipelines} />
       <RCF tag="laxParsing" component={Checkbox} type="checkbox" />
       <RCF tag="encoding" />
       <RCF tag="storage.name" />
@@ -61,6 +64,18 @@ const HarvestableFormGeneral = () => {
       <RCF tag="json" component={TextArea} rows="6" />
     </Accordion>
   );
+};
+
+HarvestableFormGeneral.propTypes = {
+  data: PropTypes.shape({
+    transformationPipelines: PropTypes.arrayOf(
+      PropTypes.shape({
+        enabled: PropTypes.bool.isRequired,
+        id: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+      }).isRequired,
+    ).isRequired,
+  }).isRequired,
 };
 
 export default HarvestableFormGeneral;

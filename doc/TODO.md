@@ -18,7 +18,7 @@ Statuses:
 * **done** -- Technical Notes: should be text-area
 * **done** -- Contact notes: should be text-area
 * **TODO** -- Harvest schedule: should provide a schedule editor
-* **TODO** -- Transformation Pipeline: should provide a dropdown
+* **done** -- Transformation Pipeline: should provide a dropdown
 * **TODO** -- Storage: should provide a dropdown
 * **done** -- Log level: should provide a dropdown [1]
 * **done** -- Saving failed records: should provide a dropdown [3]

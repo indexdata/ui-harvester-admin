@@ -33,6 +33,7 @@ const handleKeyCommand = (handler, { disabled } = {}) => {
 const HarvestableForm = (props) => {
   const {
     isLoading,
+    data,
     handlers,
     handleSubmit,
     form: { mutators },
@@ -77,8 +78,8 @@ const HarvestableForm = (props) => {
   const ErrorSection = () => <ErrorMessage message={`Unknown type '${type}'`} />;
   const SpecificSection = specificSections[type] || ErrorSection;
 
-  // XXX We probably don't need to pass this
-  const sectionProps = { handlers, mutators, values };
+  // XXX We probably don't need to pass most of these
+  const sectionProps = { data, handlers, mutators, values };
 
   const shortcuts = [
     {
@@ -117,6 +118,7 @@ const HarvestableForm = (props) => {
 
 
 HarvestableForm.propTypes = {
+  data: PropTypes.shape({}).isRequired,
   handlers: PropTypes.PropTypes.shape({
     onClose: PropTypes.func.isRequired,
   }),
