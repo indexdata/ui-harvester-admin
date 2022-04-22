@@ -44,7 +44,8 @@ const EditHarvestableRoute = ({ resources, mutator, match }) => {
   };
 
   const isLoading = (resources.harvestable.isPending ||
-                     resources.transformationPipelines.isPending);
+                     resources.transformationPipelines.isPending ||
+                     resources.storageEngines.isPending);
 
   return (
     <HarvestableForm
@@ -52,6 +53,7 @@ const EditHarvestableRoute = ({ resources, mutator, match }) => {
       initialValues={getInitialValues(resources)}
       data={{
         transformationPipelines: resources.transformationPipelines.records,
+        storageEngines: resources.storageEngines.records,
       }}
       handlers={{ onClose: handleClose }}
       onSubmit={handleSubmit}
@@ -71,6 +73,11 @@ EditHarvestableRoute.manifest = Object.freeze({
     path: 'harvester-admin/transformations',
     records: 'transformations',
   },
+  storageEngines: {
+    type: 'okapi',
+    path: 'harvester-admin/storages',
+    records: 'storages',
+  },
 });
 
 
@@ -83,6 +90,12 @@ EditHarvestableRoute.propTypes = {
       ).isRequired,
     }).isRequired,
     transformationPipelines: PropTypes.shape({
+      isPending: PropTypes.bool.isRequired,
+      records: PropTypes.arrayOf(
+        PropTypes.shape({}).isRequired,
+      ).isRequired,
+    }).isRequired,
+    storageEngines: PropTypes.shape({
       isPending: PropTypes.bool.isRequired,
       records: PropTypes.arrayOf(
         PropTypes.shape({}).isRequired,

@@ -16,6 +16,7 @@ const HarvestableFormGeneral = ({ data }) => {
   }));
 
   const transformationPipelines = data.transformationPipelines.map(x => ({ value: x.id, label: x.name }));
+  const storageEngines = data.storageEngines.map(x => ({ value: x.id, label: x.name }));
 
   return (
     <Accordion
@@ -44,7 +45,7 @@ const HarvestableFormGeneral = ({ data }) => {
       <RCF tag="transformation.id" i18nTag="transformationPipeline" component={Select} dataOptions={transformationPipelines} />
       <RCF tag="laxParsing" component={Checkbox} type="checkbox" />
       <RCF tag="encoding" />
-      <RCF tag="storage.name" />
+      <RCF tag="storage.id" i18nTag="storage.name" component={Select} dataOptions={storageEngines} />
       <RCF tag="storageBatchLimit" />
       <Row>
         <CF tag="cacheEnabled" xs={6} component={Checkbox} type="checkbox" />

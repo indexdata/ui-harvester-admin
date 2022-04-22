@@ -19,7 +19,7 @@ Statuses:
 * **done** -- Contact notes: should be text-area
 * **TODO** -- Harvest schedule: should provide a schedule editor
 * **done** -- Transformation Pipeline: should provide a dropdown
-* **TODO** -- Storage: should provide a dropdown
+* **done** -- Storage: should provide a dropdown
 * **done** -- Log level: should provide a dropdown [1]
 * **done** -- Saving failed records: should provide a dropdown [3]
 * **done** -- Send notification if severity at least: should provide a dropdown [2]
