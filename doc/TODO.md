@@ -10,7 +10,6 @@ Statuses:
 * **@name** -- I need information or work from the named person before I can proceed
 * _(none)_ -- completed
 
-
 ## General section
 
 * **done** -- Dates should be managed using a date-picker. (The old harvester-admin UI doesn't do this, but of course we want to surpass it in this and other aspects.)
@@ -73,6 +72,7 @@ Statuses:
 * **TODO** -- full-record Actions menu needs option to delete the harvestable
 * **TODO** -- full-record Actions menu needs option to start the job
 * **TODO** -- full-record Actions menu needs option to stop the job
+* **TODO** -- all editable fields should have a help-text like that of the legacy UI
 
 
 # Notes
@@ -91,8 +91,8 @@ Statuses:
 
 [5] "OAI Set Name" , "Metadata Prefix":   When an OAI URL is entered, the legacy admin UI then goes to that service and asks fo available set names and available metadata prefixes to populate the drop-downs. The FOLIO UI module should do the same. We have [a tool that shows the look-ups](https://oai-pmh-viewer.reshare-dev.indexdata.com/) (login as `oaitester`/`oai1325`). It can be used with OAI-PMH services such as https://na01.alma.exlibrisgroup.com/view/oai/01SSHELCO_MILLRSVL/request. `ListSets.set[n].setSpec` in the OAI-PMH service's XML response is what we copy into our "OAI Set Name" field.
 
-[6] in general, the schedule fields should be presented (for both view and edit) in a human-readable form, not as its underlying crontab string. But since BGV do not really use scheduling, relying on manual starting of jobs, this is not urgent and can pushed off to a later phase of work. When we do this, what is the best way to edit the crontab entry stored in the record? Ideally we would like to find a Node package that provides a crontab-entry editor rather than rolling our own. The only direct contender is
+[6] in general, the schedule fields should be presented (for both view and edit) in a human-readable form, not as its underlying crontab string. But since BGV do not really use scheduling, relying on manual starting of jobs, this is not urgent and can pushed off to a later phase of work. For now, it suffices to provide a good help text for the cron format. When we do this, what is the best way to edit the crontab entry stored in the record? Ideally we would like to find a Node package that provides a crontab-entry editor rather than rolling our own. The only direct contender is
 [`react-js-cron`](https://github.com/xrutayisire/react-js-cron).
-That has a vert nice UI, but depends on a big (165 Mb) library `antd` which may not play well with stripes-componwents. So we may be better off rolling our own using the lower-level parse/render utilities provided by
+That has a very nice UI, but depends on a big (165 Mb) library `antd` which may not play well with stripes-componwents. So we may be better off rolling our own using the lower-level parse/render utilities provided by
 [`cron-converter`](https://github.com/roccivic/cron-converter).
 
