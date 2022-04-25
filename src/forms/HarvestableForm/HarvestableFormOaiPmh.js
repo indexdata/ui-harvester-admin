@@ -11,7 +11,7 @@ const HarvestableFormOaiPmh = () => (
     <RCF tag="url" />
     <RCF tag="oaiSetName" />
     <RCF tag="metadataPrefix" />
-    <RCF tag="dateFormat" />
+    <RCF tag="useLongDateFormat" component={Checkbox} type="checkbox" />
     <Row>
       <CF tag="fromDate" xs={6} component={Datepicker} />
       <CF tag="untilDate" xs={6} component={Datepicker} />
