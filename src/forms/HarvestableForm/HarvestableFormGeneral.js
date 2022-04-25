@@ -76,6 +76,13 @@ HarvestableFormGeneral.propTypes = {
         name: PropTypes.string.isRequired,
       }).isRequired,
     ).isRequired,
+    storageEngines: PropTypes.arrayOf(
+      PropTypes.shape({
+        enabled: PropTypes.bool.isRequired,
+        id: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+      }).isRequired,
+    ).isRequired,
   }).isRequired,
 };
 
