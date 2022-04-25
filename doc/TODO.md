@@ -5,6 +5,7 @@ I compared the current ui-harvester-admin UI with that of the legacy UI to deriv
 Statuses:
 * **TODO** -- it's on me
 * **done** -- recently completed, left around for the sense of achievement (will be deleted)
+* **no** -- not to be done in the short term
 * **BLOCKED** -- cannot be implemented against the present `mod-harvester-admin`
 * **@name** -- I need information or work from the named person before I can proceed
 * _(none)_ -- completed
@@ -17,7 +18,7 @@ Statuses:
 * **done** -- Content Description: should be text-area
 * **done** -- Technical Notes: should be text-area
 * **done** -- Contact notes: should be text-area
-* **TODO** -- Harvest schedule: should provide a schedule editor
+* **no** -- Harvest schedule: should provide a schedule editor [6]
 * **done** -- Transformation Pipeline: should provide a dropdown
 * **done** -- Storage: should provide a dropdown
 * **done** -- Log level: should provide a dropdown [1]
@@ -47,7 +48,7 @@ Statuses:
 ## Status section
 
 * **done** -- Id: should be read-only
-* **TODO** -- Harvest schedule: should provide a schedule editor
+* **no** -- Harvest schedule: should provide a schedule editor [6]
 
 ## Arising from screenshot analysis
 
@@ -70,10 +71,6 @@ Statuses:
 * **@gbv** -- I would like much more detail on which fields should be grouped onto multi-column lines.
 * **TODO** -- the various list fields, whether comma-separated or space-separated (including OAI-PMH URLs), should be handled as lists on the UI side. See example in Inventory >> Instance record >> element "Subject"
 * **TODO** -- full-record display needs Actions menu with options to edit, delete, start, stop, and view log.
-* **TODO** -- the "harvest schedule" field should be presented (for both view and edit) in a human-readable form, not as its underlying crontab string. What is the best way to edit the crontab entry stored in `scheduleString`? Ideally we would like to find a Node package that provides a crontab-entry editor rather than rolling our own. The only direct contender is
-[`react-js-cron`](https://github.com/xrutayisire/react-js-cron),
-but that depends on a big (165 Mb) library `antd`. So we may be better off rolling our own using the lower-level parse/render utilities provided by
-[`cron-converter`](https://github.com/roccivic/cron-converter).
 
 
 # Notes
@@ -91,4 +88,9 @@ but that depends on a big (165 Mb) library `antd`. So we may be better off rolli
 [4] These cannot currently be implemented, as the legacy UI asks the legacy WSAPI for the relevant values but those WSAPI calls are not yet wired out through `mod-harvester-admin`. See [MODHA-5](https://issues.folio.org/browse/MODHA-5).
 
 [5] "OAI Set Name" , "Metadata Prefix":   When an OAI URL is entered, the legacy admin UI then goes to that service and asks fo available set names and available metadata prefixes to populate the drop-downs. The FOLIO UI module should do the same. We have [a tool that shows the look-ups](https://oai-pmh-viewer.reshare-dev.indexdata.com/) (login as `oaitester`/`oai1325`). It can be used with OAI-PMH services such as https://na01.alma.exlibrisgroup.com/view/oai/01SSHELCO_MILLRSVL/request. `ListSets.set[n].setSpec` in the OAI-PMH service's XML response is what we copy into our "OAI Set Name" field.
+
+[6] in general, the schedule fields should be presented (for both view and edit) in a human-readable form, not as its underlying crontab string. But since BGV do not really use scheduling, relying on manual starting of jobs, this is not urgent and can pushed off to a later phase of work. When we do this, what is the best way to edit the crontab entry stored in the record? Ideally we would like to find a Node package that provides a crontab-entry editor rather than rolling our own. The only direct contender is
+[`react-js-cron`](https://github.com/xrutayisire/react-js-cron).
+That has a vert nice UI, but depends on a big (165 Mb) library `antd` which may not play well with stripes-componwents. So we may be better off rolling our own using the lower-level parse/render utilities provided by
+[`cron-converter`](https://github.com/roccivic/cron-converter).
 
