@@ -70,7 +70,9 @@ Statuses:
   * maximum number of failed records saved next run + maximum number of failed records saved next total
 * **@gbv** -- I would like much more detail on which fields should be grouped onto multi-column lines.
 * **TODO** -- the various list fields, whether comma-separated or space-separated (including OAI-PMH URLs), should be handled as lists on the UI side. See example in Inventory >> Instance record >> element "Subject"
-* **TODO** -- full-record display needs Actions menu with options to edit, delete, start, stop, and view log.
+* **TODO** -- full-record Actions menu needs option to delete the harvestable
+* **TODO** -- full-record Actions menu needs option to start the job
+* **TODO** -- full-record Actions menu needs option to stop the job
 
 
 # Notes
