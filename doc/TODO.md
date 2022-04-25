@@ -72,7 +72,7 @@ Statuses:
 * **TODO** -- full-record Actions menu needs option to delete the harvestable
 * **TODO** -- full-record Actions menu needs option to start the job
 * **TODO** -- full-record Actions menu needs option to stop the job
-* **TODO** -- all editable fields should have a help-text like that of the legacy UI
+* **TODO** -- all editable fields should have a help-text like that of the legacy UI. Texts can be found in `localindices/harvester-admin/src/main/resources/contexthelp.properties`
 
 
 # Notes
