@@ -15,6 +15,14 @@ function getInitialValues(resources) {
     massaged.json = JSON.stringify(massaged.json, null, 2);
   }
 
+  // Acceptable values for `dateFormat` are:
+  // yyyy-MM-dd
+  // yyyy-MM-dd'T'HH:mm:ss.SSS'Z'
+  // (from localindices/harvester/src/main/java/com/indexdata/masterkey/localindices/harvest/storage/SolrRecordStorage.java:46)
+  //
+  massaged.useLongDateFormat = (massaged.dateFormat === "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+  delete massaged.dateFormat;
+
   booleanFields.forEach(tag => {
     if (massaged[tag] !== undefined) {
       massaged[tag] = (massaged[tag] === 'true');
@@ -38,6 +46,8 @@ const EditHarvestableRoute = ({ resources, mutator, match }) => {
         massaged[tag] = massaged[tag] ? 'true' : 'false';
       }
     });
+
+    massaged.dateFormat = massaged.useLongDateFormat ? "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'" : 'yyyy-MM-dd';
 
     mutator.harvestable.PUT(massaged)
       .then(handleClose);
