@@ -29,7 +29,7 @@ Statuses:
 
 * **TODO** -- OAI Set Name (type for suggestions): should do _something_ clever [5]
 * **TODO** -- Metadata Prefix: should provide a dropdown [5]
-* **done** -- Use long date fformat: should somehow be a checkbox
+* **done** -- Use long date format: should somehow be a checkbox
 
 
 ## XML Bulk section
