@@ -7,9 +7,8 @@ import { booleanFields } from '../constants';
 import packageInfo from '../../package';
 
 
-function getInitialValues(resources) {
-  const values = get(resources, 'harvestable.records[0]', {});
-  const massaged = { ...values };
+function raw2cooked(record) {
+  const massaged = { ...record };
 
   if (massaged.json && typeof massaged.json === 'object') {
     massaged.json = JSON.stringify(massaged.json, null, 2);
@@ -36,27 +35,32 @@ function getInitialValues(resources) {
 }
 
 
+function cooked2raw(record) {
+  const massaged = { ...record };
+
+  booleanFields.forEach(tag => {
+    if (massaged[tag] !== undefined) {
+      massaged[tag] = massaged[tag] ? 'true' : 'false';
+    }
+  });
+
+  massaged.dateFormat = massaged.useLongDateFormat ? "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'" : 'yyyy-MM-dd';
+  delete massaged.useLongDateFormat;
+
+  massaged.mailAddress = massaged.mailAddresses.join(',');
+  delete massaged.mailAddresses;
+
+  return massaged;
+}
+
+
 const EditHarvestableRoute = ({ resources, mutator, match }) => {
   const handleClose = () => {
     mutator.query.update({ _path: `${packageInfo.stripes.route}/harvestables/${match.params.recId}` });
   };
 
   const handleSubmit = (record) => {
-    const massaged = { ...record };
-
-    booleanFields.forEach(tag => {
-      if (massaged[tag] !== undefined) {
-        massaged[tag] = massaged[tag] ? 'true' : 'false';
-      }
-    });
-
-    massaged.dateFormat = massaged.useLongDateFormat ? "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'" : 'yyyy-MM-dd';
-    delete massaged.useLongDateFormat;
-
-    massaged.mailAddress = massaged.mailAddresses.join(',');
-    delete massaged.mailAddresses;
-
-    mutator.harvestable.PUT(massaged)
+    mutator.harvestable.PUT(cooked2raw(record))
       .then(handleClose);
   };
 
@@ -67,7 +71,7 @@ const EditHarvestableRoute = ({ resources, mutator, match }) => {
   return (
     <HarvestableForm
       isLoading={isLoading}
-      initialValues={getInitialValues(resources)}
+      initialValues={raw2cooked(get(resources, 'harvestable.records[0]', {}))}
       data={{
         transformationPipelines: resources.transformationPipelines.records,
         storageEngines: resources.storageEngines.records,
