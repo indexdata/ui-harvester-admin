@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Accordion, Row, Col, Checkbox, TextArea, Select } from '@folio/stripes/components';
+import { Field } from 'react-final-form';
+import { Accordion, Row, Col, Checkbox, TextArea, Select, TextField } from '@folio/stripes/components';
 import { RCF, CF } from '../../components/CF';
 import ListField from '../../components/ListField';
 
@@ -69,7 +70,22 @@ const HarvestableFormGeneral = ({ data }) => {
         </Col>
       </Row>
       <RCF tag="mailLevel" component={Select} dataOptions={mailLevels} />
-      <RCF tag="constantFields" />
+      <Row>
+        <Col xs={12}>
+          <ListField
+            name="constantFields"
+            label={<FormattedMessage id="ui-harvester-admin.harvestables.field.constantFields" />}
+            renderEntry={(name) => (
+              <>
+                <Field name={`${name}.key`} component={TextField} />
+                =
+                <Field name={`${name}.value`} component={TextField} />
+              </>
+            )}
+            emptyValue={{ key: '', value: '' }}
+          />
+        </Col>
+      </Row>
       <RCF tag="json" component={TextArea} rows="6" />
     </Accordion>
   );

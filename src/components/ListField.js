@@ -5,7 +5,7 @@ import { Field } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
 import { Row, Col, TextField, Label, IconButton, Button } from '@folio/stripes/components';
 
-const ListField = ({ name, label, component, emptyValue }) => {
+const ListField = ({ name, label, renderEntry, component, emptyValue }) => {
   return (
     <>
       {label && <Label>{label}</Label>}
@@ -15,7 +15,10 @@ const ListField = ({ name, label, component, emptyValue }) => {
             {fields.map((subname, index) => (
               <Row>
                 <Col xs={11}>
-                  <Field name={subname} component={component || TextField} />
+                  {renderEntry ?
+                    renderEntry(subname) :
+                    <Field name={subname} component={component || TextField} />
+                  }
                 </Col>
                 <Col xs={1}>
                   <IconButton icon="trash" onClick={() => fields.remove(index)} />
@@ -35,6 +38,7 @@ const ListField = ({ name, label, component, emptyValue }) => {
 ListField.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string, // probably wrong
+  renderEntry: PropTypes.func,
   component: PropTypes.string, // definitely wrong
   emptyValue: PropTypes.any, // eslint-disable-line react/forbid-prop-types
 };
