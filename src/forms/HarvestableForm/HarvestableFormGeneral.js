@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Field } from 'react-final-form';
-import { FieldArray } from 'react-final-form-arrays';
-import { Accordion, Row, Col, TextField, Checkbox, TextArea, Select, Label, IconButton, Button } from '@folio/stripes/components';
+import { Accordion, Row, Col, Checkbox, TextArea, Select } from '@folio/stripes/components';
 import { RCF, CF } from '../../components/CF';
+import ListField from '../../components/ListField';
 
 const logLevels = ['TRACE', 'DEBUG', 'INFO', 'WARN', 'ERROR'].map(x => ({ value: x, label: x }));
 const mailLevels = ['OK', 'WARN', 'ERROR'].map(x => ({ value: x, label: x }));
@@ -63,28 +62,10 @@ const HarvestableFormGeneral = ({ data }) => {
       </Row>
       <Row>
         <Col xs={12}>
-          <Label>
-            <FormattedMessage id="ui-harvester-admin.harvestables.field.mailAddresses" />
-          </Label>
-          <FieldArray name="mailAddresses">
-            {({ fields }) => (
-              <>
-                {fields.map((name, index) => (
-                  <Row>
-                    <Col xs={11}>
-                      <Field name={name} component={TextField} />
-                    </Col>
-                    <Col xs={1}>
-                      <IconButton icon="trash" onClick={() => fields.remove(index)} />
-                    </Col>
-                  </Row>
-                ))}
-                <Button onClick={() => fields.push('')}>
-                  <FormattedMessage id="ui-harvester-admin.add" />
-                </Button>
-              </>
-            )}
-          </FieldArray>
+          <ListField
+            name="mailAddresses"
+            label={<FormattedMessage id="ui-harvester-admin.harvestables.field.mailAddresses" />}
+          />
         </Col>
       </Row>
       <RCF tag="mailLevel" component={Select} dataOptions={mailLevels} />
