@@ -23,6 +23,9 @@ function getInitialValues(resources) {
   massaged.useLongDateFormat = (massaged.dateFormat === "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
   delete massaged.dateFormat;
 
+  massaged.mailAddresses = massaged.mailAddress?.split(/\s*,\s*/) || [];
+  delete massaged.mailAddress;
+
   booleanFields.forEach(tag => {
     if (massaged[tag] !== undefined) {
       massaged[tag] = (massaged[tag] === 'true');
@@ -48,6 +51,9 @@ const EditHarvestableRoute = ({ resources, mutator, match }) => {
     });
 
     massaged.dateFormat = massaged.useLongDateFormat ? "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'" : 'yyyy-MM-dd';
+
+    massaged.mailAddress = massaged.mailAddresses.join(',');
+    delete massaged.mailAddresses;
 
     mutator.harvestable.PUT(massaged)
       .then(handleClose);

@@ -5,6 +5,7 @@
     "error": "Something went wrong",
     "resultCount": "{count, number} {count, plural, one {record found} other {records found}}",
     "settings.nullSettings": "Null settings",
+    "add": "Add",
 
     "permission.harvester-admin.read-jobs": "",
     "permission.harvester-admin.maintain-jobs": "",
@@ -84,6 +85,7 @@
     "harvestables.field.maxSavedFailedRecordsPerRun": "Maximum number of failed records saved next run",
     "harvestables.field.maxSavedFailedRecordsTotal": "Maximum number of failed records saved total",
     "harvestables.field.mailAddress": "Notification e-mail address(es) (separate with comma)",
+    "harvestables.field.mailAddresses": "Notification e-mail addresses",
     "harvestables.field.mailLevel": "Send notification if severity at least",
     "harvestables.field.constantFields": "List of constant fields",
     "harvestables.field.json": "Extra configuration: (JSON)",

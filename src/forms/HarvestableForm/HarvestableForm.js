@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
+import arrayMutators from 'final-form-arrays';
 import { HasCommand, Button, LoadingPane, Pane, PaneFooter, checkScope } from '@folio/stripes/components';
 import { AppIcon, TitleManager, withStripes } from '@folio/stripes/core';
 import stripesFinalForm from '@folio/stripes/final-form';
@@ -142,5 +143,5 @@ export default withStripes(stripesFinalForm({
   subscription: {
     values: true,
   },
-  mutators: { setFieldData }
+  mutators: { setFieldData, ...arrayMutators }
 })(HarvestableForm));
