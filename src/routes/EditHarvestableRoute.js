@@ -7,11 +7,11 @@ import { booleanFields } from '../constants';
 import packageInfo from '../../package';
 
 
-function raw2cooked(record) {
-  const massaged = { ...record };
+function raw2cooked(raw) {
+  const cooked = { ...raw };
 
-  if (massaged.json && typeof massaged.json === 'object') {
-    massaged.json = JSON.stringify(massaged.json, null, 2);
+  if (cooked.json && typeof cooked.json === 'object') {
+    cooked.json = JSON.stringify(cooked.json, null, 2);
   }
 
   // Acceptable values for `dateFormat` are:
@@ -19,38 +19,38 @@ function raw2cooked(record) {
   // yyyy-MM-dd'T'HH:mm:ss.SSS'Z'
   // (from localindices/harvester/src/main/java/com/indexdata/masterkey/localindices/harvest/storage/SolrRecordStorage.java:46)
   //
-  massaged.useLongDateFormat = (massaged.dateFormat === "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-  delete massaged.dateFormat;
+  cooked.useLongDateFormat = (cooked.dateFormat === "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+  delete cooked.dateFormat;
 
-  massaged.mailAddresses = massaged.mailAddress?.split(/\s*,\s*/) || [];
-  delete massaged.mailAddress;
+  cooked.mailAddresses = cooked.mailAddress?.split(/\s*,\s*/) || [];
+  delete cooked.mailAddress;
 
   booleanFields.forEach(tag => {
-    if (massaged[tag] !== undefined) {
-      massaged[tag] = (massaged[tag] === 'true');
+    if (cooked[tag] !== undefined) {
+      cooked[tag] = (cooked[tag] === 'true');
     }
   });
 
-  return massaged;
+  return cooked;
 }
 
 
-function cooked2raw(record) {
-  const massaged = { ...record };
+function cooked2raw(cooked) {
+  const raw = { ...cooked };
 
   booleanFields.forEach(tag => {
-    if (massaged[tag] !== undefined) {
-      massaged[tag] = massaged[tag] ? 'true' : 'false';
+    if (raw[tag] !== undefined) {
+      raw[tag] = raw[tag] ? 'true' : 'false';
     }
   });
 
-  massaged.dateFormat = massaged.useLongDateFormat ? "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'" : 'yyyy-MM-dd';
-  delete massaged.useLongDateFormat;
+  raw.dateFormat = raw.useLongDateFormat ? "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'" : 'yyyy-MM-dd';
+  delete raw.useLongDateFormat;
 
-  massaged.mailAddress = massaged.mailAddresses.join(',');
-  delete massaged.mailAddresses;
+  raw.mailAddress = raw.mailAddresses.join(',');
+  delete raw.mailAddresses;
 
-  return massaged;
+  return raw;
 }
 
 
