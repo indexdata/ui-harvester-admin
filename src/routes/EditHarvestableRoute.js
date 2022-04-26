@@ -51,6 +51,7 @@ const EditHarvestableRoute = ({ resources, mutator, match }) => {
     });
 
     massaged.dateFormat = massaged.useLongDateFormat ? "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'" : 'yyyy-MM-dd';
+    delete massaged.useLongDateFormat;
 
     massaged.mailAddress = massaged.mailAddresses.join(',');
     delete massaged.mailAddresses;
