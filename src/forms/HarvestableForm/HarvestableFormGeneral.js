@@ -64,7 +64,7 @@ const HarvestableFormGeneral = ({ data }) => {
       <Row>
         <Col xs={12}>
           <ListField
-            name="mailAddresses"
+            name="mailAddress"
             label={<FormattedMessage id="ui-harvester-admin.harvestables.field.mailAddresses" />}
           />
         </Col>
