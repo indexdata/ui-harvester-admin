@@ -25,11 +25,11 @@ function raw2cooked(raw) {
   // (from localindices/harvester/src/main/java/com/indexdata/masterkey/localindices/harvest/storage/SolrRecordStorage.java:46)
   //
   // We represent this as a boolean: true if the long format is used, false if the short format
-  cooked.dateFormat = (cooked.dateFormat === "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+  cooked.dateFormat = (raw.dateFormat === "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 
-  cooked.mailAddress = cooked.mailAddress?.split(/\s*,\s*/) || [];
+  cooked.mailAddress = raw.mailAddress?.split(/\s*,\s*/) || [];
 
-  cooked.constantFields = (cooked.constantFields?.split(/\s*,\s*/) || []).map(s => {
+  cooked.constantFields = (raw.constantFields?.split(/\s*,\s*/) || []).map(s => {
     const pair = s.split('=');
     return { key: pair[0], value: pair[1] };
   });
@@ -37,8 +37,8 @@ function raw2cooked(raw) {
   cooked.url = raw.url?.split(/\s+/) || [];
 
   booleanFields.forEach(tag => {
-    if (cooked[tag] !== undefined) {
-      cooked[tag] = (cooked[tag] === 'true');
+    if (raw[tag] !== undefined) {
+      cooked[tag] = (raw[tag] === 'true');
     }
   });
 
@@ -49,19 +49,19 @@ function raw2cooked(raw) {
 function cooked2raw(cooked) {
   const raw = { ...cooked };
 
-  booleanFields.forEach(tag => {
-    if (raw[tag] !== undefined) {
-      raw[tag] = raw[tag] ? 'true' : 'false';
-    }
-  });
+  raw.dateFormat = cooked.dateFormat ? "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'" : 'yyyy-MM-dd';
 
-  raw.dateFormat = raw.dateFormat ? "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'" : 'yyyy-MM-dd';
+  raw.mailAddress = cooked.mailAddress.join(',');
 
-  raw.mailAddress = raw.mailAddress.join(',');
-
-  raw.constantFields = raw.constantFields.map(x => `${x.key}=${x.value}`).join(',');
+  raw.constantFields = cooked.constantFields.map(x => `${x.key}=${x.value}`).join(',');
 
   raw.url = cooked.url.join(' ');
+
+  booleanFields.forEach(tag => {
+    if (cooked[tag] !== undefined) {
+      raw[tag] = cooked[tag] ? 'true' : 'false';
+    }
+  });
 
   return raw;
 }
