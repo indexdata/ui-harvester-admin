@@ -13,7 +13,7 @@ function raw2cooked(raw) {
   // mod-harvester-admin semantics are strange here: you are supposed
   // to send the `json` field as a string, but if it's valid then it
   // comes back as a parsed object. So we have to convert it back into
-  // a string for editing. 
+  // a string for editing.
   //
   if (raw.json && typeof raw.json === 'object') {
     cooked.json = JSON.stringify(cooked.json, null, 2);
@@ -24,8 +24,8 @@ function raw2cooked(raw) {
   // yyyy-MM-dd'T'HH:mm:ss.SSS'Z'
   // (from localindices/harvester/src/main/java/com/indexdata/masterkey/localindices/harvest/storage/SolrRecordStorage.java:46)
   //
-  cooked.useLongDateFormat = (cooked.dateFormat === "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-  delete cooked.dateFormat;
+  // We represent this as a boolean: true if the long format is used, false if the short format
+  cooked.dateFormat = (cooked.dateFormat === "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 
   cooked.mailAddresses = cooked.mailAddress?.split(/\s*,\s*/) || [];
   delete cooked.mailAddress;
@@ -56,8 +56,7 @@ function cooked2raw(cooked) {
     }
   });
 
-  raw.dateFormat = raw.useLongDateFormat ? "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'" : 'yyyy-MM-dd';
-  delete raw.useLongDateFormat;
+  raw.dateFormat = raw.dateFormat ? "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'" : 'yyyy-MM-dd';
 
   raw.mailAddress = raw.mailAddresses.join(',');
   delete raw.mailAddresses;
