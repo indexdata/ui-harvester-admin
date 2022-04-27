@@ -10,7 +10,12 @@ import packageInfo from '../../package';
 function raw2cooked(raw) {
   const cooked = { ...raw };
 
-  if (cooked.json && typeof cooked.json === 'object') {
+  // mod-harvester-admin semantics are strange here: you are supposed
+  // to send the `json` field as a string, but if it's valid then it
+  // comes back as a parsed object. So we have to convert it back into
+  // a string for editing. 
+  //
+  if (raw.json && typeof raw.json === 'object') {
     cooked.json = JSON.stringify(cooked.json, null, 2);
   }
 
