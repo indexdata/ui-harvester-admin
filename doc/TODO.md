@@ -35,7 +35,7 @@ Statuses:
 ## XML Bulk section
 
 * **done** -- URLs (space-separated): should be an editable list
-* **TODO** -- MARC XML transformation format (application/marc or application/tmarc): should be a checkbox, "Use TurboMARC".
+* **done** -- MARC XML transformation format (application/marc or application/tmarc): should be a dropdown offering MARCXML, TurboMARC or N/A.
 
 
 ## Connector section

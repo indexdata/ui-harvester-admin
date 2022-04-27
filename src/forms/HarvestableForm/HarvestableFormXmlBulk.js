@@ -1,8 +1,14 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Accordion, Row, Col, Checkbox, Datepicker } from '@folio/stripes/components';
+import { Accordion, Row, Col, Checkbox, Datepicker, Select } from '@folio/stripes/components';
 import { RCF } from '../../components/CF';
 import ListField from '../../components/ListField';
+
+const outputSchemas = [
+  { value: '', label: '[N/A]' },
+  { value: 'application/marc', label: 'MARCXML standard' },
+  { value: 'application/tmarc', label: 'TurboMARC' },
+];
 
 const HarvestableFormXmlBulk = () => (
   <Accordion
@@ -24,7 +30,7 @@ const HarvestableFormXmlBulk = () => (
     <RCF tag="splitAt" type="number" />
     <RCF tag="splitSize" type="number" />
     <RCF tag="expectedSchema" />
-    <RCF tag="outputSchema" />
+    <RCF tag="outputSchema" component={Select} dataOptions={outputSchemas} />
     <RCF tag="recurse" component={Checkbox} type="checkbox" />
     <RCF tag="includeFilePattern" />
     <RCF tag="excludeFilePattern" />
