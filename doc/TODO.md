@@ -70,9 +70,9 @@ Statuses:
 * **@gbv** -- I would like much more detail on which fields should be grouped onto multi-column lines.
 * **done** -- Notification e-mail addresses should be an editable list
 * **done** -- Constant fields should be an editable list
-* **TODO** -- Filter, comma-separated list of usage tags should be an editable list
-* **TODO** -- Filter, comma-separated list of admin tags should be an editable list
-* **TODO** -- Custom e-mails addresses should be an editable list
+* **done** -- Filter, comma-separated list of usage tags should be an editable list
+* **done** -- Filter, comma-separated list of admin tags should be an editable list
+* **done** -- Custom e-mails addresses should be an editable list
 * **TODO** -- full-record Actions menu needs option to delete the harvestable
 * **TODO** -- full-record Actions menu needs option to start the job
 * **TODO** -- full-record Actions menu needs option to stop the job

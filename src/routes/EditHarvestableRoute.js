@@ -27,7 +27,9 @@ function raw2cooked(raw) {
   // We represent this as a boolean: true if the long format is used, false if the short format
   cooked.dateFormat = (raw.dateFormat === "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 
-  cooked.mailAddress = raw.mailAddress?.split(/\s*,\s*/) || [];
+  ['usedBy', 'managedBy', 'mailAddress'].forEach(name => {
+    cooked[name] = raw[name]?.split(/\s*,\s*/) || [];
+  });
 
   cooked.constantFields = (raw.constantFields?.split(/\s*,\s*/) || []).map(s => {
     const pair = s.split('=');
@@ -51,7 +53,9 @@ function cooked2raw(cooked) {
 
   raw.dateFormat = cooked.dateFormat ? "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'" : 'yyyy-MM-dd';
 
-  raw.mailAddress = cooked.mailAddress.join(',');
+  ['usedBy', 'managedBy', 'mailAddress'].forEach(name => {
+    raw[name] = cooked[name].join(',');
+  });
 
   raw.constantFields = cooked.constantFields.map(x => `${x.key}=${x.value}`).join(',');
 
