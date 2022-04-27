@@ -76,11 +76,17 @@ const HarvestableFormGeneral = ({ data }) => {
             name="constantFields"
             label={<FormattedMessage id="ui-harvester-admin.harvestables.field.constantFields" />}
             renderEntry={(name) => (
-              <>
-                <Field name={`${name}.key`} component={TextField} />
-                =
-                <Field name={`${name}.value`} component={TextField} />
-              </>
+              <Row>
+                <Col xs={3}>
+                  <Field name={`${name}.key`} component={TextField} />
+                </Col>
+                <Col xs={1}>
+                  =
+                </Col>
+                <Col xs={8}>
+                  <Field name={`${name}.value`} component={TextField} />
+                </Col>
+              </Row>
             )}
             emptyValue={{ key: '', value: '' }}
           />
