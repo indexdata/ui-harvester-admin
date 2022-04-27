@@ -1,8 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Accordion, Row, Col, Checkbox, Datepicker, Select } from '@folio/stripes/components';
-import { RCF } from '../../components/CF';
-import ListField from '../../components/ListField';
+import { Accordion, Checkbox, Datepicker, Select } from '@folio/stripes/components';
+import { RCF, RCLF } from '../../components/CF';
 
 const outputSchemas = [
   { value: '', label: '[N/A]' },
@@ -15,14 +14,7 @@ const HarvestableFormXmlBulk = () => (
     id="harvestable-form-xml"
     label={<FormattedMessage id="ui-harvester-admin.harvestables.field.type.xmlBulk" />}
   >
-    <Row>
-      <Col xs={12}>
-        <ListField
-          name="url"
-          label={<FormattedMessage id="ui-harvester-admin.harvestables.field.urls" />}
-        />
-      </Col>
-    </Row>
+    <RCLF tag="url" i18nTag="urls" />
     <RCF tag="allowErrors" component={Checkbox} type="checkbox" />
     <RCF tag="overwrite" component={Checkbox} type="checkbox" />
     <RCF tag="allowCondReq" component={Checkbox} type="checkbox" />
