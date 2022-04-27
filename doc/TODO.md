@@ -34,7 +34,7 @@ Statuses:
 
 ## XML Bulk section
 
-* **TODO** -- URLs (space-separated): should be a text-area of 15 rows
+* **TODO** -- URLs (space-separated): should be an editable list
 * **TODO** -- MARC XML transformation format (application/marc or application/tmarc): should be a checkbox, "Use TurboMARC".
 
 
@@ -68,7 +68,11 @@ Statuses:
   * cache on disk? + store original record content?
   * maximum number of failed records saved next run + maximum number of failed records saved next total
 * **@gbv** -- I would like much more detail on which fields should be grouped onto multi-column lines.
-* **TODO** -- the various list fields, whether comma-separated or space-separated (including OAI-PMH URLs), should be handled as lists on the UI side. See example in Inventory >> Instance record >> element "Subject"
+* **done** -- Notification e-mail addresses should be an editable list
+* **done** -- Constant fields should be an editable list
+* **TODO** -- Filter, comma-separated list of usage tags should be an editable list
+* **TODO** -- Filter, comma-separated list of admin tags should be an editable list
+* **TODO** -- Custom e-mails addresses should be an editable list
 * **TODO** -- full-record Actions menu needs option to delete the harvestable
 * **TODO** -- full-record Actions menu needs option to start the job
 * **TODO** -- full-record Actions menu needs option to stop the job
