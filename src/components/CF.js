@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Field } from 'react-final-form';
 import { Row, Col, TextField } from '@folio/stripes/components';
+import ListField from './ListField';
 
 // Col-Field
 export const CF = ({ tag, i18nTag, xs, ...rest }) => (
@@ -27,5 +28,26 @@ CF.propTypes = {
 export const RCF = (props) => (
   <Row>
     <CF {...props} xs={12} />
+  </Row>
+);
+
+// Col-ListField
+export const CLF = ({ tag, i18nTag, xs, ...rest }) => (
+  <Col xs={xs}>
+    <ListField
+      id={`edit-harvestable-${tag}`}
+      name={tag}
+      label={<FormattedMessage id={`ui-harvester-admin.harvestables.field.${i18nTag || tag}`} />}
+      {...rest}
+    />
+  </Col>
+);
+
+CLF.propTypes = CF.propTypes;
+
+// Row-Col-ListField
+export const RCLF = (props) => (
+  <Row>
+    <CLF {...props} xs={12} />
   </Row>
 );

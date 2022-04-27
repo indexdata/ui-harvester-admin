@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Field } from 'react-final-form';
 import { Accordion, Row, Col, Checkbox, TextArea, Select, TextField } from '@folio/stripes/components';
-import { RCF, CF } from '../../components/CF';
-import ListField from '../../components/ListField';
+import { RCF, CF, RCLF } from '../../components/CF';
 
 const logLevels = ['TRACE', 'DEBUG', 'INFO', 'WARN', 'ERROR'].map(x => ({ value: x, label: x }));
 const mailLevels = ['OK', 'WARN', 'ERROR'].map(x => ({ value: x, label: x }));
@@ -61,37 +60,25 @@ const HarvestableFormGeneral = ({ data }) => {
         <CF tag="maxSavedFailedRecordsPerRun" xs={6} type="number" />
         <CF tag="maxSavedFailedRecordsTotal" xs={6} type="number" />
       </Row>
-      <Row>
-        <Col xs={12}>
-          <ListField
-            name="mailAddress"
-            label={<FormattedMessage id="ui-harvester-admin.harvestables.field.mailAddresses" />}
-          />
-        </Col>
-      </Row>
+      <RCLF tag="mailAddress" i18nTag="mailAddresses" />
       <RCF tag="mailLevel" component={Select} dataOptions={mailLevels} />
-      <Row>
-        <Col xs={12}>
-          <ListField
-            name="constantFields"
-            label={<FormattedMessage id="ui-harvester-admin.harvestables.field.constantFields" />}
-            renderEntry={(name) => (
-              <Row>
-                <Col xs={3}>
-                  <Field name={`${name}.key`} component={TextField} />
-                </Col>
-                <Col xs={1}>
-                  =
-                </Col>
-                <Col xs={8}>
-                  <Field name={`${name}.value`} component={TextField} />
-                </Col>
-              </Row>
-            )}
-            emptyValue={{ key: '', value: '' }}
-          />
-        </Col>
-      </Row>
+      <RCLF
+        tag="constantFields"
+        renderEntry={(name) => (
+          <Row>
+            <Col xs={3}>
+              <Field name={`${name}.key`} component={TextField} />
+            </Col>
+            <Col xs={1}>
+              =
+            </Col>
+            <Col xs={8}>
+              <Field name={`${name}.value`} component={TextField} />
+            </Col>
+          </Row>
+        )}
+        emptyValue={{ key: '', value: '' }}
+      />
       <RCF tag="json" component={TextArea} rows="6" />
     </Accordion>
   );
