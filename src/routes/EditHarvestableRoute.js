@@ -30,6 +30,8 @@ function raw2cooked(raw) {
     return { key: pair[0], value: pair[1] };
   });
 
+  cooked.url = raw.url?.split(/\s+/) || [];
+
   booleanFields.forEach(tag => {
     if (cooked[tag] !== undefined) {
       cooked[tag] = (cooked[tag] === 'true');
@@ -56,6 +58,8 @@ function cooked2raw(cooked) {
   delete raw.mailAddresses;
 
   raw.constantFields = raw.constantFields.map(x => `${x.key}=${x.value}`).join(',');
+
+  raw.url = cooked.url.join(' ');
 
   return raw;
 }
