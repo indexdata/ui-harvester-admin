@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, FormattedTime, FormattedDate } from 'react-intl';
-import { AppIcon } from '@folio/stripes/core';
-import { LoadingPane, Paneset, Pane, MultiColumnList } from '@folio/stripes/components';
+import { useLocation } from 'react-router-dom';
+import { IfPermission, AppIcon } from '@folio/stripes/core';
+import { LoadingPane, Paneset, Pane, MultiColumnList, PaneMenu, MenuSection, Button, Icon } from '@folio/stripes/components';
 import { parseFilters, ColumnManager, SearchAndSortQuery } from '@folio/stripes/smart-components';
 import HarvestablesSearchPane from '../search/HarvestablesSearchPane';
 import ErrorMessage from '../components/ErrorMessage';
@@ -59,6 +60,37 @@ function manuallyFilterAndSort(query, raw) {
 }
 
 
+function renderActionsMenu(search, renderedColumnsMenu) {
+  // label={intl.formatMessage({ id: 'ui-harvester-admin.actions' })}>
+  return (
+    <>
+      <MenuSection id="actions-menu-section" label={<FormattedMessage id="ui-harvester-admin.actions" />}>
+        <IfPermission perm="harvester-admin.harvestables.item.post">
+          <PaneMenu>
+            <FormattedMessage id="stripes-smart-components.addNew">
+              {ariaLabel => (
+                <Button
+                  id="clickable-new-harvestable"
+                  aria-label={ariaLabel}
+                  to={`/ha/create${search}`}
+                  buttonStyle="dropdownItem"
+                  marginBottom0
+                >
+                  <Icon icon="plus-sign">
+                    <FormattedMessage id="stripes-smart-components.new" />
+                  </Icon>
+                </Button>
+              )}
+            </FormattedMessage>
+          </PaneMenu>
+        </IfPermission>
+      </MenuSection>
+      {renderedColumnsMenu}
+    </>
+  );
+}
+
+
 function Harvestables({
   data,
   query,
@@ -69,6 +101,7 @@ function Harvestables({
   onNeedMoreData,
   children,
 }) {
+  const location = useLocation();
   if (error) return <ErrorMessage message={error} />;
   if (!hasLoaded) return <LoadingPane />;
 
@@ -107,11 +140,7 @@ function Harvestables({
                     padContent={false}
                     paneTitle={<FormattedMessage id="ui-harvester-admin.nav.harvestables" />}
                     paneSub={<FormattedMessage id="ui-harvester-admin.resultCount" values={{ count: resultCount }} />}
-                    actionMenu={() => (
-                      <>
-                        {renderColumnsMenu}
-                      </>
-                    )}
+                    actionMenu={() => renderActionsMenu(location.search, renderColumnsMenu)}
                   >
                     <MultiColumnList
                       autosize
@@ -175,6 +204,7 @@ Harvestables.propTypes = {
   error: PropTypes.string,
   hasLoaded: PropTypes.bool.isRequired,
   onNeedMoreData: PropTypes.func.isRequired,
+  createNew: PropTypes.func.isRequired,
   children: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
 };
 

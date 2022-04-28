@@ -6,6 +6,7 @@
     "resultCount": "{count, number} {count, plural, one {record found} other {records found}}",
     "settings.nullSettings": "Null settings",
     "add": "Add",
+    "actions": "Actions",
 
     "permission.harvester-admin.read-jobs": "",
     "permission.harvester-admin.maintain-jobs": "",
