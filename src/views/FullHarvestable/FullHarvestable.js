@@ -62,6 +62,8 @@ const FullHarvestable = ({ defaultWidth, resources, mutator, match, deleteRecord
   if (!resource.hasLoaded) return <Loading />;
   const rec = resource.records[0];
 
+  const returnToList = () => mutator.query.update({ _path: `${packageInfo.stripes.route}/harvestables` });
+
   function maybeDeleteRecord(e) {
     e.stopPropagation();
     setDeleting(true);
@@ -69,6 +71,7 @@ const FullHarvestable = ({ defaultWidth, resources, mutator, match, deleteRecord
 
   function actuallyDeleteRecord() {
     deleteRecord().then(() => {
+      returnToList();
       setDeleting(false);
       callout.sendCallout({
         message: (
@@ -117,7 +120,7 @@ const FullHarvestable = ({ defaultWidth, resources, mutator, match, deleteRecord
   return (
     <Pane
       dismissible
-      onClose={() => mutator.query.update({ _path: `${packageInfo.stripes.route}/harvestables` })}
+      onClose={returnToList}
       defaultWidth={defaultWidth}
       paneTitle={resource.records[0]?.name}
       actionMenu={actionMenu}
