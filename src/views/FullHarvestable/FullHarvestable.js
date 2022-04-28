@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { useStripes } from '@folio/stripes/core';
-import { Loading, Pane, Accordion, Button, Icon } from '@folio/stripes/components';
+import { useStripes, CalloutContext } from '@folio/stripes/core';
+import { Loading, Pane, Accordion, Button, Icon, ConfirmationModal } from '@folio/stripes/components';
 import ErrorMessage from '../../components/ErrorMessage';
 import GeneralSection from './GeneralSection';
 import OaiPmhSection from './OaiPmhSection';
@@ -21,8 +21,7 @@ const specificSections = {
 };
 
 
-const FullHarvestableContent = ({ resource }) => {
-  const rec = resource.records[0];
+const FullHarvestableContent = ({ rec }) => {
   const type = rec.type;
   const ErrorSection = () => <ErrorMessage message={`Unknown type '${type}'`} />;
   const SpecificSection = specificSections[type] || ErrorSection;
@@ -48,37 +47,70 @@ const FullHarvestableContent = ({ resource }) => {
 
 
 FullHarvestableContent.propTypes = {
-  resource: PropTypes.shape({
-    records: PropTypes.arrayOf(
-      PropTypes.shape({
-        type: PropTypes.string.isRequired,
-      }).isRequired,
-    ).isRequired,
+  rec: PropTypes.shape({
+    type: PropTypes.string.isRequired,
   }).isRequired,
 };
 
 
-const FullHarvestable = ({ defaultWidth, resources, mutator, match }) => {
+const FullHarvestable = ({ defaultWidth, resources, mutator, match, deleteRecord }) => {
   const stripes = useStripes();
-  const resource = resources.harvestable;
+  const [deleting, setDeleting] = useState(false);
+  const callout = useContext(CalloutContext);
 
+  const resource = resources.harvestable;
   if (!resource.hasLoaded) return <Loading />;
+  const rec = resource.records[0];
+
+  function maybeDeleteRecord(e) {
+    e.stopPropagation();
+    setDeleting(true);
+  }
+
+  function actuallyDeleteRecord() {
+    deleteRecord().then(() => {
+      setDeleting(false);
+      callout.sendCallout({
+        message: (
+          <FormattedMessage
+            id="ui-harvester-admin.op.delete.completed"
+            values={{
+              name: rec.name,
+              b: text => <b>{text}</b>,
+            }}
+          />
+        ),
+      });
+    });
+  }
 
   const actionMenu = () => {
     if (!stripes.hasPerm('harvester-admin.harvestables.item.put')) return undefined;
     return (
-      <Button
-        buttonStyle="dropdownItem"
-        data-test-actions-menu-edit
-        id="clickable-edit-harvestable"
-        onClick={() => {
-          mutator.query.update({ _path: `${packageInfo.stripes.route}/harvestables/${match.params.recId}/edit` });
-        }}
-      >
-        <Icon icon="edit">
-          <FormattedMessage id="ui-harvester-admin.button.edit" />
-        </Icon>
-      </Button>
+      <>
+        <Button
+          buttonStyle="dropdownItem"
+          data-test-actions-menu-edit
+          id="clickable-edit-harvestable"
+          onClick={() => {
+            mutator.query.update({ _path: `${packageInfo.stripes.route}/harvestables/${match.params.recId}/edit` });
+          }}
+        >
+          <Icon icon="edit">
+            <FormattedMessage id="ui-harvester-admin.button.edit" />
+          </Icon>
+        </Button>
+        <Button
+          buttonStyle="dropdownItem"
+          data-test-actions-menu-delete
+          id="clickable-delete-harvestable"
+          onClick={maybeDeleteRecord}
+        >
+          <Icon icon="trash">
+            <FormattedMessage id="ui-harvester-admin.button.delete" />
+          </Icon>
+        </Button>
+      </>
     );
   };
 
@@ -90,7 +122,17 @@ const FullHarvestable = ({ defaultWidth, resources, mutator, match }) => {
       paneTitle={resource.records[0]?.name}
       actionMenu={actionMenu}
     >
-      <FullHarvestableContent resource={resource} />
+      <FullHarvestableContent rec={rec} />
+      {deleting &&
+        <ConfirmationModal
+          open
+          heading={<FormattedMessage id="ui-harvester-admin.op.delete.confirm" />}
+          message={rec.name}
+          confirmLabel={<FormattedMessage id="ui-harvester-admin.button.confirm" />}
+          onConfirm={() => actuallyDeleteRecord()}
+          onCancel={() => setDeleting(false)}
+        />
+      }
     </Pane>
   );
 };
@@ -117,7 +159,8 @@ FullHarvestable.propTypes = {
     params: PropTypes.shape({
       recId: PropTypes.string.isRequired,
     }).isRequired,
-  }).isRequired
+  }).isRequired,
+  deleteRecord: PropTypes.func.isRequired,
 };
 
 export default FullHarvestable;

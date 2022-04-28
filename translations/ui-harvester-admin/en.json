@@ -19,6 +19,10 @@
     "nav.steps": "Transformation steps",
 
     "button.edit": "Edit",
+    "button.delete": "Delete",
+    "button.confirm": "Confirm",
+    "op.delete.confirm": "Are you sure yu want to delete this record?",
+    "op.delete.completed": "Record <b>{name}</b> deleted",
 
     "harvestables.column.name": "Name",
     "harvestables.column.currentStatus": "Status",

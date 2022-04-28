@@ -5,7 +5,9 @@ import FullHarvestable from '../views/FullHarvestable';
 
 
 const FullHarvestableRoute = (props) => {
-  return <FullHarvestable {...props} />;
+  const deleteRecord = () => props.mutator.harvestable.DELETE({ id: props.match.params.recId });
+
+  return <FullHarvestable {...props} deleteRecord={deleteRecord} />;
 };
 
 
@@ -41,6 +43,14 @@ FullHarvestableRoute.propTypes = {
   }).isRequired
 };
 
+
+FullHarvestableRoute.propTypes = {
+  mutator: PropTypes.shape({
+    harvestable: PropTypes.shape({
+      DELETE: PropTypes.func.isRequired,
+    }).isRequired,
+  }).isRequired,
+};
 
 FullHarvestableRoute.defaultProps = {
   defaultWidth: '60%',
