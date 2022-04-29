@@ -25,6 +25,8 @@
 
     "button.edit": "Edit",
     "button.delete": "Delete",
+    "button.start-job": "Start job",
+    "button.stop-job": "Stop job",
     "button.confirm": "Confirm",
     "op.delete.confirm": "Are you sure yu want to delete this record?",
     "op.delete.completed": "Record <b>{name}</b> deleted",

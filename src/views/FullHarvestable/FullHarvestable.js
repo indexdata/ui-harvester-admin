@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { useStripes, CalloutContext } from '@folio/stripes/core';
+import { useStripes, CalloutContext, IfPermission } from '@folio/stripes/core';
 import { Loading, Pane, Accordion, Button, Icon, ConfirmationModal } from '@folio/stripes/components';
 import ErrorMessage from '../../components/ErrorMessage';
 import GeneralSection from './GeneralSection';
@@ -113,6 +113,28 @@ const FullHarvestable = ({ defaultWidth, resources, mutator, match, deleteRecord
             <FormattedMessage id="ui-harvester-admin.button.delete" />
           </Icon>
         </Button>
+        <IfPermission perm="harvester-admin.run-jobs">
+          <Button
+            buttonStyle="dropdownItem"
+            marginBottom0
+            id="clickable-start-job"
+          >
+            <Icon icon="play">
+              <FormattedMessage id="ui-harvester-admin.button.start-job" />
+            </Icon>
+          </Button>
+        </IfPermission>
+        <IfPermission perm="harvester-admin.stop-jobs">
+          <Button
+            buttonStyle="dropdownItem"
+            marginBottom0
+            id="clickable-stop-job"
+          >
+            <Icon icon="times-circle-solid">
+              <FormattedMessage id="ui-harvester-admin.button.stop-job" />
+            </Icon>
+          </Button>
+        </IfPermission>
       </>
     );
   };
