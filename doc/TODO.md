@@ -74,7 +74,7 @@ Statuses:
 * **done** -- Filter, comma-separated list of admin tags should be an editable list
 * **done** -- Custom e-mails addresses should be an editable list
 * **done** -- full-record Actions menu needs option to delete the harvestable
-* **TODO** -- Record-list Actions menu needs option to add a harvestable
+* **done** -- Record-list Actions menu needs options to add harvestables of each kind
 * **TODO** -- full-record Actions menu needs option to start the job
 * **TODO** -- full-record Actions menu needs option to stop the job
 * **TODO** -- all editable fields should have a help-text like that of the legacy UI. Texts can be found in `localindices/harvester-admin/src/main/resources/contexthelp.properties`

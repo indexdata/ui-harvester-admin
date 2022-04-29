@@ -1,30 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import get from 'lodash/get';
 import { stripesConnect } from '@folio/stripes/core';
 import HarvestableForm from '../forms/HarvestableForm';
+import { cooked2raw } from '../util/cookData';
 import packageInfo from '../../package';
-import { raw2cooked, cooked2raw } from '../util/cookData';
 
 
-const EditHarvestableRoute = ({ resources, mutator, match }) => {
+const CreateHarvestableRoute = ({ resources, mutator, match, location }) => {
   const handleClose = () => {
-    mutator.query.update({ _path: `${packageInfo.stripes.route}/harvestables/${match.params.recId}` });
+    mutator.query.update({ _path: `${packageInfo.stripes.route}/harvestables/${location.search}` });
   };
 
   const handleSubmit = (record) => {
-    mutator.harvestable.PUT(cooked2raw(record))
+    mutator.harvestables.POST(cooked2raw(record))
       .then(handleClose);
   };
 
-  const isLoading = (resources.harvestable.isPending ||
-                     resources.transformationPipelines.isPending ||
+  const isLoading = (resources.transformationPipelines.isPending ||
                      resources.storageEngines.isPending);
 
   return (
     <HarvestableForm
       isLoading={isLoading}
-      initialValues={raw2cooked(get(resources, 'harvestable.records[0]', {}))}
+      initialValues={{ type: match.params.type }}
       data={{
         transformationPipelines: resources.transformationPipelines.records,
         storageEngines: resources.storageEngines.records,
@@ -36,11 +34,13 @@ const EditHarvestableRoute = ({ resources, mutator, match }) => {
 };
 
 
-EditHarvestableRoute.manifest = Object.freeze({
+CreateHarvestableRoute.manifest = Object.freeze({
   query: {},
-  harvestable: {
+  harvestables: {
     type: 'okapi',
-    path: 'harvester-admin/harvestables/:{recId}',
+    path: 'harvester-admin/harvestables',
+    fetch: false,
+    clientGeneratePk: false,
   },
   transformationPipelines: {
     type: 'okapi',
@@ -55,10 +55,9 @@ EditHarvestableRoute.manifest = Object.freeze({
 });
 
 
-EditHarvestableRoute.propTypes = {
+CreateHarvestableRoute.propTypes = {
   resources: PropTypes.shape({
-    harvestable: PropTypes.shape({
-      isPending: PropTypes.bool.isRequired,
+    harvestables: PropTypes.shape({
       records: PropTypes.arrayOf(
         PropTypes.shape({}).isRequired,
       ).isRequired,
@@ -80,16 +79,19 @@ EditHarvestableRoute.propTypes = {
     query: PropTypes.shape({
       update: PropTypes.func.isRequired,
     }).isRequired,
-    harvestable: PropTypes.shape({
-      PUT: PropTypes.func.isRequired,
+    harvestables: PropTypes.shape({
+      POST: PropTypes.func.isRequired,
     }).isRequired,
   }).isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
-      recId: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
     }).isRequired,
+  }).isRequired,
+  location: PropTypes.shape({
+    search: PropTypes.string,
   }).isRequired,
 };
 
 
-export default stripesConnect(EditHarvestableRoute);
+export default stripesConnect(CreateHarvestableRoute);
