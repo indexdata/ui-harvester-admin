@@ -60,33 +60,40 @@ function manuallyFilterAndSort(query, raw) {
 }
 
 
+// For reasons I do not understand, the two sections of this menu
+// render side-by-side instead of one above the other. To mitigate
+// this, I am currently separating the two columns of menu items with
+// unbreakable spaces, but this is clearly unsatisfactory. See the
+// Slack thread beginning at
+// https://folio-project.slack.com/archives/C210UCHQ9/p1651229725562429
+//
 function renderActionsMenu(search, renderedColumnsMenu) {
-  // label={intl.formatMessage({ id: 'ui-harvester-admin.actions' })}>
   return (
-    <>
-      <MenuSection id="actions-menu-section" label={<FormattedMessage id="ui-harvester-admin.actions" />}>
-        <IfPermission perm="harvester-admin.harvestables.item.post">
-          <PaneMenu>
-            <FormattedMessage id="stripes-smart-components.addNew">
+    <PaneMenu>
+      <IfPermission perm="harvester-admin.harvestables.item.post">
+        <MenuSection id="actions-menu-section" label={<FormattedMessage id="ui-harvester-admin.actions.new" />}>
+          {['oaiPmh', 'xmlBulk', 'connector', 'status'].map(type => (
+            <FormattedMessage id={`ui-harvester-admin.actions.new.harvestable.${type}`}>
               {ariaLabel => (
                 <Button
-                  id="clickable-new-harvestable"
+                  id={`clickable-new-harvestable-${type}`}
                   aria-label={ariaLabel}
-                  to={`/ha/create${search}`}
+                  to={`/ha/create/${type}${search}`}
                   buttonStyle="dropdownItem"
                   marginBottom0
                 >
                   <Icon icon="plus-sign">
-                    <FormattedMessage id="stripes-smart-components.new" />
+                    <FormattedMessage id={`ui-harvester-admin.actions.new.harvestable.${type}`} />
                   </Icon>
                 </Button>
               )}
             </FormattedMessage>
-          </PaneMenu>
-        </IfPermission>
-      </MenuSection>
+          ))}
+        </MenuSection>
+      </IfPermission>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       {renderedColumnsMenu}
-    </>
+    </PaneMenu>
   );
 }
 

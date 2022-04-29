@@ -6,7 +6,11 @@
     "resultCount": "{count, number} {count, plural, one {record found} other {records found}}",
     "settings.nullSettings": "Null settings",
     "add": "Add",
-    "actions": "Actions",
+    "actions.new": "New record",
+    "actions.new.harvestable.oaiPmh": "OAI-PMH harvestable",
+    "actions.new.harvestable.xmlBulk": "XML bulk harvestable",
+    "actions.new.harvestable.connector": "Connector harvestable",
+    "actions.new.harvestable.status": "Status-report harvestable",
 
     "permission.harvester-admin.read-jobs": "",
     "permission.harvester-admin.maintain-jobs": "",
