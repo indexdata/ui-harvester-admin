@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { useStripes, CalloutContext, IfPermission } from '@folio/stripes/core';
+import { CalloutContext, IfPermission } from '@folio/stripes/core';
 import { Loading, Pane, Accordion, Button, Icon, ConfirmationModal } from '@folio/stripes/components';
 import ErrorMessage from '../../components/ErrorMessage';
 import GeneralSection from './GeneralSection';
@@ -54,7 +54,6 @@ FullHarvestableContent.propTypes = {
 
 
 const FullHarvestable = ({ defaultWidth, resources, mutator, match, deleteRecord }) => {
-  const stripes = useStripes();
   const [deleting, setDeleting] = useState(false);
   const callout = useContext(CalloutContext);
 
@@ -88,31 +87,34 @@ const FullHarvestable = ({ defaultWidth, resources, mutator, match, deleteRecord
   }
 
   const actionMenu = () => {
-    if (!stripes.hasPerm('harvester-admin.harvestables.item.put')) return undefined;
     return (
       <>
-        <Button
-          buttonStyle="dropdownItem"
-          data-test-actions-menu-edit
-          id="clickable-edit-harvestable"
-          onClick={() => {
-            mutator.query.update({ _path: `${packageInfo.stripes.route}/harvestables/${match.params.recId}/edit` });
-          }}
-        >
-          <Icon icon="edit">
-            <FormattedMessage id="ui-harvester-admin.button.edit" />
-          </Icon>
-        </Button>
-        <Button
-          buttonStyle="dropdownItem"
-          data-test-actions-menu-delete
-          id="clickable-delete-harvestable"
-          onClick={maybeDeleteRecord}
-        >
-          <Icon icon="trash">
-            <FormattedMessage id="ui-harvester-admin.button.delete" />
-          </Icon>
-        </Button>
+        <IfPermission perm="harvester-admin.harvestables.item.put">
+          <Button
+            buttonStyle="dropdownItem"
+            data-test-actions-menu-edit
+            id="clickable-edit-harvestable"
+            onClick={() => {
+              mutator.query.update({ _path: `${packageInfo.stripes.route}/harvestables/${match.params.recId}/edit` });
+            }}
+          >
+            <Icon icon="edit">
+              <FormattedMessage id="ui-harvester-admin.button.edit" />
+            </Icon>
+          </Button>
+        </IfPermission>
+        <IfPermission perm="harvester-admin.harvestables.item.delete">
+          <Button
+            buttonStyle="dropdownItem"
+            data-test-actions-menu-delete
+            id="clickable-delete-harvestable"
+            onClick={maybeDeleteRecord}
+          >
+            <Icon icon="trash">
+              <FormattedMessage id="ui-harvester-admin.button.delete" />
+            </Icon>
+          </Button>
+        </IfPermission>
         <IfPermission perm="harvester-admin.run-jobs">
           <Button
             buttonStyle="dropdownItem"
