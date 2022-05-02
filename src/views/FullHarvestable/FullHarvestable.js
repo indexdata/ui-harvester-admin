@@ -86,7 +86,24 @@ const FullHarvestable = ({ defaultWidth, resources, mutator, match, deleteRecord
     });
   }
 
-  const actionMenu = () => {
+  function controlJob(op) {
+    const method = (op === 'run') ? 'PUT' : 'POST'; // I have no idea why this assymetry
+    mutator[op][method]({ harvestableId: rec.id }).then(() => {
+      callout.sendCallout({
+        message: (
+          <FormattedMessage
+            id={`ui-harvester-admin.op.${op}.completed`}
+            values={{
+              name: rec.name,
+              b: text => <b>{text}</b>,
+            }}
+          />
+        ),
+      });
+    });
+  }
+
+  const actionMenu = ({ onToggle }) => {
     return (
       <>
         <IfPermission perm="harvester-admin.harvestables.item.put">
@@ -120,6 +137,7 @@ const FullHarvestable = ({ defaultWidth, resources, mutator, match, deleteRecord
             buttonStyle="dropdownItem"
             marginBottom0
             id="clickable-start-job"
+            onClick={() => { onToggle(); controlJob('run'); }}
           >
             <Icon icon="play">
               <FormattedMessage id="ui-harvester-admin.button.start-job" />
@@ -131,6 +149,8 @@ const FullHarvestable = ({ defaultWidth, resources, mutator, match, deleteRecord
             buttonStyle="dropdownItem"
             marginBottom0
             id="clickable-stop-job"
+            onClick={() => { onToggle(); controlJob('stop'); }}
+            disabled
           >
             <Icon icon="times-circle-solid">
               <FormattedMessage id="ui-harvester-admin.button.stop-job" />
@@ -172,6 +192,7 @@ FullHarvestable.propTypes = {
       hasLoaded: PropTypes.bool.isRequired,
       records: PropTypes.arrayOf(
         PropTypes.shape({
+          id: PropTypes.string.isRequired,
           name: PropTypes.string.isRequired,
         }).isRequired,
       ).isRequired,
@@ -180,6 +201,12 @@ FullHarvestable.propTypes = {
   mutator: PropTypes.shape({
     query: PropTypes.shape({
       update: PropTypes.func.isRequired,
+    }).isRequired,
+    run: PropTypes.shape({
+      POST: PropTypes.func.isRequired,
+    }).isRequired,
+    stop: PropTypes.shape({
+      POST: PropTypes.func.isRequired,
     }).isRequired,
   }).isRequired,
   match: PropTypes.shape({
