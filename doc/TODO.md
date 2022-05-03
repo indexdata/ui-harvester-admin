@@ -75,8 +75,8 @@ Statuses:
 * **done** -- Custom e-mails addresses should be an editable list
 * **done** -- full-record Actions menu needs option to delete the harvestable
 * **done** -- Record-list Actions menu needs options to add harvestables of each kind
-* **TODO** -- full-record Actions menu needs option to start the job
-* **TODO** -- full-record Actions menu needs option to stop the job
+* **done** -- full-record Actions menu needs option to start the job
+* **BLOCKED** -- full-record Actions menu needs option to stop the job. The code is in place for this, but there seems to be nothing on the back-end yet.
 * **TODO** -- all editable fields should have a help-text like that of the legacy UI. Texts can be found in `localindices/harvester-admin/src/main/resources/contexthelp.properties`
 
 

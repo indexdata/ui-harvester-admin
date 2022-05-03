@@ -30,6 +30,8 @@
     "button.confirm": "Confirm",
     "op.delete.confirm": "Are you sure yu want to delete this record?",
     "op.delete.completed": "Record <b>{name}</b> deleted",
+    "op.run.completed": "Job <b>{name}</b> started",
+    "op.stop.completed": "Job <b>{name}</b> stopped",
 
     "harvestables.column.name": "Name",
     "harvestables.column.currentStatus": "Status",
