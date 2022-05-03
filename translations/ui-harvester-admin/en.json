@@ -92,7 +92,7 @@
     "harvestables.field.scheduleString.day": "(day) of",
     "harvestables.field.scheduleString.month": "(month) if it's",
     "harvestables.field.scheduleString.weekday": "(day of the week)",
-    "harvestables.field.scheduleString.time": "Havesting time",
+    "harvestables.field.scheduleString.time": "Harvesting time",
     "harvestables.field.scheduleString.hour": "(hour in 24 format)",
     "harvestables.field.scheduleString.minute": "(min)",
     "harvestables.field.transformationPipeline": "Transformation pipeline",
