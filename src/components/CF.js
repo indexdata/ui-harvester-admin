@@ -1,22 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import { useIntl, FormattedMessage } from 'react-intl';
 import { Field } from 'react-final-form';
-import { Row, Col, TextField } from '@folio/stripes/components';
+import { Row, Col, TextField, InfoPopover } from '@folio/stripes/components';
 import ListField from './ListField';
 
 // Col-Field
-export const CF = ({ tag, i18nTag, xs, ...rest }) => (
-  <Col xs={xs}>
-    <Field
-      id={`edit-harvestable-${tag}`}
-      name={tag}
-      label={<FormattedMessage id={`ui-harvester-admin.harvestables.field.${i18nTag || tag}`} />}
-      component={TextField}
-      {...rest}
-    />
-  </Col>
-);
+export const CF = ({ tag, i18nTag, xs, ...rest }) => {
+  const intl = useIntl();
+  const translationTag = `ui-harvester-admin.harvestables.field.${i18nTag || tag}`;
+  const helpTranslationTag = `${translationTag}.help`;
+  const helpMessage = intl.messages[helpTranslationTag];
+  const endControl =
+    (!helpMessage || helpMessage === 'XXX') ?
+      undefined :
+      <InfoPopover content={<FormattedMessage id={helpTranslationTag} />} />;
+
+  return (
+    <Col xs={xs}>
+      <Field
+        id={`edit-harvestable-${tag}`}
+        name={tag}
+        label={<FormattedMessage id={translationTag} />}
+        component={TextField}
+        endControl={endControl}
+        {...rest}
+      />
+    </Col>
+  );
+};
 
 CF.propTypes = {
   tag: PropTypes.string.isRequired,
