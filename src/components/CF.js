@@ -5,9 +5,7 @@ import { Field } from 'react-final-form';
 import { Row, Col, TextField, InfoPopover } from '@folio/stripes/components';
 import ListField from './ListField';
 
-// Col-Field
-export const CF = ({ tag, i18nTag, xs, ...rest }) => {
-  const intl = useIntl();
+function translationTagAndHelpButton(intl, tag, i18nTag) {
   const translationTag = `ui-harvester-admin.harvestables.field.${i18nTag || tag}`;
   const helpTranslationTag = `${translationTag}.help`;
   const helpMessage = intl.messages[helpTranslationTag];
@@ -15,6 +13,14 @@ export const CF = ({ tag, i18nTag, xs, ...rest }) => {
     (!helpMessage || helpMessage === 'XXX') ?
       undefined :
       <InfoPopover content={<FormattedMessage id={helpTranslationTag} />} />;
+
+  return [translationTag, helpButton];
+}
+
+// Col-Field
+export const CF = ({ tag, i18nTag, xs, ...rest }) => {
+  const intl = useIntl();
+  const [translationTag, helpButton] = translationTagAndHelpButton(intl, tag, i18nTag);
 
   return (
     <Col xs={xs}>
