@@ -135,7 +135,6 @@
     "harvestables.field.metadataPrefix": "Metadata prefix",
     "harvestables.field.metadataPrefix.help": "A string that specifies the metadata format in OAI-PMH requests issued to a targeted repository. It is important to choose the correct format or no data will be harvested from the repository. Make sure a Transformation Pipeline that matches the metadata format used in the repository is selected, otherwise records will not be understood by the Harvester. Repositories generally use one of the following prefixes (or embedded data formats): Dublin Core (OAI-DC) or MARC XML (MARC12/USMARC). Other less common MetadataPrefix values include PMC (PubMed Central full-text records), PMC (PubMed Central metadata records), and PZ2 (pazpar2).",
     "harvestables.field.dateFormat": "Date format",
-    "harvestables.field.dateFormat.help": "XXX dateFormat",
     "harvestables.field.useLongDateFormat": "Use long date format",
     "harvestables.field.useLongDateFormat.help": "Check-box to indicate whether to use a long date format when requesting records from the OAI-PMH resource. This is not used very often, but is required by some resources.",
     "harvestables.field.fromDate": "Harvest from (yyyy-MM-dd)",
