@@ -11,7 +11,7 @@ export const CF = ({ tag, i18nTag, xs, ...rest }) => {
   const translationTag = `ui-harvester-admin.harvestables.field.${i18nTag || tag}`;
   const helpTranslationTag = `${translationTag}.help`;
   const helpMessage = intl.messages[helpTranslationTag];
-  const endControl =
+  const helpButton =
     (!helpMessage || helpMessage === 'XXX') ?
       undefined :
       <InfoPopover content={<FormattedMessage id={helpTranslationTag} />} />;
@@ -21,9 +21,8 @@ export const CF = ({ tag, i18nTag, xs, ...rest }) => {
       <Field
         id={`edit-harvestable-${tag}`}
         name={tag}
-        label={<FormattedMessage id={translationTag} />}
+        label={<><FormattedMessage id={translationTag} /> {helpButton}</>}
         component={TextField}
-        endControl={endControl}
         {...rest}
       />
     </Col>
