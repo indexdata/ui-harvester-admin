@@ -49,16 +49,21 @@ export const RCF = (props) => (
 );
 
 // Col-ListField
-export const CLF = ({ tag, i18nTag, xs, ...rest }) => (
-  <Col xs={xs}>
-    <ListField
-      id={`edit-harvestable-${tag}`}
-      name={tag}
-      label={<FormattedMessage id={`ui-harvester-admin.harvestables.field.${i18nTag || tag}`} />}
-      {...rest}
-    />
-  </Col>
-);
+export const CLF = ({ tag, i18nTag, xs, ...rest }) => {
+  const intl = useIntl();
+  const [translationTag, helpButton] = translationTagAndHelpButton(intl, tag, i18nTag);
+
+  return (
+    <Col xs={xs}>
+      <ListField
+        id={`edit-harvestable-${tag}`}
+        name={tag}
+        label={<><FormattedMessage id={translationTag} /> {helpButton}</>}
+        {...rest}
+      />
+    </Col>
+  );
+};
 
 CLF.propTypes = CF.propTypes;
 
