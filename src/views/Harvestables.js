@@ -211,7 +211,6 @@ Harvestables.propTypes = {
   error: PropTypes.string,
   hasLoaded: PropTypes.bool.isRequired,
   onNeedMoreData: PropTypes.func.isRequired,
-  createNew: PropTypes.func.isRequired,
   children: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
 };
 
