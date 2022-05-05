@@ -1,9 +1,13 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Accordion, Row, Checkbox, Datepicker } from '@folio/stripes/components';
 import { RCF, CF } from '../../components/CF';
 
-const HarvestableFormOaiPmh = () => (
+const HarvestableFormOaiPmh = () => {
+ const intl = useIntl();
+ console.log('harvestables.field.initialFromDate.help =', intl.formatMessage({ id: 'ui-harvester-admin.harvestables.field.initialFromDate.help' }));
+
+ return (
   <Accordion
     id="harvestable-form-oai"
     label={<FormattedMessage id="ui-harvester-admin.harvestables.field.type.oaiPmh" />}
@@ -24,6 +28,7 @@ const HarvestableFormOaiPmh = () => (
       <CF tag="retryWait" xs={6} />
     </Row>
   </Accordion>
-);
+ );
+};
 
 export default HarvestableFormOaiPmh;
