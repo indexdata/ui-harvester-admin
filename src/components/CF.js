@@ -5,12 +5,12 @@ import { Field } from 'react-final-form';
 import { Row, Col, TextField, InfoPopover } from '@folio/stripes/components';
 import ListField from './ListField';
 
-function translationTagAndHelpButton(intl, tag, i18nTag) {
+function translationTagAndHelpButton(intl, tag, i18nTag, helpTag) {
   const translationTag = `ui-harvester-admin.harvestables.field.${i18nTag || tag}`;
-  const helpTranslationTag = `${translationTag}.help`;
+  const helpTranslationTag = `ui-harvester-admin.harvestables.field.${helpTag || i18nTag || tag}.help`;
   const helpMessage = intl.messages[helpTranslationTag];
   const helpButton =
-    (!helpMessage || helpMessage === 'XXX') ?
+    !helpMessage ?
       undefined :
       <InfoPopover content={<FormattedMessage id={helpTranslationTag} />} />;
 
@@ -18,9 +18,9 @@ function translationTagAndHelpButton(intl, tag, i18nTag) {
 }
 
 // Col-Field
-export const CF = ({ tag, i18nTag, xs, ...rest }) => {
+export const CF = ({ tag, i18nTag, helpTag, xs, ...rest }) => {
   const intl = useIntl();
-  const [translationTag, helpButton] = translationTagAndHelpButton(intl, tag, i18nTag);
+  const [translationTag, helpButton] = translationTagAndHelpButton(intl, tag, i18nTag, helpTag);
 
   return (
     <Col xs={xs}>
@@ -38,6 +38,7 @@ export const CF = ({ tag, i18nTag, xs, ...rest }) => {
 CF.propTypes = {
   tag: PropTypes.string.isRequired,
   i18nTag: PropTypes.string, // if defined, use this translation tag instead of `tag`
+  helpTag: PropTypes.string, // if defined, use this translation tag to find help text
   xs: PropTypes.number.isRequired,
 };
 
@@ -49,9 +50,9 @@ export const RCF = (props) => (
 );
 
 // Col-ListField
-export const CLF = ({ tag, i18nTag, xs, ...rest }) => {
+export const CLF = ({ tag, i18nTag, helpTag, xs, ...rest }) => {
   const intl = useIntl();
-  const [translationTag, helpButton] = translationTagAndHelpButton(intl, tag, i18nTag);
+  const [translationTag, helpButton] = translationTagAndHelpButton(intl, tag, i18nTag, helpTag);
 
   return (
     <Col xs={xs}>
