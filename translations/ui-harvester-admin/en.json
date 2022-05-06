@@ -192,6 +192,7 @@
     "harvestables.field.connectorRepoUrlSetting.label.help": "Select the connector repository where the Connectors are hosted  and maintained. Usually, the Connector Repository is provided by Index Data and may  require a login account. The account credentials are provided directly in the  Connector Repository URL setting accessed from the Settings tab and should have the  form: <pre>http(s)://&lt;repouser&gt;:&lt;repopass&gt;@url.to.the.repository</pre>.",
     "harvestables.field.connector": "Connector (type for suggestion)",
     "harvestables.field.connector.help": "Enter here the name of the harvesting  connector specific to the harvested resource. This field provides suggestions by  looking up the Repository so only a couple of initial characters or a part of the  name is required.",
+    "harvestables.field.overwrite-connector.help": "Check to delete all previously  harvested data before beginning the next scheduled (or manually triggered) run.",  
     "harvestables.field.connuser": "User Name",
     "harvestables.field.connuser.help": "User name required for access to a harvested resource that  requires authentication.",
     "harvestables.field.password": "Password",

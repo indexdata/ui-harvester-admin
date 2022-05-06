@@ -12,7 +12,7 @@ const HarvestableFormConnector = () => (
     <RCF tag="engineParameters" />
     <RCF tag="connectorRepoUrlSetting.label" />
     <RCF tag="connector" />
-    <RCF tag="overwrite" component={Checkbox} type="checkbox" />
+    <RCF tag="overwrite" helpTag="overwrite-connector" component={Checkbox} type="checkbox" />
     <Row>
       <CF tag="username" xs={6} i18nTag="connuser" />
       <CF tag="password" xs={6} />
