@@ -87,8 +87,7 @@ const FullHarvestable = ({ defaultWidth, resources, mutator, match, deleteRecord
   }
 
   function controlJob(op) {
-    const method = (op === 'run') ? 'PUT' : 'POST'; // I have no idea why this assymetry
-    mutator[op][method]({ harvestableId: rec.id }).then(() => {
+    mutator[op].PUT({}).then(() => {
       callout.sendCallout({
         message: (
           <FormattedMessage
@@ -150,7 +149,6 @@ const FullHarvestable = ({ defaultWidth, resources, mutator, match, deleteRecord
             marginBottom0
             id="clickable-stop-job"
             onClick={() => { onToggle(); controlJob('stop'); }}
-            disabled
           >
             <Icon icon="times-circle-solid">
               <FormattedMessage id="ui-harvester-admin.button.stop-job" />
@@ -203,10 +201,10 @@ FullHarvestable.propTypes = {
       update: PropTypes.func.isRequired,
     }).isRequired,
     run: PropTypes.shape({
-      POST: PropTypes.func.isRequired,
+      PUT: PropTypes.func.isRequired,
     }).isRequired,
     stop: PropTypes.shape({
-      POST: PropTypes.func.isRequired,
+      PUT: PropTypes.func.isRequired,
     }).isRequired,
   }).isRequired,
   match: PropTypes.shape({

@@ -19,12 +19,12 @@ FullHarvestableRoute.manifest = Object.freeze({
   },
   run: {
     type: 'okapi',
-    path: 'harvester-admin/jobs/run',
+    path: 'harvester-admin/jobs/run/:{recId}',
     fetch: false,
   },
   stop: {
     type: 'okapi',
-    path: 'harvester-admin/jobs/stop',
+    path: 'harvester-admin/jobs/stop/:{recId}',
     fetch: false,
   },
 });
@@ -46,10 +46,10 @@ FullHarvestableRoute.propTypes = {
       update: PropTypes.func.isRequired,
     }).isRequired,
     run: PropTypes.shape({
-      POST: PropTypes.func.isRequired,
+      PUT: PropTypes.func.isRequired,
     }).isRequired,
     stop: PropTypes.shape({
-      POST: PropTypes.func.isRequired,
+      PUT: PropTypes.func.isRequired,
     }).isRequired,
   }).isRequired,
   match: PropTypes.shape({
