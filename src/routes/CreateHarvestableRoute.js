@@ -12,7 +12,7 @@ const CreateHarvestableRoute = ({ resources, mutator, match, location }) => {
   };
 
   const handleSubmit = (record) => {
-    mutator.harvestables.POST(cooked2raw(record))
+    mutator.harvestables.POST(cooked2raw({ ...record, harvestImmediately: "false" }))
       .then(handleClose);
   };
 
@@ -22,7 +22,10 @@ const CreateHarvestableRoute = ({ resources, mutator, match, location }) => {
   return (
     <HarvestableForm
       isLoading={isLoading}
-      initialValues={{ type: match.params.type }}
+      initialValues={{
+        type: match.params.type,
+        enabled: false,
+      }}
       data={{
         transformationPipelines: resources.transformationPipelines.records,
         storageEngines: resources.storageEngines.records,
