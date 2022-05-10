@@ -17,7 +17,7 @@ const HarvestableFormGeneral = ({ data }) => {
   }));
 
   const transformationPipelines = data.transformationPipelines.map(x => ({ value: x.id, label: x.name }));
-  const storageEngines = data.storageEngines.map(x => ({ value: x.id, label: x.name }));
+  const storageEngines = data.storageEngines.map(x => ({ value: x.id, label: `${x.name} [${x.description}]` }));
 
   return (
     <Accordion
