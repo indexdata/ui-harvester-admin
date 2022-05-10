@@ -35,7 +35,10 @@ export function raw2cooked(raw) {
     return { key: pair[0], value: pair[1] };
   });
 
-  cooked.url = raw.url?.split(/\s+/) || [];
+  // Infuriatingly, `url` is a list in XML Bulk harvestables, but not in OAI-PMH ones
+  if (cooked.type === 'xmlBulk') {
+    cooked.url = raw.url?.split(/\s+/) || [];
+  }
 
   booleanFields.forEach(tag => {
     if (raw[tag] !== undefined) {
@@ -58,7 +61,9 @@ export function cooked2raw(cooked) {
 
   raw.constantFields = (cooked.constantFields || []).map(x => `${x.key}=${x.value}`).join(',');
 
-  raw.url = (cooked.url || []).join(' ');
+  if (cooked.type === 'xmlBulk') {
+    raw.url = (cooked.url || []).join(' ');
+  }
 
   booleanFields.forEach(tag => {
     if (cooked[tag] !== undefined) {
