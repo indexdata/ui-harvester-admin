@@ -12,7 +12,7 @@ const CreateHarvestableRoute = ({ resources, mutator, match, location }) => {
   };
 
   const handleSubmit = (record) => {
-    mutator.harvestables.POST(cooked2raw({ ...record, harvestImmediately: "false" }))
+    mutator.harvestables.POST(cooked2raw({ ...record, harvestImmediately: 'false' }))
       .then(handleClose);
   };
 
