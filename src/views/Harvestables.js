@@ -157,10 +157,12 @@ function Harvestables({
                       columnMapping={columnMapping}
                       columnWidths={{
                         name: '400px',
-                        id: '80px',
+                        currentStatus: '80px',
+                        lastHarvestFinished: '180px',
                         enabled: '80px',
                         jobClass: '150px',
-                        currentStatus: '80px',
+                        id: '80px',
+                        message: '600px',
                       }}
                       formatter={{
                         enabled: r => <FormattedMessage id={`ui-harvester-admin.harvestables.column.enabled.${r.enabled}`} />,
