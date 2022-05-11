@@ -1,5 +1,13 @@
 # TODO - Very lightweight local issues database
 
+> **WARNING.**
+> This file is obsolete: it has now been superseded by
+> [the UIHAADM JIRA project](https://issues.folio.org/projects/UIHAADM).
+
+---
+
+<br />
+
 I compared the current ui-harvester-admin UI with that of the legacy UI to derive the TODOs in the first few sections. [GBV made comments](https://drive.google.com/file/d/1_PYsNa20k0vmAD09GD2iAuO7D3aaBLHV/view) on the screenshots that I supplied on 15 March, and recorded [a video of the accompanying presentation](https://drive.google.com/file/d/1V7s0ApLVZe-AxQoEy5WTjDaf3YElZlWW/view). Based on these, the TODOs in the last section emerged.
 
 Statuses:
@@ -27,8 +35,7 @@ Statuses:
 
 ## OAI-PMH section
 
-* **TODO** -- OAI Set Name (type for suggestions): should do _something_ clever [5]
-* **TODO** -- Metadata Prefix: should provide a dropdown [5]
+* **TODO** -- OAI Set Name and Metadata Prefix should provide a dropdowns: see [UIHAADM-2](https://issues.folio.org/browse/UIHAADM-2).
 * **done** -- Use long date format: should somehow be a checkbox
 
 
@@ -40,8 +47,7 @@ Statuses:
 
 ## Connector section
 
-* **BLOCKED** -- CF Engine: should be a dropdown [4]
-* **BLOCKED** -- CF Repository: should be a dropdown [4]
+* **BLOCKED** -- CF Engine and CF Repository: should be dropdowns: see [UIHAADM-4](https://issues.folio.org/browse/UIHAADM-4).
 * **done** -- Init Data: should be a text-area
 
 ## Status section
@@ -53,8 +59,8 @@ Statuses:
 
 * **@charlotte** -- We need to get GBV a system that they can play with soonest.
 * **@nielserik** -- I need guidance on how to format the long status text. Is the `message` field is formatted reliably enough that I can parse out the numbers and present them differently? Or is the best we can really do just to dump the message out blindly?
-* **BLOCKED** -- provide log links in the UK: we need new mod-harvester-admin WSAPI to provide access to the logs.
-* **TODO** -- the set of fields to show/hide is _not_ persisted across sessions. That seems like a bug to me. I am pushing towards fixing this at the stripes-components level, starting with [STCOR-601, "Add facility for persistent storage of user preferences"](https://issues.folio.org/browse/STCOR-601).
+* **BLOCKED** -- provide log links in the UK: we need new mod-harvester-admin WSAPI to provide access to the logs: see [UIHAADM-5](https://issues.folio.org/browse/UIHAADM-5).
+* **TODO** -- the set of fields to show/hide is not persisted across sessions: see [UIHAADM-3](https://issues.folio.org/browse/UIHAADM-3).
 * **@gbv** -- The "General" section contains the fields that are relevant for all the different kinds of harvestable. If in fact some of them are _not_ relevant for XML harvests, then perhaps they are misplaced. Which fields fall into that category?
 * **@gbv** -- I can break the "General" section down into smaller sections, but I need your guidance on what the new groupings should be.
 * **done** -- cluster some fields together as multiple columns of a single row:
@@ -92,9 +98,9 @@ Statuses:
 * `CREATE_OVERWRITE` (Do save. Overwrite existing files)
 * `ADD_ALL` (Do save. Add numbered versions for existing files)
 
-[4] These cannot currently be implemented, as the legacy UI asks the legacy WSAPI for the relevant values but those WSAPI calls are not yet wired out through `mod-harvester-admin`. See [MODHA-5](https://issues.folio.org/browse/MODHA-5).
+[4] This note intentionally left blank.
 
-[5] "OAI Set Name" , "Metadata Prefix":   When an OAI URL is entered, the legacy admin UI then goes to that service and asks fo available set names and available metadata prefixes to populate the drop-downs. The FOLIO UI module should do the same. We have [a tool that shows the look-ups](https://oai-pmh-viewer.reshare-dev.indexdata.com/) (login as `oaitester`/`oai1325`). It can be used with OAI-PMH services such as https://na01.alma.exlibrisgroup.com/view/oai/01SSHELCO_MILLRSVL/request. `ListSets.set[n].setSpec` in the OAI-PMH service's XML response is what we copy into our "OAI Set Name" field.
+[5] This note intentionally left blank.
 
 [6] in general, the schedule fields should be presented (for both view and edit) in a human-readable form, not as its underlying crontab string. But since BGV do not really use scheduling, relying on manual starting of jobs, this is not urgent and can pushed off to a later phase of work. For now, it suffices to provide a good help text for the cron format. When we do this, what is the best way to edit the crontab entry stored in the record? Ideally we would like to find a Node package that provides a crontab-entry editor rather than rolling our own. The only direct contender is
 [`react-js-cron`](https://github.com/xrutayisire/react-js-cron).
