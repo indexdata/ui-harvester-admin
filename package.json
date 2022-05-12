@@ -1,5 +1,5 @@
 {
-  "name": "@folio/harvester-admin",
+  "name": "@indexdata/harvester-admin",
   "version": "0.0.1",
   "description": "Admin console for the Index Data Harvester",
   "repository": "https://github.com/indexdata/ui-harvester-admin",
