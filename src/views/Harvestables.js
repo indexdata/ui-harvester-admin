@@ -139,6 +139,7 @@ function Harvestables({
                 id="harvestable-visible-columns"
                 columnMapping={columnMapping}
                 excludeKeys={['name']}
+                persist
               >
                 {({ renderColumnsMenu, visibleColumns }) => (
                   <Pane
