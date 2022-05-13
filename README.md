@@ -17,6 +17,7 @@ This is a Stripes UI modules providing an administrative interface to the Index 
 * [Running `ui-harvester-admin` against a local backend](doc/running.md)
 * [Re-establishing permissions after changing the module descriptor](doc/permissions.md)
 * [Very lightweight local issues database](doc/TODO.md)
+* [Exercising the OAI-PMH tools](doc/exercising-oai-pmh.md)
 
 And outside of this repository:
 
