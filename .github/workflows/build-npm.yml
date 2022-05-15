@@ -56,3 +56,9 @@ jobs:
         run: yarn build-mod-descriptor
       - name: Print FOLIO module descriptor
         run: cat module-descriptor.json
+      - name: Publish yarn.lock
+        uses: actions/upload-artifact@v2
+        with:
+          name: yarn.lock
+          path: yarn.lock
+          retention-days: 5
