@@ -4,25 +4,26 @@ import { FormattedMessage } from 'react-intl';
 import { Accordion, Row } from '@folio/stripes/components';
 import { RCKV, CKV } from '../../components/CKV';
 
-const TrailerSection = ({ rec }) => (
+const HeaderSection = ({ rec }) => (
   <Accordion
     id="harvestable-section-general"
     label={<FormattedMessage id="ui-harvester-admin.harvestables.heading.status" />}
   >
     <Row>
-      <CKV rec={rec} tag="currentStatus" xs={6} />
-      <CKV rec={rec} tag="initiallyHarvested" xs={6} />
+      <CKV rec={rec} tag="currentStatus" xs={4} />
+      <CKV rec={rec} tag="lastUpdated" xs={4} />
     </Row>
     <Row>
-      <CKV rec={rec} tag="lastHarvestStarted" xs={6} />
-      <CKV rec={rec} tag="lastHarvestFinished" xs={6} />
+      <CKV rec={rec} tag="initiallyHarvested" xs={4} />
+      <CKV rec={rec} tag="lastHarvestStarted" xs={4} />
+      <CKV rec={rec} tag="lastHarvestFinished" xs={4} />
     </Row>
-    <RCKV rec={rec} tag="lastUpdated" />
+    <RCKV rec={rec} tag="message" />
   </Accordion>
 );
 
-TrailerSection.propTypes = {
+HeaderSection.propTypes = {
   rec: PropTypes.object.isRequired,
 };
 
-export default TrailerSection;
+export default HeaderSection;

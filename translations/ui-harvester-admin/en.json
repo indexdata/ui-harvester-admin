@@ -224,6 +224,7 @@
     "harvestables.field.lastHarvestStarted": "Last harvest started",
     "harvestables.field.lastHarvestFinished": "Last harvest completed",
     "harvestables.field.lastUpdated": "Last updated",
+    "harvestables.field.message": "Message from last harvest:",
 
     "harvestables.field.failedRecordsLogging.NO_STORE": "Don't save failed records",
     "harvestables.field.failedRecordsLogging.CLEAN_DIRECTORY": "Do save. Clean up directory first",

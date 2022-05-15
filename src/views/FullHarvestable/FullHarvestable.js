@@ -9,7 +9,7 @@ import OaiPmhSection from './OaiPmhSection';
 import XmlBulkSection from './XmlBulkSection';
 import ConnectorSection from './ConnectorSection';
 import StatusSection from './StatusSection';
-import TrailerSection from './TrailerSection';
+import HeaderSection from './HeaderSection';
 import packageInfo from '../../../package';
 
 
@@ -28,9 +28,9 @@ const FullHarvestableContent = ({ rec }) => {
 
   return (
     <>
+      {type !== 'status' && <HeaderSection rec={rec} />}
       {type !== 'status' && <GeneralSection rec={rec} />}
       <SpecificSection rec={rec} />
-      {type !== 'status' && <TrailerSection rec={rec} />}
 
       <Accordion
         id="harvestable-section-devinfo"
