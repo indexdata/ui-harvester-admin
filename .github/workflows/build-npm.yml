@@ -38,6 +38,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODEJS_VERSION }}
+          cache: 'npm'
           check-latest: true
           always-auth: true
       - name: Set yarn config
