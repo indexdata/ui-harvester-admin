@@ -1,8 +1,6 @@
 name: build-npm
 
 on:
-  push:
-    branches: [DEVOPS-946-workflows-npm]
   workflow_dispatch:
 
 env:
