@@ -9,6 +9,7 @@
     "start": "stripes serve --port 3003 --okapi http://ironman:9130",
     "lint": "eslint -f unix .",
     "qlint": "eslint -f unix  --rule '{\"no-console\":\"off\"}' ."
+    "formatjs-compile": "formatjs compile-folder --ast --format simple ./translations/ui-harvester-admin ./translations/ui-harvester-admin/compiled"
   },
   "stripes": {
     "actsAs": [
