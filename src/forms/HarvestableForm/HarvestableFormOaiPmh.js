@@ -6,26 +6,55 @@ import { Accordion, Row, Checkbox, Datepicker, Select } from '@folio/stripes/com
 import { RCF, CF } from '../../components/CF';
 
 const HarvestableFormOaiPmh = ({ values }) => {
+  const [oaiPmh, setOaiPmh] = useState();
   const [sets, setSets] = useState();
+  const [prefixes, setPrefixes] = useState();
+
   useEffect(() => {
-    async function fetchOaiPmhData() {
-      const oaiPhm = new OaiPmh(values.url);
-      let setsResponse;
+    const newOaiPhm = new OaiPmh(values.url);
+    setOaiPmh(newOaiPhm);
+  }, [values.url]);
+
+  useEffect(() => {
+    if (!oaiPmh) return;
+
+    async function fetchSets() {
+      let data;
       try {
-        setsResponse = await oaiPhm.listSets();
+        data = await oaiPmh.listSets();
       } catch (err) {
         // It would be nice to do something cleverer here
         // eslint-disable-next-line no-console
         console.error('OAI-PMH oops!', err);
         return;
       }
-      setSets(setsResponse.ListSets[0].set.map(x => ({
+      setSets(data.ListSets[0].set.map(x => ({
         value: x.setSpec[0],
         label: `${x.setName} (${x.setSpec[0]})`,
       })));
     }
-    fetchOaiPmhData();
-  }, [values.url]);
+
+    async function fetchPrefixes() {
+      let data;
+      try {
+        data = await oaiPmh.listMetadataFormats();
+      } catch (err) {
+        // It would be nice to do something cleverer here
+        // eslint-disable-next-line no-console
+        console.error('OAI-PMH oops!', err);
+        return;
+      }
+      setPrefixes(data.ListMetadataFormats[0].metadataFormat.map(x => ({
+        value: x.metadataPrefix,
+        label: x.metadataPrefix,
+      })));
+
+      console.log(data);
+    }
+
+    fetchSets();
+    fetchPrefixes();
+  }, [oaiPmh]);
 
   return (
     <Accordion
@@ -34,7 +63,7 @@ const HarvestableFormOaiPmh = ({ values }) => {
     >
       <RCF tag="url" />
       <RCF tag="oaiSetName" component={Select} dataOptions={sets} />
-      <RCF tag="metadataPrefix" />
+      <RCF tag="metadataPrefix" component={Select} dataOptions={prefixes} />
       <RCF tag="dateFormat" i18nTag="useLongDateFormat" component={Checkbox} type="checkbox" />
       <Row>
         <CF tag="fromDate" xs={6} component={Datepicker} />
