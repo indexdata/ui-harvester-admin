@@ -28,16 +28,7 @@
       }
     ],
     "okapiInterfaces": {
-      "course-reserves-storage": "0.2",
-      "term-storage": "0.1",
-      "department-storage": "0.1",
-      "course-type-storage": "0.1",
-      "processing-status-storage": "0.1",
-      "copyright-status-storage": "0.1",
-      "role-storage": "0.1",
-      "locations": "3.0",
-      "item-storage": "7.1 8.0 9.0",
-      "loan-types": "2.2"
+      "harvester-admin": "0.1"
     },
     "permissionSets": [
       {
