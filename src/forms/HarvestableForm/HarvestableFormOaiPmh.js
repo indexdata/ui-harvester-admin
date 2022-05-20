@@ -48,8 +48,6 @@ const HarvestableFormOaiPmh = ({ values }) => {
         value: x.metadataPrefix,
         label: x.metadataPrefix,
       })));
-
-      console.log(data);
     }
 
     fetchSets();
