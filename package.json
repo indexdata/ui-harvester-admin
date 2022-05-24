@@ -28,16 +28,7 @@
       }
     ],
     "okapiInterfaces": {
-      "course-reserves-storage": "0.2",
-      "term-storage": "0.1",
-      "department-storage": "0.1",
-      "course-type-storage": "0.1",
-      "processing-status-storage": "0.1",
-      "copyright-status-storage": "0.1",
-      "role-storage": "0.1",
-      "locations": "3.0",
-      "item-storage": "7.1 8.0 9.0",
-      "loan-types": "2.2"
+      "harvester-admin": "0.1"
     },
     "permissionSets": [
       {
@@ -103,6 +94,7 @@
     ]
   },
   "dependencies": {
+    "@indexdata/oai-pmh": "^0.0.2",
     "final-form-arrays": "^3.0.2",
     "final-form-set-field-data": "^1.0.2",
     "lodash": "^4.17.0",
@@ -124,14 +116,14 @@
     "@folio/eslint-config-stripes": "~6.1.0",
     "@folio/stripes": "^7.0.0",
     "@folio/stripes-cli": "^2.4.0",
+    "@formatjs/cli": "^4.2.20",
     "eslint": "^7.32.0",
     "eslint-import-resolver-alias": "^1.1.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-intl": "^5.7.0",
     "react-router": "^5.2.0",
-    "react-router-dom": "^5.2.0",
-    "@formatjs/cli": "^4.2.20"
+    "react-router-dom": "^5.2.0"
   },
   "resolutions": {
     "postcss-custom-properties": "12.0.0"
