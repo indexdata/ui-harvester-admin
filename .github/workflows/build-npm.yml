@@ -4,8 +4,7 @@ on:
   workflow_dispatch:
 
 env:
-  # Note: upstream-upstream workflow bug with 16: setup-node/issues/490 opened 2022-05-13
-  NODEJS_VERSION: '14'
+  NODEJS_VERSION: '16'
   FOLIO_NPM_REGISTRY: 'https://repository.folio.org/repository/npm-folioci/'
   COMPILE_TRANSLATION_FILES: 'true'
 
