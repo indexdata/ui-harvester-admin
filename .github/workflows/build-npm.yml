@@ -42,7 +42,7 @@ jobs:
       - name: Run yarn install
         run: yarn install --ignore-scripts
       - name: Run yarn list of modules
-        run: yarn list --pattern "@folio|@indexdata"
+        run: yarn list --pattern "@folio|@reshare|@indexdata"
       - name: Run yarn lint
         run: yarn lint
         continue-on-error: true
