@@ -1,19 +1,28 @@
-name: build-npm
+name: release-npm
+
+# Status: In development.
+# Is only triggered via push to branch (later will only be triggered via git tag)
 
 on:
-  workflow_dispatch:
+  push:
+    branches: [ DEVOPS-946-workflows-npm ]
 
 env:
+  TAG_GIT: 'v0.0.1'  # FIXME: Temporary for testing. Later will use actual git tag.
   NODEJS_VERSION: '16'
   FOLIO_NPM_REGISTRY: 'https://repository.folio.org/repository/npm-folioci/'
   COMPILE_TRANSLATION_FILES: 'true'
 
 jobs:
-  build-npm:
+  release-npm:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+      - name: Set TAG_VERSION
+        # FIXME: When in production, use actual git tag.
+        # run: echo "TAG_VERSION=$(echo ${GITHUB_REF#refs/tags/v})" >> $GITHUB_ENV
+        run: echo "TAG_VERSION=$(echo ${TAG_GIT#v})" >> $GITHUB_ENV
       - name: Get version from package.json
         id: package_version
         uses: notiz-dev/github-action-json-property@release
@@ -27,8 +36,14 @@ jobs:
       - name: Report some variables
         run: |
           echo "PACKAGE_VERSION=${{ env.PACKAGE_VERSION }}"
+          echo "TAG_VERSION=${{ env.TAG_VERSION }}"
           echo "github.REF=${{ github.REF }}"
           echo "DEFAULT_BRANCH=${{ env.DEFAULT_BRANCH }}"
+      - name: Ensure that git tag matches the version from package.json
+        if: ${{ env.TAG_VERSION != env.PACKAGE_VERSION }}
+        run: |
+          echo "Git tag version '${{ env.TAG_VERSION }}' does not match package.json version '${{ env.PACKAGE_VERSION }}'."
+          exit 1
       - name: Setup kernel for react native, increase watchers
         run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
       - name: Use Node.js
