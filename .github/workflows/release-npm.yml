@@ -8,9 +8,12 @@ on:
     branches: [ DEVOPS-946-workflows-npm ]
 
 env:
-  TAG_GIT: 'v0.0.2'  # FIXME: Temporary for testing. Later will use actual git tag.
+  TAG_GIT: 'v0.0.1'  # FIXME: Temporary for testing. Later will use actual git tag.
+  DO_PUBLISH_MD: 'false'  # FIXME: For testing.
+  DO_PUBLISH_NPM: 'false'  # FIXME: For testing.
   NODEJS_VERSION: '16'
   FOLIO_NPM_REGISTRY: 'https://repository.folio.org/repository/npm-folioci/'
+  FOLIO_MD_REGISTRY: 'https://registry.folio-dev.indexdata.com'
   COMPILE_TRANSLATION_FILES: 'true'
 
 jobs:
@@ -68,6 +71,49 @@ jobs:
         run: yarn build-mod-descriptor
       - name: Print FOLIO module descriptor
         run: cat module-descriptor.json
+      - name: Read module descriptor
+        id: moduleDescriptor
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ./module-descriptor.json
+      - name: Login ModuleDescriptor registry
+        id: login-md-registry
+        uses: indiesdev/curl@v1.1
+        with:
+          url: "${{ env.FOLIO_MD_REGISTRY }}/authn/login"
+          method: "POST"
+          accept: 201
+          headers: |
+            {
+              "content-type": "application/json",
+              "x-okapi-tenant": "${{ secrets.FOLIO_REGISTRY_TENANT }}"
+            }
+          body: |
+            {
+              "username": "${{ secrets.FOLIO_REGISTRY_USERNAME }}",
+              "password": "${{ secrets.FOLIO_REGISTRY_PASSWORD }}"
+            }
+      - name: Get the MD registry login token
+        run: |
+          echo "TOKEN_MD_REGISTRY=${{ fromJSON(steps.login-md-registry.outputs.response).headers['x-okapi-token'] }}" >> $GITHUB_ENV
+      # FIXME: Login to public NPM registry for namespace indexdata
+      # FIXME: Login to docker registry to get okapi docker image
+      # FIXME: Start local Okapi, pull MDs from both FOLIO and Indexdata MD registries, do dependency check
+      - name: Publish ModuleDescriptor to MD registry
+        if: ${{ env.DO_PUBLISH_MD == 'true' }}
+        id: result-md-registry
+        uses: indiesdev/curl@v1.1
+        with:
+          url: "${{ env.FOLIO_MD_REGISTRY }}/_/proxy/modules"
+          method: "POST"
+          accept: 201
+          headers: |
+            {
+              "content-type": "application/json",
+              "x-okapi-tenant": "${{ secrets.FOLIO_REGISTRY_TENANT }}",
+              "x-okapi-token": "${{ env.TOKEN_MD_REGISTRY }}"
+            }
+          body: ${{ steps.moduleDescriptor.outputs.content }}
       - name: Publish yarn.lock
         uses: actions/upload-artifact@v3
         with:
