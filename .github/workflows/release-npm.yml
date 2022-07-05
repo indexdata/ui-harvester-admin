@@ -8,7 +8,7 @@ on:
     branches: [ DEVOPS-946-workflows-npm ]
 
 env:
-  TAG_GIT: 'v0.0.1'  # FIXME: Temporary for testing. Later will use actual git tag.
+  TAG_GIT: 'v0.0.2'  # FIXME: Temporary for testing. Later will use actual git tag.
   NODEJS_VERSION: '16'
   FOLIO_NPM_REGISTRY: 'https://repository.folio.org/repository/npm-folioci/'
   COMPILE_TRANSLATION_FILES: 'true'
