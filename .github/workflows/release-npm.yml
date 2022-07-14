@@ -14,6 +14,7 @@ env:
   NODEJS_VERSION: '16'
   FOLIO_NPM_REGISTRY: 'https://repository.folio.org/repository/npm-folioci/'
   FOLIO_MD_REGISTRY: 'https://registry.folio-dev.indexdata.com'
+  OKAPI_PULL: '{ "urls" : [ "https://folio-registry.dev.folio.org", "https://registry.folio-dev.indexdata.com" ] }'
   COMPILE_TRANSLATION_FILES: 'true'
 
 jobs:
@@ -97,8 +98,6 @@ jobs:
         run: |
           echo "TOKEN_MD_REGISTRY=${{ fromJSON(steps.login-md-registry.outputs.response).headers['x-okapi-token'] }}" >> $GITHUB_ENV
       # FIXME: Login to public NPM registry for namespace indexdata
-#      - name: Docker registry login
-#        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login https://docker.io/v2/ -u "${{ secrets.DOCKER_USER }}" --password-stdin
       - name: Docker registry login
         uses: docker/login-action@v2
         with:
@@ -112,7 +111,31 @@ jobs:
           sleep 10
       - name: Docker registry logout
         run: docker logout https://docker.io/v2/
-      # FIXME: Okapi pull MDs from both FOLIO and Indexdata MD registries, do dependency check
+      - name: Pull all Module descriptors to local Okapi instance
+        uses: indiesdev/curl@v1.1
+        with:
+          url: "http://${{ env.OKAPI_IP }}:9130/_/proxy/pull/modules"
+          method: "POST"
+          accept: 200
+          timeout: 60000
+          headers: |
+            {
+              "content-type": "application/json; charset=utf-8",
+              "accept": "application/json; charset=utf-8"
+            }
+          body: ${{ env.OKAPI_PULL }}
+      - name: Perform local Okapi dependency check
+        uses: indiesdev/curl@v1.1
+        with:
+          url: "http://${{ env.OKAPI_IP }}:9130/_/proxy/modules?preRelease=false&npmSnapshot=false"
+          method: "POST"
+          accept: 201
+          headers: |
+            {
+              "content-type": "application/json; charset=utf-8",
+              "accept": "application/json; charset=utf-8"
+            }
+          body: ${{ steps.moduleDescriptor.outputs.content }}
       - name: Publish ModuleDescriptor to MD registry
         if: ${{ env.DO_PUBLISH_MD == 'true' }}
         id: result-md-registry
