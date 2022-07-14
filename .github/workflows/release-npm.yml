@@ -97,8 +97,17 @@ jobs:
         run: |
           echo "TOKEN_MD_REGISTRY=${{ fromJSON(steps.login-md-registry.outputs.response).headers['x-okapi-token'] }}" >> $GITHUB_ENV
       # FIXME: Login to public NPM registry for namespace indexdata
-      # FIXME: Login to docker registry to get okapi docker image
-      # FIXME: Start local Okapi, pull MDs from both FOLIO and Indexdata MD registries, do dependency check
+      - name: Docker registry login
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login https://docker.io/v2/ -u "${{ secrets.DOCKER_USER }}" --password-stdin
+      - name: Start a local instance of Okapi
+        run: |
+          docker pull folioorg/okapi:latest
+          docker run --name okapi -t -detach folioorg/okapi:latest dev
+          echo "OKAPI_IP=$(docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' okapi)" >> $GITHUB_ENV
+          sleep 10
+      - name: Docker registry logout
+        run: docker logout https://docker.io/v2/
+      # FIXME: Okapi pull MDs from both FOLIO and Indexdata MD registries, do dependency check
       - name: Publish ModuleDescriptor to MD registry
         if: ${{ env.DO_PUBLISH_MD == 'true' }}
         id: result-md-registry
