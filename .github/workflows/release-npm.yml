@@ -130,6 +130,7 @@ jobs:
           url: "http://${{ env.OKAPI_IP }}:9130/_/proxy/modules?preRelease=false&npmSnapshot=false"
           method: "POST"
           accept: 201
+          timeout: 60000
           headers: |
             {
               "content-type": "application/json; charset=utf-8",
