@@ -14,7 +14,8 @@ env:
   NODEJS_VERSION: '16'
   FOLIO_NPM_REGISTRY: 'https://repository.folio.org/repository/npm-folioci/'
   FOLIO_MD_REGISTRY: 'https://registry.folio-dev.indexdata.com'
-  OKAPI_PULL: '{ "urls" : [ "https://folio-registry.dev.folio.org", "https://registry.folio-dev.indexdata.com" ] }'
+  OKAPI_PULL_FOLIO: '{ "urls" : [ "https://folio-registry.dev.folio.org" ] }'
+  OKAPI_PULL_INDEXDATA: '{ "urls" : [ "https://registry.folio-dev.indexdata.com" ] }'
   COMPILE_TRANSLATION_FILES: 'true'
 
 jobs:
@@ -111,7 +112,7 @@ jobs:
           sleep 10
       - name: Docker registry logout
         run: docker logout https://docker.io/v2/
-      - name: Pull all Module descriptors to local Okapi instance
+      - name: Pull FOLIO ModuleDescriptors to local Okapi
         uses: indiesdev/curl@v1.1
         with:
           url: "http://${{ env.OKAPI_IP }}:9130/_/proxy/pull/modules"
@@ -123,7 +124,20 @@ jobs:
               "content-type": "application/json; charset=utf-8",
               "accept": "application/json; charset=utf-8"
             }
-          body: ${{ env.OKAPI_PULL }}
+          body: ${{ env.OKAPI_PULL_FOLIO }}
+      - name: Pull Index Data ModuleDescriptors to local Okapi
+        uses: indiesdev/curl@v1.1
+        with:
+          url: "http://${{ env.OKAPI_IP }}:9130/_/proxy/pull/modules"
+          method: "POST"
+          accept: 200
+          timeout: 60000
+          headers: |
+            {
+              "content-type": "application/json; charset=utf-8",
+              "accept": "application/json; charset=utf-8"
+            }
+          body: ${{ env.OKAPI_PULL_INDEXDATA }}
       - name: Perform local Okapi dependency check
         uses: indiesdev/curl@v1.1
         with:
