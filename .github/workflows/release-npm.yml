@@ -141,7 +141,8 @@ jobs:
       - name: Perform local Okapi dependency check
         uses: indiesdev/curl@v1.1
         with:
-          url: "http://${{ env.OKAPI_IP }}:9130/_/proxy/modules?preRelease=false&npmSnapshot=false"
+          # FIXME: Using preRelease for testing.
+          url: "http://${{ env.OKAPI_IP }}:9130/_/proxy/modules?preRelease=true&npmSnapshot=false"
           method: "POST"
           accept: 201
           timeout: 60000
