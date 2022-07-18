@@ -1,15 +1,11 @@
 name: release-npm
 
-# Status: In development.
-# Is only triggered via push to branch (later will only be triggered via git tag)
-
 on:
   push:
-    branches: [ DEVOPS-946-workflows-npm ]
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'  # i.e. release tag only
 
 env:
-  TAG_GIT: 'v0.0.1'  # FIXME: Temporary for testing. Later will use actual git tag.
-  DO_PUBLISH_MD: 'false'  # FIXME: For testing.
   NODEJS_VERSION: '16'
   FOLIO_NPM_REGISTRY: 'https://repository.folio.org/repository/npm-folioci/'
   FOLIO_MD_REGISTRY: 'https://registry.folio-dev.indexdata.com'
@@ -24,9 +20,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       - name: Set TAG_VERSION
-        # FIXME: When in production, use actual git tag.
-        # run: echo "TAG_VERSION=$(echo ${GITHUB_REF#refs/tags/v})" >> $GITHUB_ENV
-        run: echo "TAG_VERSION=$(echo ${TAG_GIT#v})" >> $GITHUB_ENV
+        run: echo "TAG_VERSION=$(echo ${GITHUB_REF#refs/tags/v})" >> $GITHUB_ENV
       - name: Get version from package.json
         id: package_version
         uses: notiz-dev/github-action-json-property@release
@@ -139,8 +133,7 @@ jobs:
       - name: Perform local Okapi dependency check
         uses: indiesdev/curl@v1.1
         with:
-          # FIXME: Using preRelease for testing, as mod-harvester-admin is not yet released.
-          url: "http://${{ env.OKAPI_IP }}:9130/_/proxy/modules?preRelease=true&npmSnapshot=false"
+          url: "http://${{ env.OKAPI_IP }}:9130/_/proxy/modules?preRelease=false&npmSnapshot=false"
           method: "POST"
           accept: 201
           timeout: 60000
@@ -162,12 +155,10 @@ jobs:
           echo ".github" >> .npmignore
           echo "artifacts" >> .npmignore
       - name: Publish NPM to npmjs registry
-        # FIXME: Using dry-run for testing.
-        run: npm publish --access=public --dry-run
+        run: npm publish --access=public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN_NPMJS }}
       - name: Publish ModuleDescriptor to MD registry
-        if: ${{ env.DO_PUBLISH_MD == 'true' }}
         id: result-md-registry
         uses: indiesdev/curl@v1.1
         with:
