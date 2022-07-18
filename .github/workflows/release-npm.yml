@@ -10,7 +10,6 @@ on:
 env:
   TAG_GIT: 'v0.0.1'  # FIXME: Temporary for testing. Later will use actual git tag.
   DO_PUBLISH_MD: 'false'  # FIXME: For testing.
-  DO_PUBLISH_NPM: 'false'  # FIXME: For testing.
   NODEJS_VERSION: '16'
   FOLIO_NPM_REGISTRY: 'https://repository.folio.org/repository/npm-folioci/'
   FOLIO_MD_REGISTRY: 'https://registry.folio-dev.indexdata.com'
@@ -51,7 +50,7 @@ jobs:
           exit 1
       - name: Setup kernel for react native, increase watchers
         run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
-      - name: Use Node.js
+      - name: Setup NPM for install
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODEJS_VERSION }}
@@ -98,7 +97,6 @@ jobs:
       - name: Get the MD registry login token
         run: |
           echo "TOKEN_MD_REGISTRY=${{ fromJSON(steps.login-md-registry.outputs.response).headers['x-okapi-token'] }}" >> $GITHUB_ENV
-      # FIXME: Login to public NPM registry for namespace indexdata
       - name: Docker registry login
         uses: docker/login-action@v2
         with:
@@ -141,7 +139,7 @@ jobs:
       - name: Perform local Okapi dependency check
         uses: indiesdev/curl@v1.1
         with:
-          # FIXME: Using preRelease for testing.
+          # FIXME: Using preRelease for testing, as mod-harvester-admin is not yet released.
           url: "http://${{ env.OKAPI_IP }}:9130/_/proxy/modules?preRelease=true&npmSnapshot=false"
           method: "POST"
           accept: 201
@@ -152,6 +150,22 @@ jobs:
               "accept": "application/json; charset=utf-8"
             }
           body: ${{ steps.moduleDescriptor.outputs.content }}
+      - name: Setup NPM for publish
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODEJS_VERSION }}
+          check-latest: true
+          always-auth: true
+          registry-url: "https://registry.npmjs.org"
+      - name: Exclude some CI-generated artifacts in package
+        run: |
+          echo ".github" >> .npmignore
+          echo "artifacts" >> .npmignore
+      - name: Publish NPM to npmjs registry
+        # FIXME: Using dry-run for testing.
+        run: npm publish --access=public --dry-run
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN_NPMJS }}
       - name: Publish ModuleDescriptor to MD registry
         if: ${{ env.DO_PUBLISH_MD == 'true' }}
         id: result-md-registry
