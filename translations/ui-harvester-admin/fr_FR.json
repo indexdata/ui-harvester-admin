@@ -178,7 +178,7 @@
     "harvestables.field.connector": "Connector (type for suggestion)",
     "harvestables.field.connector.help": "Enter here the name of the harvesting  connector specific to the harvested resource. This field provides suggestions by  looking up the Repository so only a couple of initial characters or a part of the  name is required.",
     "harvestables.field.overwrite-connector.help": "Check to delete all previously  harvested data before beginning the next scheduled (or manually triggered) run.",
-    "harvestables.field.connuser": "User Name",
+    "harvestables.field.connuser": "Nom d'utilisateur",
     "harvestables.field.connuser.help": "User name required for access to a harvested resource that  requires authentication.",
     "harvestables.field.password": "Mot de passe",
     "harvestables.field.password.help": "Password required for access to a harvested resource that requires  authentication.",
