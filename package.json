@@ -28,7 +28,7 @@
       }
     ],
     "okapiInterfaces": {
-      "harvester-admin": "0.1"
+      "harvester-admin": "1.0"
     },
     "permissionSets": [
       {
