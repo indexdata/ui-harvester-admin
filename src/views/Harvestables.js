@@ -158,8 +158,8 @@ function Harvestables({
                       columnMapping={columnMapping}
                       columnWidths={{
                         name: '400px',
-                        currentStatus: '80px',
-                        lastHarvestFinished: '180px',
+                        currentStatus: '90px',
+                        lastHarvestFinished: '210px',
                         enabled: '80px',
                         jobClass: '150px',
                         id: '80px',
