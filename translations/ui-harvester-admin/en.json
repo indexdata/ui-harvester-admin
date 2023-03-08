@@ -159,7 +159,7 @@
     "harvestables.field.retryWait.help": "Delay for retrying failed requests. Only change when resource fails to work with the default values.",
 
     "harvestables.field.type.xmlBulk": "XML bulk specific information",
-    "harvestables.field.urls": "URLs (space-separated)",
+    "harvestables.field.urls": "URLs",
     "harvestables.field.urls.help": "One or more space-separated URL (HTTP or FTP) for XML  or MARC binary data. Jump or index pages (HTML pages with URLs) are supported and  so are FTP directories. For FTP, harvesting of recursive directories may be enabled below.",
     "harvestables.field.allowErrors": "Continue on errors?",
     "harvestables.field.allowErrors.help": "Check to continue harvesting and storing records even if  retrieving some of the listed resources fails.",
