@@ -214,9 +214,9 @@
     "harvestables.field.failedRetryCount.help": "Specify how many times the harvester should retry  failed harvest requests, 0 disables retrying entirely.",
 
     "harvestables.field.type.status": "General information",
-    "harvestables.field.usageTags": "Filter, comma-separated list of usage tags",
+    "harvestables.field.usageTags": "Filter: list of usage tags",
     "harvestables.field.usageTags.help": "Used for filtering the status report by the user groups on customers tagged to a harvest job (\"Used by\").",
-    "harvestables.field.adminTags": "Filter, comma-separated list of admin tags",
+    "harvestables.field.adminTags": "Filter: list of admin tags",
     "harvestables.field.adminTags.help": "Used for filtering the status report by the harvest jobs creator or administrator, as tagged to the harvest job (\"Managed by\")",
     "harvestables.field.statusJobEnabled": "Status job enabled",
     "harvestables.field.statusJobEnabled.help": "",
