@@ -6,7 +6,7 @@
   "license": "Apache-2.0",
   "main": "src/index.js",
   "scripts": {
-    "start": "stripes serve --port 3003 --okapi http://ironman:9130",
+    "start": "stripes serve --port 3003 --okapi https://harvester-dev-okapi.folio-dev.indexdata.com --tenant harvesterdev",
     "lint": "eslint -f unix .",
     "qlint": "eslint -f unix  --rule '{\"no-console\":\"off\"}' .",
     "build-mod-descriptor": "stripes mod descriptor --full --strict | jq '.[]' > module-descriptor.json",
