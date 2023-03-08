@@ -67,6 +67,11 @@
 
     "harvestables.heading.general": "General information",
     "harvestables.field.id": "Id",
+    "harvestables.field.jobClass": "Job class",
+    "harvestables.field.jobClass.oaiPmh": "OAI-PMH",
+    "harvestables.field.jobClass.xmlBulk": "XML bulk",
+    "harvestables.field.jobClass.connector": "Harvest connector",
+    "harvestables.field.jobClass.status": "Status report",
     "harvestables.field.id.help": "Automatically assigned identifier for the job",
     "harvestables.field.name": "Name",
     "harvestables.field.name.help": "Preferably a unique name for users to identify this Harvester resource. In some cases the name may be proposed after filling out protocol specific section of the configuration (e.g Index Data Connectors, OAI-PMH).",

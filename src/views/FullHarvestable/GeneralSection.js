@@ -9,7 +9,10 @@ const GeneralSection = ({ rec }) => (
     id="harvestable-section-general"
     label={<FormattedMessage id="ui-harvester-admin.harvestables.heading.general" />}
   >
-    <RCKV rec={rec} tag="id" />
+    <Row>
+      <CKV rec={rec} tag="id" xs={6} />
+      <CKV rec={rec} tag="__jobClass" i18nTag="jobClass" xs={6} />
+    </Row>
     <RCKV rec={rec} tag="name" />
     <RCKV rec={rec} tag="serviceProvider" />
     <Row>
