@@ -52,7 +52,7 @@ const HarvestableFormGeneral = ({ data }) => {
         <CF tag="cacheEnabled" xs={6} component={Checkbox} type="checkbox" />
         <CF tag="storeOriginal" xs={6} component={Checkbox} type="checkbox" />
       </Row>
-      <div style={{ marginTop: '1em' }}/>
+      <div style={{ marginTop: '1em' }} />
       <Row>
         <CF tag="recordLimit" xs={6} />
         <CF tag="timeout" xs={6} />
