@@ -52,8 +52,11 @@ const HarvestableFormGeneral = ({ data }) => {
         <CF tag="cacheEnabled" xs={6} component={Checkbox} type="checkbox" />
         <CF tag="storeOriginal" xs={6} component={Checkbox} type="checkbox" />
       </Row>
-      <RCF tag="recordLimit" />
-      <RCF tag="timeout" />
+      <div style={{ marginTop: '1em' }}/>
+      <Row>
+        <CF tag="recordLimit" xs={6} />
+        <CF tag="timeout" xs={6} />
+      </Row>
       <RCF tag="logLevel" component={Select} dataOptions={logLevels} />
       <RCF tag="failedRecordsLogging" component={Select} dataOptions={failedRecords} />
       <Row>
