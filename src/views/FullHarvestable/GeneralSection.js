@@ -10,34 +10,43 @@ const GeneralSection = ({ rec }) => (
     label={<FormattedMessage id="ui-harvester-admin.harvestables.heading.general" />}
   >
     <Row>
-      <CKV rec={rec} tag="id" xs={6} />
-      <CKV rec={rec} tag="__jobClass" i18nTag="jobClass" xs={6} />
+      <CKV rec={rec} tag="id" xs={2} />
+      <CKV rec={rec} tag="name" xs={6} />
+      <CKV rec={rec} tag="serviceProvider" xs={4} />
     </Row>
-    <RCKV rec={rec} tag="name" />
-    <RCKV rec={rec} tag="serviceProvider" />
     <Row>
       <CKV rec={rec} tag="usedBy" xs={6} />
       <CKV rec={rec} tag="managedBy" xs={6} />
     </Row>
     <RCKV rec={rec} tag="openAccess" />
     <RCKV rec={rec} tag="description" />
-    <RCKV rec={rec} tag="technicalNotes" />
-    <RCKV rec={rec} tag="contactNotes" />
-    <RCKV rec={rec} tag="enabled" />
-    <RCKV rec={rec} tag="scheduleString" />
+    <Row>
+      <CKV rec={rec} tag="technicalNotes" xs={6} />
+      <CKV rec={rec} tag="contactNotes" xs={6} />
+    </Row>
+    <Row>
+      <CKV rec={rec} tag="enabled" xs={4} />
+      <CKV rec={rec} tag="scheduleString" xs={8} />
+    </Row>
     <RCKV rec={rec} tag="transformation.name" i18nTag="transformationPipeline" />
     <RCKV rec={rec} tag="laxParsing" />
     <RCKV rec={rec} tag="encoding" />
     <RCKV rec={rec} tag="storage.name" />
     <RCKV rec={rec} tag="storageBatchLimit" />
-    <RCKV rec={rec} tag="cacheEnabled" />
-    <RCKV rec={rec} tag="storeOriginal" />
-    <RCKV rec={rec} tag="recordLimit" />
-    <RCKV rec={rec} tag="timeout" />
+    <Row>
+      <CKV rec={rec} tag="cacheEnabled" xs={6} />
+      <CKV rec={rec} tag="storeOriginal" xs={6} />
+    </Row>
+    <Row>
+      <CKV rec={rec} tag="recordLimit" xs={6} />
+      <CKV rec={rec} tag="timeout" xs={6} />
+    </Row>
     <RCKV rec={rec} tag="logLevel" />
     <RCKV rec={rec} tag="failedRecordsLogging" />
-    <RCKV rec={rec} tag="maxSavedFailedRecordsPerRun" />
-    <RCKV rec={rec} tag="maxSavedFailedRecordsTotal" />
+    <Row>
+      <CKV rec={rec} tag="maxSavedFailedRecordsPerRun" xs={6} />
+      <CKV rec={rec} tag="maxSavedFailedRecordsTotal" xs={6} />
+    </Row>
     <RCKV rec={rec} tag="mailAddress" />
     <RCKV rec={rec} tag="mailLevel" />
     <RCKV rec={rec} tag="constantFields" />
