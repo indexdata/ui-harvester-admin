@@ -56,6 +56,7 @@
     "harvestables.column.currentStatus.RUNNING": "Running",
     "harvestables.column.currentStatus.FINISHED": "Finished",
     "harvestables.column.currentStatus.KILLED": "Killed",
+    "harvestables.column.currentStatus.SHUTDOWN": "Shutdown",
 
     "harvestables.index.name": "Name",
     "harvestables.index.id": "ID",
