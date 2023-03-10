@@ -19,12 +19,18 @@ const HarvestableFormConnector = () => (
     </Row>
     <RCF tag="proxy" />
     <RCF tag="initData" component={TextArea} rows="4" />
-    <RCF tag="fromDate" component={Datepicker} />
-    <RCF tag="untilDate" component={Datepicker} />
-    <RCF tag="resumptionToken" i18nTag="startToken" />
-    <RCF tag="sleep" type="number" />
-    <RCF tag="retryCount" i18nTag="failedRetryCount" type="number" />
-    <RCF tag="allowErrors" component={Checkbox} type="checkbox" />
+    <Row>
+      <CF tag="fromDate" component={Datepicker} xs={6} />
+      <CF tag="untilDate" component={Datepicker} xs={6} />
+    </Row>
+    <Row>
+      <CF tag="resumptionToken" xs={6} i18nTag="startToken" />
+      <CF tag="sleep" xs={6} type="number" />
+    </Row>
+    <Row>
+      <CF tag="retryCount" xs={6} i18nTag="failedRetryCount" type="number" />
+      <CF tag="allowErrors" xs={6} component={Checkbox} type="checkbox" />
+    </Row>
   </Accordion>
 );
 

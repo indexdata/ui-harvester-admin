@@ -60,8 +60,10 @@ const HarvestableFormOaiPmh = ({ values }) => {
       label={<FormattedMessage id="ui-harvester-admin.harvestables.field.type.oaiPmh" />}
     >
       <RCF tag="url" />
-      <RCF tag="oaiSetName" component={Select} dataOptions={sets} />
-      <RCF tag="metadataPrefix" component={Select} dataOptions={prefixes} />
+      <Row>
+        <CF tag="oaiSetName" xs={6} component={Select} dataOptions={sets} />
+        <CF tag="metadataPrefix" xs={6} component={Select} dataOptions={prefixes} />
+      </Row>
       <RCF tag="dateFormat" i18nTag="useLongDateFormat" component={Checkbox} type="checkbox" />
       <Row>
         <CF tag="fromDate" xs={6} component={Datepicker} />

@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { CalloutContext, IfPermission } from '@folio/stripes/core';
 import { Loading, Pane, Accordion, Button, Icon, ConfirmationModal } from '@folio/stripes/components';
 import ErrorMessage from '../../components/ErrorMessage';
@@ -22,9 +22,13 @@ const specificSections = {
 
 
 const FullHarvestableContent = ({ rec }) => {
+  const intl = useIntl();
   const type = rec.type;
   const ErrorSection = () => <ErrorMessage message={`Unknown type '${type}'`} />;
   const SpecificSection = specificSections[type] || ErrorSection;
+
+  // eslint-disable-next-line react/prop-types
+  rec.__jobClass = intl.formatMessage({ id: `ui-harvester-admin.harvestables.field.jobClass.${rec.type}` });
 
   return (
     <>

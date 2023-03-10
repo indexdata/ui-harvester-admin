@@ -1,15 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { Accordion } from '@folio/stripes/components';
-import { RCKV } from '../../components/CKV';
+import { Accordion, Row } from '@folio/stripes/components';
+import { RCKV, CKV } from '../../components/CKV';
 
 const StatusSection = ({ rec }) => (
   <Accordion
     id="harvestable-section-status"
     label={<FormattedMessage id="ui-harvester-admin.harvestables.field.type.status" />}
   >
-    <RCKV rec={rec} tag="id" />
+    <Row>
+      <CKV rec={rec} tag="id" xs={6} />
+      <CKV rec={rec} tag="__jobClass" i18nTag="jobClass" xs={6} />
+    </Row>
     <RCKV rec={rec} tag="name" />
     <RCKV rec={rec} tag="scheduleString" />
     <RCKV rec={rec} tag="usedBy" i18nTag="usageTags" />
