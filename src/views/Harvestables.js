@@ -177,9 +177,11 @@ function Harvestables({
                           </>
                         ),
                         message: r => (
-                          <ul className={css.noDot}>
-                            {r.message?.split(' ').filter(s => !!s).map((s, i) => <li key={i}>{s}</li>)}
-                          </ul>
+                          r.message?.match('Instances_processed/loaded') ?
+                            <ul className={css.noDot}>
+                              {r.message?.split(' ').filter(s => !!s).map((s, i) => <li key={i}>{s}</li>)}
+                            </ul> :
+                            r.message
                         ),
                       }}
                       contentData={harvestables}
