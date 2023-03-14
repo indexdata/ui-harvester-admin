@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Accordion, Checkbox, Row } from '@folio/stripes/components';
-import { RCF, CF, RCLF } from '../../components/CF';
+import { CF, RCLF } from '../../components/CF';
 
 const HarvestableFormStatus = () => (
   <Accordion
