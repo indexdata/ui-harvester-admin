@@ -10,14 +10,16 @@ const StatusSection = ({ rec }) => (
     label={<FormattedMessage id="ui-harvester-admin.harvestables.field.type.status" />}
   >
     <Row>
-      <CKV rec={rec} tag="id" xs={6} />
+      <CKV rec={rec} tag="id" xs={2} />
+      <CKV rec={rec} tag="name" xs={4} />
       <CKV rec={rec} tag="__jobClass" i18nTag="jobClass" xs={6} />
     </Row>
-    <RCKV rec={rec} tag="name" />
-    <RCKV rec={rec} tag="scheduleString" />
+    <Row>
+      <CKV rec={rec} tag="enabled" i18nTag="statusJobEnabled" xs={4} />
+      <CKV rec={rec} tag="scheduleString" xs={8} />
+    </Row>
     <RCKV rec={rec} tag="usedBy" i18nTag="usageTags" />
     <RCKV rec={rec} tag="managedBy" i18nTag="adminTags" />
-    <RCKV rec={rec} tag="enabled" i18nTag="statusJobEnabled" />
     <RCKV rec={rec} tag="mailAddress" i18nTag="customMailAddresses" />
   </Accordion>
 );
