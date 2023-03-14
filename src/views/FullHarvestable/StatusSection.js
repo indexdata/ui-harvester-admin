@@ -11,7 +11,7 @@ const StatusSection = ({ rec }) => (
   >
     <Row>
       <CKV rec={rec} tag="id" xs={2} />
-      <CKV rec={rec} tag="name" xs={4}/>
+      <CKV rec={rec} tag="name" xs={4} />
       <CKV rec={rec} tag="__jobClass" i18nTag="jobClass" xs={6} />
     </Row>
     <Row>
