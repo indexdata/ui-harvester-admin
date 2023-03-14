@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { Accordion } from '@folio/stripes/components';
-import { RCKV } from '../../components/CKV';
+import { Accordion, Row } from '@folio/stripes/components';
+import { RCKV, CKV } from '../../components/CKV';
 
 const OaiPmhSection = ({ rec }) => (
   <Accordion
@@ -10,16 +10,22 @@ const OaiPmhSection = ({ rec }) => (
     label={<FormattedMessage id="ui-harvester-admin.harvestables.field.type.oaiPmh" />}
   >
     <RCKV rec={rec} tag="url" />
-    <RCKV rec={rec} tag="oaiSetName" />
-    <RCKV rec={rec} tag="metadataPrefix" />
+    <Row>
+      <CKV rec={rec} tag="oaiSetName" xs={6} />
+      <CKV rec={rec} tag="metadataPrefix" xs={6} />
+    </Row>
     <RCKV rec={rec} tag="dateFormat" />
-    <RCKV rec={rec} tag="fromDate" />
-    <RCKV rec={rec} tag="untilDate" />
+    <Row>
+      <CKV rec={rec} tag="fromDate" xs={6} />
+      <CKV rec={rec} tag="untilDate" xs={6} />
+    </Row>
     <RCKV rec={rec} tag="resumptionToken" />
     <RCKV rec={rec} tag="clearRtOnError" />
     <RCKV rec={rec} tag="keepPartial" />
-    <RCKV rec={rec} tag="retryCount" />
-    <RCKV rec={rec} tag="retryWait" />
+    <Row>
+      <CKV rec={rec} tag="retryCount" xs={6} />
+      <CKV rec={rec} tag="retryWait" xs={6} />
+    </Row>
   </Accordion>
 );
 
