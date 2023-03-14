@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { Accordion } from '@folio/stripes/components';
-import { RCKV } from '../../components/CKV';
+import { Accordion, Row } from '@folio/stripes/components';
+import { RCKV, CKV } from '../../components/CKV';
 
 const ConnectorSection = ({ rec }) => (
   <Accordion
@@ -14,16 +14,24 @@ const ConnectorSection = ({ rec }) => (
     <RCKV rec={rec} tag="connectorRepoUrlSetting.label" />
     <RCKV rec={rec} tag="connector" />
     <RCKV rec={rec} tag="overwrite" />
-    <RCKV rec={rec} tag="username" i18nTag="connuser" />
-    <RCKV rec={rec} tag="password" />
+    <Row>
+      <CKV rec={rec} tag="username" i18nTag="connuser" xs={6} />
+      <CKV rec={rec} tag="password" xs={6} />
+    </Row>
     <RCKV rec={rec} tag="proxy" />
     <RCKV rec={rec} tag="initData" />
-    <RCKV rec={rec} tag="fromDate" />
-    <RCKV rec={rec} tag="untilDate" />
-    <RCKV rec={rec} tag="resumptionToken" i18nTag="startToken" />
-    <RCKV rec={rec} tag="sleep" />
-    <RCKV rec={rec} tag="retryCount" i18nTag="failedRetryCount" />
-    <RCKV rec={rec} tag="allowErrors" />
+    <Row>
+      <CKV rec={rec} tag="fromDate" xs={6} />
+      <CKV rec={rec} tag="untilDate" xs={6} />
+    </Row>
+    <Row>
+      <CKV rec={rec} tag="resumptionToken" i18nTag="startToken" xs={6} />
+      <CKV rec={rec} tag="sleep" xs={6} />
+    </Row>
+    <Row>
+      <CKV rec={rec} tag="retryCount" i18nTag="failedRetryCount" xs={6} />
+      <CKV rec={rec} tag="allowErrors" xs={6} />
+    </Row>
   </Accordion>
 );
 
