@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { Accordion } from '@folio/stripes/components';
-import { RCKV } from '../../components/CKV';
+import { Accordion, Row } from '@folio/stripes/components';
+import { RCKV, CKV } from '../../components/CKV';
 
 const XmlBulkSection = ({ rec }) => (
   <Accordion
@@ -12,15 +12,21 @@ const XmlBulkSection = ({ rec }) => (
     <RCKV rec={rec} tag="url" i18nTag="urls" />
     <RCKV rec={rec} tag="allowErrors" />
     <RCKV rec={rec} tag="overwrite" />
-    <RCKV rec={rec} tag="allowCondReq" />
-    <RCKV rec={rec} tag="fromDate" i18nTag="initialFromDate" />
-    <RCKV rec={rec} tag="splitAt" />
-    <RCKV rec={rec} tag="splitSize" />
+    <Row>
+      <CKV rec={rec} tag="allowCondReq" xs={6} />
+      <CKV rec={rec} tag="fromDate" i18nTag="initialFromDate" xs={6} />
+    </Row>
+    <Row>
+      <CKV rec={rec} tag="splitAt" xs={6} />
+      <CKV rec={rec} tag="splitSize" xs={6} />
+    </Row>
     <RCKV rec={rec} tag="expectedSchema" />
     <RCKV rec={rec} tag="outputSchema" />
     <RCKV rec={rec} tag="recurse" />
-    <RCKV rec={rec} tag="includeFilePattern" />
-    <RCKV rec={rec} tag="excludeFilePattern" />
+    <Row>
+      <CKV rec={rec} tag="includeFilePattern" xs={6} />
+      <CKV rec={rec} tag="excludeFilePattern" xs={6} />
+    </Row>
     <RCKV rec={rec} tag="passiveMode" />
     <RCKV rec={rec} tag="csvConfiguration" />
   </Accordion>
