@@ -238,5 +238,7 @@
     "harvestables.field.failedRecordsLogging.CREATE_OVERWRITE": "Do save. Overwrite existing files",
     "harvestables.field.failedRecordsLogging.ADD_ALL": "Do save. Add numbered versions for existing files",
 
+    "logs.plainTextLog": "Plain text log",
+
     "SENTINEL": "SENTINEL"
 }

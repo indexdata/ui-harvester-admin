@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { FormattedMessage } from 'react-intl';
-import { HasCommand, LoadingPane, Pane, checkScope } from '@folio/stripes/components';
+import { FormattedMessage } from 'react-intl';
+import { HasCommand, LoadingPane, Pane, checkScope, Accordion } from '@folio/stripes/components';
 import { AppIcon, TitleManager } from '@folio/stripes/core';
 
 
@@ -44,9 +44,14 @@ const HarvestableLogs = (props) => {
         onClose={handlers.onClose}
       >
         <TitleManager record={title}>
-          <pre>
-            {data.plainTextLog}
-          </pre>
+          <Accordion
+            id="harvestable-logs-plain"
+            label={<FormattedMessage id="ui-harvester-admin.logs.plainTextLog" />}
+          >
+            <pre>
+              {data.plainTextLog}
+            </pre>
+          </Accordion>
         </TitleManager>
       </Pane>
     </HasCommand>
