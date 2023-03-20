@@ -25,6 +25,7 @@
 
     "button.edit": "Edit",
     "button.delete": "Delete",
+    "button.view-log": "View log",
     "button.start-job": "Start job",
     "button.stop-job": "Stop job",
     "button.confirm": "Confirm",

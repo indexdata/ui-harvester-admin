@@ -159,6 +159,20 @@ const FullHarvestable = ({ defaultWidth, resources, mutator, match, deleteRecord
             </Icon>
           </Button>
         </IfPermission>
+        <IfPermission perm="harvester-admin.harvestables.log.get">
+          <Button
+            buttonStyle="dropdownItem"
+            marginBottom0
+            id="clickable-view-log"
+            onClick={() => {
+              mutator.query.update({ _path: `${packageInfo.stripes.route}/harvestables/${match.params.recId}/logs` });
+            }}
+          >
+            <Icon icon="report">
+              <FormattedMessage id="ui-harvester-admin.button.view-log" />
+            </Icon>
+          </Button>
+        </IfPermission>
       </>
     );
   };
