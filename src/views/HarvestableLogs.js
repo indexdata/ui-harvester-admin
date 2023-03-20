@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+// import { FormattedMessage } from 'react-intl';
 import { HasCommand, LoadingPane, Pane, checkScope } from '@folio/stripes/components';
 import { AppIcon, TitleManager } from '@folio/stripes/core';
 
@@ -23,7 +23,6 @@ const HarvestableLogs = (props) => {
   if (isLoading) return <LoadingPane />;
   const harvestable = data.harvestable[0];
   const title = harvestable?.name;
-  const log = data.log[0];
 
   const shortcuts = [
     {
@@ -46,7 +45,7 @@ const HarvestableLogs = (props) => {
       >
         <TitleManager record={title}>
           <pre>
-            {JSON.stringify(log, null, 2)}
+            {data.log}
           </pre>
         </TitleManager>
       </Pane>
@@ -62,10 +61,7 @@ HarvestableLogs.propTypes = {
         name: PropTypes.string.isRequired,
       }).isRequired,
     ).isRequired,
-    log: PropTypes.arrayOf(
-      PropTypes.shape({
-      }).isRequired,
-    ).isRequired,
+    log: PropTypes.string,
   }).isRequired,
   handlers: PropTypes.shape({
     onClose: PropTypes.func.isRequired,

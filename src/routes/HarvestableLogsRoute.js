@@ -1,21 +1,38 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { stripesConnect } from '@folio/stripes/core';
+import { stripesConnect, useOkapiKy } from '@folio/stripes/core';
 import HarvestableLogs from '../views/HarvestableLogs';
 import packageInfo from '../../package';
 
 
 const HarvestableLogsRoute = ({ resources, mutator, match }) => {
+  const okapiKy = useOkapiKy();
+  const [logs, setLogs] = useState();
+
   const handleClose = () => {
     mutator.query.update({ _path: `${packageInfo.stripes.route}/harvestables/${match.params.recId}` });
   };
 
+  useEffect(() => {
+    async function fetchData() {
+      const recId = match.params.recId;
+      const res = await okapiKy(`harvester-admin/harvestables/${recId}/log`, {
+        headers: {
+          'Accept': 'text/plain'
+        }
+      });
+      const data = await res.text();
+      setLogs(data);
+    }
+    fetchData();
+  }, [okapiKy, setLogs, match.params.recId]);
+
   return (
     <HarvestableLogs
-      isLoading={resources.harvestable.isPending || resources.log.isPending}
+      isLoading={resources.harvestable.isPending || !logs}
       data={{
         harvestable: resources.harvestable.records,
-        log: resources.log.records,
+        log: logs,
       }}
       handlers={{ onClose: handleClose }}
     />
@@ -28,16 +45,6 @@ HarvestableLogsRoute.manifest = Object.freeze({
   harvestable: {
     type: 'okapi',
     path: 'harvester-admin/harvestables/:{recId}',
-  },
-  log: {
-    type: 'okapi',
-    path: 'harvester-admin/harvestables/:{recId}/log',
-    GET: {
-      headers: {
-        // XXX this is ignored by stripes-connect: I don't understand why
-        'Accept': 'text/plain',
-      },
-    },
   },
 });
 
