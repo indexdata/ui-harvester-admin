@@ -31,7 +31,7 @@ const HarvestableLogsRoute = ({ resources, mutator, match }) => {
 
   return (
     <HarvestableLogs
-      isLoading={resources.harvestable.isPending || !plainTextLog}
+      isLoading={resources.harvestable.isPending || typeof plainTextLog !== 'string'}
       data={{
         harvestable: resources.harvestable.records,
         plainTextLog,
