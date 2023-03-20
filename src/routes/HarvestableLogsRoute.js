@@ -7,7 +7,7 @@ import packageInfo from '../../package';
 
 const HarvestableLogsRoute = ({ resources, mutator, match }) => {
   const okapiKy = useOkapiKy();
-  const [logs, setLogs] = useState();
+  const [plainTextLog, setPlainTextLog] = useState();
 
   const handleClose = () => {
     mutator.query.update({ _path: `${packageInfo.stripes.route}/harvestables/${match.params.recId}` });
@@ -22,17 +22,17 @@ const HarvestableLogsRoute = ({ resources, mutator, match }) => {
         }
       });
       const data = await res.text();
-      setLogs(data);
+      setPlainTextLog(data);
     }
     fetchData();
-  }, [okapiKy, setLogs, match.params.recId]);
+  }, [okapiKy, setPlainTextLog, match.params.recId]);
 
   return (
     <HarvestableLogs
-      isLoading={resources.harvestable.isPending || !logs}
+      isLoading={resources.harvestable.isPending || !plainTextLog}
       data={{
         harvestable: resources.harvestable.records,
-        log: logs,
+        plainTextLog,
       }}
       handlers={{ onClose: handleClose }}
     />

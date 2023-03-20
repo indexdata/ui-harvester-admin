@@ -45,7 +45,7 @@ const HarvestableLogs = (props) => {
       >
         <TitleManager record={title}>
           <pre>
-            {data.log}
+            {data.plainTextLog}
           </pre>
         </TitleManager>
       </Pane>
@@ -61,7 +61,7 @@ HarvestableLogs.propTypes = {
         name: PropTypes.string.isRequired,
       }).isRequired,
     ).isRequired,
-    log: PropTypes.string,
+    plainTextLog: PropTypes.string,
   }).isRequired,
   handlers: PropTypes.shape({
     onClose: PropTypes.func.isRequired,
