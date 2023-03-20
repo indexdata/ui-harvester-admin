@@ -25,7 +25,9 @@ const HarvestableLogsRoute = ({ resources, mutator, match }) => {
       setPlainTextLog(data);
     }
     fetchData();
-  }, [okapiKy, setPlainTextLog, match.params.recId]);
+    // If we include okapi-ky in the useEffect dependencies, we get many fetches for some reason
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [setPlainTextLog, match.params.recId]);
 
   return (
     <HarvestableLogs
