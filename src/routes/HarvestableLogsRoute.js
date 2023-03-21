@@ -29,11 +29,16 @@ const HarvestableLogsRoute = ({ resources, mutator, match }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setPlainTextLog, match.params.recId]);
 
+  const isLoading = (resources.harvestable.isPending ||
+                     resources.failedRecords.isPending ||
+                     typeof plainTextLog !== 'string');
+
   return (
     <HarvestableLogs
-      isLoading={resources.harvestable.isPending || typeof plainTextLog !== 'string'}
+      isLoading={isLoading}
       data={{
         harvestable: resources.harvestable.records,
+        failedRecords: resources.failedRecords.records,
         plainTextLog,
       }}
       handlers={{ onClose: handleClose }}
@@ -48,12 +53,22 @@ HarvestableLogsRoute.manifest = Object.freeze({
     type: 'okapi',
     path: 'harvester-admin/harvestables/:{recId}',
   },
+  failedRecords: {
+    type: 'okapi',
+    path: 'harvester-admin/harvestables/:{recId}/failed-records',
+  },
 });
 
 
 HarvestableLogsRoute.propTypes = {
   resources: PropTypes.shape({
     harvestable: PropTypes.shape({
+      isPending: PropTypes.bool.isRequired,
+      records: PropTypes.arrayOf(
+        PropTypes.shape({}).isRequired,
+      ).isRequired,
+    }).isRequired,
+    failedRecords: PropTypes.shape({
       isPending: PropTypes.bool.isRequired,
       records: PropTypes.arrayOf(
         PropTypes.shape({}).isRequired,

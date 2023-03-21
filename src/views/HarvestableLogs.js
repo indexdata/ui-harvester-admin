@@ -52,6 +52,14 @@ const HarvestableLogs = (props) => {
               {data.plainTextLog}
             </pre>
           </Accordion>
+          <Accordion
+            id="harvestable-logs-failed"
+            label={<FormattedMessage id="ui-harvester-admin.logs.failedRecords" />}
+          >
+            <pre>
+              {data.failedRecords}
+            </pre>
+          </Accordion>
         </TitleManager>
       </Pane>
     </HasCommand>
@@ -67,6 +75,7 @@ HarvestableLogs.propTypes = {
       }).isRequired,
     ).isRequired,
     plainTextLog: PropTypes.string,
+    failedRecords: PropTypes.string,
   }).isRequired,
   handlers: PropTypes.shape({
     onClose: PropTypes.func.isRequired,

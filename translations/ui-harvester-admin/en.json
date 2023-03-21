@@ -239,6 +239,7 @@
     "harvestables.field.failedRecordsLogging.ADD_ALL": "Do save. Add numbered versions for existing files",
 
     "logs.plainTextLog": "Plain text log",
+    "logs.failedRecords": "Failed records",
 
     "SENTINEL": "SENTINEL"
 }
