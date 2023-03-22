@@ -13,6 +13,8 @@ const HarvestableLogsRoute = ({ resources, mutator, match }) => {
     mutator.query.update({ _path: `${packageInfo.stripes.route}/harvestables/${match.params.recId}` });
   };
 
+  // We can't use stripes-connect for plainTextLog, as it assumes JSON responses: see the code at
+  // https://github.com/folio-org/stripes-connect/blob/7009eec490b36365e59b009cb9fde9f3573ea669/RESTResource/RESTResource.js#L789
   useEffect(() => {
     async function fetchData() {
       const recId = match.params.recId;
@@ -32,7 +34,6 @@ const HarvestableLogsRoute = ({ resources, mutator, match }) => {
   const isLoading = (resources.harvestable.isPending ||
                      resources.failedRecords.isPending ||
                      typeof plainTextLog !== 'string');
-
   return (
     <HarvestableLogs
       isLoading={isLoading}
@@ -56,6 +57,11 @@ HarvestableLogsRoute.manifest = Object.freeze({
   failedRecords: {
     type: 'okapi',
     path: 'harvester-admin/harvestables/:{recId}/failed-records',
+    GET: {
+      headers: {
+        'Accept': 'text/plain'
+      }
+    }
   },
 });
 
@@ -69,12 +75,6 @@ HarvestableLogsRoute.propTypes = {
       ).isRequired,
     }).isRequired,
     failedRecords: PropTypes.shape({
-      isPending: PropTypes.bool.isRequired,
-      records: PropTypes.arrayOf(
-        PropTypes.shape({}).isRequired,
-      ).isRequired,
-    }).isRequired,
-    log: PropTypes.shape({
       isPending: PropTypes.bool.isRequired,
       records: PropTypes.arrayOf(
         PropTypes.shape({}).isRequired,
