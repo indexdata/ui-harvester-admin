@@ -45,19 +45,20 @@ const HarvestableLogs = (props) => {
       >
         <TitleManager record={title}>
           <Accordion
-            id="harvestable-logs-plain"
-            label={<FormattedMessage id="ui-harvester-admin.logs.plainTextLog" />}
-          >
-            <pre>
-              {data.plainTextLog}
-            </pre>
-          </Accordion>
-          <Accordion
             id="harvestable-logs-failed"
             label={<FormattedMessage id="ui-harvester-admin.logs.failedRecords" />}
           >
             <pre>
               {JSON.stringify(data.failedRecords, 0, 2)}
+            </pre>
+          </Accordion>
+          <Accordion
+            id="harvestable-logs-plain"
+            label={<FormattedMessage id="ui-harvester-admin.logs.plainTextLog" />}
+            closedByDefault
+          >
+            <pre>
+              {data.plainTextLog}
             </pre>
           </Accordion>
         </TitleManager>
