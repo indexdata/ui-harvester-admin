@@ -57,7 +57,7 @@ const HarvestableLogs = (props) => {
             label={<FormattedMessage id="ui-harvester-admin.logs.failedRecords" />}
           >
             <pre>
-              {data.failedRecords}
+              {JSON.stringify(data.failedRecords, 0, 2)}
             </pre>
           </Accordion>
         </TitleManager>
