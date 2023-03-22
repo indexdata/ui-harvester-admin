@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
+import ObjectInspector from 'react-inspector';
 import { HasCommand, LoadingPane, Pane, checkScope, Accordion } from '@folio/stripes/components';
 import { AppIcon, TitleManager } from '@folio/stripes/core';
 
@@ -48,9 +49,13 @@ const HarvestableLogs = (props) => {
             id="harvestable-logs-failed"
             label={<FormattedMessage id="ui-harvester-admin.logs.failedRecords" />}
           >
-            <pre>
-              {JSON.stringify(data.failedRecords, 0, 2)}
-            </pre>
+            <div>
+              <ObjectInspector
+                data={data.failedRecords}
+                expandLevel={2}
+                sortObjectKeys
+              />
+            </div>
           </Accordion>
           <Accordion
             id="harvestable-logs-plain"
@@ -76,7 +81,14 @@ HarvestableLogs.propTypes = {
       }).isRequired,
     ).isRequired,
     plainTextLog: PropTypes.string,
-    failedRecords: PropTypes.string,
+    failedRecords: PropTypes.shape({
+      totalRecords: PropTypes.number.isRequired,
+      "failed-records": PropTypes.arrayOf(
+        PropTypes.shape({
+          // XXX add individual fields
+        }).isRequired,
+      ).isRequired,
+    }),
   }).isRequired,
   handlers: PropTypes.shape({
     onClose: PropTypes.func.isRequired,
