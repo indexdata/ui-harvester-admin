@@ -212,5 +212,11 @@
     "harvestables.field.failedRecordsLogging.CLEAN_DIRECTORY": "Do save. Clean up directory first",
     "harvestables.field.failedRecordsLogging.CREATE_OVERWRITE": "Do save. Overwrite existing files",
     "harvestables.field.failedRecordsLogging.ADD_ALL": "Do save. Add numbered versions for existing files",
-    "SENTINEL": "SENTINEL"
+    "SENTINEL": "SENTINEL",
+    "harvestables.field.jobClass": "Job class",
+    "harvestables.field.jobClass.oaiPmh": "OAI-PMH",
+    "harvestables.field.jobClass.xmlBulk": "XML bulk",
+    "harvestables.field.jobClass.connector": "Harvest connector",
+    "harvestables.field.jobClass.status": "Status report",
+    "harvestables.column.currentStatus.SHUTDOWN": "Shutdown"
 }
