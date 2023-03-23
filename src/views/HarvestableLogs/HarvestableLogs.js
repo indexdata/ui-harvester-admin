@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import ObjectInspector from 'react-inspector';
 import { HasCommand, LoadingPane, Pane, checkScope, Accordion } from '@folio/stripes/components';
 import { AppIcon, TitleManager } from '@folio/stripes/core';
-import HarvestableLogsHeader from './HarvestableLogs/HarvestableLogsHeader';
+import HarvestableLogsHeader from './HarvestableLogsHeader';
 
 
 const handleKeyCommand = (handler, { disabled } = {}) => {
