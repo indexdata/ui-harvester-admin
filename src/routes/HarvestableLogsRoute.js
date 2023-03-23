@@ -57,11 +57,6 @@ HarvestableLogsRoute.manifest = Object.freeze({
   failedRecords: {
     type: 'okapi',
     path: 'harvester-admin/harvestables/:{recId}/failed-records',
-    GET: {
-      headers: {
-        'Accept': 'text/plain'
-      }
-    }
   },
 });
 
