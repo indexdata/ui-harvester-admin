@@ -83,7 +83,7 @@ HarvestableLogs.propTypes = {
     plainTextLog: PropTypes.string,
     failedRecords: PropTypes.shape({
       totalRecords: PropTypes.number.isRequired,
-      "failed-records": PropTypes.arrayOf(
+      'failed-records': PropTypes.arrayOf(
         PropTypes.shape({
           // XXX add individual fields
         }).isRequired,
