@@ -49,13 +49,11 @@ const HarvestableLogs = (props) => {
             id="harvestable-logs-failed"
             label={<FormattedMessage id="ui-harvester-admin.logs.failedRecords" />}
           >
-            <div>
-              <ObjectInspector
-                data={data.failedRecords}
-                expandLevel={2}
-                sortObjectKeys
-              />
-            </div>
+            <ObjectInspector
+              data={data.failedRecords}
+              expandLevel={2}
+              sortObjectKeys
+            />
           </Accordion>
           <Accordion
             id="harvestable-logs-plain"
