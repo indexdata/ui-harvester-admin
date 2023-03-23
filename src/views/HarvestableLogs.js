@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import ObjectInspector from 'react-inspector';
 import { HasCommand, LoadingPane, Pane, checkScope, Accordion } from '@folio/stripes/components';
 import { AppIcon, TitleManager } from '@folio/stripes/core';
+import HarvestableLogsHeader from './HarvestableLogs/HarvestableLogsHeader';
 
 
 const handleKeyCommand = (handler, { disabled } = {}) => {
@@ -45,6 +46,7 @@ const HarvestableLogs = (props) => {
         onClose={handlers.onClose}
       >
         <TitleManager record={title}>
+          <HarvestableLogsHeader harvestable={harvestable} />
           <Accordion
             id="harvestable-logs-failed"
             label={<FormattedMessage id="ui-harvester-admin.logs.failedRecords" />}
