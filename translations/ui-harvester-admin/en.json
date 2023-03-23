@@ -241,5 +241,16 @@
     "logs.plainTextLog": "Plain text log",
     "logs.failedRecords": "Failed records",
 
+    "summary-table.summary": "Summary",
+    "summary-table.source": "MIU",
+    "summary-table.instances": "Instance",
+    "summary-table.holdings": "Holdings",
+    "summary-table.items": "Item",
+
+    "summary-label.processed": "Processed",
+    "summary-label.loaded": "Loaded",
+    "summary-label.deleted": "Deleted",
+    "summary-label.failed": "Failed",
+
     "SENTINEL": "SENTINEL"
 }
