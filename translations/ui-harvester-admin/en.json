@@ -252,5 +252,11 @@
     "summary-label.deleted": "Deleted",
     "summary-label.failed": "Failed",
 
+    "failed-records.recordNumber": "Record number",
+    "failed-records.timeStamp": "Time stamp",
+    "failed-records.instanceHrid": "Instance HRID",
+    "failed-records.instanceTitle": "Instance title",
+    "failed-records.errors": "Errors",
+
     "SENTINEL": "SENTINEL"
 }

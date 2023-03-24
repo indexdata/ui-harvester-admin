@@ -72,7 +72,7 @@ HarvestableLogs.propTypes = {
       }).isRequired,
     ).isRequired,
     plainTextLog: PropTypes.string,
-    failedRecords: PropTypes.shape({}).isRequired,
+    failedRecords: PropTypes.shape({}),
   }).isRequired,
   handlers: PropTypes.shape({
     onClose: PropTypes.func.isRequired,
