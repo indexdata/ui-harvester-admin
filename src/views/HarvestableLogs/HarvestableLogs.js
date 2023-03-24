@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import ObjectInspector from 'react-inspector';
 import { HasCommand, LoadingPane, Pane, checkScope, Accordion } from '@folio/stripes/components';
 import { AppIcon, TitleManager } from '@folio/stripes/core';
 import HarvestableLogsHeader from './HarvestableLogsHeader';
+import HarvestableLogsFailedRecords from './HarvestableLogsFailedRecords';
 
 
 const handleKeyCommand = (handler, { disabled } = {}) => {
@@ -47,16 +47,7 @@ const HarvestableLogs = (props) => {
       >
         <TitleManager record={title}>
           <HarvestableLogsHeader harvestable={harvestable} />
-          <Accordion
-            id="harvestable-logs-failed"
-            label={<FormattedMessage id="ui-harvester-admin.logs.failedRecords" />}
-          >
-            <ObjectInspector
-              data={data.failedRecords}
-              expandLevel={2}
-              sortObjectKeys
-            />
-          </Accordion>
+          <HarvestableLogsFailedRecords failedRecords={data.failedRecords} />
           <Accordion
             id="harvestable-logs-plain"
             label={<FormattedMessage id="ui-harvester-admin.logs.plainTextLog" />}
@@ -81,14 +72,7 @@ HarvestableLogs.propTypes = {
       }).isRequired,
     ).isRequired,
     plainTextLog: PropTypes.string,
-    failedRecords: PropTypes.shape({
-      totalRecords: PropTypes.number.isRequired,
-      failedRecords: PropTypes.arrayOf(
-        PropTypes.shape({
-          // XXX add individual fields
-        }).isRequired,
-      ).isRequired,
-    }),
+    failedRecords: PropTypes.shape({}).isRequired,
   }).isRequired,
   handlers: PropTypes.shape({
     onClose: PropTypes.func.isRequired,
