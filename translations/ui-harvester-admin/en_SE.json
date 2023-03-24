@@ -218,5 +218,22 @@
     "harvestables.field.jobClass.xmlBulk": "XML bulk",
     "harvestables.field.jobClass.connector": "Harvest connector",
     "harvestables.field.jobClass.status": "Status report",
-    "harvestables.column.currentStatus.SHUTDOWN": "Shutdown"
+    "harvestables.column.currentStatus.SHUTDOWN": "Shutdown",
+    "button.view-log": "View log",
+    "logs.plainTextLog": "Plain text log",
+    "logs.failedRecords": "Failed records",
+    "summary-table.summary": "Summary",
+    "summary-table.source": "MIU",
+    "summary-table.instances": "Instance",
+    "summary-table.holdings": "Holdings",
+    "summary-table.items": "Item",
+    "summary-label.processed": "Processed",
+    "summary-label.loaded": "Loaded",
+    "summary-label.deleted": "Deleted",
+    "summary-label.failed": "Failed",
+    "failed-records.recordNumber": "Record number",
+    "failed-records.timeStamp": "Time stamp",
+    "failed-records.instanceHrid": "Instance HRID",
+    "failed-records.instanceTitle": "Instance title",
+    "failed-records.errors": "Errors"
 }
