@@ -25,6 +25,7 @@
 
     "button.edit": "Edit",
     "button.delete": "Delete",
+    "button.view-log": "View log",
     "button.start-job": "Start job",
     "button.stop-job": "Stop job",
     "button.confirm": "Confirm",
@@ -236,6 +237,26 @@
     "harvestables.field.failedRecordsLogging.CLEAN_DIRECTORY": "Do save. Clean up directory first",
     "harvestables.field.failedRecordsLogging.CREATE_OVERWRITE": "Do save. Overwrite existing files",
     "harvestables.field.failedRecordsLogging.ADD_ALL": "Do save. Add numbered versions for existing files",
+
+    "logs.plainTextLog": "Plain text log",
+    "logs.failedRecords": "Failed records",
+
+    "summary-table.summary": "Summary",
+    "summary-table.source": "MIU",
+    "summary-table.instances": "Instance",
+    "summary-table.holdings": "Holdings",
+    "summary-table.items": "Item",
+
+    "summary-label.processed": "Processed",
+    "summary-label.loaded": "Loaded",
+    "summary-label.deleted": "Deleted",
+    "summary-label.failed": "Failed",
+
+    "failed-records.recordNumber": "Record number",
+    "failed-records.timeStamp": "Time stamp",
+    "failed-records.instanceHrid": "Instance HRID",
+    "failed-records.instanceTitle": "Instance title",
+    "failed-records.errors": "Errors",
 
     "SENTINEL": "SENTINEL"
 }
