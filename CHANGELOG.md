@@ -11,6 +11,7 @@
 * Display summary header on the Logs page. Fixes UIHAADM-24.
 * Display simple list of errors on the Logs page. Fixes UIHAADM-25.
 * Cope elegantly with absent logs on the Logs page. Fixes UIHAADM-26.
+* Add "View log" buttons to each row in list of harvestables. Fixes UIHAADM-27.
 
 ## [0.1.0](https://github.com/folio-org/ui-harvester-admin/tree/v0.1.0) (2022-07-19)
 
