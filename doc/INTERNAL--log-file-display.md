@@ -12,6 +12,13 @@ is complete.
 * [Concrete examples of relevant WSAPI calls](https://jira.indexdata.com/browse/DEVOPS-1644?focusedCommentId=2198871&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-2198871)
 
 
+## Services
+
+* [Local development server](http://localhost:3003/ha/harvestables)
+* [Demo server](https://harvester-dev.folio-dev.indexdata.com/)
+(GitHub action to [rebuild UI](https://github.com/indexdata/platform-harvester-dev/actions/workflows/bundle-deploy.yml))
+
+
 ## UI elements
 
 The document [Ongoing Feedback Document for the Harvester UI](https://docs.google.com/document/d/1_XFdtvCNYlO78CemF8Zs9DmYFvg3Jx6SACsTKe-oiOE/edit?pli=1) reminds us that:
