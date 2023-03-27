@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { HasCommand, LoadingPane, Pane, checkScope, Accordion } from '@folio/stripes/components';
+import { HasCommand, LoadingPane, Pane, checkScope, Accordion, NoValue } from '@folio/stripes/components';
 import { AppIcon, TitleManager } from '@folio/stripes/core';
 import HarvestableLogsHeader from './HarvestableLogsHeader';
 import HarvestableLogsFailedRecords from './HarvestableLogsFailedRecords';
@@ -54,7 +54,7 @@ const HarvestableLogs = (props) => {
             closedByDefault
           >
             <pre>
-              {data.plainTextLog}
+              {data.plainTextLog || <NoValue />}
             </pre>
           </Accordion>
         </TitleManager>

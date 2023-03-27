@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { MultiColumnList, Accordion } from '@folio/stripes/components';
+import { MultiColumnList, Accordion, NoValue } from '@folio/stripes/components';
 import message2stats from '../../util/message2stats';
 
 
@@ -18,7 +18,7 @@ const HarvestableLogsHeader = ({ harvestable }) => {
     items: <FormattedMessage id="ui-harvester-admin.summary-table.items" />,
   };
 
-  const contentData = ['processed', 'loaded', 'deleted', 'failed'].map(caption => {
+  const contentData = !stats ? [] : ['processed', 'loaded', 'deleted', 'failed'].map(caption => {
     const values = {
       summary: <FormattedMessage id={`ui-harvester-admin.summary-label.${caption}`} />,
     };
@@ -46,11 +46,13 @@ const HarvestableLogsHeader = ({ harvestable }) => {
         label={<FormattedMessage id="ui-harvester-admin.accordion.devinfo" />}
         closedByDefault
       >
+        <h3>Message</h3>
         <pre>
-          {harvestable.message.replace(/ /g, '\n')}
-          <br />
-          <br />
-          {JSON.stringify(stats, null, 2)}
+          {harvestable.message?.replace(/^\s+/, '').replace(/ /g, '\n') || <NoValue />}
+        </pre>
+        <h3>Compiled stats</h3>
+        <pre>
+          {JSON.stringify(stats, null, 2) || <NoValue />}
         </pre>
       </Accordion>
     </>
@@ -60,7 +62,7 @@ const HarvestableLogsHeader = ({ harvestable }) => {
 
 HarvestableLogsHeader.propTypes = {
   harvestable: PropTypes.shape({
-    message: PropTypes.string.isRequired,
+    message: PropTypes.string,
   }).isRequired,
 };
 
