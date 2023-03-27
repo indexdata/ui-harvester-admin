@@ -1,4 +1,6 @@
 function message2stats(message) {
+  if (!message) return undefined;
+
   const stats = {};
   message.split(' ').forEach(row => {
     const matchData = row.match(/(.*?)_.*:_+([^_]*)_+([^_]*)_+([^_]*)_+([^_]*)/);
