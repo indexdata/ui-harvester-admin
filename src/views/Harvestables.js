@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, FormattedTime, FormattedDate } from 'react-intl';
 import { useLocation } from 'react-router-dom';
-import { IfPermission, AppIcon } from '@folio/stripes/core';
+import { useStripes, IfPermission, AppIcon } from '@folio/stripes/core';
 import { LoadingPane, Paneset, Pane, MultiColumnList, PaneMenu, MenuSection, Button, Icon } from '@folio/stripes/components';
 import { parseFilters, ColumnManager, SearchAndSortQuery } from '@folio/stripes/smart-components';
 import HarvestablesSearchPane from '../search/HarvestablesSearchPane';
@@ -109,6 +109,7 @@ function Harvestables({
   children,
 }) {
   const location = useLocation();
+  const stripes = useStripes();
   if (error) return <ErrorMessage message={error} />;
   if (!hasLoaded) return <LoadingPane />;
 
@@ -121,6 +122,10 @@ function Harvestables({
     id: <FormattedMessage id="ui-harvester-admin.harvestables.column.id" />,
     message: <FormattedMessage id="ui-harvester-admin.harvestables.column.message" />,
   };
+
+  if (stripes.hasPerm('harvester-admin.harvestables.log.get')) {
+    columnMapping.logFile = <FormattedMessage id="ui-harvester-admin.harvestables.column.logFile" />;
+  }
 
   const harvestables = manuallyFilterAndSort(query, data.harvestables);
   return (
@@ -182,6 +187,18 @@ function Harvestables({
                               {r.message?.split(' ').filter(s => !!s).map((s, i) => <li key={i}>{s}</li>)}
                             </ul> :
                             r.message
+                        ),
+                        logFile: r => (
+                          <Button
+                            id={`clickable-log-file-${r.id}`}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              updateQuery({ _path: `${packageInfo.stripes.route}/harvestables/${r.id}/logs` })
+                            }}
+                            marginBottom0
+                          >
+                            <FormattedMessage id="ui-harvester-admin.button.view-log" />
+                          </Button>
                         ),
                       }}
                       contentData={harvestables}
