@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 import { useStripes, IfPermission, AppIcon } from '@folio/stripes/core';
 import { LoadingPane, Paneset, Pane, MultiColumnList, PaneMenu, MenuSection, Button, Icon } from '@folio/stripes/components';
 import { parseFilters, ColumnManager, SearchAndSortQuery } from '@folio/stripes/smart-components';
+import message2stats from '../util/message2stats';
 import HarvestablesSearchPane from '../search/HarvestablesSearchPane';
 import ErrorMessage from '../components/ErrorMessage';
 import packageInfo from '../../package';
@@ -116,6 +117,7 @@ function Harvestables({
   const columnMapping = {
     name: <FormattedMessage id="ui-harvester-admin.harvestables.column.name" />,
     currentStatus: <FormattedMessage id="ui-harvester-admin.harvestables.column.currentStatus" />,
+    records: <FormattedMessage id="ui-harvester-admin.harvestables.column.records" />,
     lastHarvestFinished: <FormattedMessage id="ui-harvester-admin.harvestables.column.lastHarvestFinished" />,
     enabled: <FormattedMessage id="ui-harvester-admin.harvestables.column.enabled" />,
     jobClass: <FormattedMessage id="ui-harvester-admin.harvestables.column.jobClass" />,
@@ -164,6 +166,7 @@ function Harvestables({
                       columnWidths={{
                         name: '400px',
                         currentStatus: '90px',
+                        records: '90px',
                         lastHarvestFinished: '210px',
                         enabled: '80px',
                         jobClass: '150px',
@@ -174,6 +177,10 @@ function Harvestables({
                         enabled: r => <FormattedMessage id={`ui-harvester-admin.harvestables.column.enabled.${r.enabled}`} />,
                         jobClass: r => <FormattedMessage id={`ui-harvester-admin.harvestables.column.jobClass.${r.jobClass}`} />,
                         currentStatus: r => <FormattedMessage id={`ui-harvester-admin.harvestables.column.currentStatus.${r.currentStatus}`} />,
+                        records: r => {
+                          const stats = message2stats(r.message);
+                          return stats?.instances?.loaded;
+                        },
                         lastHarvestFinished: r => (
                           <>
                             <FormattedTime value={r.lastHarvestFinished} />
@@ -193,7 +200,7 @@ function Harvestables({
                             id={`clickable-log-file-${r.id}`}
                             onClick={(e) => {
                               e.stopPropagation();
-                              updateQuery({ _path: `${packageInfo.stripes.route}/harvestables/${r.id}/logs` })
+                              updateQuery({ _path: `${packageInfo.stripes.route}/harvestables/${r.id}/logs` });
                             }}
                             marginBottom0
                           >

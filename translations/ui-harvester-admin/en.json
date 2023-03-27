@@ -36,6 +36,7 @@
 
     "harvestables.column.name": "Name",
     "harvestables.column.currentStatus": "Status",
+    "harvestables.column.records": "Records",
     "harvestables.column.lastHarvestFinished": "Last harvest finished",
     "harvestables.column.enabled": "Enabled?",
     "harvestables.column.jobClass": "Job class",
