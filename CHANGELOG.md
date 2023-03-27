@@ -9,7 +9,7 @@
 * Tidy up Harvestable read-only displays to match editing forms. Fixes UIHAADM-12.
 * Fix up [`zh_CN.json`](translations/ui-harvester-admin/zh_CN.json) translations to properly escape XML appearing in the help-text translations. Fixes UIHAADM-23.
 * Display summary header on the Logs page. Fixes UIHAADM-24.
-* Display simple list of errors on the Logs page. UIHAADM-25.
+* Display simple list of errors on the Logs page. Fixes UIHAADM-25.
 
 ## [0.1.0](https://github.com/folio-org/ui-harvester-admin/tree/v0.1.0) (2022-07-19)
 
