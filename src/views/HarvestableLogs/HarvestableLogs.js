@@ -22,9 +22,9 @@ const HarvestableLogs = (props) => {
     handlers,
   } = props;
 
-  if (isLoading) return <LoadingPane />;
   const harvestable = data.harvestable[0];
-  const title = harvestable?.name;
+  if (isLoading || !harvestable) return <LoadingPane />;
+  const title = harvestable.name;
 
   const shortcuts = [
     {
