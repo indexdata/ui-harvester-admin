@@ -172,6 +172,18 @@ const FullHarvestable = ({ defaultWidth, resources, mutator, match, deleteRecord
               <FormattedMessage id="ui-harvester-admin.button.view-log" />
             </Icon>
           </Button>
+          <Button
+            buttonStyle="dropdownItem"
+            marginBottom0
+            id="clickable-old-logs"
+            onClick={() => {
+              mutator.query.update({ _path: `${packageInfo.stripes.route}/harvestables/${match.params.recId}/oldlogs` });
+            }}
+          >
+            <Icon icon="list">
+              <FormattedMessage id="ui-harvester-admin.button.old-logs" />
+            </Icon>
+          </Button>
         </IfPermission>
       </>
     );

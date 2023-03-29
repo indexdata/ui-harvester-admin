@@ -2,7 +2,9 @@
 
 To be deleted after
 [UIHAADM-5](https://issues.folio.org/browse/UIHAADM-5)
-is complete.
+and
+[UIHAADM-29](https://issues.folio.org/browse/UIHAADM-29)
+are complete.
 
 
 ## Documentation
