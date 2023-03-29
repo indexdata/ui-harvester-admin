@@ -10,6 +10,17 @@ import ErrorMessage from '../../components/ErrorMessage';
 import packageInfo from '../../../package';
 
 
+function formatDateTime(dt) {
+  return (
+    <>
+      <FormattedTime value={dt} hour="numeric" minute="numeric" second="numeric" />
+      {', '}
+      <FormattedDate value={dt} year="numeric" month="long" day="numeric" />
+    </>
+  );
+}
+
+
 function HarvestableOldLogs({
   data,
   query,
@@ -26,10 +37,35 @@ function HarvestableOldLogs({
     name: <FormattedMessage id="ui-harvester-admin.old-logs.column.name" />,
     status: <FormattedMessage id="ui-harvester-admin.old-logs.column.status" />,
     amountHarvested: <FormattedMessage id="ui-harvester-admin.old-logs.column.amountHarvested" />,
+    seconds: <FormattedMessage id="ui-harvester-admin.old-logs.column.seconds" />,
     started: <FormattedMessage id="ui-harvester-admin.old-logs.column.started" />,
     finished: <FormattedMessage id="ui-harvester-admin.old-logs.column.finished" />,
     type: <FormattedMessage id="ui-harvester-admin.old-logs.column.type" />,
+    message: <FormattedMessage id="ui-harvester-admin.old-logs.column.message" />,
   };
+
+  const columnWidths = {
+    name: '400px',
+    status: '90px',
+    amountHarvested: '90px',
+    seconds: '100px',
+    started: '210px',
+    finished: '210px',
+    type: '150px',
+    message: '600px',
+  };
+
+  const formatter = {
+    status: r => <FormattedMessage id={`ui-harvester-admin.harvestables.column.currentStatus.${r.status}`} />,
+    amountHarvested: r => {
+      const stats = message2stats(r.message);
+      return r.amountHarvested + '=' + stats?.instances?.loaded;
+    },
+    started: r => formatDateTime(r.started),
+    finished: r => formatDateTime(r.finished),
+    seconds: r => Math.trunc((new Date(r.finished) - new Date(r.started)) / 1000),
+    type: r => <FormattedMessage id={`ui-harvester-admin.harvestables.field.jobClass.${r.type}`} />,
+  }
 
   return (
     <SearchAndSortQuery>
@@ -65,31 +101,8 @@ function HarvestableOldLogs({
                       virtualize
                       visibleColumns={visibleColumns}
                       columnMapping={columnMapping}
-                      columnWidths={{
-                        name: '400px',
-                        currentStatus: '90px',
-                        records: '90px',
-                        lastHarvestFinished: '210px',
-                        enabled: '80px',
-                        jobClass: '150px',
-                        id: '80px',
-                        message: '600px',
-                      }}
-                      formatter={{
-                        jobClass: r => <FormattedMessage id={`ui-harvester-admin.harvestables.column.jobClass.${r.jobClass}`} />,
-                        currentStatus: r => <FormattedMessage id={`ui-harvester-admin.harvestables.column.currentStatus.${r.currentStatus}`} />,
-                        records: r => {
-                          const stats = message2stats(r.message);
-                          return stats?.instances?.loaded;
-                        },
-                        lastHarvestFinished: r => (
-                          <>
-                            <FormattedTime value={r.lastHarvestFinished} />
-                            {', '}
-                            <FormattedDate value={r.lastHarvestFinished} year="numeric" month="long" day="numeric" />
-                          </>
-                        ),
-                      }}
+                      columnWidths={columnWidths}
+                      formatter={formatter}
                       contentData={data.oldLogs}
                       totalCount={resultCount}
                       onHeaderClick={sasqParams.onSort}

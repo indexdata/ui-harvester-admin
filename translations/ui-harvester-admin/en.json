@@ -263,11 +263,13 @@
     "failed-records.errors": "Errors",
 
     "old-logs.column.name": "Name",
-    "old-logs.column.type": "Type",
     "old-logs.column.status": "Status",
+    "old-logs.column.amountHarvested": "Records",
+    "old-logs.column.seconds": "Seconds",
     "old-logs.column.started": "Started",
     "old-logs.column.finished": "Finished",
-    "old-logs.column.amountHarvested": "Records",
+    "old-logs.column.type": "Job class",
+    "old-logs.column.message": "Message",
 
     "SENTINEL": "SENTINEL"
 }
