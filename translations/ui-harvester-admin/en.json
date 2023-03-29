@@ -22,10 +22,12 @@
     "nav.storages": "Storage engines",
     "nav.pipelines": "Transformation pipelines",
     "nav.steps": "Transformation steps",
+    "nav.old-logs": "Logs from previous jobs",
 
     "button.edit": "Edit",
     "button.delete": "Delete",
     "button.view-log": "View log",
+    "button.old-logs": "Old logs",
     "button.start-job": "Start job",
     "button.stop-job": "Stop job",
     "button.confirm": "Confirm",
@@ -259,6 +261,13 @@
     "failed-records.instanceHrid": "Instance HRID",
     "failed-records.instanceTitle": "Instance title",
     "failed-records.errors": "Errors",
+
+    "old-logs.column.name": "Name",
+    "old-logs.column.type": "Type",
+    "old-logs.column.status": "Status",
+    "old-logs.column.started": "Started",
+    "old-logs.column.finished": "Finished",
+    "old-logs.column.amountHarvested": "Records",
 
     "SENTINEL": "SENTINEL"
 }
