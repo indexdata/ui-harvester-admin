@@ -11,6 +11,7 @@ import EditHarvestableRoute from './routes/EditHarvestableRoute';
 import HarvestableLogsRoute from './routes/HarvestableLogsRoute';
 import HarvestableOldLogsRoute from './routes/HarvestableOldLogsRoute';
 import StoragesRoute from './routes/StoragesRoute';
+import AllOldLogsRoute from './routes/AllOldLogsRoute';
 
 const HarvesterAdminApp = (props) => {
   const {
@@ -35,6 +36,7 @@ const HarvesterAdminApp = (props) => {
             <NestedRoute path={`${path}/harvestables/:recId/edit`} exact component={EditHarvestableRoute} />
           </NestedRoute>
           <NestedRoute path={`${path}/storages`} exact component={StoragesRoute} />
+          <NestedRoute path={`${path}/logs`} exact component={AllOldLogsRoute} />
         </Switch>
       </NestedRoute>
     </Switch>

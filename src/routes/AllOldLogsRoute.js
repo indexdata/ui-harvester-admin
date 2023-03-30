@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import queryString from 'query-string';
 import { stripesConnect } from '@folio/stripes/core';
 import { StripesConnectedSource } from '@folio/stripes/smart-components';
 import HarvestableOldLogs from '../views/HarvestableOldLogs';
-import packageInfo from '../../package';
 
 
-const INITIAL_RESULT_COUNT = 100;
-const RESULT_COUNT_INCREMENT = 100;
+const INITIAL_RESULT_COUNT = 20;
+const RESULT_COUNT_INCREMENT = 10;
 
 
-const HarvestableOldLogsRoute = ({ stripes, resources, mutator, match }) => {
+const HarvestableOldLogsRoute = ({ stripes, resources, mutator }) => {
   let [source, setSource] = useState(); // eslint-disable-line prefer-const
   if (!source) {
     source = new StripesConnectedSource({ resources, mutator }, stripes.logger, 'reportTitles');
@@ -20,19 +18,14 @@ const HarvestableOldLogsRoute = ({ stripes, resources, mutator, match }) => {
     source.update({ resources, mutator }, 'reportTitles');
   }
 
-  const handleClose = () => {
-    mutator.query.update({ _path: `${packageInfo.stripes.route}/harvestables/${match.params.recId}` });
-  };
-
   const handleNeedMoreData = () => source.fetchMore(RESULT_COUNT_INCREMENT);
 
-  const hasLoaded = resources.harvestable.hasLoaded && resources.oldLogs.hasLoaded;
+  const hasLoaded = resources.oldLogs.hasLoaded;
   const error = resources.oldLogs.failed ? resources.oldLogs.failed.message : undefined;
 
   return (
     <HarvestableOldLogs
       data={{
-        harvestable: resources.harvestable.records?.[0],
         oldLogs: resources.oldLogs.records,
       }}
       resultCount={resources.oldLogs.other?.totalRecords}
@@ -40,7 +33,6 @@ const HarvestableOldLogsRoute = ({ stripes, resources, mutator, match }) => {
       updateQuery={mutator.query.update}
       hasLoaded={hasLoaded}
       error={error}
-      handlers={{ onClose: handleClose }}
       onNeedMoreData={handleNeedMoreData}
     />
   );
@@ -50,10 +42,6 @@ const HarvestableOldLogsRoute = ({ stripes, resources, mutator, match }) => {
 HarvestableOldLogsRoute.manifest = Object.freeze({
   query: {},
   resultCount: { initialValue: INITIAL_RESULT_COUNT },
-  harvestable: {
-    type: 'okapi',
-    path: 'harvester-admin/harvestables/:{recId}',
-  },
   oldLogs: {
     type: 'okapi',
     path: 'harvester-admin/previous-jobs',
@@ -61,12 +49,13 @@ HarvestableOldLogsRoute.manifest = Object.freeze({
     records: 'previousJobs',
     recordsRequired: '%{resultCount}',
     perRequest: RESULT_COUNT_INCREMENT,
+    /*
     params: {
-      query: (_queryParams, pathComponents) => {
-        const qp = { harvestableId: pathComponents.recId };
-        return queryString.stringify(qp);
+      query: (qp) => {
+        return 'cql.allRecords=1'; // XXX for now
       },
     },
+    */
   },
 });
 
@@ -77,12 +66,6 @@ HarvestableOldLogsRoute.propTypes = {
   }).isRequired,
   resources: PropTypes.shape({
     query: PropTypes.object.isRequired,
-    harvestable: PropTypes.shape({
-      hasLoaded: PropTypes.bool.isRequired,
-      records: PropTypes.arrayOf(
-        PropTypes.shape({}).isRequired,
-      ).isRequired,
-    }).isRequired,
     oldLogs: PropTypes.shape({
       failed: PropTypes.oneOfType([
         PropTypes.bool,
@@ -102,11 +85,6 @@ HarvestableOldLogsRoute.propTypes = {
   mutator: PropTypes.shape({
     query: PropTypes.shape({
       update: PropTypes.func.isRequired,
-    }).isRequired,
-  }).isRequired,
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      recId: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
 };

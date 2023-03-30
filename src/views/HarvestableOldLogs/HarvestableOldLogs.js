@@ -71,6 +71,13 @@ function HarvestableOldLogs({
     },
   };
 
+  const paneTitle = !data.harvestable ?
+    <FormattedMessage id="ui-harvester-admin.nav.logs" /> :
+    <FormattedMessage
+      id="ui-harvester-admin.nav.logs-for"
+      values={{ name: data.harvestable.name }}
+    />;
+
   return (
     <SearchAndSortQuery>
       {
@@ -95,7 +102,7 @@ function HarvestableOldLogs({
                     appIcon={<AppIcon app="harvester-admin" />}
                     defaultWidth="fill"
                     padContent={false}
-                    paneTitle={<FormattedMessage id="ui-harvester-admin.nav.old-logs" />}
+                    paneTitle={paneTitle}
                     paneSub={<FormattedMessage id="ui-harvester-admin.resultCount" values={{ count: resultCount }} />}
                     actionMenu={() => renderColumnsMenu}
                   >
@@ -127,8 +134,12 @@ function HarvestableOldLogs({
 
 HarvestableOldLogs.propTypes = {
   data: PropTypes.shape({
+    harvestable: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+    }), // optional
     oldLogs: PropTypes.arrayOf(
       PropTypes.shape({
+        // XXX fill in
       }).isRequired,
     ).isRequired,
   }).isRequired,

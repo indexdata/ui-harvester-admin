@@ -22,7 +22,8 @@
     "nav.storages": "Storage engines",
     "nav.pipelines": "Transformation pipelines",
     "nav.steps": "Transformation steps",
-    "nav.old-logs": "Logs from previous jobs",
+    "nav.logs": "Logs",
+    "nav.logs-for": "Logs for {name}",
 
     "button.edit": "Edit",
     "button.delete": "Delete",
