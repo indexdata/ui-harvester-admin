@@ -74,7 +74,7 @@ jobs:
       - name: Login ModuleDescriptor registry
         id: login-md-registry
         # uses: indiesdev/curl@v1.1
-        uses: cyberman54/curl@v1.2
+        uses: cyberman54/curl@master
         with:
           url: "${{ env.FOLIO_MD_REGISTRY }}/authn/login"
           method: "POST"
@@ -107,7 +107,7 @@ jobs:
         run: docker logout https://docker.io/v2/
       - name: Pull FOLIO ModuleDescriptors to local Okapi
         # uses: indiesdev/curl@v1.1
-        uses: cyberman54/curl@v1.2
+        uses: cyberman54/curl@master
         with:
           url: "http://${{ env.OKAPI_IP }}:9130/_/proxy/pull/modules"
           method: "POST"
@@ -121,7 +121,7 @@ jobs:
           body: ${{ env.OKAPI_PULL_FOLIO }}
       - name: Pull Index Data ModuleDescriptors to local Okapi
         # uses: indiesdev/curl@v1.1
-        uses: cyberman54/curl@v1.2
+        uses: cyberman54/curl@master
         with:
           url: "http://${{ env.OKAPI_IP }}:9130/_/proxy/pull/modules"
           method: "POST"
@@ -135,7 +135,7 @@ jobs:
           body: ${{ env.OKAPI_PULL_INDEXDATA }}
       - name: Perform local Okapi dependency check
         # uses: indiesdev/curl@v1.1
-        uses: cyberman54/curl@v1.2
+        uses: cyberman54/curl@master
         with:
           url: "http://${{ env.OKAPI_IP }}:9130/_/proxy/modules?preRelease=false&npmSnapshot=false"
           method: "POST"
@@ -165,7 +165,7 @@ jobs:
       - name: Publish ModuleDescriptor to MD registry
         id: result-md-registry
         # uses: indiesdev/curl@v1.1
-        uses: cyberman54/curl@v1.2
+        uses: cyberman54/curl@master
         with:
           url: "${{ env.FOLIO_MD_REGISTRY }}/_/proxy/modules"
           method: "POST"
