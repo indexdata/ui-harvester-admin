@@ -47,7 +47,7 @@ function HarvestableOldLogs({
   const columnWidths = {
     name: '400px',
     status: '90px',
-    amountHarvested: '90px',
+    amountHarvested: '110px',
     seconds: '100px',
     started: '210px',
     finished: '210px',
@@ -59,13 +59,17 @@ function HarvestableOldLogs({
     status: r => <FormattedMessage id={`ui-harvester-admin.harvestables.column.currentStatus.${r.status}`} />,
     amountHarvested: r => {
       const stats = message2stats(r.message);
-      return r.amountHarvested + '=' + stats?.instances?.loaded;
+      return `${r.amountHarvested} (${stats?.instances?.loaded})`;
     },
     started: r => formatDateTime(r.started),
     finished: r => formatDateTime(r.finished),
     seconds: r => Math.trunc((new Date(r.finished) - new Date(r.started)) / 1000),
     type: r => <FormattedMessage id={`ui-harvester-admin.harvestables.field.jobClass.${r.type}`} />,
-  }
+    message: r => {
+      const m = r.message.match(/^ *Instances_processed.*? /);
+      return m ? m[0] : r.message;
+    },
+  };
 
   return (
     <SearchAndSortQuery>
