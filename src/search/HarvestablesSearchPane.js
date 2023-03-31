@@ -2,12 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useIntl, FormattedMessage } from 'react-intl';
 import { useStripes } from '@folio/stripes/core';
-import { Button, Icon, Pane, SearchField, Select } from '@folio/stripes/components';
-import { parseFilters, deparseFilters, MultiSelectionFilter } from '@folio/stripes/smart-components';
+import { Button, Icon, Pane, SearchField } from '@folio/stripes/components';
+import { parseFilters } from '@folio/stripes/smart-components';
+import renderFilter from './renderFilter';
 import css from './Harvestables.css';
-
-
-const NO_VALUE = 'NO';
 
 
 function HarvestablesSearchPane(props) {
@@ -35,46 +33,6 @@ function HarvestablesSearchPane(props) {
   ));
 
   const filterStruct = parseFilters(query.filters);
-
-  const renderFilter = (field, optionTags, isMulti) => {
-    const dataOptions = optionTags.map(tag => ({
-      value: tag,
-      label: intl.formatMessage({ id: `ui-harvester-admin.harvestables.column.${field}.${tag}` }),
-    }));
-
-    if (isMulti) {
-      return (
-        <MultiSelectionFilter
-          name={`multifilter-${field}`}
-          label={intl.formatMessage({ id: `ui-harvester-admin.harvestables.column.${field}` })}
-          dataOptions={dataOptions}
-          selectedValues={filterStruct[field]}
-          onChange={(group) => {
-            const fs2 = { ...filterStruct, [field]: group.values };
-            updateQuery({ filters: deparseFilters(fs2) });
-          }}
-        />
-      );
-    }
-
-    return (
-      <Select
-        label={intl.formatMessage({ id: `ui-harvester-admin.harvestables.column.${field}` })}
-        dataOptions={[
-          { value: NO_VALUE, label: intl.formatMessage({ id: 'ui-harvester-admin.no-value' }) },
-          ...dataOptions
-        ]}
-        value={filterStruct[field] && filterStruct[field][0]}
-        onChange={(e) => {
-          const val = e.target.value;
-          const fs2 = { ...filterStruct };
-          delete fs2[field];
-          if (val !== NO_VALUE) fs2[field] = [val];
-          updateQuery({ filters: deparseFilters(fs2) });
-        }}
-      />
-    );
-  };
 
   return (
     <Pane
@@ -115,9 +73,9 @@ function HarvestablesSearchPane(props) {
           </Button>
         </div>
 
-        {renderFilter('enabled', ['true', 'false'])}
-        {renderFilter('jobClass', ['OaiPmhResource', 'XmlBulkResource', 'HarvestConnectorResource', 'StatusResource'])}
-        {renderFilter('currentStatus', ['NEW', 'OK', 'WARN', 'ERROR', 'RUNNING', 'FINISHED', 'KILLED'], true)}
+        {renderFilter(intl, filterStruct, updateQuery, 'enabled', ['true', 'false'])}
+        {renderFilter(intl, filterStruct, updateQuery, 'jobClass', ['OaiPmhResource', 'XmlBulkResource', 'HarvestConnectorResource', 'StatusResource'])}
+        {renderFilter(intl, filterStruct, updateQuery, 'currentStatus', ['NEW', 'OK', 'WARN', 'ERROR', 'RUNNING', 'FINISHED', 'KILLED'], true)}
 
         <div className={css.resetButtonWrap}>
           <Button
@@ -146,7 +104,7 @@ HarvestablesSearchPane.propTypes = {
   onSubmitSearch: PropTypes.func.isRequired,
   searchField: PropTypes.any, // eslint-disable-line react/forbid-prop-types
 
-  // Passed explicitly by <Harvestables>
+  // Passed explicitly by caller
   defaultWidth: PropTypes.string.isRequired,
   query: PropTypes.object.isRequired,
   updateQuery:PropTypes.func.isRequired,
