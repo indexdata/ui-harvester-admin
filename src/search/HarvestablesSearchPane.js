@@ -5,7 +5,7 @@ import { Button, Icon, Pane, SearchField } from '@folio/stripes/components';
 import { parseFilters } from '@folio/stripes/smart-components';
 import renderFilter from './renderFilter';
 import searchPanePropTypes from './searchPanePropTypes';
-import css from './Harvestables.css';
+import css from './SearchPane.css';
 
 
 function HarvestablesSearchPane(props) {
