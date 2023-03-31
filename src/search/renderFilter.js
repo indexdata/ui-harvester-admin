@@ -6,17 +6,26 @@ import { MultiSelectionFilter, deparseFilters } from '@folio/stripes/smart-compo
 const NO_VALUE = 'NO';
 
 
-function renderFilter(intl, filterStruct, updateQuery, field, optionTags, isMulti) {
+function renderFilter(intl, filterStruct, updateQuery, qualifiedField, optionTags, isMulti) {
+  // `qualifiedField` may be simply the fieldname, provided that the
+  // translations for that field are in `harvestables.column.FIELD`. If
+  // they are elsewhere, `qualifiedField` takes the form `FIELD/TAG`
+  // where TAG is the translation-tag path to the relevant field's
+  // translations. See OldLogsSearchPane.js for examples.
+  const match = qualifiedField.match(/(.*)\/(.*)/);
+  const field = match ? match[1] : qualifiedField;
+  const transTag = match ? match[2] : `harvestables.column.${field}`;
+
   const dataOptions = optionTags.map(tag => ({
     value: tag,
-    label: intl.formatMessage({ id: `ui-harvester-admin.harvestables.column.${field}.${tag}` }),
+    label: intl.formatMessage({ id: `ui-harvester-admin.${transTag}.${tag}` }),
   }));
 
   if (isMulti) {
     return (
       <MultiSelectionFilter
         name={`multifilter-${field}`}
-        label={intl.formatMessage({ id: `ui-harvester-admin.harvestables.column.${field}` })}
+        label={intl.formatMessage({ id: `ui-harvester-admin.${transTag}` })}
         dataOptions={dataOptions}
         selectedValues={filterStruct[field]}
         onChange={(group) => {
@@ -29,7 +38,7 @@ function renderFilter(intl, filterStruct, updateQuery, field, optionTags, isMult
 
   return (
     <Select
-      label={intl.formatMessage({ id: `ui-harvester-admin.harvestables.column.${field}` })}
+      label={intl.formatMessage({ id: `ui-harvester-admin.${transTag}` })}
       dataOptions={[
         { value: NO_VALUE, label: intl.formatMessage({ id: 'ui-harvester-admin.no-value' }) },
         ...dataOptions
