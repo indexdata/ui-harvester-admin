@@ -1,10 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useIntl, FormattedMessage } from 'react-intl';
 import { useStripes } from '@folio/stripes/core';
 import { Button, Icon, Pane, SearchField } from '@folio/stripes/components';
 import { parseFilters } from '@folio/stripes/smart-components';
 import renderFilter from './renderFilter';
+import searchPanePropTypes from './searchPanePropTypes';
 import css from './Harvestables.css';
 
 
@@ -95,20 +95,7 @@ function HarvestablesSearchPane(props) {
 }
 
 
-HarvestablesSearchPane.propTypes = {
-  // Passed as SASQ parameters
-  searchValue: PropTypes.shape({
-    query: PropTypes.string,
-  }).isRequired,
-  getSearchHandlers: PropTypes.func.isRequired,
-  onSubmitSearch: PropTypes.func.isRequired,
-  searchField: PropTypes.any, // eslint-disable-line react/forbid-prop-types
-
-  // Passed explicitly by caller
-  defaultWidth: PropTypes.string.isRequired,
-  query: PropTypes.object.isRequired,
-  updateQuery:PropTypes.func.isRequired,
-};
+HarvestablesSearchPane.propTypes = searchPanePropTypes;
 
 
 export default HarvestablesSearchPane;
