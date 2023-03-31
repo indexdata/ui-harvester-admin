@@ -68,6 +68,12 @@
     "harvestables.index.id": "ID",
     "harvestables.index.message": "Message",
 
+    "old-logs.index.name": "Name",
+    "old-logs.index.id": "ID",
+    "old-logs.index.harvestableId": "Harvestable ID",
+    "old-logs.index.message": "Message",
+    "old-logs.index.all": "(All)",
+
     "searchInputLabel": "XXX searchInputLabel",
 
     "accordion.devinfo": "Developer information",

@@ -5,7 +5,7 @@ import { AppIcon } from '@folio/stripes/core';
 import { LoadingPane, Paneset, Pane, MultiColumnList } from '@folio/stripes/components';
 import { ColumnManager, SearchAndSortQuery } from '@folio/stripes/smart-components';
 import message2stats from '../../util/message2stats';
-import HarvestablesSearchPane from '../../search/HarvestablesSearchPane';
+import OldLogsSearchPane from '../../search/OldLogsSearchPane';
 import ErrorMessage from '../../components/ErrorMessage';
 import packageInfo from '../../../package';
 
@@ -84,8 +84,7 @@ function HarvestableOldLogs({
         (sasqParams) => {
           return (
             <Paneset id="old-logs-paneset">
-              {/* XXX Ostensibly id , harvestableId , name ,  type , and status are queryable */}
-              <HarvestablesSearchPane
+              <OldLogsSearchPane
                 {...sasqParams}
                 defaultWidth="20%"
                 query={query}
