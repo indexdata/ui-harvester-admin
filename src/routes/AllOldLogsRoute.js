@@ -1,12 +1,30 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { stripesConnect } from '@folio/stripes/core';
-import { StripesConnectedSource } from '@folio/stripes/smart-components';
+import { makeQueryFunction, StripesConnectedSource } from '@folio/stripes/smart-components';
+import indexNames from '../search/oldLogsIndexNames';
 import HarvestableOldLogs from '../views/HarvestableOldLogs';
 
 
-const INITIAL_RESULT_COUNT = 20;
-const RESULT_COUNT_INCREMENT = 10;
+const INITIAL_RESULT_COUNT = 100;
+const RESULT_COUNT_INCREMENT = 100;
+
+
+const sortMap = {
+  // XXX I _think_ all the headings are the names of sortable fields
+  // Verify this when server-side sorting starts to work
+};
+
+const filterConfig = [{
+  name: 'status',
+  cql: 'status',
+  values: [],
+}, {
+  name: 'type',
+  cql: 'type',
+  values: [],
+}];
+
 
 
 const HarvestableOldLogsRoute = ({ stripes, resources, mutator }) => {
@@ -49,13 +67,16 @@ HarvestableOldLogsRoute.manifest = Object.freeze({
     records: 'previousJobs',
     recordsRequired: '%{resultCount}',
     perRequest: RESULT_COUNT_INCREMENT,
-    /*
     params: {
-      query: (qp) => {
-        return 'cql.allRecords=1'; // XXX for now
-      },
+      query: makeQueryFunction(
+        'cql.allRecords=1',
+        indexNames
+          .filter(n => n !== 'all' && n !== 'id' && n !== 'harvestableId' && n !== 'message' /* XXX for now */)
+          .map(index => `${index}="%{query.query}*"`).join(' or '),
+        sortMap,
+        filterConfig,
+      ),
     },
-    */
   },
 });
 
