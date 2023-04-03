@@ -30,7 +30,7 @@ const filterConfig = [{
 }];
 
 
-const HarvestableOldLogsRoute = ({ stripes, resources, mutator }) => {
+const AllOldLogsRoute = ({ stripes, resources, mutator }) => {
   let [source, setSource] = useState(); // eslint-disable-line prefer-const
   if (!source) {
     source = new StripesConnectedSource({ resources, mutator }, stripes.logger, 'reportTitles');
@@ -70,7 +70,7 @@ const queryFunction = makeQueryFunction(
 );
 
 
-HarvestableOldLogsRoute.manifest = Object.freeze({
+AllOldLogsRoute.manifest = Object.freeze({
   query: {},
   resultCount: { initialValue: INITIAL_RESULT_COUNT },
   oldLogs: {
@@ -87,7 +87,7 @@ HarvestableOldLogsRoute.manifest = Object.freeze({
 });
 
 
-HarvestableOldLogsRoute.propTypes = {
+AllOldLogsRoute.propTypes = {
   stripes: PropTypes.shape({
     logger: PropTypes.object.isRequired,
   }).isRequired,
@@ -117,4 +117,4 @@ HarvestableOldLogsRoute.propTypes = {
 };
 
 
-export default stripesConnect(HarvestableOldLogsRoute);
+export default stripesConnect(AllOldLogsRoute);
