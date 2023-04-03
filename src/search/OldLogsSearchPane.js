@@ -3,6 +3,7 @@ import { useIntl, FormattedMessage } from 'react-intl';
 import { useStripes } from '@folio/stripes/core';
 import { Button, Icon, Pane, SearchField } from '@folio/stripes/components';
 import { parseFilters } from '@folio/stripes/smart-components';
+import indexNames from './oldLogsIndexNames';
 import renderFilter from './renderFilter';
 import searchPanePropTypes from './searchPanePropTypes';
 import css from './SearchPane.css';
@@ -28,7 +29,7 @@ function OldLogsSearchPane(props) {
   };
 
   const intl = useIntl();
-  const searchableIndexes = ['name', 'id', 'harvestableId', 'message', 'all'].map(x => (
+  const searchableIndexes = indexNames.map(x => (
     { value: x, label: intl.formatMessage({ id: `ui-harvester-admin.old-logs.index.${x}` }) }
   ));
 
