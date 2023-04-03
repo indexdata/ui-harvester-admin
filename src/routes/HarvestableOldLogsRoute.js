@@ -1,14 +1,34 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import queryString from 'query-string';
 import { stripesConnect } from '@folio/stripes/core';
-import { StripesConnectedSource } from '@folio/stripes/smart-components';
+import { makeQueryFunction, StripesConnectedSource } from '@folio/stripes/smart-components';
+import indexNames from '../search/oldLogsIndexNames';
 import HarvestableOldLogs from '../views/HarvestableOldLogs';
 import packageInfo from '../../package';
 
 
 const INITIAL_RESULT_COUNT = 100;
 const RESULT_COUNT_INCREMENT = 100;
+
+
+const sortMap = {
+  // XXX I _think_ all the headings are the names of sortable fields
+  // Verify this when server-side sorting starts to work
+};
+
+const filterConfig = [{
+  name: 'status',
+  cql: 'status',
+  values: [],
+}, {
+  name: 'type',
+  cql: 'type',
+  values: [],
+}, {
+  name: 'harvestableId',
+  cql: 'harvestableId',
+  values: [],
+}];
 
 
 const HarvestableOldLogsRoute = ({ stripes, resources, mutator, match }) => {
@@ -47,6 +67,16 @@ const HarvestableOldLogsRoute = ({ stripes, resources, mutator, match }) => {
 };
 
 
+const queryFunction = makeQueryFunction(
+  'cql.allRecords=1',
+  indexNames
+    .filter(n => n !== 'all' && n !== 'id' && n !== 'harvestableId' && n !== 'message' /* XXX for now */)
+    .map(index => `${index}="%{query.query}*"`).join(' or '),
+  sortMap,
+  filterConfig,
+);
+
+
 HarvestableOldLogsRoute.manifest = Object.freeze({
   query: {},
   resultCount: { initialValue: INITIAL_RESULT_COUNT },
@@ -62,10 +92,12 @@ HarvestableOldLogsRoute.manifest = Object.freeze({
     recordsRequired: '%{resultCount}',
     perRequest: RESULT_COUNT_INCREMENT,
     params: {
-      query: (_queryParams, pathComponents) => {
-        const qp = { harvestableId: pathComponents.recId };
-        return queryString.stringify(qp);
-      },
+      query: (queryParams, pathComponents, rv, logger) => {
+        const extraFilter = `harvestableId.${pathComponents.recId}`;
+        const allFilters = rv.query.filters ? `${rv.query.filters},${extraFilter}` : extraFilter;
+        rv.query = { ...rv.query, filters: allFilters };
+        return queryFunction(queryParams, pathComponents, rv, logger);
+      }
     },
   },
 });
