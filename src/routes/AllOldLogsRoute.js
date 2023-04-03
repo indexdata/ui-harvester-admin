@@ -23,8 +23,11 @@ const filterConfig = [{
   name: 'type',
   cql: 'type',
   values: [],
+}, {
+  name: 'harvestableId',
+  cql: 'harvestableId',
+  values: [],
 }];
-
 
 
 const HarvestableOldLogsRoute = ({ stripes, resources, mutator }) => {
@@ -57,6 +60,16 @@ const HarvestableOldLogsRoute = ({ stripes, resources, mutator }) => {
 };
 
 
+const queryFunction = makeQueryFunction(
+  'cql.allRecords=1',
+  indexNames
+    .filter(n => n !== 'all' && n !== 'id' && n !== 'harvestableId' && n !== 'message' /* XXX for now */)
+    .map(index => `${index}="%{query.query}*"`).join(' or '),
+  sortMap,
+  filterConfig,
+);
+
+
 HarvestableOldLogsRoute.manifest = Object.freeze({
   query: {},
   resultCount: { initialValue: INITIAL_RESULT_COUNT },
@@ -68,14 +81,7 @@ HarvestableOldLogsRoute.manifest = Object.freeze({
     recordsRequired: '%{resultCount}',
     perRequest: RESULT_COUNT_INCREMENT,
     params: {
-      query: makeQueryFunction(
-        'cql.allRecords=1',
-        indexNames
-          .filter(n => n !== 'all' && n !== 'id' && n !== 'harvestableId' && n !== 'message' /* XXX for now */)
-          .map(index => `${index}="%{query.query}*"`).join(' or '),
-        sortMap,
-        filterConfig,
-      ),
+      query: queryFunction,
     },
   },
 });
