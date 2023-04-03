@@ -4,26 +4,12 @@ import { stripesConnect } from '@folio/stripes/core';
 import { makeQueryFunction, StripesConnectedSource } from '@folio/stripes/smart-components';
 import indexNames from '../search/oldLogsIndexNames';
 import sortMap from '../search/oldLogsSortMap';
+import filterConfig from '../search/oldLogsFilterConfig';
 import HarvestableOldLogs from '../views/HarvestableOldLogs';
 
 
 const INITIAL_RESULT_COUNT = 100;
 const RESULT_COUNT_INCREMENT = 100;
-
-
-const filterConfig = [{
-  name: 'status',
-  cql: 'status',
-  values: [],
-}, {
-  name: 'type',
-  cql: 'type',
-  values: [],
-}, {
-  name: 'harvestableId',
-  cql: 'harvestableId',
-  values: [],
-}];
 
 
 const AllOldLogsRoute = ({ stripes, resources, mutator }) => {
