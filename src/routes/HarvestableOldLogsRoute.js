@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { stripesConnect } from '@folio/stripes/core';
 import { makeQueryFunction, StripesConnectedSource } from '@folio/stripes/smart-components';
 import indexNames from '../search/oldLogsIndexNames';
+import sortMap from '../search/oldLogsSortMap';
 import HarvestableOldLogs from '../views/HarvestableOldLogs';
 import packageInfo from '../../package';
 
@@ -10,11 +11,6 @@ import packageInfo from '../../package';
 const INITIAL_RESULT_COUNT = 100;
 const RESULT_COUNT_INCREMENT = 100;
 
-
-const sortMap = {
-  // XXX I _think_ all the headings are the names of sortable fields
-  // Verify this when server-side sorting starts to work
-};
 
 const filterConfig = [{
   name: 'status',
