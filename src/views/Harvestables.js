@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage, FormattedTime, FormattedDate } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { useLocation } from 'react-router-dom';
 import { useStripes, IfPermission, AppIcon } from '@folio/stripes/core';
 import { LoadingPane, Paneset, Pane, MultiColumnList, PaneMenu, MenuSection, Button, Icon } from '@folio/stripes/components';
 import { parseFilters, ColumnManager, SearchAndSortQuery } from '@folio/stripes/smart-components';
 import message2stats from '../util/message2stats';
+import formatDateTime from '../util/formatDateTime';
 import HarvestablesSearchPane from '../search/HarvestablesSearchPane';
 import ErrorMessage from '../components/ErrorMessage';
 import packageInfo from '../../package';
@@ -181,13 +182,7 @@ function Harvestables({
                           const stats = message2stats(r.message);
                           return stats?.instances?.loaded;
                         },
-                        lastHarvestFinished: r => (
-                          <>
-                            <FormattedTime value={r.lastHarvestFinished} />
-                            {', '}
-                            <FormattedDate value={r.lastHarvestFinished} year="numeric" month="long" day="numeric" />
-                          </>
-                        ),
+                        lastHarvestFinished: r => formatDateTime(r.lastHarvestFinished),
                         message: r => (
                           r.message?.match('Instances_processed/loaded') ?
                             <ul className={css.noDot}>
