@@ -1,24 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage, FormattedTime, FormattedDate } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { AppIcon } from '@folio/stripes/core';
 import { LoadingPane, Paneset, Pane, MultiColumnList } from '@folio/stripes/components';
 import { ColumnManager, SearchAndSortQuery } from '@folio/stripes/smart-components';
+import formatDateTime from '../../util/formatDateTime';
 import message2stats from '../../util/message2stats';
 import OldLogsSearchPane from '../../search/OldLogsSearchPane';
 import ErrorMessage from '../../components/ErrorMessage';
 import packageInfo from '../../../package';
-
-
-function formatDateTime(dt) {
-  return (
-    <>
-      <FormattedTime value={dt} hour="numeric" minute="numeric" second="numeric" />
-      {', '}
-      <FormattedDate value={dt} year="numeric" month="long" day="numeric" />
-    </>
-  );
-}
 
 
 function HarvestableOldLogs({
