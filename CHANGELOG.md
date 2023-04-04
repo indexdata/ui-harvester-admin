@@ -16,6 +16,7 @@
 * Provide access to older harvester logs across all jobs. Fixes UIHAADM-30.
 * Create a search pane for the old-logs page. Fixes UIHAADM-31.
 * Activate the search pane for the harvestable-specific old-logs page. Fixes UIHAADM-34.
+* Minor quality-of-life improvements for Logs page. Fixes UIHAADM-37.
 
 ## [0.1.0](https://github.com/folio-org/ui-harvester-admin/tree/v0.1.0) (2022-07-19)
 
