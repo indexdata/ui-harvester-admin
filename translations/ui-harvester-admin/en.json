@@ -250,7 +250,7 @@
     "harvestables.field.failedRecordsLogging.ADD_ALL": "Do save. Add numbered versions for existing files",
 
     "logs.plainTextLog": "Plain text log",
-    "logs.failedRecords": "{count, number} {count, plural, one {failed record} other {failed records}}",
+    "logs.countFailedRecords": "{count, number} {count, plural, one {failed record} other {failed records}}",
 
     "summary-table.summary": "Summary",
     "summary-table.source": "MIU",
