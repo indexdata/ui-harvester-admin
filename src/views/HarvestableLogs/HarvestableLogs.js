@@ -35,6 +35,13 @@ const HarvestableLogs = (props) => {
     },
   ];
 
+  const log = data.plainTextLog;
+  let fileName;
+  if (log) {
+    const m = log.match(/Begin processing of (.*)/m);
+    if (m) fileName = m[1];
+  }
+
   return (
     <HasCommand commands={shortcuts} isWithinScope={checkScope} scope={document.body}>
       <Pane
@@ -51,11 +58,11 @@ const HarvestableLogs = (props) => {
           <HarvestableLogsFailedRecords failedRecords={data.failedRecords} />
           <Accordion
             id="harvestable-logs-plain"
-            label={<FormattedMessage id="ui-harvester-admin.logs.plainTextLog" />}
+            label={<><FormattedMessage id="ui-harvester-admin.logs.plainTextLog" />{fileName ? ` (${fileName})` : ''}</>}
             closedByDefault
           >
             <pre>
-              {data.plainTextLog || <NoValue />}
+              {log || <NoValue />}
             </pre>
           </Accordion>
         </TitleManager>
