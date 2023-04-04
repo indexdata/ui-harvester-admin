@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { HasCommand, LoadingPane, Pane, checkScope, Accordion, NoValue } from '@folio/stripes/components';
 import { AppIcon, TitleManager } from '@folio/stripes/core';
+import formatDateTime from '../../util/formatDateTime';
 import HarvestableLogsHeader from './HarvestableLogsHeader';
 import HarvestableLogsFailedRecords from './HarvestableLogsFailedRecords';
 
@@ -41,7 +42,7 @@ const HarvestableLogs = (props) => {
         centerContent
         defaultWidth="60%"
         id="pane-harvestable-logs"
-        paneTitle={title}
+        paneTitle={<>{title} ({formatDateTime(harvestable.lastHarvestFinished)})</>}
         dismissible
         onClose={handlers.onClose}
       >
@@ -69,6 +70,7 @@ HarvestableLogs.propTypes = {
     harvestable: PropTypes.arrayOf(
       PropTypes.shape({
         name: PropTypes.string.isRequired,
+        lastHarvestFinished: PropTypes.string.isRequired, // XXX wrong
       }).isRequired,
     ).isRequired,
     plainTextLog: PropTypes.string,
