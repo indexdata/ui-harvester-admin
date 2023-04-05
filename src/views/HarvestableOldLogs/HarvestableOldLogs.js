@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import { useIntl, FormattedMessage } from 'react-intl';
 import { AppIcon } from '@folio/stripes/core';
 import { LoadingPane, Paneset, Pane, MultiColumnList } from '@folio/stripes/components';
 import { ColumnManager, SearchAndSortQuery } from '@folio/stripes/smart-components';
 import formatDateTime from '../../util/formatDateTime';
-import { message2stats } from '../../util/message2stats';
+import { message2stats, summarizeStats } from '../../util/message2stats';
 import OldLogsSearchPane from '../../search/OldLogsSearchPane';
 import ErrorMessage from '../../components/ErrorMessage';
 import packageInfo from '../../../package';
@@ -20,6 +20,7 @@ function HarvestableOldLogs({
   hasLoaded,
   onNeedMoreData,
 }) {
+  const intl = useIntl();
   if (error) return <ErrorMessage message={error} />;
   if (!hasLoaded) return <LoadingPane />;
 
@@ -55,10 +56,7 @@ function HarvestableOldLogs({
     finished: r => formatDateTime(r.finished),
     seconds: r => Math.trunc((new Date(r.finished) - new Date(r.started)) / 1000),
     type: r => <FormattedMessage id={`ui-harvester-admin.harvestables.field.jobClass.${r.type}`} />,
-    message: r => {
-      const m = r.message.match(/^ *Instances_processed.*? /);
-      return m ? m[0] : r.message;
-    },
+    message: r => (r.message?.match('Instances_processed') ? summarizeStats(intl, r.message) : r.message),
   };
 
   const paneTitle = !data.harvestable ?

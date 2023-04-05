@@ -24,4 +24,18 @@ const stats = message2stats(message);
 console.log(stats);
 */
 
-export { message2stats };
+function summarizeLine(statLine) {
+  return `${statLine.processed}/${statLine.loaded}/${statLine.deleted}/${statLine.failed}`;
+}
+
+
+function summarizeStats(intl, param) {
+  const stats = (typeof param === 'string') ? message2stats(param) : param;
+
+  return ['instances', 'holdings', 'items', 'source']
+    .map(t => intl.formatMessage({ id: `ui-harvester-admin.stats.${t}` }) + ':' + summarizeLine(stats[t]))
+    .join(' ');
+}
+
+
+export { message2stats, summarizeStats };

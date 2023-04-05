@@ -1,16 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import { useIntl, FormattedMessage } from 'react-intl';
 import { useLocation } from 'react-router-dom';
 import { useStripes, IfPermission, AppIcon } from '@folio/stripes/core';
 import { LoadingPane, Paneset, Pane, MultiColumnList, PaneMenu, MenuSection, Button, Icon } from '@folio/stripes/components';
 import { parseFilters, ColumnManager, SearchAndSortQuery } from '@folio/stripes/smart-components';
-import { message2stats } from '../util/message2stats';
+import { message2stats, summarizeStats } from '../util/message2stats';
 import formatDateTime from '../util/formatDateTime';
 import HarvestablesSearchPane from '../search/HarvestablesSearchPane';
 import ErrorMessage from '../components/ErrorMessage';
 import packageInfo from '../../package';
-import css from './Harvestables.css';
 
 
 function parseSort(sort) {
@@ -110,6 +109,7 @@ function Harvestables({
   onNeedMoreData,
   children,
 }) {
+  const intl = useIntl();
   const location = useLocation();
   const stripes = useStripes();
   if (error) return <ErrorMessage message={error} />;
@@ -183,13 +183,7 @@ function Harvestables({
                           return stats?.instances?.loaded;
                         },
                         lastHarvestFinished: r => formatDateTime(r.lastHarvestFinished),
-                        message: r => (
-                          r.message?.match('Instances_processed/loaded') ?
-                            <ul className={css.noDot}>
-                              {r.message?.split(' ').filter(s => !!s).map((s, i) => <li key={i}>{s}</li>)}
-                            </ul> :
-                            r.message
-                        ),
+                        message: r => (r.message?.match('Instances_processed') ? summarizeStats(intl, r.message) : r.message),
                         logFile: r => (
                           <Button
                             id={`clickable-log-file-${r.id}`}

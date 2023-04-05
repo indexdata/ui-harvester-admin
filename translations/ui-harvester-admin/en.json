@@ -44,7 +44,7 @@
     "harvestables.column.enabled": "Enabled?",
     "harvestables.column.jobClass": "Job class",
     "harvestables.column.id": "ID",
-    "harvestables.column.message": "Message",
+    "harvestables.column.message": "Message (processed/loaded/deleted/failed)",
     "harvestables.column.logFile": "Log file",
 
     "harvestables.column.enabled.true": "Yes",
@@ -276,7 +276,12 @@
     "old-logs.column.started": "Started",
     "old-logs.column.finished": "Finished",
     "old-logs.column.type": "Job class",
-    "old-logs.column.message": "Message",
+    "old-logs.column.message": "Message (processed/loaded/deleted/failed)",
+
+    "stats.instances": "Instances",
+    "stats.holdings": "Holdings",
+    "stats.items": "Items",
+    "stats.source": "Source",
 
     "SENTINEL": "SENTINEL"
 }
