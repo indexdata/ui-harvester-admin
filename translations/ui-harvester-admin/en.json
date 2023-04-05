@@ -18,7 +18,7 @@
     "permission.harvester-admin.maintain-pipelines": "",
     "permission.ui-harvester-admin.all": "",
 
-    "nav.harvestables": "Harvest jobs",
+    "nav.harvestables": "Harvestables",
     "nav.storages": "Storage engines",
     "nav.pipelines": "Transformation pipelines",
     "nav.steps": "Transformation steps",
@@ -230,7 +230,7 @@
     "harvestables.field.usageTags": "Filter: list of usage tags",
     "harvestables.field.usageTags.help": "Used for filtering the status report by the user groups on customers tagged to a harvest job (\"Used by\").",
     "harvestables.field.adminTags": "Filter: list of admin tags",
-    "harvestables.field.adminTags.help": "Used for filtering the status report by the harvest jobs creator or administrator, as tagged to the harvest job (\"Managed by\")",
+    "harvestables.field.adminTags.help": "Used for filtering the status report by the harvestables creator or administrator, as tagged to the harvest job (\"Managed by\")",
     "harvestables.field.statusJobEnabled": "Status job enabled",
     "harvestables.field.statusJobEnabled.help": "",
     "harvestables.field.customMailAddresses": "Custom e-mails addresses (multiple separated with comma)",
