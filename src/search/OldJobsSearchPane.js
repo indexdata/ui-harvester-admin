@@ -3,13 +3,13 @@ import { useIntl, FormattedMessage } from 'react-intl';
 import { useStripes } from '@folio/stripes/core';
 import { Button, Icon, Pane, SearchField } from '@folio/stripes/components';
 import { parseFilters } from '@folio/stripes/smart-components';
-import indexNames from './oldLogsIndexNames';
+import indexNames from './oldJobsIndexNames';
 import renderFilter from './renderFilter';
 import searchPanePropTypes from './searchPanePropTypes';
 import css from './SearchPane.css';
 
 
-function OldLogsSearchPane(props) {
+function OldJobsSearchPane(props) {
   const {
     defaultWidth,
     searchValue,
@@ -30,7 +30,7 @@ function OldLogsSearchPane(props) {
 
   const intl = useIntl();
   const searchableIndexes = indexNames.map(x => (
-    { value: x, label: intl.formatMessage({ id: `ui-harvester-admin.old-logs.index.${x}` }) }
+    { value: x, label: intl.formatMessage({ id: `ui-harvester-admin.old-jobs.index.${x}` }) }
   ));
 
   const filterStruct = parseFilters(query.filters);
@@ -45,8 +45,8 @@ function OldLogsSearchPane(props) {
           <FormattedMessage id="ui-harvester-admin.searchInputLabel">
             { ([ariaLabel]) => (
               <SearchField
-                data-test-old-logs-search-input
-                id="input-old-logs-search"
+                data-test-old-jobs-search-input
+                id="input-old-jobs-search"
                 autoFocus
                 ariaLabel={ariaLabel}
                 className={css.searchField}
@@ -66,7 +66,7 @@ function OldLogsSearchPane(props) {
             buttonStyle="primary"
             disabled={!searchValue.query || searchValue.query === ''}
             fullWidth
-            id="clickable-old-logs-search"
+            id="clickable-old-jobs-search"
             marginBottom0
             type="submit"
           >
@@ -100,7 +100,7 @@ function OldLogsSearchPane(props) {
 }
 
 
-OldLogsSearchPane.propTypes = searchPanePropTypes;
+OldJobsSearchPane.propTypes = searchPanePropTypes;
 
 
-export default OldLogsSearchPane;
+export default OldJobsSearchPane;

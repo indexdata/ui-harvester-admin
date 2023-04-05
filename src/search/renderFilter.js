@@ -11,7 +11,7 @@ function renderFilter(intl, filterStruct, updateQuery, qualifiedField, optionTag
   // translations for that field are in `harvestables.column.FIELD`. If
   // they are elsewhere, `qualifiedField` takes the form `FIELD/TAG`
   // where TAG is the translation-tag path to the relevant field's
-  // translations. See OldLogsSearchPane.js for examples.
+  // translations. See OldJobsSearchPane.js for examples.
   const match = qualifiedField.match(/(.*)\/(.*)/);
   const field = match ? match[1] : qualifiedField;
   const transTag = match ? match[2] : `harvestables.column.${field}`;

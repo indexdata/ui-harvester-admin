@@ -1,6 +1,6 @@
 # Notes on searching old jobs
 
-The code is in [`OldLogsSearchPane.js`](OldLogsSearchPane.js).
+The code is in [`OldJobsSearchPane.js`](../src/search/OldJobsSearchPane.js).
 
 Niels-Erik says that id, harvestableId, name, type and status are queryable via the WSAPI.
 

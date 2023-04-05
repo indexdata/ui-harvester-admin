@@ -6,12 +6,12 @@ import { LoadingPane, Paneset, Pane, MultiColumnList } from '@folio/stripes/comp
 import { ColumnManager, SearchAndSortQuery } from '@folio/stripes/smart-components';
 import formatDateTime from '../../util/formatDateTime';
 import { message2stats, summarizeStats } from '../../util/message2stats';
-import OldLogsSearchPane from '../../search/OldLogsSearchPane';
+import OldJobsSearchPane from '../../search/OldJobsSearchPane';
 import ErrorMessage from '../../components/ErrorMessage';
 import packageInfo from '../../../package';
 
 
-function HarvestableOldLogs({
+function OldJobs({
   data,
   query,
   resultCount,
@@ -25,14 +25,14 @@ function HarvestableOldLogs({
   if (!hasLoaded) return <LoadingPane />;
 
   const columnMapping = {
-    name: <FormattedMessage id="ui-harvester-admin.old-logs.column.name" />,
-    status: <FormattedMessage id="ui-harvester-admin.old-logs.column.status" />,
-    amountHarvested: <FormattedMessage id="ui-harvester-admin.old-logs.column.amountHarvested" />,
-    seconds: <FormattedMessage id="ui-harvester-admin.old-logs.column.seconds" />,
-    started: <FormattedMessage id="ui-harvester-admin.old-logs.column.started" />,
-    finished: <FormattedMessage id="ui-harvester-admin.old-logs.column.finished" />,
-    type: <FormattedMessage id="ui-harvester-admin.old-logs.column.type" />,
-    message: <FormattedMessage id="ui-harvester-admin.old-logs.column.message" />,
+    name: <FormattedMessage id="ui-harvester-admin.old-jobs.column.name" />,
+    status: <FormattedMessage id="ui-harvester-admin.old-jobs.column.status" />,
+    amountHarvested: <FormattedMessage id="ui-harvester-admin.old-jobs.column.amountHarvested" />,
+    seconds: <FormattedMessage id="ui-harvester-admin.old-jobs.column.seconds" />,
+    started: <FormattedMessage id="ui-harvester-admin.old-jobs.column.started" />,
+    finished: <FormattedMessage id="ui-harvester-admin.old-jobs.column.finished" />,
+    type: <FormattedMessage id="ui-harvester-admin.old-jobs.column.type" />,
+    message: <FormattedMessage id="ui-harvester-admin.old-jobs.column.message" />,
   };
 
   const columnWidths = {
@@ -60,9 +60,9 @@ function HarvestableOldLogs({
   };
 
   const paneTitle = !data.harvestable ?
-    <FormattedMessage id="ui-harvester-admin.nav.logs" /> :
+    <FormattedMessage id="ui-harvester-admin.nav.jobs" /> :
     <FormattedMessage
-      id="ui-harvester-admin.nav.logs-for"
+      id="ui-harvester-admin.nav.jobs-for"
       values={{ name: data.harvestable.name }}
     />;
 
@@ -71,15 +71,15 @@ function HarvestableOldLogs({
       {
         (sasqParams) => {
           return (
-            <Paneset id="old-logs-paneset">
-              <OldLogsSearchPane
+            <Paneset id="old-jobs-paneset">
+              <OldJobsSearchPane
                 {...sasqParams}
                 defaultWidth="20%"
                 query={query}
                 updateQuery={updateQuery}
               />
               <ColumnManager
-                id="old-logs-visible-columns"
+                id="old-jobs-visible-columns"
                 columnMapping={columnMapping}
                 excludeKeys={['name']}
                 persist
@@ -101,7 +101,7 @@ function HarvestableOldLogs({
                       columnMapping={columnMapping}
                       columnWidths={columnWidths}
                       formatter={formatter}
-                      contentData={data.oldLogs}
+                      contentData={data.oldJobs}
                       totalCount={resultCount}
                       onHeaderClick={sasqParams.onSort}
                       onNeedMoreData={onNeedMoreData}
@@ -119,12 +119,12 @@ function HarvestableOldLogs({
 }
 
 
-HarvestableOldLogs.propTypes = {
+OldJobs.propTypes = {
   data: PropTypes.shape({
     harvestable: PropTypes.shape({
       name: PropTypes.string.isRequired,
     }), // optional
-    oldLogs: PropTypes.arrayOf(
+    oldJobs: PropTypes.arrayOf(
       PropTypes.shape({
         // XXX fill in
       }).isRequired,
@@ -139,4 +139,4 @@ HarvestableOldLogs.propTypes = {
 };
 
 
-export default HarvestableOldLogs;
+export default OldJobs;

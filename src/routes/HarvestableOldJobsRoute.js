@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { stripesConnect } from '@folio/stripes/core';
 import { StripesConnectedSource } from '@folio/stripes/smart-components';
-import queryFunction from '../search/oldLogsQueryFunction';
-import HarvestableOldLogs from '../views/HarvestableOldLogs';
+import queryFunction from '../search/oldJobsQueryFunction';
+import OldJobs from '../views/OldJobs';
 import packageInfo from '../../package';
 
 
@@ -11,7 +11,7 @@ const INITIAL_RESULT_COUNT = 100;
 const RESULT_COUNT_INCREMENT = 100;
 
 
-const HarvestableOldLogsRoute = ({ stripes, resources, mutator, match }) => {
+const HarvestableOldJobsRoute = ({ stripes, resources, mutator, match }) => {
   let [source, setSource] = useState(); // eslint-disable-line prefer-const
   if (!source) {
     source = new StripesConnectedSource({ resources, mutator }, stripes.logger, 'reportTitles');
@@ -26,16 +26,16 @@ const HarvestableOldLogsRoute = ({ stripes, resources, mutator, match }) => {
 
   const handleNeedMoreData = () => source.fetchMore(RESULT_COUNT_INCREMENT);
 
-  const hasLoaded = resources.harvestable.hasLoaded && resources.oldLogs.hasLoaded;
-  const error = resources.oldLogs.failed ? resources.oldLogs.failed.message : undefined;
+  const hasLoaded = resources.harvestable.hasLoaded && resources.oldJobs.hasLoaded;
+  const error = resources.oldJobs.failed ? resources.oldJobs.failed.message : undefined;
 
   return (
-    <HarvestableOldLogs
+    <OldJobs
       data={{
         harvestable: resources.harvestable.records?.[0],
-        oldLogs: resources.oldLogs.records,
+        oldJobs: resources.oldJobs.records,
       }}
-      resultCount={resources.oldLogs.other?.totalRecords}
+      resultCount={resources.oldJobs.other?.totalRecords}
       query={resources.query}
       updateQuery={mutator.query.update}
       hasLoaded={hasLoaded}
@@ -47,14 +47,14 @@ const HarvestableOldLogsRoute = ({ stripes, resources, mutator, match }) => {
 };
 
 
-HarvestableOldLogsRoute.manifest = Object.freeze({
+HarvestableOldJobsRoute.manifest = Object.freeze({
   query: {},
   resultCount: { initialValue: INITIAL_RESULT_COUNT },
   harvestable: {
     type: 'okapi',
     path: 'harvester-admin/harvestables/:{recId}',
   },
-  oldLogs: {
+  oldJobs: {
     type: 'okapi',
     path: 'harvester-admin/previous-jobs',
     throwErrors: false,
@@ -74,7 +74,7 @@ HarvestableOldLogsRoute.manifest = Object.freeze({
 });
 
 
-HarvestableOldLogsRoute.propTypes = {
+HarvestableOldJobsRoute.propTypes = {
   stripes: PropTypes.shape({
     logger: PropTypes.object.isRequired,
   }).isRequired,
@@ -86,7 +86,7 @@ HarvestableOldLogsRoute.propTypes = {
         PropTypes.shape({}).isRequired,
       ).isRequired,
     }).isRequired,
-    oldLogs: PropTypes.shape({
+    oldJobs: PropTypes.shape({
       failed: PropTypes.oneOfType([
         PropTypes.bool,
         PropTypes.shape({
@@ -115,4 +115,4 @@ HarvestableOldLogsRoute.propTypes = {
 };
 
 
-export default stripesConnect(HarvestableOldLogsRoute);
+export default stripesConnect(HarvestableOldJobsRoute);

@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { stripesConnect } from '@folio/stripes/core';
 import { StripesConnectedSource } from '@folio/stripes/smart-components';
-import queryFunction from '../search/oldLogsQueryFunction';
-import HarvestableOldLogs from '../views/HarvestableOldLogs';
+import queryFunction from '../search/oldJobsQueryFunction';
+import OldJobs from '../views/OldJobs';
 
 
 const INITIAL_RESULT_COUNT = 100;
 const RESULT_COUNT_INCREMENT = 100;
 
 
-const AllOldLogsRoute = ({ stripes, resources, mutator }) => {
+const AllOldJobsRoute = ({ stripes, resources, mutator }) => {
   let [source, setSource] = useState(); // eslint-disable-line prefer-const
   if (!source) {
     source = new StripesConnectedSource({ resources, mutator }, stripes.logger, 'reportTitles');
@@ -21,15 +21,15 @@ const AllOldLogsRoute = ({ stripes, resources, mutator }) => {
 
   const handleNeedMoreData = () => source.fetchMore(RESULT_COUNT_INCREMENT);
 
-  const hasLoaded = resources.oldLogs.hasLoaded;
-  const error = resources.oldLogs.failed ? resources.oldLogs.failed.message : undefined;
+  const hasLoaded = resources.oldJobs.hasLoaded;
+  const error = resources.oldJobs.failed ? resources.oldJobs.failed.message : undefined;
 
   return (
-    <HarvestableOldLogs
+    <OldJobs
       data={{
-        oldLogs: resources.oldLogs.records,
+        oldJobs: resources.oldJobs.records,
       }}
-      resultCount={resources.oldLogs.other?.totalRecords}
+      resultCount={resources.oldJobs.other?.totalRecords}
       query={resources.query}
       updateQuery={mutator.query.update}
       hasLoaded={hasLoaded}
@@ -40,10 +40,10 @@ const AllOldLogsRoute = ({ stripes, resources, mutator }) => {
 };
 
 
-AllOldLogsRoute.manifest = Object.freeze({
+AllOldJobsRoute.manifest = Object.freeze({
   query: {},
   resultCount: { initialValue: INITIAL_RESULT_COUNT },
-  oldLogs: {
+  oldJobs: {
     type: 'okapi',
     path: 'harvester-admin/previous-jobs',
     throwErrors: false,
@@ -57,13 +57,13 @@ AllOldLogsRoute.manifest = Object.freeze({
 });
 
 
-AllOldLogsRoute.propTypes = {
+AllOldJobsRoute.propTypes = {
   stripes: PropTypes.shape({
     logger: PropTypes.object.isRequired,
   }).isRequired,
   resources: PropTypes.shape({
     query: PropTypes.object.isRequired,
-    oldLogs: PropTypes.shape({
+    oldJobs: PropTypes.shape({
       failed: PropTypes.oneOfType([
         PropTypes.bool,
         PropTypes.shape({
@@ -87,4 +87,4 @@ AllOldLogsRoute.propTypes = {
 };
 
 
-export default stripesConnect(AllOldLogsRoute);
+export default stripesConnect(AllOldJobsRoute);
