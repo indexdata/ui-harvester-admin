@@ -24,4 +24,4 @@ const stats = message2stats(message);
 console.log(stats);
 */
 
-export default message2stats;
+export { message2stats };

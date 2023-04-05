@@ -5,7 +5,7 @@ import { AppIcon } from '@folio/stripes/core';
 import { LoadingPane, Paneset, Pane, MultiColumnList } from '@folio/stripes/components';
 import { ColumnManager, SearchAndSortQuery } from '@folio/stripes/smart-components';
 import formatDateTime from '../../util/formatDateTime';
-import message2stats from '../../util/message2stats';
+import { message2stats } from '../../util/message2stats';
 import OldLogsSearchPane from '../../search/OldLogsSearchPane';
 import ErrorMessage from '../../components/ErrorMessage';
 import packageInfo from '../../../package';

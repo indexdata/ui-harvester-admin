@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { MultiColumnList, Accordion, NoValue } from '@folio/stripes/components';
-import message2stats from '../../util/message2stats';
+import { message2stats } from '../../util/message2stats';
 
 
 const HarvestableLogsHeader = ({ harvestable }) => {
