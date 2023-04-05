@@ -13,11 +13,12 @@
 * Display simple list of errors on the Logs page. Fixes UIHAADM-25.
 * Cope elegantly with absent logs on the Logs page. Fixes UIHAADM-26.
 * Add "View log" buttons to each row in list of harvestables. Fixes UIHAADM-27.
-* Provide access to older harvester logs across all jobs. Fixes UIHAADM-30.
-* Create a search pane for the old-logs page. Fixes UIHAADM-31.
-* Activate the search pane for the harvestable-specific old-logs page. Fixes UIHAADM-34.
+* Provide access to older harvester jobs across all harvestables. Fixes UIHAADM-30.
+* Create a search pane for the old-jobs page. Fixes UIHAADM-31.
+* Activate the search pane for the harvestable-specific old-jobs page. Fixes UIHAADM-34.
 * Minor quality-of-life improvements for Logs page. Fixes UIHAADM-37.
 * Single-line summary of stats from harvestable message. Fixes UIHAADM-38.
+* Rename various entites (Harvest Jobs -> Harvestables, Old Logs -> Old Jobs). Involves UI text, translation tag names, component names, function names, source file names, HTML element IDs and data-text-XXX attributes. Fixes UIHAADM-33. Next time, names things right the first time.
 
 ## [0.1.0](https://github.com/folio-org/ui-harvester-admin/tree/v0.1.0) (2022-07-19)
 

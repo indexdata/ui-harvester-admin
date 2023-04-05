@@ -1,5 +1,5 @@
 import { makeQueryFunction } from '@folio/stripes/smart-components';
-import indexNames from './oldLogsIndexNames';
+import indexNames from './oldJobsIndexNames';
 
 const sortMap = {
   // XXX I _think_ all the headings are the names of sortable fields
@@ -15,13 +15,13 @@ const filterConfig = [{
   cql: 'type',
   values: [],
 }, {
-  // Value is injected from path-component by HarvestableOldLogsRoute's query function
+  // Value is injected from path-component by HarvestableOldJobsRoute's query function
   name: 'harvestableId',
   cql: 'harvestableId',
   values: [],
 }];
 
-const oldLogsqueryFunction = makeQueryFunction(
+const oldJobsQueryFunction = makeQueryFunction(
   'cql.allRecords=1',
   indexNames
     .filter(n => n !== 'all' && n !== 'id' && n !== 'harvestableId' && n !== 'message' /* XXX for now */)
@@ -30,4 +30,4 @@ const oldLogsqueryFunction = makeQueryFunction(
   filterConfig,
 );
 
-export default oldLogsqueryFunction;
+export default oldJobsQueryFunction;

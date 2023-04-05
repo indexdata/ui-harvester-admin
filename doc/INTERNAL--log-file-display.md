@@ -27,6 +27,6 @@ The document [Ongoing Feedback Document for the Harvester UI](https://docs.googl
 * We want a column in the harvestables list with a **View log** button.
 * The action menu for individual harvestables needs a **View log** button.
 
-And we have [notes on searching/filtering of old logs](OldLogsSearchPane.md).
+And we have [notes on searching/filtering of old ](OldJobsSearchPane.md).
 
 

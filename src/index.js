@@ -9,9 +9,9 @@ import CreateHarvestableRoute from './routes/CreateHarvestableRoute';
 import FullHarvestableRoute from './routes/FullHarvestableRoute';
 import EditHarvestableRoute from './routes/EditHarvestableRoute';
 import HarvestableLogsRoute from './routes/HarvestableLogsRoute';
-import HarvestableOldLogsRoute from './routes/HarvestableOldLogsRoute';
+import HarvestableOldJobsRoute from './routes/HarvestableOldJobsRoute';
 import StoragesRoute from './routes/StoragesRoute';
-import AllOldLogsRoute from './routes/AllOldLogsRoute';
+import AllOldJobsRoute from './routes/AllOldJobsRoute';
 
 const HarvesterAdminApp = (props) => {
   const {
@@ -30,13 +30,13 @@ const HarvesterAdminApp = (props) => {
         <Switch>
           <NestedRoute path={`${path}/harvestables/create/:type`} exact component={CreateHarvestableRoute} />
           <NestedRoute path={`${path}/harvestables/:recId/logs`} exact component={HarvestableLogsRoute} />
-          <NestedRoute path={`${path}/harvestables/:recId/oldlogs`} exact component={HarvestableOldLogsRoute} />
+          <NestedRoute path={`${path}/harvestables/:recId/oldjobs`} exact component={HarvestableOldJobsRoute} />
           <NestedRoute path={`${path}/harvestables`} component={HarvestablesRoute}>
             <NestedRoute path={`${path}/harvestables/:recId`} exact component={FullHarvestableRoute} />
             <NestedRoute path={`${path}/harvestables/:recId/edit`} exact component={EditHarvestableRoute} />
           </NestedRoute>
           <NestedRoute path={`${path}/storages`} exact component={StoragesRoute} />
-          <NestedRoute path={`${path}/logs`} exact component={AllOldLogsRoute} />
+          <NestedRoute path={`${path}/jobs`} exact component={AllOldJobsRoute} />
         </Switch>
       </NestedRoute>
     </Switch>
