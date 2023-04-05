@@ -34,7 +34,7 @@
     "harvestables.column.enabled": "Enabled?",
     "harvestables.column.jobClass": "Job class",
     "harvestables.column.id": "ID",
-    "harvestables.column.message": "Message",
+    "harvestables.column.message": "Message (processed/loaded/deleted/failed)",
     "harvestables.column.enabled.true": "Yes",
     "harvestables.column.enabled.false": "No",
     "harvestables.column.jobClass.OaiPmhResource": "OAI-PMH",
