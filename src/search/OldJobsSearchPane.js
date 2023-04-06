@@ -29,9 +29,10 @@ function OldJobsSearchPane(props) {
   };
 
   const intl = useIntl();
-  const searchableIndexes = indexNames.map(x => (
-    { value: x, label: intl.formatMessage({ id: `ui-harvester-admin.old-jobs.index.${x}` }) }
-  ));
+  const searchableIndexes = indexNames.map(x => ({
+    value: x === 'all' ? '' : x,
+    label: intl.formatMessage({ id: `ui-harvester-admin.old-jobs.index.${x}` }),
+  }));
 
   const filterStruct = parseFilters(query.filters);
 
