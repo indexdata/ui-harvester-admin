@@ -1,5 +1,4 @@
 import { makeQueryFunction } from '@folio/stripes/smart-components';
-import indexNames from './oldJobsIndexNames';
 
 const sortMap = {
   // XXX I _think_ all the headings are the names of sortable fields
@@ -23,9 +22,7 @@ const filterConfig = [{
 
 const oldJobsQueryFunction = makeQueryFunction(
   'cql.allRecords=1',
-  indexNames
-    .filter(n => n !== 'all' && n !== 'id' && n !== 'harvestableId' && n !== 'message' /* XXX for now */)
-    .map(index => `${index}="%{query.query}*"`).join(' or '),
+  'name="%{query.query}*"', // XXX cannot yet add: 'or id="%{query.query}" or harvestableId="%{query.query}"',
   sortMap,
   filterConfig,
 );
