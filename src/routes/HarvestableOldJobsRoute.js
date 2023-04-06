@@ -67,7 +67,10 @@ HarvestableOldJobsRoute.manifest = Object.freeze({
         const extraFilter = `harvestableId.${pathComponents.recId}`;
         const allFilters = rv.query.filters ? `${rv.query.filters},${extraFilter}` : extraFilter;
         rv.query = { ...rv.query, filters: allFilters };
-        return queryFunction(queryParams, pathComponents, rv, logger);
+        const res = queryFunction(queryParams, pathComponents, rv, logger);
+        if (res === undefined) return undefined;
+        const m = res.match(/^(\(?(id|harvestableId)=\"[^\"]*)\*"(.*)$/);
+        return m ? `${m[1]}\"${m[3]}` : res;
       }
     },
   },
