@@ -32,7 +32,7 @@ function summarizeLine(statLine) {
 function summarizeStats(intl, param) {
   const stats = (typeof param === 'string') ? message2stats(param) : param;
 
-  return ['instances', 'holdings', 'items', 'source']
+  return ['instances', 'holdings', 'items']
     .map(t => intl.formatMessage({ id: `ui-harvester-admin.stats.${t}` }) + ':' + summarizeLine(stats[t]))
     .join(' ');
 }

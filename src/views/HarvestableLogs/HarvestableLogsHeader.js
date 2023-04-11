@@ -9,11 +9,10 @@ const HarvestableLogsHeader = ({ harvestable }) => {
   const intl = useIntl();
   const stats = message2stats(harvestable.message);
 
-  const visibleColumns = ['summary', 'source', 'instances', 'holdings', 'items'];
+  const visibleColumns = ['summary', 'instances', 'holdings', 'items'];
 
   const columnMapping = {
     summary: <FormattedMessage id="ui-harvester-admin.summary-table.summary" />,
-    source: <FormattedMessage id="ui-harvester-admin.summary-table.source" />,
     instances: <FormattedMessage id="ui-harvester-admin.summary-table.instances" />,
     holdings: <FormattedMessage id="ui-harvester-admin.summary-table.holdings" />,
     items: <FormattedMessage id="ui-harvester-admin.summary-table.items" />,

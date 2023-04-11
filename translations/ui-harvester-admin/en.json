@@ -253,7 +253,6 @@
     "logs.countFailedRecords": "{count, number} {count, plural, one {failed record} other {failed records}}",
 
     "summary-table.summary": "Summary",
-    "summary-table.source": "MIU",
     "summary-table.instances": "Instance",
     "summary-table.holdings": "Holdings",
     "summary-table.items": "Item",
@@ -281,7 +280,6 @@
     "stats.instances": "Instances",
     "stats.holdings": "Holdings",
     "stats.items": "Items",
-    "stats.source": "Source",
 
     "SENTINEL": "SENTINEL"
 }
