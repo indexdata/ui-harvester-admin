@@ -55,7 +55,6 @@ const HarvestableLogs = (props) => {
       >
         <TitleManager record={title}>
           <HarvestableLogsHeader harvestable={harvestable} />
-          <HarvestableLogsFailedRecords failedRecords={data.failedRecords} />
           <Accordion
             id="harvestable-logs-plain"
             label={<><FormattedMessage id="ui-harvester-admin.logs.plainTextLog" />{fileName ? ` (${fileName})` : ''}</>}
@@ -65,6 +64,7 @@ const HarvestableLogs = (props) => {
               {log || <NoValue />}
             </pre>
           </Accordion>
+          <HarvestableLogsFailedRecords failedRecords={data.failedRecords} />
         </TitleManager>
       </Pane>
     </HasCommand>

@@ -20,6 +20,7 @@
 * Single-line summary of stats from harvestable message. Fixes UIHAADM-38.
 * Rename various entites (Harvest Jobs -> Harvestables, Old Logs -> Old Jobs). Involves UI text, translation tag names, component names, function names, source file names, HTML element IDs and data-text-XXX attributes. Fixes UIHAADM-33. Next time, names things right the first time.
 * Searching jobs by ID or Harvestable ID now works correctly. Fixes UIHAADM-35.
+* On the Logs page, move the plain-text log above the failed records. Fixes UIHAADM-40.
 
 ## [0.1.0](https://github.com/folio-org/ui-harvester-admin/tree/v0.1.0) (2022-07-19)
 
