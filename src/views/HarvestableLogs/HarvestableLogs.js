@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { HasCommand, LoadingPane, Pane, checkScope, Accordion, NoValue } from '@folio/stripes/components';
+import { HasCommand, LoadingPane, Pane, checkScope } from '@folio/stripes/components';
 import { AppIcon, TitleManager } from '@folio/stripes/core';
 import formatDateTime from '../../util/formatDateTime';
 import HarvestableLogsHeader from './HarvestableLogsHeader';
+import HarvestableLogsPlainText from './HarvestableLogsPlainText';
 import HarvestableLogsFailedRecords from './HarvestableLogsFailedRecords';
 import css from '../Harvestables.css';
 
@@ -37,13 +38,6 @@ const HarvestableLogs = (props) => {
     },
   ];
 
-  const log = data.plainTextLog;
-  let fileName;
-  if (log) {
-    const m = log.match(/Begin processing of (.*)/m);
-    if (m) fileName = m[1];
-  }
-
   const paneTitle = (
     <>
       {harvestable.name}
@@ -52,14 +46,6 @@ const HarvestableLogs = (props) => {
       <span className={`${css.status} ${css[`status_${status}`]}`}>
         <FormattedMessage id={`ui-harvester-admin.harvestables.column.currentStatus.${status}`} />
       </span>
-    </>
-  );
-
-  const logStatus = status === 'RUNNING' ? 'running' : 'previous';
-  const logLabel = (
-    <>
-      <FormattedMessage id={`ui-harvester-admin.logs.plainTextLog.${logStatus}`} />
-      {fileName ? ` (${fileName})` : ''}
     </>
   );
 
@@ -76,15 +62,7 @@ const HarvestableLogs = (props) => {
       >
         <TitleManager record={title}>
           <HarvestableLogsHeader harvestable={harvestable} />
-          <Accordion
-            id="harvestable-logs-plain"
-            label={logLabel}
-            closedByDefault
-          >
-            <pre>
-              {log || <NoValue />}
-            </pre>
-          </Accordion>
+          <HarvestableLogsPlainText harvestable={harvestable} log={data.plainTextLog} />
           <HarvestableLogsFailedRecords failedRecords={data.failedRecords} />
         </TitleManager>
       </Pane>
