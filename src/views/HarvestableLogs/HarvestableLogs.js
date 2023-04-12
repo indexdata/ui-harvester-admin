@@ -23,6 +23,7 @@ const HarvestableLogs = (props) => {
     isLoading,
     data,
     handlers,
+    refreshLog,
   } = props;
 
   const harvestable = data.harvestable[0];
@@ -62,7 +63,7 @@ const HarvestableLogs = (props) => {
       >
         <TitleManager record={title}>
           <HarvestableLogsHeader harvestable={harvestable} />
-          <HarvestableLogsPlainText harvestable={harvestable} log={data.plainTextLog} />
+          <HarvestableLogsPlainText harvestable={harvestable} log={data.plainTextLog} refreshLog={refreshLog} />
           <HarvestableLogsFailedRecords failedRecords={data.failedRecords} />
         </TitleManager>
       </Pane>
@@ -87,6 +88,7 @@ HarvestableLogs.propTypes = {
     onClose: PropTypes.func.isRequired,
   }),
   isLoading: PropTypes.bool,
+  refreshLog: PropTypes.func.isRequired,
 };
 
 

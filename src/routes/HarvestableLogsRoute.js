@@ -7,6 +7,7 @@ import packageInfo from '../../package';
 
 const HarvestableLogsRoute = ({ resources, mutator, match }) => {
   const okapiKy = useOkapiKy();
+  const [logFetchCount, setLogFetchCount] = useState(0);
   const [plainTextLog, setPlainTextLog] = useState();
 
   const handleClose = () => {
@@ -37,7 +38,7 @@ const HarvestableLogsRoute = ({ resources, mutator, match }) => {
     fetchData();
     // If we include okapi-ky in the useEffect dependencies, we get many fetches for some reason
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [setPlainTextLog, match.params.recId]);
+  }, [setPlainTextLog, match.params.recId, logFetchCount]);
 
   const isLoading = (resources.harvestable.isPending ||
                      resources.failedRecords.isPending ||
@@ -51,6 +52,7 @@ const HarvestableLogsRoute = ({ resources, mutator, match }) => {
         plainTextLog,
       }}
       handlers={{ onClose: handleClose }}
+      refreshLog={() => setLogFetchCount(logFetchCount + 1)}
     />
   );
 };

@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { Accordion, NoValue } from '@folio/stripes/components';
+import { Accordion, NoValue, Button, Icon } from '@folio/stripes/components';
 
 
-const HarvestableLogsPlainText = ({ harvestable, log }) => {
+const HarvestableLogsPlainText = ({ harvestable, log, refreshLog }) => {
   let fileName;
   if (log) {
     const m = log.match(/Begin processing of (.*)/m);
@@ -26,6 +26,18 @@ const HarvestableLogsPlainText = ({ harvestable, log }) => {
       label={logLabel}
       closedByDefault
     >
+      <br />
+      <Button
+        data-test-refresh-logs
+        id="clickable-refresh-logs"
+        marginBottom0
+        onClick={refreshLog}
+      >
+        <Icon icon="refresh">
+          <FormattedMessage id="ui-harvester-admin.logs.plainTextLog.refresh" />
+        </Icon>
+      </Button>
+
       <pre>
         {log || <NoValue />}
       </pre>
@@ -40,6 +52,7 @@ HarvestableLogsPlainText.propTypes = {
     currentStatus: PropTypes.string.isRequired,
   }).isRequired,
   log: PropTypes.string,
+  refreshLog: PropTypes.func.isRequired,
 };
 
 
