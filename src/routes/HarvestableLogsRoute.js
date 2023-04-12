@@ -18,13 +18,21 @@ const HarvestableLogsRoute = ({ resources, mutator, match }) => {
   useEffect(() => {
     async function fetchData() {
       const recId = match.params.recId;
-      const res = await okapiKy(`harvester-admin/harvestables/${recId}/log`, {
-        headers: {
-          'Accept': 'text/plain'
+      let res;
+      try {
+        res = await okapiKy(`harvester-admin/harvestables/${recId}/log`, {
+          headers: { 'Accept': 'text/plain' }
+        });
+        setPlainTextLog(await res.text());
+      } catch (e) {
+        if (e.response.status === 404) {
+          // This happens when the harvestable has never been run (i.e. has status NEW)
+          setPlainTextLog('');
+        } else {
+          // Some other error that we don't know how to handle
+          throw e;
         }
-      });
-      const data = await res.text();
-      setPlainTextLog(data);
+      }
     }
     fetchData();
     // If we include okapi-ky in the useEffect dependencies, we get many fetches for some reason

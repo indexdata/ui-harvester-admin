@@ -77,7 +77,7 @@ HarvestableLogs.propTypes = {
     harvestable: PropTypes.arrayOf(
       PropTypes.shape({
         name: PropTypes.string.isRequired,
-        lastHarvestFinished: PropTypes.string.isRequired, // XXX wrong
+        lastHarvestFinished: PropTypes.string,
       }).isRequired,
     ).isRequired,
     plainTextLog: PropTypes.string,
