@@ -24,6 +24,7 @@
 * Remove the “source” data from all displays. Fixes UIHAADM-42.
 * View logs for a job that had an error no longer crashes the UI! Fixes UIHAADM-45.
 * Trying to view logs for a new (never run) job no longer hangs. Fixes UIHAADM-44.
+* View-logs page wording and presentation varies depending on whether job is running. Fixes UIHAADM-39.
 
 ## [0.1.0](https://github.com/folio-org/ui-harvester-admin/tree/v0.1.0) (2022-07-19)
 

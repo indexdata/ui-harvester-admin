@@ -3,3 +3,13 @@
     padding-left: 0;
     margin-bottom: 0;
 }
+
+.status {
+    font-size: 150%;
+    font-weight: bold;
+}
+
+.status_RUNNING { color: #00a000; }
+.status_ERROR, .status_WARN { color: #c00000; }
+
+/* Other statuses do not appear in colour: OK NEW FINISHED KILLED SHUTDOWN */

@@ -249,7 +249,8 @@
     "harvestables.field.failedRecordsLogging.CREATE_OVERWRITE": "Do save. Overwrite existing files",
     "harvestables.field.failedRecordsLogging.ADD_ALL": "Do save. Add numbered versions for existing files",
 
-    "logs.plainTextLog": "Plain text log",
+    "logs.plainTextLog.running": "Live plain text log for current running job",
+    "logs.plainTextLog.previous": "Plain text log for last job",
     "logs.countFailedRecords": "{count, number} {count, plural, one {failed record} other {failed records}}",
 
     "summary-table.summary": "Summary",

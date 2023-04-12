@@ -6,6 +6,7 @@ import { AppIcon, TitleManager } from '@folio/stripes/core';
 import formatDateTime from '../../util/formatDateTime';
 import HarvestableLogsHeader from './HarvestableLogsHeader';
 import HarvestableLogsFailedRecords from './HarvestableLogsFailedRecords';
+import css from '../Harvestables.css';
 
 
 const handleKeyCommand = (handler, { disabled } = {}) => {
@@ -26,6 +27,7 @@ const HarvestableLogs = (props) => {
   const harvestable = data.harvestable[0];
   if (isLoading || !harvestable) return <LoadingPane />;
   const title = harvestable.name;
+  const status = harvestable.currentStatus;
 
   const shortcuts = [
     {
@@ -42,6 +44,25 @@ const HarvestableLogs = (props) => {
     if (m) fileName = m[1];
   }
 
+  const paneTitle = (
+    <>
+      {harvestable.name}
+      ({formatDateTime(harvestable.lastHarvestFinished)})
+      {' '}&mdash;{' '}
+      <span className={`${css.status} ${css[`status_${status}`]}`}>
+        <FormattedMessage id={`ui-harvester-admin.harvestables.column.currentStatus.${status}`} />
+      </span>
+    </>
+  );
+
+  const logStatus = status === 'RUNNING' ? 'running' : 'previous';
+  const logLabel = (
+    <>
+      <FormattedMessage id={`ui-harvester-admin.logs.plainTextLog.${logStatus}`} />
+      {fileName ? ` (${fileName})` : ''}
+    </>
+  );
+
   return (
     <HasCommand commands={shortcuts} isWithinScope={checkScope} scope={document.body}>
       <Pane
@@ -49,7 +70,7 @@ const HarvestableLogs = (props) => {
         centerContent
         defaultWidth="60%"
         id="pane-harvestable-logs"
-        paneTitle={<>{title} ({formatDateTime(harvestable.lastHarvestFinished)})</>}
+        paneTitle={paneTitle}
         dismissible
         onClose={handlers.onClose}
       >
@@ -57,7 +78,7 @@ const HarvestableLogs = (props) => {
           <HarvestableLogsHeader harvestable={harvestable} />
           <Accordion
             id="harvestable-logs-plain"
-            label={<><FormattedMessage id="ui-harvester-admin.logs.plainTextLog" />{fileName ? ` (${fileName})` : ''}</>}
+            label={logLabel}
             closedByDefault
           >
             <pre>
@@ -78,6 +99,7 @@ HarvestableLogs.propTypes = {
       PropTypes.shape({
         name: PropTypes.string.isRequired,
         lastHarvestFinished: PropTypes.string,
+        currentStatus: PropTypes.string.isRequired,
       }).isRequired,
     ).isRequired,
     plainTextLog: PropTypes.string,
