@@ -22,6 +22,7 @@
 * Searching jobs by ID or Harvestable ID now works correctly. Fixes UIHAADM-35.
 * On the Logs page, move the plain-text log above the failed records. Fixes UIHAADM-40.
 * Remove the “source” data from all displays. Fixes UIHAADM-42.
+* View logs for a job that had an error no longer crashes the UI! Fixes UIHAADM-45.
 
 ## [0.1.0](https://github.com/folio-org/ui-harvester-admin/tree/v0.1.0) (2022-07-19)
 

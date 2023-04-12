@@ -1,7 +1,7 @@
 function message2stats(message) {
-  if (!message) return undefined;
-
   const stats = {};
+  if (!message) return stats;
+
   message.split(' ').forEach(row => {
     const matchData = row.match(/(.*?)_.*:_+([^_]*)_+([^_]*)_+([^_]*)_+([^_]*)/);
     if (matchData) {
@@ -25,12 +25,14 @@ console.log(stats);
 */
 
 function summarizeLine(statLine) {
-  return `${statLine.processed}/${statLine.loaded}/${statLine.deleted}/${statLine.failed}`;
+  return ['processed', 'loaded', 'deleted', ',failed']
+    .map(entry => statLine?.[entry] || '')
+    .join('/');
 }
 
 
 function summarizeStats(intl, param) {
-  const stats = (typeof param === 'string') ? message2stats(param) : param;
+  const stats = !param ? {} : (typeof param === 'string') ? message2stats(param) : param;
 
   return ['instances', 'holdings', 'items']
     .map(t => intl.formatMessage({ id: `ui-harvester-admin.stats.${t}` }) + ':' + summarizeLine(stats[t]))
