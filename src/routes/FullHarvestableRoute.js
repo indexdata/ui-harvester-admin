@@ -45,6 +45,9 @@ FullHarvestableRoute.propTypes = {
     query: PropTypes.shape({
       update: PropTypes.func.isRequired,
     }).isRequired,
+    harvestable: PropTypes.shape({
+      DELETE: PropTypes.func.isRequired,
+    }).isRequired,
     run: PropTypes.shape({
       PUT: PropTypes.func.isRequired,
     }).isRequired,
@@ -57,15 +60,6 @@ FullHarvestableRoute.propTypes = {
       recId: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired
-};
-
-
-FullHarvestableRoute.propTypes = {
-  mutator: PropTypes.shape({
-    harvestable: PropTypes.shape({
-      DELETE: PropTypes.func.isRequired,
-    }).isRequired,
-  }).isRequired,
 };
 
 FullHarvestableRoute.defaultProps = {
