@@ -1,5 +1,5 @@
 // The representation of harvestables in the mod-harvester-admin
-// web-service is referred to a "raw"; the form that is maintained in
+// web-service is referred to as "raw"; the form that is maintained in
 // forms in this app is "cooked". The two functions exported from this
 // file transform between the two representations.
 
