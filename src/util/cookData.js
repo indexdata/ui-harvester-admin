@@ -75,5 +75,7 @@ export function cooked2raw(cooked) {
     }
   });
 
+  delete raw.currentStatus;
+
   return raw;
 }
