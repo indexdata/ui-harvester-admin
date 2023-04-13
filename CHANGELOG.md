@@ -27,6 +27,7 @@
 * View-logs page wording and presentation varies depending on whether job is running. Fixes UIHAADM-39.
 * Add a button on the Logs page to refresh the plain-text log. Fixes UIHAADM-41.
 * Start/Stop Job now work, thanks to correct Accept header. Fixes UIHAADM-46.
+* Sanitize XML-bulk records before saving by removing invalid fields. Fixes UIHAADM-47.
 
 ## [0.1.0](https://github.com/folio-org/ui-harvester-admin/tree/v0.1.0) (2022-07-19)
 

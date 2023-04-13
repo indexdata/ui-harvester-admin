@@ -63,6 +63,10 @@ export function cooked2raw(cooked) {
 
   if (cooked.type === 'xmlBulk') {
     raw.url = (cooked.url || []).join(' ');
+
+    // Really, mod-harvester-admin should never give us these fields, but it does. See MODHAADM-55.
+    delete raw.retryCount;
+    delete raw.retryWait;
   }
 
   booleanFields.forEach(tag => {
