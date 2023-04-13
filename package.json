@@ -45,6 +45,30 @@
         "visible": false
       },
       {
+        "permissionName": "ui-harvester-admin.settings.storage",
+        "displayName": "Settings (Harvester admin): manage storage engines",
+        "subPermissions": [
+          "settings.harvester-admin.enabled"
+        ],
+        "visible": true
+      },
+      {
+        "permissionName": "ui-harvester-admin.settings.pipeline",
+        "displayName": "Settings (Harvester admin): manage transformation pipelines",
+        "subPermissions": [
+          "settings.harvester-admin.enabled"
+        ],
+        "visible": true
+      },
+      {
+        "permissionName": "ui-harvester-admin.settings.step",
+        "displayName": "Settings (Harvester admin): manage transformation steps",
+        "subPermissions": [
+          "settings.harvester-admin.enabled"
+        ],
+        "visible": true
+      },
+      {
         "permissionName": "ui-harvester-admin.read-jobs",
         "displayName": "Harvester admin: see what jobs exist, their status, etc.",
         "subPermissions": [

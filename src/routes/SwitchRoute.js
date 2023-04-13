@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Button, ButtonGroup } from '@folio/stripes/components';
 
-const segments = ['harvestables', 'storages', 'pipelines', 'steps', 'jobs'];
+const segments = ['harvestables', 'jobs'];
 
 function SwitchRoute({ location, children }) {
   return (

@@ -1,14 +1,29 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Settings } from '@folio/stripes/smart-components';
-import NullSettings from './NullSettings';
+import StorageSettings from './StorageSettings';
+import PipelineSettings from './PipelineSettings';
+import StepSettings from './StepSettings';
 
 const HarvesterAdminSettings = (props) => {
   const pages = [
     {
-      route: 'null-settings',
-      label: <FormattedMessage id="ui-harvester-admin.settings.nullSettings" />,
-      component: NullSettings,
+      route: 'storage',
+      label: <FormattedMessage id="ui-harvester-admin.settings.storage" />,
+      component: StorageSettings,
+      // perm: 'ui-harvester-admin.settings.storage',
+    },
+    {
+      route: 'pipeline',
+      label: <FormattedMessage id="ui-harvester-admin.settings.pipeline" />,
+      component: PipelineSettings,
+      // perm: 'ui-harvester-admin.settings.pipeline',
+    },
+    {
+      route: 'step',
+      label: <FormattedMessage id="ui-harvester-admin.settings.step" />,
+      component: StepSettings,
+      // perm: 'ui-harvester-admin.settings.step',
     },
   ];
 

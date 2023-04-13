@@ -4,7 +4,10 @@
     "no-value": "-",
     "error": "Something went wrong",
     "resultCount": "{count, number} {count, plural, one {record found} other {records found}}",
-    "settings.nullSettings": "Null settings",
+    "settings.storage": "Storage engines",
+    "settings.pipeline": "Transformation pipelines",
+    "settings.step": "Transformation steps",
+
     "add": "Add",
     "actions.new": "New record",
     "actions.new.harvestable.oaiPmh": "OAI-PMH harvestable",
@@ -12,16 +15,7 @@
     "actions.new.harvestable.connector": "Connector harvestable",
     "actions.new.harvestable.status": "Status-report harvestable",
 
-    "permission.harvester-admin.read-jobs": "",
-    "permission.harvester-admin.maintain-jobs": "",
-    "permission.harvester-admin.maintain-all-jobs": "",
-    "permission.harvester-admin.maintain-pipelines": "",
-    "permission.ui-harvester-admin.all": "",
-
     "nav.harvestables": "Harvestables",
-    "nav.storages": "Storage engines",
-    "nav.pipelines": "Transformation pipelines",
-    "nav.steps": "Transformation steps",
     "nav.jobs": "Jobs",
     "nav.jobs-for": "Jobs for {name}",
 
@@ -282,6 +276,15 @@
     "stats.instances": "Instances",
     "stats.holdings": "Holdings",
     "stats.items": "Items",
+
+    "permission.settings.storage": "Settings (Harvester admin): manage storage engines",
+    "permission.settings.pipeline": "Settings (Harvester admin): manage transformation pipelines",
+    "permission.settings.step": "Settings (Harvester admin): manage transformation steps",
+    "permission.read-jobs": "Harvester admin: see what jobs exist, their status, etc.",
+    "permission.maintain-jobs": "Harvester admin: see, start and stop jobs",
+    "permission.maintain-all-jobs": "Harvester admin: see, start and stop jobs for all customers",
+    "permission.maintain-pipelines": "Harvester admin: maintain pipeline stages and pipelines",
+    "permission.all": "Harvester admin: All permissions",
 
     "SENTINEL": "SENTINEL"
 }
