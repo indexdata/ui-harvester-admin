@@ -5,6 +5,7 @@ import { Button, Icon, Pane, SearchField } from '@folio/stripes/components';
 import { parseFilters } from '@folio/stripes/smart-components';
 import indexNames from './oldJobsIndexNames';
 import renderFilter from './renderFilter';
+import renderDateFilterPair from './renderDateFilterPair';
 import searchPanePropTypes from './searchPanePropTypes';
 import css from './SearchPane.css';
 
@@ -82,6 +83,8 @@ function OldJobsSearchPane(props) {
         {/* XXX we need filters for `started` and `finished` date-ranges */}
         {renderFilter(intl, filterStruct, updateQuery, 'type/harvestables.field.jobClass',
           ['oaiPmh', 'xmlBulk', 'connector', 'status'])}
+        {renderDateFilterPair(intl, query, updateQuery, 'started')}
+        {renderDateFilterPair(intl, query, updateQuery, 'ended')}
 
         <div className={css.resetButtonWrap}>
           <Button

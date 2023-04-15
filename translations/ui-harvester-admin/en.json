@@ -69,7 +69,12 @@
     "old-jobs.index.all": "(All)",
 
     "searchInputLabel": "XXX searchInputLabel",
-
+    "filter.date.started": "Date started",
+    "filter.date.started.from": "From",
+    "filter.date.started.to": "To",
+    "filter.date.ended": "Date ended",
+    "filter.date.ended.from": "From",
+    "filter.date.ended.to": "To",
     "accordion.devinfo": "Developer information",
 
     "harvestables.heading.general": "General information",
