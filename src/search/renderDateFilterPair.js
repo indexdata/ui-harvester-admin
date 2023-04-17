@@ -14,8 +14,12 @@ function renderSingleDateFilter(intl, query, updateQuery, field, boundary) {
       label={intl.formatMessage({ id: `ui-harvester-admin.filter.date.${field}.${boundary}` })}
       value={query[keyString] || ''}
       onChange={(e) => {
-        const val = e.target.value;
-        updateQuery({ [keyString]: val });
+        const localizedDateString = e.target.value;
+        const date = new Date(localizedDateString); // XXX only works under US locale
+        console.log('date =', date);
+        const isoDateString = date.toISOString().substring(0, 10);
+        console.log('isoDateString =', isoDateString);
+        updateQuery({ [keyString]: isoDateString });
       }}
     />
   );
