@@ -5,9 +5,11 @@ const sortMap = {
   // Verify this when server-side sorting starts to work
 };
 
-function parseFilterValue(field, value) {
-  // console.log(`parseFilterValue field='${field}', value='${value}'`);
-  return value;
+function parseFilterValue(complexField, value) {
+  const [field, boundary] = complexField.split('_');
+  const op = boundary === 'from' ? '>=' : '<=';
+  // console.log(`parseFilterValue field='${field}', op='${op}' value='${value}'`);
+  return `${field}${op}${value}`;
 }
 
 function makePFV(field) {
