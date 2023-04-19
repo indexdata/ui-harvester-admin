@@ -5,6 +5,15 @@ const sortMap = {
   // Verify this when server-side sorting starts to work
 };
 
+function parseFilterValue(field, value) {
+  // console.log(`parseFilterValue field='${field}', value='${value}'`);
+  return value;
+}
+
+function makePFV(field) {
+  return (value) => parseFilterValue(field, value);
+}
+
 const filterConfig = [{
   name: 'status',
   cql: 'status',
@@ -13,6 +22,26 @@ const filterConfig = [{
   name: 'type',
   cql: 'type',
   values: [],
+}, {
+  name: 'started_from',
+  cql: 'started_from',
+  values: [],
+  parse: makePFV('started_from'),
+}, {
+  name: 'started_to',
+  cql: 'started_to',
+  values: [],
+  parse: makePFV('started_to'),
+}, {
+  name: 'ended_from',
+  cql: 'ended_from',
+  values: [],
+  parse: makePFV('ended_from'),
+}, {
+  name: 'ended_to',
+  cql: 'ended_to',
+  values: [],
+  parse: makePFV('ended_to'),
 }, {
   // Value is injected from path-component by HarvestableOldJobsRoute's query function
   name: 'harvestableId',
