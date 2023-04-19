@@ -5,15 +5,13 @@ const sortMap = {
   // Verify this when server-side sorting starts to work
 };
 
-function parseFilterValue(complexField, value) {
-  const [field, boundary] = complexField.split('_');
-  const op = boundary === 'from' ? '>=' : '<=';
-  // console.log(`parseFilterValue field='${field}', op='${op}' value='${value}'`);
+function parseFilterValue(field, op, value) {
+  console.log(`parseFilterValue field='${field}', op='${op}' value='${value}'`);
   return `${field}${op}${value}`;
 }
 
-function makePFV(field) {
-  return (value) => parseFilterValue(field, value);
+function makePFV(field, op) {
+  return (value) => parseFilterValue(field, op, value);
 }
 
 const filterConfig = [{
@@ -28,22 +26,22 @@ const filterConfig = [{
   name: 'started_from',
   cql: 'started_from',
   values: [],
-  parse: makePFV('started_from'),
+  parse: makePFV('started', '>='),
 }, {
   name: 'started_to',
   cql: 'started_to',
   values: [],
-  parse: makePFV('started_to'),
+  parse: makePFV('started', '<='),
 }, {
   name: 'ended_from',
   cql: 'ended_from',
   values: [],
-  parse: makePFV('ended_from'),
+  parse: makePFV('ended', '>='),
 }, {
   name: 'ended_to',
   cql: 'ended_to',
   values: [],
-  parse: makePFV('ended_to'),
+  parse: makePFV('ended', '<='),
 }, {
   // Value is injected from path-component by HarvestableOldJobsRoute's query function
   name: 'harvestableId',
