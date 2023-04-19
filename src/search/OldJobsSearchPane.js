@@ -84,7 +84,7 @@ function OldJobsSearchPane(props) {
         {renderFilter(intl, filterStruct, updateQuery, 'type/harvestables.field.jobClass',
           ['oaiPmh', 'xmlBulk', 'connector', 'status'])}
         {renderDateFilterPair(intl, filterStruct, updateQuery, 'started')}
-        {renderDateFilterPair(intl, filterStruct, updateQuery, 'ended')}
+        {renderDateFilterPair(intl, filterStruct, updateQuery, 'finished')}
 
         <div className={css.resetButtonWrap}>
           <Button

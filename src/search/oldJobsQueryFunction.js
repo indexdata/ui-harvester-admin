@@ -33,15 +33,15 @@ const filterConfig = [{
   values: [],
   parse: makePFV('started', '<='),
 }, {
-  name: 'ended_from',
-  cql: 'ended_from',
+  name: 'finished_from',
+  cql: 'finished_from',
   values: [],
-  parse: makePFV('ended', '>='),
+  parse: makePFV('finished', '>='),
 }, {
-  name: 'ended_to',
-  cql: 'ended_to',
+  name: 'finished_to',
+  cql: 'finished_to',
   values: [],
-  parse: makePFV('ended', '<='),
+  parse: makePFV('finished', '<='),
 }, {
   // Value is injected from path-component by HarvestableOldJobsRoute's query function
   name: 'harvestableId',

@@ -72,9 +72,9 @@
     "filter.date.started": "Date started",
     "filter.date.started.from": "From",
     "filter.date.started.to": "To",
-    "filter.date.ended": "Date ended",
-    "filter.date.ended.from": "From",
-    "filter.date.ended.to": "To",
+    "filter.date.finished": "Date finished",
+    "filter.date.finished.from": "From",
+    "filter.date.finished.to": "To",
     "accordion.devinfo": "Developer information",
 
     "harvestables.heading.general": "General information",
