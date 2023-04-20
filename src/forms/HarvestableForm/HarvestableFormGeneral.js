@@ -91,14 +91,14 @@ HarvestableFormGeneral.propTypes = {
   data: PropTypes.shape({
     transformationPipelines: PropTypes.arrayOf(
       PropTypes.shape({
-        enabled: PropTypes.bool.isRequired,
+        enabled: PropTypes.string.isRequired, // "true" or "false", so boolean in intent
         id: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
       }).isRequired,
     ).isRequired,
     storageEngines: PropTypes.arrayOf(
       PropTypes.shape({
-        enabled: PropTypes.bool.isRequired,
+        enabled: PropTypes.string.isRequired, // "true" or "false", so boolean in intent
         id: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
       }).isRequired,
