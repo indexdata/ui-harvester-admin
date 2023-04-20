@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Field } from 'react-final-form';
 import { Accordion, Row, Col, Checkbox, TextArea, Select, TextField } from '@folio/stripes/components';
-import { RCF, CF, RCLF } from '../../components/CF';
+import { RCF, CF, RCLF, CLF } from '../../components/CF';
 
 const logLevels = ['TRACE', 'DEBUG', 'INFO', 'WARN', 'ERROR'].map(x => ({ value: x, label: x }));
 const mailLevels = ['OK', 'WARN', 'ERROR'].map(x => ({ value: x, label: x }));
@@ -30,8 +30,8 @@ const HarvestableFormGeneral = ({ data }) => {
         <CF tag="serviceProvider" xs={4} />
       </Row>
       <Row>
-        <CF tag="usedBy" xs={6} />
-        <CF tag="managedBy" xs={6} />
+        <CLF tag="usedBy" xs={6} />
+        <CLF tag="managedBy" xs={6} />
       </Row>
       <RCF tag="openAccess" component={Checkbox} type="checkbox" />
       <RCF tag="description" component={TextArea} rows="4" />
