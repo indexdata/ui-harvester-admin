@@ -6,7 +6,6 @@ const sortMap = {
 };
 
 function parseFilterValue(field, op, value) {
-  console.log(`parseFilterValue field='${field}', op='${op}' value='${value}'`);
   return `${field}${op}${value}`;
 }
 
