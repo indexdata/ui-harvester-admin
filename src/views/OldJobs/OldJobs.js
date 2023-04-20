@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useIntl, FormattedMessage } from 'react-intl';
 import { AppIcon } from '@folio/stripes/core';
-import { LoadingPane, Paneset, Pane, MultiColumnList } from '@folio/stripes/components';
+import { LoadingPane, Paneset, Pane, MultiColumnList, ErrorModal } from '@folio/stripes/components';
 import { ColumnManager, SearchAndSortQuery } from '@folio/stripes/smart-components';
 import formatDateTime from '../../util/formatDateTime';
 import { message2stats, summarizeStats } from '../../util/message2stats';
@@ -20,6 +20,7 @@ function OldJobs({
   hasLoaded,
   onNeedMoreData,
 }) {
+  const [invalidSortKey, setInvalidSortKey] = useState();
   const intl = useIntl();
   if (error) return <ErrorMessage message={error} />;
   if (!hasLoaded) return <LoadingPane />;
@@ -103,9 +104,25 @@ function OldJobs({
                       formatter={formatter}
                       contentData={data.oldJobs}
                       totalCount={resultCount}
-                      onHeaderClick={sasqParams.onSort}
+                      onHeaderClick={(event, headerMetadata) => {
+                        if (headerMetadata.name === 'seconds') {
+                          setInvalidSortKey(headerMetadata.name);
+                          return undefined;
+                        } else {
+                          return sasqParams.onSort(event, headerMetadata);
+                        }
+                      }}
                       onNeedMoreData={onNeedMoreData}
                       onRowClick={(event, rec) => updateQuery({ _path: `XXX ${packageInfo.stripes.route}/harvestables/${rec.id}` })}
+                    />
+                    <ErrorModal
+                      open={!!invalidSortKey}
+                      label={<FormattedMessage id="ui-harvester-admin.error.invalidSort.label" />}
+                      content={<FormattedMessage
+                        id="ui-harvester-admin.error.invalidSort.content"
+                        values={{ name: invalidSortKey, code: s => <code>{s}</code> }}
+                      />}
+                      onClose={() => setInvalidSortKey(undefined)}
                     />
                   </Pane>
                 )}

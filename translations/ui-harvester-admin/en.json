@@ -282,6 +282,9 @@
     "stats.holdings": "Holdings",
     "stats.items": "Items",
 
+    "error.invalidSort.label": "Invalid sort criterion",
+    "error.invalidSort.content": "It is not possible to sort on the <code>{name}</code> column due to implementation limitations.",
+
     "permission.settings.storage": "Settings (Harvester admin): manage storage engines",
     "permission.settings.pipeline": "Settings (Harvester admin): manage transformation pipelines",
     "permission.settings.step": "Settings (Harvester admin): manage transformation steps",
