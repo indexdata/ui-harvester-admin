@@ -11,8 +11,10 @@ const HarvestableFormOaiPmh = ({ values }) => {
   const [prefixes, setPrefixes] = useState();
 
   useEffect(() => {
-    const newOaiPhm = new OaiPmh(values.url);
-    setOaiPmh(newOaiPhm);
+    const newOaiPmh = new OaiPmh(values.url);
+    // I think using this can never work without proxying via the FOLIO service, because of CORS
+    console.log(`Made OaiPmh object ${newOaiPmh} but not using it`); // eslint-disable-line no-console
+    setOaiPmh(undefined);
   }, [values.url]);
 
   useEffect(() => {
