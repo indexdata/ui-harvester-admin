@@ -29,7 +29,7 @@ const HarvestableLogsRoute = ({ resources, mutator, match }) => {
     <HarvestableLogs
       isLoading={isLoading}
       data={{
-        harvestable: resources.harvestable.records[0],
+        record: resources.harvestable.records[0],
         failedRecords: resources.failedRecords.records[0],
         plainTextLog,
       }}
