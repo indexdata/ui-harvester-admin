@@ -17,7 +17,7 @@ const HarvestableLogsRoute = ({ resources, mutator, match }) => {
 
   // We can't use stripes-connect for plainTextLog, as it assumes JSON responses: see the code at
   // https://github.com/folio-org/stripes-connect/blob/7009eec490b36365e59b009cb9fde9f3573ea669/RESTResource/RESTResource.js#L789
-  const load = () => loadPlainTextLog(okapiKy, match.params.recId, setPlainTextLog);
+  const load = () => loadPlainTextLog(okapiKy, `harvestables/${match.params.recId}/log`, setPlainTextLog);
   // If we include okapi-ky in the useEffect dependencies, we get many fetches for some reason
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(load, [setPlainTextLog, match.params.recId, logFetchCount]);

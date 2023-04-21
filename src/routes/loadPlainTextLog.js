@@ -1,8 +1,8 @@
-function loadPlainTextLog(okapiKy, recId, setPlainTextLog) {
+function loadPlainTextLog(okapiKy, subPath, setPlainTextLog) {
   async function fetchData() {
     let res;
     try {
-      res = await okapiKy(`harvester-admin/harvestables/${recId}/log`, {
+      res = await okapiKy(`harvester-admin/${subPath}`, {
         headers: { 'Accept': 'text/plain' }
       });
       setPlainTextLog(await res.text());
