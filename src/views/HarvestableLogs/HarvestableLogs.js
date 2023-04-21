@@ -26,10 +26,10 @@ const HarvestableLogs = (props) => {
     refreshLog,
   } = props;
 
-  const harvestable = data.record;
-  if (isLoading || !harvestable) return <LoadingPane />;
-  const title = harvestable.name;
-  const status = harvestable.currentStatus;
+  const record = data.record;
+  if (isLoading || !record) return <LoadingPane />;
+  const title = record.name;
+  const status = record.currentStatus;
 
   const shortcuts = [
     {
@@ -41,8 +41,8 @@ const HarvestableLogs = (props) => {
 
   const paneTitle = (
     <>
-      {harvestable.name}
-      ({formatDateTime(harvestable.lastHarvestFinished)})
+      {record.name}
+      ({formatDateTime(record.lastHarvestFinished)})
       {status &&
         <>
           {' '}&mdash;{' '}
@@ -60,14 +60,14 @@ const HarvestableLogs = (props) => {
         appIcon={<AppIcon app="harvester-admin" />}
         centerContent
         defaultWidth="60%"
-        id="pane-harvestable-logs"
+        id="pane-logs"
         paneTitle={paneTitle}
         dismissible
         onClose={handlers.onClose}
       >
         <TitleManager record={title}>
-          <HarvestableLogsHeader harvestable={harvestable} />
-          <HarvestableLogsPlainText harvestable={harvestable} log={data.plainTextLog} refreshLog={refreshLog} />
+          <HarvestableLogsHeader harvestable={record} />
+          <HarvestableLogsPlainText harvestable={record} log={data.plainTextLog} refreshLog={refreshLog} />
           <HarvestableLogsFailedRecords failedRecords={data.failedRecords} />
         </TitleManager>
       </Pane>
