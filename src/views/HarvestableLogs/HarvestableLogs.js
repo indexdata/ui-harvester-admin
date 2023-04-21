@@ -26,7 +26,7 @@ const HarvestableLogs = (props) => {
     refreshLog,
   } = props;
 
-  const harvestable = data.harvestable[0];
+  const harvestable = data.harvestable;
   if (isLoading || !harvestable) return <LoadingPane />;
   const title = harvestable.name;
   const status = harvestable.currentStatus;
@@ -78,13 +78,11 @@ const HarvestableLogs = (props) => {
 
 HarvestableLogs.propTypes = {
   data: PropTypes.shape({
-    harvestable: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        lastHarvestFinished: PropTypes.string,
-        currentStatus: PropTypes.string, // .isRequired for harvestable, not for previous-job
-      }).isRequired,
-    ).isRequired,
+    harvestable: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      lastHarvestFinished: PropTypes.string,
+      currentStatus: PropTypes.string, // .isRequired for harvestable, not for previous-job
+    }),
     plainTextLog: PropTypes.string,
     failedRecords: PropTypes.shape({}),
   }).isRequired,
