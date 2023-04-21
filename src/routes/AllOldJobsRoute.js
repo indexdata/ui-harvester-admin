@@ -10,7 +10,7 @@ const INITIAL_RESULT_COUNT = 100;
 const RESULT_COUNT_INCREMENT = 100;
 
 
-const AllOldJobsRoute = ({ stripes, resources, mutator }) => {
+const AllOldJobsRoute = ({ stripes, resources, mutator, children }) => {
   let [source, setSource] = useState(); // eslint-disable-line prefer-const
   if (!source) {
     source = new StripesConnectedSource({ resources, mutator }, stripes.logger, 'reportTitles');
@@ -35,7 +35,9 @@ const AllOldJobsRoute = ({ stripes, resources, mutator }) => {
       hasLoaded={hasLoaded}
       error={error}
       onNeedMoreData={handleNeedMoreData}
-    />
+    >
+      {children}
+    </OldJobs>
   );
 };
 

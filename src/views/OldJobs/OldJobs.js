@@ -19,6 +19,7 @@ function OldJobs({
   error,
   hasLoaded,
   onNeedMoreData,
+  children,
 }) {
   const [invalidSortKey, setInvalidSortKey] = useState();
   const intl = useIntl();
@@ -113,7 +114,7 @@ function OldJobs({
                         }
                       }}
                       onNeedMoreData={onNeedMoreData}
-                      onRowClick={(event, rec) => updateQuery({ _path: `XXX ${packageInfo.stripes.route}/harvestables/${rec.id}` })}
+                      onRowClick={(event, rec) => updateQuery({ _path: `${packageInfo.stripes.route}/jobs/${rec.id}` })}
                     />
                     <ErrorModal
                       open={!!invalidSortKey}
@@ -127,6 +128,7 @@ function OldJobs({
                   </Pane>
                 )}
               </ColumnManager>
+              {children}
             </Paneset>
           );
         }
