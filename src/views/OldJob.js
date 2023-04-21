@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Loading, Pane } from '@folio/stripes/components';
 import packageInfo from '../../package';
 
@@ -14,11 +15,30 @@ const OldJob = ({ defaultWidth, resources, mutator }) => {
       dismissible
       onClose={returnToList}
       defaultWidth={defaultWidth}
-      paneTitle={resource.records[0]?.name}
+      paneTitle={rec?.name}
     >
       <pre>{JSON.stringify(rec, null, 2)}</pre>
     </Pane>
   );
+};
+
+OldJob.propTypes = {
+  defaultWidth: PropTypes.string,
+  resources: PropTypes.shape({
+    job: PropTypes.shape({
+      hasLoaded: PropTypes.bool.isRequired,
+      records: PropTypes.arrayOf(
+        PropTypes.shape({
+          name: PropTypes.string.isRequired,
+        }).isRequired,
+      ).isRequired,
+    }).isRequired,
+  }).isRequired,
+  mutator: PropTypes.shape({
+    query: PropTypes.shape({
+      update: PropTypes.func.isRequired,
+    }).isRequired,
+  }).isRequired,
 };
 
 export default OldJob;

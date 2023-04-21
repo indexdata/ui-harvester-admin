@@ -92,6 +92,7 @@ AllOldJobsRoute.propTypes = {
       update: PropTypes.func.isRequired,
     }).isRequired,
   }).isRequired,
+  children: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
 };
 
 

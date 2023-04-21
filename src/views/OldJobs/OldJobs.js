@@ -155,6 +155,7 @@ OldJobs.propTypes = {
   error: PropTypes.string,
   hasLoaded: PropTypes.bool.isRequired,
   onNeedMoreData: PropTypes.func.isRequired,
+  children: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
 };
 
 
