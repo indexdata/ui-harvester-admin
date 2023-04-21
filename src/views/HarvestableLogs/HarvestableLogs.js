@@ -43,10 +43,14 @@ const HarvestableLogs = (props) => {
     <>
       {harvestable.name}
       ({formatDateTime(harvestable.lastHarvestFinished)})
-      {' '}&mdash;{' '}
-      <span className={`${css.status} ${css[`status_${status}`]}`}>
-        <FormattedMessage id={`ui-harvester-admin.harvestables.column.currentStatus.${status}`} />
-      </span>
+      {status &&
+        <>
+          {' '}&mdash;{' '}
+          <span className={`${css.status} ${css[`status_${status}`]}`}>
+            <FormattedMessage id={`ui-harvester-admin.harvestables.column.currentStatus.${status}`} />
+          </span>
+        </>
+      }
     </>
   );
 
@@ -78,7 +82,7 @@ HarvestableLogs.propTypes = {
       PropTypes.shape({
         name: PropTypes.string.isRequired,
         lastHarvestFinished: PropTypes.string,
-        currentStatus: PropTypes.string.isRequired,
+        currentStatus: PropTypes.string, // .isRequired for harvestable, not for previous-job
       }).isRequired,
     ).isRequired,
     plainTextLog: PropTypes.string,

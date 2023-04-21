@@ -49,7 +49,7 @@ const HarvestableLogsPlainText = ({ harvestable, log, refreshLog }) => {
 HarvestableLogsPlainText.propTypes = {
   harvestable: PropTypes.shape({
     message: PropTypes.string,
-    currentStatus: PropTypes.string.isRequired,
+    currentStatus: PropTypes.string, // .isRequired for harvestable, not for previous-job
   }).isRequired,
   log: PropTypes.string,
   refreshLog: PropTypes.func.isRequired,
