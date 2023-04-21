@@ -5,6 +5,28 @@ import HarvestableLogs from '../views/HarvestableLogs';
 import packageInfo from '../../package';
 
 
+function loadPlainTextLog(okapiKy, recId, setPlainTextLog) {
+  async function fetchData() {
+    let res;
+    try {
+      res = await okapiKy(`harvester-admin/harvestables/${recId}/log`, {
+        headers: { 'Accept': 'text/plain' }
+      });
+      setPlainTextLog(await res.text());
+    } catch (e) {
+      if (e.response.status === 404) {
+        // This happens when the harvestable has never been run (i.e. has status NEW)
+        setPlainTextLog('');
+      } else {
+        // Some other error that we don't know how to handle
+        throw e;
+      }
+    }
+  }
+  fetchData();
+}
+
+
 const HarvestableLogsRoute = ({ resources, mutator, match }) => {
   const okapiKy = useOkapiKy();
   const [logFetchCount, setLogFetchCount] = useState(0);
@@ -16,29 +38,10 @@ const HarvestableLogsRoute = ({ resources, mutator, match }) => {
 
   // We can't use stripes-connect for plainTextLog, as it assumes JSON responses: see the code at
   // https://github.com/folio-org/stripes-connect/blob/7009eec490b36365e59b009cb9fde9f3573ea669/RESTResource/RESTResource.js#L789
-  useEffect(() => {
-    async function fetchData() {
-      const recId = match.params.recId;
-      let res;
-      try {
-        res = await okapiKy(`harvester-admin/harvestables/${recId}/log`, {
-          headers: { 'Accept': 'text/plain' }
-        });
-        setPlainTextLog(await res.text());
-      } catch (e) {
-        if (e.response.status === 404) {
-          // This happens when the harvestable has never been run (i.e. has status NEW)
-          setPlainTextLog('');
-        } else {
-          // Some other error that we don't know how to handle
-          throw e;
-        }
-      }
-    }
-    fetchData();
-    // If we include okapi-ky in the useEffect dependencies, we get many fetches for some reason
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [setPlainTextLog, match.params.recId, logFetchCount]);
+  const load = () => loadPlainTextLog(okapiKy, match.params.recId, setPlainTextLog);
+  // If we include okapi-ky in the useEffect dependencies, we get many fetches for some reason
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(load, [setPlainTextLog, match.params.recId, logFetchCount]);
 
   const isLoading = (resources.harvestable.isPending ||
                      resources.failedRecords.isPending ||
