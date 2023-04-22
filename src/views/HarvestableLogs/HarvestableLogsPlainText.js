@@ -4,14 +4,14 @@ import { FormattedMessage } from 'react-intl';
 import { Accordion, NoValue, Button, Icon } from '@folio/stripes/components';
 
 
-const HarvestableLogsPlainText = ({ harvestable, log, refreshLog }) => {
+const HarvestableLogsPlainText = ({ record, log, refreshLog }) => {
   let fileName;
   if (log) {
     const m = log.match(/Begin processing of (.*)/m);
     if (m) fileName = m[1];
   }
 
-  const status = harvestable.currentStatus;
+  const status = record.currentStatus;
   const logStatus = status === 'RUNNING' ? 'running' : 'previous';
   const logLabel = (
     <>
@@ -22,7 +22,7 @@ const HarvestableLogsPlainText = ({ harvestable, log, refreshLog }) => {
 
   return (
     <Accordion
-      id="harvestable-logs-plain"
+      id="logs-plain"
       label={logLabel}
       closedByDefault
     >
@@ -47,7 +47,7 @@ const HarvestableLogsPlainText = ({ harvestable, log, refreshLog }) => {
 
 
 HarvestableLogsPlainText.propTypes = {
-  harvestable: PropTypes.shape({
+  record: PropTypes.shape({
     message: PropTypes.string,
     currentStatus: PropTypes.string, // .isRequired for harvestable, not for previous-job
   }).isRequired,

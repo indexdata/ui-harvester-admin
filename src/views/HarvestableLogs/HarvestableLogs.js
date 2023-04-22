@@ -66,8 +66,8 @@ const HarvestableLogs = (props) => {
         onClose={handlers.onClose}
       >
         <TitleManager record={title}>
-          <HarvestableLogsHeader harvestable={record} />
-          <HarvestableLogsPlainText harvestable={record} log={data.plainTextLog} refreshLog={refreshLog} />
+          <HarvestableLogsHeader record={record} />
+          <HarvestableLogsPlainText record={record} log={data.plainTextLog} refreshLog={refreshLog} />
           <HarvestableLogsFailedRecords failedRecords={data.failedRecords} />
         </TitleManager>
       </Pane>

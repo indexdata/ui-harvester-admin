@@ -42,7 +42,7 @@ const HarvestableLogsFailedRecords = ({ failedRecords }) => {
 
   return (
     <Accordion
-      id="harvestable-logs-failed"
+      id="logs-failed"
       label={<FormattedMessage
         id="ui-harvester-admin.logs.countFailedRecords"
         values={{ count: failedRecords.failedRecords.length }}
