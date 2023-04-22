@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import ObjectInspector from 'react-inspector';
 import { MultiColumnList, Accordion } from '@folio/stripes/components';
-import css from '../Harvestables.css';
+import css from '../Styles.css';
 
 
 function summariseErrors(errors) {

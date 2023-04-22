@@ -7,7 +7,7 @@ import formatDateTime from '../../util/formatDateTime';
 import HarvestableLogsHeader from './HarvestableLogsHeader';
 import HarvestableLogsPlainText from './HarvestableLogsPlainText';
 import HarvestableLogsFailedRecords from './HarvestableLogsFailedRecords';
-import css from '../Harvestables.css';
+import css from '../Styles.css';
 
 
 const handleKeyCommand = (handler, { disabled } = {}) => {
