@@ -6,7 +6,7 @@ import packageInfo from '../../package';
 import loadPlainTextLog from '../util/loadPlainTextLog';
 
 
-const HarvestableLogsRoute = ({ resources, mutator, match }) => {
+const HarvestableLogRoute = ({ resources, mutator, match }) => {
   const okapiKy = useOkapiKy();
   const [logFetchCount, setLogFetchCount] = useState(0);
   const [plainTextLog, setPlainTextLog] = useState();
@@ -40,7 +40,7 @@ const HarvestableLogsRoute = ({ resources, mutator, match }) => {
 };
 
 
-HarvestableLogsRoute.manifest = Object.freeze({
+HarvestableLogRoute.manifest = Object.freeze({
   query: {},
   harvestable: {
     type: 'okapi',
@@ -53,7 +53,7 @@ HarvestableLogsRoute.manifest = Object.freeze({
 });
 
 
-HarvestableLogsRoute.propTypes = {
+HarvestableLogRoute.propTypes = {
   resources: PropTypes.shape({
     harvestable: PropTypes.shape({
       isPending: PropTypes.bool.isRequired,
@@ -81,4 +81,4 @@ HarvestableLogsRoute.propTypes = {
 };
 
 
-export default stripesConnect(HarvestableLogsRoute);
+export default stripesConnect(HarvestableLogRoute);

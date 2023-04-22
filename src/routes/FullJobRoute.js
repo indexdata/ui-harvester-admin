@@ -6,7 +6,7 @@ import packageInfo from '../../package';
 import loadPlainTextLog from '../util/loadPlainTextLog';
 
 
-const OldJobRoute = ({ resources, mutator, match }) => {
+const FullJobRoute = ({ resources, mutator, match }) => {
   const okapiKy = useOkapiKy();
   const [logFetchCount, setLogFetchCount] = useState(0);
   const [plainTextLog, setPlainTextLog] = useState();
@@ -15,7 +15,7 @@ const OldJobRoute = ({ resources, mutator, match }) => {
     mutator.query.update({ _path: `${packageInfo.stripes.route}/jobs` });
   };
 
-  // See comments on loadPlainTextLog in HarvestableLogsRoute.js
+  // See comments on loadPlainTextLog in HarvestableLogRoute.js
   const load = () => loadPlainTextLog(okapiKy, `previous-jobs/${match.params.recId}/log`, setPlainTextLog);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(load, [setPlainTextLog, match.params.recId, logFetchCount]);
@@ -40,7 +40,7 @@ const OldJobRoute = ({ resources, mutator, match }) => {
 };
 
 
-OldJobRoute.manifest = Object.freeze({
+FullJobRoute.manifest = Object.freeze({
   query: {},
   job: {
     type: 'okapi',
@@ -53,7 +53,7 @@ OldJobRoute.manifest = Object.freeze({
 });
 
 
-OldJobRoute.propTypes = {
+FullJobRoute.propTypes = {
   resources: PropTypes.shape({
     job: PropTypes.shape({
       isPending: PropTypes.bool.isRequired,
@@ -81,4 +81,4 @@ OldJobRoute.propTypes = {
 };
 
 
-export default stripesConnect(OldJobRoute);
+export default stripesConnect(FullJobRoute);

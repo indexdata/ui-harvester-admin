@@ -11,7 +11,7 @@ const INITIAL_RESULT_COUNT = 100;
 const RESULT_COUNT_INCREMENT = 100;
 
 
-const HarvestableOldJobsRoute = ({ stripes, resources, mutator, match }) => {
+const HarvestableJobsRoute = ({ stripes, resources, mutator, match }) => {
   let [source, setSource] = useState(); // eslint-disable-line prefer-const
   if (!source) {
     source = new StripesConnectedSource({ resources, mutator }, stripes.logger, 'reportTitles');
@@ -47,7 +47,7 @@ const HarvestableOldJobsRoute = ({ stripes, resources, mutator, match }) => {
 };
 
 
-HarvestableOldJobsRoute.manifest = Object.freeze({
+HarvestableJobsRoute.manifest = Object.freeze({
   query: {},
   resultCount: { initialValue: INITIAL_RESULT_COUNT },
   harvestable: {
@@ -77,7 +77,7 @@ HarvestableOldJobsRoute.manifest = Object.freeze({
 });
 
 
-HarvestableOldJobsRoute.propTypes = {
+HarvestableJobsRoute.propTypes = {
   stripes: PropTypes.shape({
     logger: PropTypes.object.isRequired,
   }).isRequired,
@@ -118,4 +118,4 @@ HarvestableOldJobsRoute.propTypes = {
 };
 
 
-export default stripesConnect(HarvestableOldJobsRoute);
+export default stripesConnect(HarvestableJobsRoute);

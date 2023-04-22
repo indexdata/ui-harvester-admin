@@ -10,7 +10,7 @@ const INITIAL_RESULT_COUNT = 100;
 const RESULT_COUNT_INCREMENT = 100;
 
 
-const AllOldJobsRoute = ({ stripes, resources, mutator, children }) => {
+const JobsRoute = ({ stripes, resources, mutator, children }) => {
   let [source, setSource] = useState(); // eslint-disable-line prefer-const
   if (!source) {
     source = new StripesConnectedSource({ resources, mutator }, stripes.logger, 'reportTitles');
@@ -42,7 +42,7 @@ const AllOldJobsRoute = ({ stripes, resources, mutator, children }) => {
 };
 
 
-AllOldJobsRoute.manifest = Object.freeze({
+JobsRoute.manifest = Object.freeze({
   query: {},
   resultCount: { initialValue: INITIAL_RESULT_COUNT },
   oldJobs: {
@@ -65,7 +65,7 @@ AllOldJobsRoute.manifest = Object.freeze({
 });
 
 
-AllOldJobsRoute.propTypes = {
+JobsRoute.propTypes = {
   stripes: PropTypes.shape({
     logger: PropTypes.object.isRequired,
   }).isRequired,
@@ -96,4 +96,4 @@ AllOldJobsRoute.propTypes = {
 };
 
 
-export default stripesConnect(AllOldJobsRoute);
+export default stripesConnect(JobsRoute);

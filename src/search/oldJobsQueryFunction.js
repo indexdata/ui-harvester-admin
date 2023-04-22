@@ -42,7 +42,7 @@ const filterConfig = [{
   values: [],
   parse: makePFV('finished', '<='),
 }, {
-  // Value is injected from path-component by HarvestableOldJobsRoute's query function
+  // Value is injected from path-component by HarvestableJobsRoute's query function
   name: 'harvestableId',
   cql: 'harvestableId',
   values: [],
