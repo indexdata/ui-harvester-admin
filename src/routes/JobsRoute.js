@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { stripesConnect } from '@folio/stripes/core';
 import { StripesConnectedSource } from '@folio/stripes/smart-components';
-import queryFunction from '../search/oldJobsQueryFunction';
-import OldJobs from '../views/OldJobs';
+import queryFunction from '../search/jobsQueryFunction';
+import Jobs from '../views/Jobs';
 
 
 const INITIAL_RESULT_COUNT = 100;
@@ -25,7 +25,7 @@ const JobsRoute = ({ stripes, resources, mutator, children }) => {
   const error = resources.oldJobs.failed ? resources.oldJobs.failed.message : undefined;
 
   return (
-    <OldJobs
+    <Jobs
       data={{
         oldJobs: resources.oldJobs.records,
       }}
@@ -37,7 +37,7 @@ const JobsRoute = ({ stripes, resources, mutator, children }) => {
       onNeedMoreData={handleNeedMoreData}
     >
       {children}
-    </OldJobs>
+    </Jobs>
   );
 };
 

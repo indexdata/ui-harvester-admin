@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { stripesConnect } from '@folio/stripes/core';
 import { StripesConnectedSource } from '@folio/stripes/smart-components';
-import queryFunction from '../search/oldJobsQueryFunction';
-import OldJobs from '../views/OldJobs';
+import queryFunction from '../search/jobsQueryFunction';
+import Jobs from '../views/Jobs';
 import packageInfo from '../../package';
 
 
@@ -30,7 +30,7 @@ const HarvestableJobsRoute = ({ stripes, resources, mutator, match }) => {
   const error = resources.oldJobs.failed ? resources.oldJobs.failed.message : undefined;
 
   return (
-    <OldJobs
+    <Jobs
       data={{
         harvestable: resources.harvestable.records?.[0],
         oldJobs: resources.oldJobs.records,

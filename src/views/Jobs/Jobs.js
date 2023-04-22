@@ -6,12 +6,12 @@ import { LoadingPane, Paneset, Pane, MultiColumnList, ErrorModal } from '@folio/
 import { ColumnManager, SearchAndSortQuery } from '@folio/stripes/smart-components';
 import formatDateTime from '../../util/formatDateTime';
 import { message2stats, summarizeStats } from '../../util/message2stats';
-import OldJobsSearchPane from '../../search/OldJobsSearchPane';
+import JobsSearchPane from '../../search/JobsSearchPane';
 import ErrorMessage from '../../components/ErrorMessage';
 import packageInfo from '../../../package';
 
 
-function OldJobs({
+function Jobs({
   data,
   query,
   resultCount,
@@ -74,7 +74,7 @@ function OldJobs({
         (sasqParams) => {
           return (
             <Paneset id="old-jobs-paneset">
-              <OldJobsSearchPane
+              <JobsSearchPane
                 {...sasqParams}
                 defaultWidth="20%"
                 query={query}
@@ -138,7 +138,7 @@ function OldJobs({
 }
 
 
-OldJobs.propTypes = {
+Jobs.propTypes = {
   data: PropTypes.shape({
     harvestable: PropTypes.shape({
       name: PropTypes.string.isRequired,
@@ -162,4 +162,4 @@ OldJobs.propTypes = {
 };
 
 
-export default OldJobs;
+export default Jobs;

@@ -3,14 +3,14 @@ import { useIntl, FormattedMessage } from 'react-intl';
 import { useStripes } from '@folio/stripes/core';
 import { Button, Icon, Pane, SearchField } from '@folio/stripes/components';
 import { parseFilters } from '@folio/stripes/smart-components';
-import indexNames from './oldJobsIndexNames';
+import indexNames from './jobsIndexNames';
 import renderFilter from './renderFilter';
 import renderDateFilterPair from './renderDateFilterPair';
 import searchPanePropTypes from './searchPanePropTypes';
 import css from './SearchPane.css';
 
 
-function OldJobsSearchPane(props) {
+function JobsSearchPane(props) {
   const {
     defaultWidth,
     searchValue,
@@ -104,7 +104,7 @@ function OldJobsSearchPane(props) {
 }
 
 
-OldJobsSearchPane.propTypes = searchPanePropTypes;
+JobsSearchPane.propTypes = searchPanePropTypes;
 
 
-export default OldJobsSearchPane;
+export default JobsSearchPane;

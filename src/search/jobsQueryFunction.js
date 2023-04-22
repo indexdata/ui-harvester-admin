@@ -48,11 +48,11 @@ const filterConfig = [{
   values: [],
 }];
 
-const oldJobsQueryFunction = makeQueryFunction(
+const jobsQueryFunction = makeQueryFunction(
   'cql.allRecords=1',
   'name="%{query.query}*"', // XXX cannot yet add: 'or id="%{query.query}" or harvestableId="%{query.query}"',
   sortMap,
   filterConfig,
 );
 
-export default oldJobsQueryFunction;
+export default jobsQueryFunction;
