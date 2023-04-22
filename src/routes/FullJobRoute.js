@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { stripesConnect, useOkapiKy } from '@folio/stripes/core';
-import HarvestableLogs from '../views/HarvestableLogs';
+import HarvestableLog from '../views/HarvestableLog';
 import packageInfo from '../../package';
 import loadPlainTextLog from '../util/loadPlainTextLog';
 
@@ -26,7 +26,7 @@ const FullJobRoute = ({ resources, mutator, match }) => {
 
   // XXX note that the data key `harvestable` is misleading here
   return (
-    <HarvestableLogs
+    <HarvestableLog
       isLoading={isLoading}
       data={{
         record: resources.job.records[0],

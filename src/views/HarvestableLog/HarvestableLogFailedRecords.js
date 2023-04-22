@@ -23,7 +23,7 @@ function summariseErrors(errors) {
 }
 
 
-const HarvestableLogsFailedRecords = ({ failedRecords }) => {
+const HarvestableLogFailedRecords = ({ failedRecords }) => {
   const visibleColumns = ['recordNumber', 'instanceHrid', 'instanceTitle', 'errors', 'timeStamp'];
 
   const columnMapping = {
@@ -77,7 +77,7 @@ const HarvestableLogsFailedRecords = ({ failedRecords }) => {
 };
 
 
-HarvestableLogsFailedRecords.propTypes = {
+HarvestableLogFailedRecords.propTypes = {
   failedRecords: PropTypes.shape({
     totalRecords: PropTypes.number.isRequired,
     failedRecords: PropTypes.arrayOf(
@@ -89,4 +89,4 @@ HarvestableLogsFailedRecords.propTypes = {
 };
 
 
-export default HarvestableLogsFailedRecords;
+export default HarvestableLogFailedRecords;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { stripesConnect, useOkapiKy } from '@folio/stripes/core';
-import HarvestableLogs from '../views/HarvestableLogs';
+import HarvestableLog from '../views/HarvestableLog';
 import packageInfo from '../../package';
 import loadPlainTextLog from '../util/loadPlainTextLog';
 
@@ -26,7 +26,7 @@ const HarvestableLogRoute = ({ resources, mutator, match }) => {
                      resources.failedRecords.isPending ||
                      typeof plainTextLog !== 'string');
   return (
-    <HarvestableLogs
+    <HarvestableLog
       isLoading={isLoading}
       data={{
         record: resources.harvestable.records[0],

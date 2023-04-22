@@ -4,9 +4,9 @@ import { FormattedMessage } from 'react-intl';
 import { HasCommand, LoadingPane, Pane, checkScope } from '@folio/stripes/components';
 import { AppIcon, TitleManager } from '@folio/stripes/core';
 import formatDateTime from '../../util/formatDateTime';
-import HarvestableLogsHeader from './HarvestableLogsHeader';
-import HarvestableLogsPlainText from './HarvestableLogsPlainText';
-import HarvestableLogsFailedRecords from './HarvestableLogsFailedRecords';
+import HarvestableLogHeader from './HarvestableLogHeader';
+import HarvestableLogPlainText from './HarvestableLogPlainText';
+import HarvestableLogFailedRecords from './HarvestableLogFailedRecords';
 import css from '../Styles.css';
 
 
@@ -18,7 +18,7 @@ const handleKeyCommand = (handler, { disabled } = {}) => {
 };
 
 
-const HarvestableLogs = (props) => {
+const HarvestableLog = (props) => {
   const {
     isLoading,
     data,
@@ -66,9 +66,9 @@ const HarvestableLogs = (props) => {
         onClose={handlers.onClose}
       >
         <TitleManager record={title}>
-          <HarvestableLogsHeader record={record} />
-          <HarvestableLogsPlainText record={record} log={data.plainTextLog} refreshLog={refreshLog} />
-          <HarvestableLogsFailedRecords failedRecords={data.failedRecords} />
+          <HarvestableLogHeader record={record} />
+          <HarvestableLogPlainText record={record} log={data.plainTextLog} refreshLog={refreshLog} />
+          <HarvestableLogFailedRecords failedRecords={data.failedRecords} />
         </TitleManager>
       </Pane>
     </HasCommand>
@@ -76,7 +76,7 @@ const HarvestableLogs = (props) => {
 };
 
 
-HarvestableLogs.propTypes = {
+HarvestableLog.propTypes = {
   data: PropTypes.shape({
     record: PropTypes.shape({
       name: PropTypes.string.isRequired,
@@ -94,4 +94,4 @@ HarvestableLogs.propTypes = {
 };
 
 
-export default HarvestableLogs;
+export default HarvestableLog;

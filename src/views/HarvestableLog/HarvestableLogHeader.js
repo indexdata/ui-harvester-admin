@@ -5,7 +5,7 @@ import { MultiColumnList, Accordion, NoValue } from '@folio/stripes/components';
 import { message2stats, summarizeStats } from '../../util/message2stats';
 
 
-const HarvestableLogsHeader = ({ record }) => {
+const HarvestableLogHeader = ({ record }) => {
   const intl = useIntl();
   const stats = message2stats(record.message);
 
@@ -64,11 +64,11 @@ const HarvestableLogsHeader = ({ record }) => {
 };
 
 
-HarvestableLogsHeader.propTypes = {
+HarvestableLogHeader.propTypes = {
   record: PropTypes.shape({
     message: PropTypes.string,
   }).isRequired,
 };
 
 
-export default HarvestableLogsHeader;
+export default HarvestableLogHeader;

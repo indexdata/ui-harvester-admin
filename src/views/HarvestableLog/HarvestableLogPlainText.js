@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { Accordion, NoValue, Button, Icon } from '@folio/stripes/components';
 
 
-const HarvestableLogsPlainText = ({ record, log, refreshLog }) => {
+const HarvestableLogPlainText = ({ record, log, refreshLog }) => {
   let fileName;
   if (log) {
     const m = log.match(/Begin processing of (.*)/m);
@@ -46,7 +46,7 @@ const HarvestableLogsPlainText = ({ record, log, refreshLog }) => {
 };
 
 
-HarvestableLogsPlainText.propTypes = {
+HarvestableLogPlainText.propTypes = {
   record: PropTypes.shape({
     message: PropTypes.string,
     currentStatus: PropTypes.string, // .isRequired for harvestable, not for previous-job
@@ -56,4 +56,4 @@ HarvestableLogsPlainText.propTypes = {
 };
 
 
-export default HarvestableLogsPlainText;
+export default HarvestableLogPlainText;
