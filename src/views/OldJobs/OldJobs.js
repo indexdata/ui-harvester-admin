@@ -158,7 +158,7 @@ OldJobs.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.object.isRequired,
     PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
-  ]).isRequired,
+  ]),
 };
 
 
