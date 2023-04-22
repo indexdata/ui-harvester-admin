@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { stripesConnect, useOkapiKy } from '@folio/stripes/core';
 import HarvestableLogs from '../views/HarvestableLogs';
 import packageInfo from '../../package';
-import loadPlainTextLog from './loadPlainTextLog';
+import loadPlainTextLog from '../util/loadPlainTextLog';
 
 
 const HarvestableLogsRoute = ({ resources, mutator, match }) => {
