@@ -73,6 +73,19 @@ function HarvestablesSearchPane(props) {
           </Button>
         </div>
 
+        <div className={css.resetButtonWrap}>
+          <Button
+            buttonStyle="none"
+            id="clickable-reset-all"
+            disabled={false}
+            onClick={() => updateQuery({ qindex: undefined, query: undefined, sort: undefined, filters: undefined })}
+          >
+            <Icon icon="times-circle-solid">
+              <FormattedMessage id="stripes-smart-components.resetAll" />
+            </Icon>
+          </Button>
+        </div>
+
         {renderFilter(intl, filterStruct, updateQuery, 'enabled',
           ['true', 'false'])}
         {renderFilter(intl, filterStruct, updateQuery, 'jobClass',
@@ -81,18 +94,6 @@ function HarvestablesSearchPane(props) {
           ['NEW', 'OK', 'WARN', 'ERROR', 'RUNNING', 'FINISHED', 'KILLED'],
           true)}
 
-        <div className={css.resetButtonWrap}>
-          <Button
-            buttonStyle="none"
-            id="clickable-reset-all"
-            disabled={false}
-            onClick={() => updateQuery({ query: undefined, sort: undefined, filters: undefined })}
-          >
-            <Icon icon="times-circle-solid">
-              <FormattedMessage id="stripes-smart-components.resetAll" />
-            </Icon>
-          </Button>
-        </div>
       </form>
     </Pane>
   );
