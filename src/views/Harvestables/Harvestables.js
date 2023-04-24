@@ -131,6 +131,10 @@ function Harvestables({
   }
 
   const harvestables = manuallyFilterAndSort(query, data.harvestables);
+  const sortKeys = parseSort(query.sort);
+  const sortedColumn = sortKeys[0]?.key;
+  const sortDirection = sortKeys[0]?.descending ? 'descending' : 'ascending';
+
   return (
     <SearchAndSortQuery>
       {
@@ -200,6 +204,8 @@ function Harvestables({
                       contentData={harvestables}
                       totalCount={resultCount}
                       onHeaderClick={sasqParams.onSort}
+                      sortedColumn={sortedColumn}
+                      sortDirection={sortDirection}
                       onNeedMoreData={onNeedMoreData}
                       onRowClick={(event, rec) => updateQuery({ _path: `${packageInfo.stripes.route}/harvestables/${rec.id}` })}
                     />
