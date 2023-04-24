@@ -4,6 +4,7 @@ import { useIntl, FormattedMessage } from 'react-intl';
 import { AppIcon } from '@folio/stripes/core';
 import { LoadingPane, Paneset, Pane, MultiColumnList, ErrorModal } from '@folio/stripes/components';
 import { ColumnManager, SearchAndSortQuery } from '@folio/stripes/smart-components';
+import parseSort from '../../util/parseSort';
 import formatDateTime from '../../util/formatDateTime';
 import { message2stats, summarizeStats } from '../../util/message2stats';
 import JobsSearchPane from '../../search/JobsSearchPane';
@@ -68,6 +69,10 @@ function Jobs({
       values={{ name: data.harvestable.name }}
     />;
 
+  const sortKeys = parseSort(query.sort);
+  const sortedColumn = sortKeys[0]?.key;
+  const sortDirection = sortKeys[0]?.descending ? 'descending' : 'ascending';
+
   return (
     <SearchAndSortQuery>
       {
@@ -114,6 +119,8 @@ function Jobs({
                         }
                       }}
                       onNeedMoreData={onNeedMoreData}
+                      sortedColumn={sortedColumn}
+                      sortDirection={sortDirection}
                       onRowClick={(event, rec) => updateQuery({ _path: `${packageInfo.stripes.route}/jobs/${rec.id}` })}
                     />
                     <ErrorModal
