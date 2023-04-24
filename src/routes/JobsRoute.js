@@ -21,15 +21,15 @@ const JobsRoute = ({ stripes, resources, mutator, children }) => {
 
   const handleNeedMoreData = () => source.fetchMore(RESULT_COUNT_INCREMENT);
 
-  const hasLoaded = resources.oldJobs.hasLoaded;
-  const error = resources.oldJobs.failed ? resources.oldJobs.failed.message : undefined;
+  const hasLoaded = resources.jobs.hasLoaded;
+  const error = resources.jobs.failed ? resources.jobs.failed.message : undefined;
 
   return (
     <Jobs
       data={{
-        oldJobs: resources.oldJobs.records,
+        oldJobs: resources.jobs.records,
       }}
-      resultCount={resources.oldJobs.other?.totalRecords}
+      resultCount={resources.jobs.other?.totalRecords}
       query={resources.query}
       updateQuery={mutator.query.update}
       hasLoaded={hasLoaded}
@@ -45,7 +45,7 @@ const JobsRoute = ({ stripes, resources, mutator, children }) => {
 JobsRoute.manifest = Object.freeze({
   query: {},
   resultCount: { initialValue: INITIAL_RESULT_COUNT },
-  oldJobs: {
+  jobs: {
     type: 'okapi',
     path: 'harvester-admin/previous-jobs',
     throwErrors: false,
@@ -71,7 +71,7 @@ JobsRoute.propTypes = {
   }).isRequired,
   resources: PropTypes.shape({
     query: PropTypes.object.isRequired,
-    oldJobs: PropTypes.shape({
+    jobs: PropTypes.shape({
       failed: PropTypes.oneOfType([
         PropTypes.bool,
         PropTypes.shape({
