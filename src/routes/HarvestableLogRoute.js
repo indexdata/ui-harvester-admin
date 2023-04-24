@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { stripesConnect, useOkapiKy } from '@folio/stripes/core';
-import HarvestableLogs from '../views/HarvestableLogs';
+import HarvestableLog from '../views/HarvestableLog';
 import packageInfo from '../../package';
+import loadPlainTextLog from '../util/loadPlainTextLog';
 
 
-const HarvestableLogsRoute = ({ resources, mutator, match }) => {
+const HarvestableLogRoute = ({ resources, mutator, match }) => {
   const okapiKy = useOkapiKy();
   const [logFetchCount, setLogFetchCount] = useState(0);
   const [plainTextLog, setPlainTextLog] = useState();
@@ -16,38 +17,19 @@ const HarvestableLogsRoute = ({ resources, mutator, match }) => {
 
   // We can't use stripes-connect for plainTextLog, as it assumes JSON responses: see the code at
   // https://github.com/folio-org/stripes-connect/blob/7009eec490b36365e59b009cb9fde9f3573ea669/RESTResource/RESTResource.js#L789
-  useEffect(() => {
-    async function fetchData() {
-      const recId = match.params.recId;
-      let res;
-      try {
-        res = await okapiKy(`harvester-admin/harvestables/${recId}/log`, {
-          headers: { 'Accept': 'text/plain' }
-        });
-        setPlainTextLog(await res.text());
-      } catch (e) {
-        if (e.response.status === 404) {
-          // This happens when the harvestable has never been run (i.e. has status NEW)
-          setPlainTextLog('');
-        } else {
-          // Some other error that we don't know how to handle
-          throw e;
-        }
-      }
-    }
-    fetchData();
-    // If we include okapi-ky in the useEffect dependencies, we get many fetches for some reason
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [setPlainTextLog, match.params.recId, logFetchCount]);
+  const load = () => loadPlainTextLog(okapiKy, `harvestables/${match.params.recId}/log`, setPlainTextLog);
+  // If we include okapi-ky in the useEffect dependencies, we get many fetches for some reason
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(load, [setPlainTextLog, match.params.recId, logFetchCount]);
 
   const isLoading = (resources.harvestable.isPending ||
                      resources.failedRecords.isPending ||
                      typeof plainTextLog !== 'string');
   return (
-    <HarvestableLogs
+    <HarvestableLog
       isLoading={isLoading}
       data={{
-        harvestable: resources.harvestable.records,
+        record: resources.harvestable.records[0],
         failedRecords: resources.failedRecords.records[0],
         plainTextLog,
       }}
@@ -58,7 +40,7 @@ const HarvestableLogsRoute = ({ resources, mutator, match }) => {
 };
 
 
-HarvestableLogsRoute.manifest = Object.freeze({
+HarvestableLogRoute.manifest = Object.freeze({
   query: {},
   harvestable: {
     type: 'okapi',
@@ -71,7 +53,7 @@ HarvestableLogsRoute.manifest = Object.freeze({
 });
 
 
-HarvestableLogsRoute.propTypes = {
+HarvestableLogRoute.propTypes = {
   resources: PropTypes.shape({
     harvestable: PropTypes.shape({
       isPending: PropTypes.bool.isRequired,
@@ -99,4 +81,4 @@ HarvestableLogsRoute.propTypes = {
 };
 
 
-export default stripesConnect(HarvestableLogsRoute);
+export default stripesConnect(HarvestableLogRoute);

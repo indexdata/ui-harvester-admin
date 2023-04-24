@@ -3,14 +3,14 @@ import { useIntl, FormattedMessage } from 'react-intl';
 import { useStripes } from '@folio/stripes/core';
 import { Button, Icon, Pane, SearchField } from '@folio/stripes/components';
 import { parseFilters } from '@folio/stripes/smart-components';
-import indexNames from './oldJobsIndexNames';
+import indexNames from './jobsIndexNames';
 import renderFilter from './renderFilter';
 import renderDateFilterPair from './renderDateFilterPair';
 import searchPanePropTypes from './searchPanePropTypes';
 import css from './SearchPane.css';
 
 
-function OldJobsSearchPane(props) {
+function JobsSearchPane(props) {
   const {
     defaultWidth,
     searchValue,
@@ -32,7 +32,7 @@ function OldJobsSearchPane(props) {
   const intl = useIntl();
   const searchableIndexes = indexNames.map(x => ({
     value: x === 'all' ? '' : x,
-    label: intl.formatMessage({ id: `ui-harvester-admin.old-jobs.index.${x}` }),
+    label: intl.formatMessage({ id: `ui-harvester-admin.jobs.index.${x}` }),
   }));
 
   const filterStruct = parseFilters(query.filters);
@@ -47,8 +47,8 @@ function OldJobsSearchPane(props) {
           <FormattedMessage id="ui-harvester-admin.searchInputLabel">
             { ([ariaLabel]) => (
               <SearchField
-                data-test-old-jobs-search-input
-                id="input-old-jobs-search"
+                data-test-jobs-search-input
+                id="input-jobs-search"
                 autoFocus
                 ariaLabel={ariaLabel}
                 className={css.searchField}
@@ -68,7 +68,7 @@ function OldJobsSearchPane(props) {
             buttonStyle="primary"
             disabled={!searchValue.query || searchValue.query === ''}
             fullWidth
-            id="clickable-old-jobs-search"
+            id="clickable-jobs-search"
             marginBottom0
             type="submit"
           >
@@ -104,7 +104,7 @@ function OldJobsSearchPane(props) {
 }
 
 
-OldJobsSearchPane.propTypes = searchPanePropTypes;
+JobsSearchPane.propTypes = searchPanePropTypes;
 
 
-export default OldJobsSearchPane;
+export default JobsSearchPane;

@@ -2,15 +2,16 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { stripesConnect } from '@folio/stripes/core';
 import { StripesConnectedSource } from '@folio/stripes/smart-components';
-import queryFunction from '../search/oldJobsQueryFunction';
-import OldJobs from '../views/OldJobs';
+import queryFunction from '../search/jobsQueryFunction';
+import Jobs from '../views/Jobs';
+import packageInfo from '../../package';
 
 
 const INITIAL_RESULT_COUNT = 100;
 const RESULT_COUNT_INCREMENT = 100;
 
 
-const AllOldJobsRoute = ({ stripes, resources, mutator }) => {
+const HarvestableJobsRoute = ({ stripes, resources, mutator, match }) => {
   let [source, setSource] = useState(); // eslint-disable-line prefer-const
   if (!source) {
     source = new StripesConnectedSource({ resources, mutator }, stripes.logger, 'reportTitles');
@@ -19,31 +20,41 @@ const AllOldJobsRoute = ({ stripes, resources, mutator }) => {
     source.update({ resources, mutator }, 'reportTitles');
   }
 
+  const handleClose = () => {
+    mutator.query.update({ _path: `${packageInfo.stripes.route}/harvestables/${match.params.recId}` });
+  };
+
   const handleNeedMoreData = () => source.fetchMore(RESULT_COUNT_INCREMENT);
 
-  const hasLoaded = resources.oldJobs.hasLoaded;
-  const error = resources.oldJobs.failed ? resources.oldJobs.failed.message : undefined;
+  const hasLoaded = resources.harvestable.hasLoaded && resources.jobs.hasLoaded;
+  const error = resources.jobs.failed ? resources.jobs.failed.message : undefined;
 
   return (
-    <OldJobs
+    <Jobs
       data={{
-        oldJobs: resources.oldJobs.records,
+        harvestable: resources.harvestable.records?.[0],
+        jobs: resources.jobs.records,
       }}
-      resultCount={resources.oldJobs.other?.totalRecords}
+      resultCount={resources.jobs.other?.totalRecords}
       query={resources.query}
       updateQuery={mutator.query.update}
       hasLoaded={hasLoaded}
       error={error}
+      handlers={{ onClose: handleClose }}
       onNeedMoreData={handleNeedMoreData}
     />
   );
 };
 
 
-AllOldJobsRoute.manifest = Object.freeze({
+HarvestableJobsRoute.manifest = Object.freeze({
   query: {},
   resultCount: { initialValue: INITIAL_RESULT_COUNT },
-  oldJobs: {
+  harvestable: {
+    type: 'okapi',
+    path: 'harvester-admin/harvestables/:{recId}',
+  },
+  jobs: {
     type: 'okapi',
     path: 'harvester-admin/previous-jobs',
     throwErrors: false,
@@ -51,8 +62,11 @@ AllOldJobsRoute.manifest = Object.freeze({
     recordsRequired: '%{resultCount}',
     perRequest: RESULT_COUNT_INCREMENT,
     params: {
-      // Modify the query-function to remove unwanted asterisks after ID searches
+      // Curry the query-function to inject an extra filter specifying which harvestables's jobs we want
       query: (queryParams, pathComponents, rv, logger) => {
+        const extraFilter = `harvestableId.${pathComponents.recId}`;
+        const allFilters = rv.query.filters ? `${rv.query.filters},${extraFilter}` : extraFilter;
+        rv.query = { ...rv.query, filters: allFilters };
         const res = queryFunction(queryParams, pathComponents, rv, logger);
         if (res === undefined) return undefined;
         const m = res.match(/^(\(?(id|harvestableId)=\"[^\"]*)\*"(.*)$/);
@@ -63,13 +77,19 @@ AllOldJobsRoute.manifest = Object.freeze({
 });
 
 
-AllOldJobsRoute.propTypes = {
+HarvestableJobsRoute.propTypes = {
   stripes: PropTypes.shape({
     logger: PropTypes.object.isRequired,
   }).isRequired,
   resources: PropTypes.shape({
     query: PropTypes.object.isRequired,
-    oldJobs: PropTypes.shape({
+    harvestable: PropTypes.shape({
+      hasLoaded: PropTypes.bool.isRequired,
+      records: PropTypes.arrayOf(
+        PropTypes.shape({}).isRequired,
+      ).isRequired,
+    }).isRequired,
+    jobs: PropTypes.shape({
       failed: PropTypes.oneOfType([
         PropTypes.bool,
         PropTypes.shape({
@@ -90,7 +110,12 @@ AllOldJobsRoute.propTypes = {
       update: PropTypes.func.isRequired,
     }).isRequired,
   }).isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      recId: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
 };
 
 
-export default stripesConnect(AllOldJobsRoute);
+export default stripesConnect(HarvestableJobsRoute);

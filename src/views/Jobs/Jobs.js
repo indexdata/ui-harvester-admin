@@ -6,12 +6,12 @@ import { LoadingPane, Paneset, Pane, MultiColumnList, ErrorModal } from '@folio/
 import { ColumnManager, SearchAndSortQuery } from '@folio/stripes/smart-components';
 import formatDateTime from '../../util/formatDateTime';
 import { message2stats, summarizeStats } from '../../util/message2stats';
-import OldJobsSearchPane from '../../search/OldJobsSearchPane';
+import JobsSearchPane from '../../search/JobsSearchPane';
 import ErrorMessage from '../../components/ErrorMessage';
 import packageInfo from '../../../package';
 
 
-function OldJobs({
+function Jobs({
   data,
   query,
   resultCount,
@@ -19,6 +19,7 @@ function OldJobs({
   error,
   hasLoaded,
   onNeedMoreData,
+  children,
 }) {
   const [invalidSortKey, setInvalidSortKey] = useState();
   const intl = useIntl();
@@ -26,14 +27,14 @@ function OldJobs({
   if (!hasLoaded) return <LoadingPane />;
 
   const columnMapping = {
-    name: <FormattedMessage id="ui-harvester-admin.old-jobs.column.name" />,
-    status: <FormattedMessage id="ui-harvester-admin.old-jobs.column.status" />,
-    amountHarvested: <FormattedMessage id="ui-harvester-admin.old-jobs.column.amountHarvested" />,
-    seconds: <FormattedMessage id="ui-harvester-admin.old-jobs.column.seconds" />,
-    started: <FormattedMessage id="ui-harvester-admin.old-jobs.column.started" />,
-    finished: <FormattedMessage id="ui-harvester-admin.old-jobs.column.finished" />,
-    type: <FormattedMessage id="ui-harvester-admin.old-jobs.column.type" />,
-    message: <FormattedMessage id="ui-harvester-admin.old-jobs.column.message" />,
+    name: <FormattedMessage id="ui-harvester-admin.jobs.column.name" />,
+    status: <FormattedMessage id="ui-harvester-admin.jobs.column.status" />,
+    amountHarvested: <FormattedMessage id="ui-harvester-admin.jobs.column.amountHarvested" />,
+    seconds: <FormattedMessage id="ui-harvester-admin.jobs.column.seconds" />,
+    started: <FormattedMessage id="ui-harvester-admin.jobs.column.started" />,
+    finished: <FormattedMessage id="ui-harvester-admin.jobs.column.finished" />,
+    type: <FormattedMessage id="ui-harvester-admin.jobs.column.type" />,
+    message: <FormattedMessage id="ui-harvester-admin.jobs.column.message" />,
   };
 
   const columnWidths = {
@@ -72,15 +73,15 @@ function OldJobs({
       {
         (sasqParams) => {
           return (
-            <Paneset id="old-jobs-paneset">
-              <OldJobsSearchPane
+            <Paneset id="jobs-paneset">
+              <JobsSearchPane
                 {...sasqParams}
                 defaultWidth="20%"
                 query={query}
                 updateQuery={updateQuery}
               />
               <ColumnManager
-                id="old-jobs-visible-columns"
+                id="jobs-visible-columns"
                 columnMapping={columnMapping}
                 excludeKeys={['name']}
                 persist
@@ -96,13 +97,13 @@ function OldJobs({
                   >
                     <MultiColumnList
                       autosize
-                      id="list-old-jobs"
+                      id="list-jobs"
                       virtualize
                       visibleColumns={visibleColumns}
                       columnMapping={columnMapping}
                       columnWidths={columnWidths}
                       formatter={formatter}
-                      contentData={data.oldJobs}
+                      contentData={data.jobs}
                       totalCount={resultCount}
                       onHeaderClick={(event, headerMetadata) => {
                         if (headerMetadata.name === 'seconds') {
@@ -113,7 +114,7 @@ function OldJobs({
                         }
                       }}
                       onNeedMoreData={onNeedMoreData}
-                      onRowClick={(event, rec) => updateQuery({ _path: `XXX ${packageInfo.stripes.route}/harvestables/${rec.id}` })}
+                      onRowClick={(event, rec) => updateQuery({ _path: `${packageInfo.stripes.route}/jobs/${rec.id}` })}
                     />
                     <ErrorModal
                       open={!!invalidSortKey}
@@ -127,6 +128,7 @@ function OldJobs({
                   </Pane>
                 )}
               </ColumnManager>
+              {children}
             </Paneset>
           );
         }
@@ -136,12 +138,12 @@ function OldJobs({
 }
 
 
-OldJobs.propTypes = {
+Jobs.propTypes = {
   data: PropTypes.shape({
     harvestable: PropTypes.shape({
       name: PropTypes.string.isRequired,
     }), // optional
-    oldJobs: PropTypes.arrayOf(
+    jobs: PropTypes.arrayOf(
       PropTypes.shape({
         // XXX fill in
       }).isRequired,
@@ -153,7 +155,11 @@ OldJobs.propTypes = {
   error: PropTypes.string,
   hasLoaded: PropTypes.bool.isRequired,
   onNeedMoreData: PropTypes.func.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.object.isRequired,
+    PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+  ]),
 };
 
 
-export default OldJobs;
+export default Jobs;

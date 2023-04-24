@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import ObjectInspector from 'react-inspector';
 import { MultiColumnList, Accordion } from '@folio/stripes/components';
-import css from '../Harvestables.css';
+import css from '../Styles.css';
 
 
 function summariseErrors(errors) {
@@ -23,7 +23,7 @@ function summariseErrors(errors) {
 }
 
 
-const HarvestableLogsFailedRecords = ({ failedRecords }) => {
+const HarvestableLogFailedRecords = ({ failedRecords }) => {
   const visibleColumns = ['recordNumber', 'instanceHrid', 'instanceTitle', 'errors', 'timeStamp'];
 
   const columnMapping = {
@@ -42,7 +42,7 @@ const HarvestableLogsFailedRecords = ({ failedRecords }) => {
 
   return (
     <Accordion
-      id="harvestable-logs-failed"
+      id="logs-failed"
       label={<FormattedMessage
         id="ui-harvester-admin.logs.countFailedRecords"
         values={{ count: failedRecords.failedRecords.length }}
@@ -77,7 +77,7 @@ const HarvestableLogsFailedRecords = ({ failedRecords }) => {
 };
 
 
-HarvestableLogsFailedRecords.propTypes = {
+HarvestableLogFailedRecords.propTypes = {
   failedRecords: PropTypes.shape({
     totalRecords: PropTypes.number.isRequired,
     failedRecords: PropTypes.arrayOf(
@@ -89,4 +89,4 @@ HarvestableLogsFailedRecords.propTypes = {
 };
 
 
-export default HarvestableLogsFailedRecords;
+export default HarvestableLogFailedRecords;

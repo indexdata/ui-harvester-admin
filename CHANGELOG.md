@@ -32,6 +32,7 @@
 * Remove `currentStatus` from submitted records: this is both read-only (so ignored when correct) and controlled (so it causes problems when it is not). Fixes UIHAADM-49.
 * Prevent UI from attempting to sort Old Jobs on `seconds` column. Fixes UIHAADM-51.
 * Harvestables can now be correctly saved even when usedBy or managedBy is set, as these is now edited as lists. Fixes UIHAADM-48.
+* Provide a full-record view for individual jobs. Fixes UIHAADM-32.
 
 ## [0.1.0](https://github.com/folio-org/ui-harvester-admin/tree/v0.1.0) (2022-07-19)
 

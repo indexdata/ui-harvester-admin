@@ -42,17 +42,17 @@ const filterConfig = [{
   values: [],
   parse: makePFV('finished', '<='),
 }, {
-  // Value is injected from path-component by HarvestableOldJobsRoute's query function
+  // Value is injected from path-component by HarvestableJobsRoute's query function
   name: 'harvestableId',
   cql: 'harvestableId',
   values: [],
 }];
 
-const oldJobsQueryFunction = makeQueryFunction(
+const jobsQueryFunction = makeQueryFunction(
   'cql.allRecords=1',
   'name="%{query.query}*"', // XXX cannot yet add: 'or id="%{query.query}" or harvestableId="%{query.query}"',
   sortMap,
   filterConfig,
 );
 
-export default oldJobsQueryFunction;
+export default jobsQueryFunction;
