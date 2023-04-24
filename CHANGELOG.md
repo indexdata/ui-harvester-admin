@@ -33,6 +33,10 @@
 * Prevent UI from attempting to sort Old Jobs on `seconds` column. Fixes UIHAADM-51.
 * Harvestables can now be correctly saved even when usedBy or managedBy is set, as these is now edited as lists. Fixes UIHAADM-48.
 * Provide a full-record view for individual jobs. Fixes UIHAADM-32.
+* Minor UI changes decided. Fixes UIHAADM-52:
+  * When viewing the jobs associated with a harvestable, the Jobs tab (not the Harvestables tab) is highlighted.
+  * In the filter panes for both harvestables and jobs, the Reset button is moved up above the filters.
+  * The the sorted result lists for both harvestables and jobs, the currently sorted-by header is highlighted and the sort direction indicated.
 
 ## [0.1.0](https://github.com/folio-org/ui-harvester-admin/tree/v0.1.0) (2022-07-19)
 
