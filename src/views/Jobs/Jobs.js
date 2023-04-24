@@ -27,14 +27,14 @@ function Jobs({
   if (!hasLoaded) return <LoadingPane />;
 
   const columnMapping = {
-    name: <FormattedMessage id="ui-harvester-admin.old-jobs.column.name" />,
-    status: <FormattedMessage id="ui-harvester-admin.old-jobs.column.status" />,
-    amountHarvested: <FormattedMessage id="ui-harvester-admin.old-jobs.column.amountHarvested" />,
-    seconds: <FormattedMessage id="ui-harvester-admin.old-jobs.column.seconds" />,
-    started: <FormattedMessage id="ui-harvester-admin.old-jobs.column.started" />,
-    finished: <FormattedMessage id="ui-harvester-admin.old-jobs.column.finished" />,
-    type: <FormattedMessage id="ui-harvester-admin.old-jobs.column.type" />,
-    message: <FormattedMessage id="ui-harvester-admin.old-jobs.column.message" />,
+    name: <FormattedMessage id="ui-harvester-admin.jobs.column.name" />,
+    status: <FormattedMessage id="ui-harvester-admin.jobs.column.status" />,
+    amountHarvested: <FormattedMessage id="ui-harvester-admin.jobs.column.amountHarvested" />,
+    seconds: <FormattedMessage id="ui-harvester-admin.jobs.column.seconds" />,
+    started: <FormattedMessage id="ui-harvester-admin.jobs.column.started" />,
+    finished: <FormattedMessage id="ui-harvester-admin.jobs.column.finished" />,
+    type: <FormattedMessage id="ui-harvester-admin.jobs.column.type" />,
+    message: <FormattedMessage id="ui-harvester-admin.jobs.column.message" />,
   };
 
   const columnWidths = {
