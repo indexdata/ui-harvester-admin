@@ -47,8 +47,8 @@ function JobsSearchPane(props) {
           <FormattedMessage id="ui-harvester-admin.searchInputLabel">
             { ([ariaLabel]) => (
               <SearchField
-                data-test-old-jobs-search-input
-                id="input-old-jobs-search"
+                data-test-jobs-search-input
+                id="input-jobs-search"
                 autoFocus
                 ariaLabel={ariaLabel}
                 className={css.searchField}
@@ -68,7 +68,7 @@ function JobsSearchPane(props) {
             buttonStyle="primary"
             disabled={!searchValue.query || searchValue.query === ''}
             fullWidth
-            id="clickable-old-jobs-search"
+            id="clickable-jobs-search"
             marginBottom0
             type="submit"
           >

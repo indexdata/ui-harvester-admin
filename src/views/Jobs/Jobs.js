@@ -73,7 +73,7 @@ function Jobs({
       {
         (sasqParams) => {
           return (
-            <Paneset id="old-jobs-paneset">
+            <Paneset id="jobs-paneset">
               <JobsSearchPane
                 {...sasqParams}
                 defaultWidth="20%"
@@ -81,7 +81,7 @@ function Jobs({
                 updateQuery={updateQuery}
               />
               <ColumnManager
-                id="old-jobs-visible-columns"
+                id="jobs-visible-columns"
                 columnMapping={columnMapping}
                 excludeKeys={['name']}
                 persist
@@ -97,7 +97,7 @@ function Jobs({
                   >
                     <MultiColumnList
                       autosize
-                      id="list-old-jobs"
+                      id="list-jobs"
                       virtualize
                       visibleColumns={visibleColumns}
                       columnMapping={columnMapping}

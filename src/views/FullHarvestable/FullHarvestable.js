@@ -175,7 +175,7 @@ const FullHarvestable = ({ defaultWidth, resources, mutator, match, deleteRecord
           <Button
             buttonStyle="dropdownItem"
             marginBottom0
-            id="clickable-old-jobs"
+            id="clickable-jobs"
             onClick={() => {
               mutator.query.update({ _path: `${packageInfo.stripes.route}/harvestables/${match.params.recId}/jobs` });
             }}
