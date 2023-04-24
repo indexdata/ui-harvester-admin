@@ -12,8 +12,9 @@ function SwitchRoute({ location, children }) {
         <ButtonGroup data-test-navigation>
           {
             segments.map(name => {
-              console.log(`considering tab '${name}' for`, location);
-              const selected = location.pathname.startsWith(`/ha/${name}`);
+              let effectiveTab = location.pathname.replace(/^\/ha\//, '').replace(/\/.*/, '');
+              if (location.pathname.endsWith('/jobs')) effectiveTab = 'jobs';
+              const selected = (effectiveTab === name);
               return (
                 <Button
                   key={`${name}`}
