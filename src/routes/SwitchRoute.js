@@ -11,16 +11,20 @@ function SwitchRoute({ location, children }) {
       <div style={{ display: 'flex', justifyContent: 'center', marginTop: '0.5em' }}>
         <ButtonGroup data-test-navigation>
           {
-            segments.map(name => (
-              <Button
-                key={`${name}`}
-                to={`/ha/${name}`}
-                buttonStyle={`${location.pathname.startsWith(`/ha/${name}`) ? 'primary' : 'default'}`}
-                aria-selected={location.pathname === `/ha/${name}`}
-              >
-                <FormattedMessage id={`ui-harvester-admin.nav.${name}`} />
-              </Button>
-            ))
+            segments.map(name => {
+              console.log(`considering tab '${name}' for`, location);
+              const selected = location.pathname.startsWith(`/ha/${name}`);
+              return (
+                <Button
+                  key={`${name}`}
+                  to={`/ha/${name}`}
+                  buttonStyle={selected ? 'primary' : 'default'}
+                  aria-selected={selected}
+                >
+                  <FormattedMessage id={`ui-harvester-admin.nav.${name}`} />
+                </Button>
+              );
+            })
           }
         </ButtonGroup>
       </div>
