@@ -33,7 +33,7 @@ const HarvestableJobsRoute = ({ stripes, resources, mutator, match }) => {
     <Jobs
       data={{
         harvestable: resources.harvestable.records?.[0],
-        oldJobs: resources.jobs.records,
+        jobs: resources.jobs.records,
       }}
       resultCount={resources.jobs.other?.totalRecords}
       query={resources.query}

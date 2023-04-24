@@ -27,7 +27,7 @@ const JobsRoute = ({ stripes, resources, mutator, children }) => {
   return (
     <Jobs
       data={{
-        oldJobs: resources.jobs.records,
+        jobs: resources.jobs.records,
       }}
       resultCount={resources.jobs.other?.totalRecords}
       query={resources.query}

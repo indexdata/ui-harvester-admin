@@ -103,7 +103,7 @@ function Jobs({
                       columnMapping={columnMapping}
                       columnWidths={columnWidths}
                       formatter={formatter}
-                      contentData={data.oldJobs}
+                      contentData={data.jobs}
                       totalCount={resultCount}
                       onHeaderClick={(event, headerMetadata) => {
                         if (headerMetadata.name === 'seconds') {
@@ -143,7 +143,7 @@ Jobs.propTypes = {
     harvestable: PropTypes.shape({
       name: PropTypes.string.isRequired,
     }), // optional
-    oldJobs: PropTypes.arrayOf(
+    jobs: PropTypes.arrayOf(
       PropTypes.shape({
         // XXX fill in
       }).isRequired,
