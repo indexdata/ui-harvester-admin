@@ -177,7 +177,7 @@ const FullHarvestable = ({ defaultWidth, resources, mutator, match, deleteRecord
             marginBottom0
             id="clickable-old-jobs"
             onClick={() => {
-              mutator.query.update({ _path: `${packageInfo.stripes.route}/harvestables/${match.params.recId}/oldjobs` });
+              mutator.query.update({ _path: `${packageInfo.stripes.route}/harvestables/${match.params.recId}/jobs` });
             }}
           >
             <Icon icon="list">

@@ -30,7 +30,7 @@ const HarvesterAdminApp = (props) => {
         <Switch>
           <NestedRoute path={`${path}/harvestables/create/:type`} exact component={CreateHarvestableRoute} />
           <NestedRoute path={`${path}/harvestables/:recId/logs`} exact component={HarvestableLogRoute} />
-          <NestedRoute path={`${path}/harvestables/:recId/oldjobs`} exact component={HarvestableJobsRoute} />
+          <NestedRoute path={`${path}/harvestables/:recId/jobs`} exact component={HarvestableJobsRoute} />
           <NestedRoute path={`${path}/harvestables`} component={HarvestablesRoute}>
             <NestedRoute path={`${path}/harvestables/:recId`} exact component={FullHarvestableRoute} />
             <NestedRoute path={`${path}/harvestables/:recId/edit`} exact component={EditHarvestableRoute} />
