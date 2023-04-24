@@ -26,16 +26,16 @@ const HarvestableJobsRoute = ({ stripes, resources, mutator, match }) => {
 
   const handleNeedMoreData = () => source.fetchMore(RESULT_COUNT_INCREMENT);
 
-  const hasLoaded = resources.harvestable.hasLoaded && resources.oldJobs.hasLoaded;
-  const error = resources.oldJobs.failed ? resources.oldJobs.failed.message : undefined;
+  const hasLoaded = resources.harvestable.hasLoaded && resources.jobs.hasLoaded;
+  const error = resources.jobs.failed ? resources.jobs.failed.message : undefined;
 
   return (
     <Jobs
       data={{
         harvestable: resources.harvestable.records?.[0],
-        oldJobs: resources.oldJobs.records,
+        oldJobs: resources.jobs.records,
       }}
-      resultCount={resources.oldJobs.other?.totalRecords}
+      resultCount={resources.jobs.other?.totalRecords}
       query={resources.query}
       updateQuery={mutator.query.update}
       hasLoaded={hasLoaded}
@@ -54,7 +54,7 @@ HarvestableJobsRoute.manifest = Object.freeze({
     type: 'okapi',
     path: 'harvester-admin/harvestables/:{recId}',
   },
-  oldJobs: {
+  jobs: {
     type: 'okapi',
     path: 'harvester-admin/previous-jobs',
     throwErrors: false,
@@ -89,7 +89,7 @@ HarvestableJobsRoute.propTypes = {
         PropTypes.shape({}).isRequired,
       ).isRequired,
     }).isRequired,
-    oldJobs: PropTypes.shape({
+    jobs: PropTypes.shape({
       failed: PropTypes.oneOfType([
         PropTypes.bool,
         PropTypes.shape({
