@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { LoadingPane } from '@folio/stripes/components';
-import ErrorMessage from '../components/ErrorMessage';
-import HarvestableLogFailedRecords from './HarvestableLog/HarvestableLogFailedRecords';
+import ErrorMessage from '../../components/ErrorMessage';
+import HarvestableLogFailedRecords from '../HarvestableLog/HarvestableLogFailedRecords';
 
 
 function Records({
