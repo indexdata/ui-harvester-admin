@@ -260,7 +260,7 @@
     "jobs.index.harvestableId": "Harvestable ID",
     "jobs.index.message": "Message",
     "jobs.index.all": "(All)",
-    "jobs.column.name": "Name",
+    "jobs.column.name": "Harvestable name",
     "jobs.column.status": "Status",
     "jobs.column.amountHarvested": "Records",
     "jobs.column.seconds": "Seconds",
@@ -268,5 +268,16 @@
     "jobs.column.finished": "Finished",
     "jobs.column.type": "Job class",
     "jobs.column.message": "Message (processed/loaded/deleted/failed)",
-    "nav.records": "Failed records"
+    "nav.records": "Failed records",
+    "records.index.recordNumber": "Record number",
+    "records.index.instanceHrid": "Instance hrid",
+    "records.index.instanceTitle": "Instance title",
+    "records.index.errors": "Errors",
+    "records.index.timeStamp": "Time stamp",
+    "records.index.harvestableName": "Harvestable name",
+    "records.index.all": "(All)",
+    "filter.date.timeStamp": "Time stamp",
+    "filter.date.timeStamp.from": "From",
+    "filter.date.timeStamp.to": "To",
+    "failed-records.harvestableName": "Harvestable name"
 }
