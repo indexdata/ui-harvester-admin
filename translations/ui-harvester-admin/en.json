@@ -69,6 +69,14 @@
     "jobs.index.message": "Message",
     "jobs.index.all": "(All)",
 
+    "records.index.recordNumber": "Record number",
+    "records.index.instanceHrid": "Instance hrid",
+    "records.index.instanceTitle": "Instance title",
+    "records.index.errors": "Errors",
+    "records.index.timeStamp": "Time stamp",
+    "records.index.harvestableName": "Harvestable name",
+    "records.index.all": "(All)",
+
     "searchInputLabel": "XXX searchInputLabel",
     "filter.date.started": "Date started",
     "filter.date.started.from": "From",
@@ -76,6 +84,10 @@
     "filter.date.finished": "Date finished",
     "filter.date.finished.from": "From",
     "filter.date.finished.to": "To",
+    "filter.date.timeStamp": "Time stamp",
+    "filter.date.timeStamp.from": "From",
+    "filter.date.timeStamp.to": "To",
+
     "accordion.devinfo": "Developer information",
 
     "harvestables.heading.general": "General information",
@@ -271,7 +283,7 @@
     "failed-records.errors": "Errors",
     "failed-records.harvestableName": "Harvestable name",
 
-    "jobs.column.name": "Name",
+    "jobs.column.name": "Harvestable name",
     "jobs.column.status": "Status",
     "jobs.column.amountHarvested": "Records",
     "jobs.column.seconds": "Seconds",

@@ -6,7 +6,7 @@ import { LoadingPane, Paneset, Pane, MultiColumnList, ErrorModal } from '@folio/
 import { ColumnManager, SearchAndSortQuery } from '@folio/stripes/smart-components';
 import parseSort from '../../util/parseSort';
 import summarizeErrors from '../../util/summarizeErrors';
-import RecordsSearchPane from '../../search/JobsSearchPane';
+import RecordsSearchPane from '../../search/RecordsSearchPane';
 import ErrorMessage from '../../components/ErrorMessage';
 import packageInfo from '../../../package';
 
