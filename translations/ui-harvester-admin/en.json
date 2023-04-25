@@ -18,6 +18,7 @@
     "nav.harvestables": "Harvestables",
     "nav.jobs": "Jobs",
     "nav.jobs-for": "Jobs for {name}",
+    "nav.records": "Failed records",
 
     "button.edit": "Edit",
     "button.delete": "Delete",
