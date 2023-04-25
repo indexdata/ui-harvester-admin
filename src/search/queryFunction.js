@@ -42,6 +42,16 @@ const filterConfig = [{
   values: [],
   parse: makePFV('finished', '<='),
 }, {
+  name: 'timeStamp_from',
+  cql: 'timeStamp_from',
+  values: [],
+  parse: makePFV('timeStamp', '>='),
+}, {
+  name: 'timeStamp_to',
+  cql: 'timeStamp_to',
+  values: [],
+  parse: makePFV('timeStamp', '<='),
+}, {
   // Value is injected from path-component by HarvestableJobsRoute's query function
   name: 'harvestableId',
   cql: 'harvestableId',

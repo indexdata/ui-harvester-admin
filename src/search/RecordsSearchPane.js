@@ -3,13 +3,12 @@ import { useIntl, FormattedMessage } from 'react-intl';
 import { useStripes } from '@folio/stripes/core';
 import { Button, Icon, Pane, SearchField } from '@folio/stripes/components';
 import { parseFilters } from '@folio/stripes/smart-components';
-import renderFilter from './renderFilter';
 import renderDateFilterPair from './renderDateFilterPair';
 import searchPanePropTypes from './searchPanePropTypes';
 import css from './SearchPane.css';
 
 
-function JobsSearchPane(props) {
+function RecordsSearchPane(props) {
   const {
     defaultWidth,
     searchValue,
@@ -29,9 +28,18 @@ function JobsSearchPane(props) {
   };
 
   const intl = useIntl();
-  const searchableIndexes = ['name', 'id', 'harvestableId', 'message', 'all'].map(x => ({
+
+  const indexNames = [
+    'recordNumber',
+    // 'instanceHrid', // XXX not yet supported
+    // 'instanceTitle', // XXX not yet supported
+    // 'errors', // XXX not yet supported
+    'harvestableName', // XXX works, but will not accept masking characters
+    'all'
+  ];
+  const searchableIndexes = indexNames.map(x => ({
     value: x === 'all' ? '' : x,
-    label: intl.formatMessage({ id: `ui-harvester-admin.jobs.index.${x}` }),
+    label: intl.formatMessage({ id: `ui-harvester-admin.records.index.${x}` }),
   }));
 
   const filterStruct = parseFilters(query.filters);
@@ -46,8 +54,8 @@ function JobsSearchPane(props) {
           <FormattedMessage id="ui-harvester-admin.searchInputLabel">
             { ([ariaLabel]) => (
               <SearchField
-                data-test-jobs-search-input
-                id="input-jobs-search"
+                data-test-records-search-input
+                id="input-records-search"
                 autoFocus
                 ariaLabel={ariaLabel}
                 className={css.searchField}
@@ -67,7 +75,7 @@ function JobsSearchPane(props) {
             buttonStyle="primary"
             disabled={!searchValue.query || searchValue.query === ''}
             fullWidth
-            id="clickable-jobs-search"
+            id="clickable-records-search"
             marginBottom0
             type="submit"
           >
@@ -88,14 +96,7 @@ function JobsSearchPane(props) {
           </Button>
         </div>
 
-        {renderFilter(intl, filterStruct, updateQuery, 'status/harvestables.column.currentStatus',
-          ['NEW', 'OK', 'WARN', 'ERROR', 'RUNNING', 'FINISHED', 'KILLED'],
-          true)}
-        {/* XXX we need a filter for "some errors occurred during the run, which was OK overall" */}
-        {renderFilter(intl, filterStruct, updateQuery, 'type/harvestables.field.jobClass',
-          ['oaiPmh', 'xmlBulk', 'connector', 'status'])}
-        {renderDateFilterPair(intl, filterStruct, updateQuery, 'started')}
-        {renderDateFilterPair(intl, filterStruct, updateQuery, 'finished')}
+        {renderDateFilterPair(intl, filterStruct, updateQuery, 'timeStamp')}
 
       </form>
     </Pane>
@@ -103,7 +104,7 @@ function JobsSearchPane(props) {
 }
 
 
-JobsSearchPane.propTypes = searchPanePropTypes;
+RecordsSearchPane.propTypes = searchPanePropTypes;
 
 
-export default JobsSearchPane;
+export default RecordsSearchPane;
