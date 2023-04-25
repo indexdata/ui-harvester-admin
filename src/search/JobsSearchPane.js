@@ -93,7 +93,6 @@ function JobsSearchPane(props) {
           ['NEW', 'OK', 'WARN', 'ERROR', 'RUNNING', 'FINISHED', 'KILLED'],
           true)}
         {/* XXX we need a filter for "some errors occurred during the run, which was OK overall" */}
-        {/* XXX we need filters for `started` and `finished` date-ranges */}
         {renderFilter(intl, filterStruct, updateQuery, 'type/harvestables.field.jobClass',
           ['oaiPmh', 'xmlBulk', 'connector', 'status'])}
         {renderDateFilterPair(intl, filterStruct, updateQuery, 'started')}
