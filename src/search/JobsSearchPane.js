@@ -3,7 +3,6 @@ import { useIntl, FormattedMessage } from 'react-intl';
 import { useStripes } from '@folio/stripes/core';
 import { Button, Icon, Pane, SearchField } from '@folio/stripes/components';
 import { parseFilters } from '@folio/stripes/smart-components';
-import indexNames from './jobsIndexNames';
 import renderFilter from './renderFilter';
 import renderDateFilterPair from './renderDateFilterPair';
 import searchPanePropTypes from './searchPanePropTypes';
@@ -30,7 +29,7 @@ function JobsSearchPane(props) {
   };
 
   const intl = useIntl();
-  const searchableIndexes = indexNames.map(x => ({
+  const searchableIndexes = ['name', 'id', 'harvestableId', 'message', 'all'].map(x => ({
     value: x === 'all' ? '' : x,
     label: intl.formatMessage({ id: `ui-harvester-admin.jobs.index.${x}` }),
   }));
