@@ -26,18 +26,18 @@ function Records({
   if (!hasLoaded) return <LoadingPane />;
 
   const columnMapping = {
-    harvestableName: <FormattedMessage id="ui-harvester-admin.failed-records.harvestableName" />,
     recordNumber: <FormattedMessage id="ui-harvester-admin.failed-records.recordNumber" />,
     instanceHrid: <FormattedMessage id="ui-harvester-admin.failed-records.instanceHrid" />,
     instanceTitle: <FormattedMessage id="ui-harvester-admin.failed-records.instanceTitle" />,
     errors: <FormattedMessage id="ui-harvester-admin.failed-records.errors" />,
     timeStamp: <FormattedMessage id="ui-harvester-admin.failed-records.timeStamp" />,
+    harvestableName: <FormattedMessage id="ui-harvester-admin.failed-records.harvestableName" />,
   };
 
   const columnWidths = {
     harvestableName: '300px',
     recordNumber: '150px',
-    instanceHrid: '120px',
+    instanceHrid: '140px',
     instanceTitle: '300px',
   };
 
