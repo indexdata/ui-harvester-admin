@@ -269,6 +269,7 @@
     "failed-records.instanceHrid": "Instance HRID",
     "failed-records.instanceTitle": "Instance title",
     "failed-records.errors": "Errors",
+    "failed-records.harvestableName": "Harvestable name",
 
     "jobs.column.name": "Name",
     "jobs.column.status": "Status",

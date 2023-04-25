@@ -26,6 +26,7 @@ function Records({
   if (!hasLoaded) return <LoadingPane />;
 
   const columnMapping = {
+    harvestableName: <FormattedMessage id="ui-harvester-admin.failed-records.harvestableName" />,
     recordNumber: <FormattedMessage id="ui-harvester-admin.failed-records.recordNumber" />,
     instanceHrid: <FormattedMessage id="ui-harvester-admin.failed-records.instanceHrid" />,
     instanceTitle: <FormattedMessage id="ui-harvester-admin.failed-records.instanceTitle" />,
@@ -34,6 +35,7 @@ function Records({
   };
 
   const columnWidths = {
+    harvestableName: '300px',
     recordNumber: '150px',
     instanceHrid: '120px',
     instanceTitle: '300px',
@@ -45,12 +47,7 @@ function Records({
     errors: r => summarizeErrors(r.recordErrors),
   };
 
-  const paneTitle = !data.harvestable ?
-    <FormattedMessage id="ui-harvester-admin.nav.records" /> :
-    <FormattedMessage
-      id="ui-harvester-admin.nav.records-for"
-      values={{ name: data.harvestable.name }}
-    />;
+  const paneTitle = <FormattedMessage id="ui-harvester-admin.nav.records" />;
 
   const sortKeys = parseSort(query.sort);
   const sortedColumn = sortKeys[0]?.key;
@@ -130,9 +127,6 @@ function Records({
 
 Records.propTypes = {
   data: PropTypes.shape({
-    harvestable: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-    }), // optional
     records: PropTypes.arrayOf(
       PropTypes.shape({
         // XXX fill in
