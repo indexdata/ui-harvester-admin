@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { stripesConnect } from '@folio/stripes/core';
 import { StripesConnectedSource } from '@folio/stripes/smart-components';
 import queryFunction from '../search/queryFunction';
-import Records from '../views/Jobs';
+import Records from '../views/Records';
 
 
 const INITIAL_RESULT_COUNT = 100;
@@ -92,7 +92,7 @@ RecordsRoute.propTypes = {
       update: PropTypes.func.isRequired,
     }).isRequired,
   }).isRequired,
-  children: PropTypes.object.isRequired,
+  children: PropTypes.object, // XXX may need to add .isRequired later
 };
 
 
