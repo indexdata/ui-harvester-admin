@@ -6,7 +6,7 @@ import { MultiColumnList, Accordion } from '@folio/stripes/components';
 import css from '../Styles.css';
 
 
-function summariseErrors(errors) {
+function summarizeErrors(errors) {
   return (
     <ul className={css.noDot}>
       {
@@ -37,7 +37,7 @@ const HarvestableLogFailedRecords = ({ failedRecords }) => {
   const resultsFormatter = {
     instanceHrid: r => r.transformedRecord?.instance?.hrid,
     instanceTitle: r => r.transformedRecord?.instance?.title,
-    errors: r => summariseErrors(r.recordErrors),
+    errors: r => summarizeErrors(r.recordErrors),
   };
 
   return (
