@@ -267,5 +267,6 @@
     "jobs.column.started": "Started",
     "jobs.column.finished": "Finished",
     "jobs.column.type": "Job class",
-    "jobs.column.message": "Message (processed/loaded/deleted/failed)"
+    "jobs.column.message": "Message (processed/loaded/deleted/failed)",
+    "nav.records": "Failed records"
 }
