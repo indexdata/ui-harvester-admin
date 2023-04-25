@@ -3,24 +3,7 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import ObjectInspector from 'react-inspector';
 import { MultiColumnList, Accordion } from '@folio/stripes/components';
-import css from '../Styles.css';
-
-
-function summarizeErrors(errors) {
-  return (
-    <ul className={css.noDot}>
-      {
-        errors.map(error => (
-          error.error?.message?.errors.map(x => (
-            <li>
-              {x.message}
-            </li>
-          ))
-        ))
-      }
-    </ul>
-  );
-}
+import summarizeErrors from '../../util/summarizeErrors';
 
 
 const HarvestableLogFailedRecords = ({ failedRecords }) => {
