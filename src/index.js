@@ -12,6 +12,7 @@ import HarvestableLogRoute from './routes/HarvestableLogRoute';
 import HarvestableJobsRoute from './routes/HarvestableJobsRoute';
 import JobsRoute from './routes/JobsRoute';
 import FullJobRoute from './routes/FullJobRoute';
+import RecordsRoute from './routes/RecordsRoute';
 
 const HarvesterAdminApp = (props) => {
   const {
@@ -38,6 +39,7 @@ const HarvesterAdminApp = (props) => {
           <NestedRoute path={`${path}/jobs`} component={JobsRoute}>
             <NestedRoute path={`${path}/jobs/:recId`} exact component={FullJobRoute} />
           </NestedRoute>
+          <NestedRoute path={`${path}/records`} component={RecordsRoute} />
         </Switch>
       </NestedRoute>
     </Switch>

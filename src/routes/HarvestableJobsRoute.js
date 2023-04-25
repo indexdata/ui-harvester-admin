@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { stripesConnect } from '@folio/stripes/core';
 import { StripesConnectedSource } from '@folio/stripes/smart-components';
-import queryFunction from '../search/jobsQueryFunction';
+import queryFunction from '../search/queryFunction';
 import Jobs from '../views/Jobs';
 import packageInfo from '../../package';
 

@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import { stripesConnect } from '@folio/stripes/core';
 import { StripesConnectedSource } from '@folio/stripes/smart-components';
 import queryFunction from '../search/queryFunction';
-import Jobs from '../views/Jobs';
+import Records from '../views/Records';
 
 
 const INITIAL_RESULT_COUNT = 100;
 const RESULT_COUNT_INCREMENT = 100;
 
 
-const JobsRoute = ({ stripes, resources, mutator, children }) => {
+const RecordsRoute = ({ stripes, resources, mutator, children }) => {
   let [source, setSource] = useState(); // eslint-disable-line prefer-const
   if (!source) {
     source = new StripesConnectedSource({ resources, mutator }, stripes.logger, 'reportTitles');
@@ -21,15 +21,15 @@ const JobsRoute = ({ stripes, resources, mutator, children }) => {
 
   const handleNeedMoreData = () => source.fetchMore(RESULT_COUNT_INCREMENT);
 
-  const hasLoaded = resources.jobs.hasLoaded;
-  const error = resources.jobs.failed ? resources.jobs.failed.message : undefined;
+  const hasLoaded = resources.records.hasLoaded;
+  const error = resources.records.failed ? resources.records.failed.message : undefined;
 
   return (
-    <Jobs
+    <Records
       data={{
-        jobs: resources.jobs.records,
+        records: resources.records.records,
       }}
-      resultCount={resources.jobs.other?.totalRecords}
+      resultCount={resources.records.other?.totalRecords}
       query={resources.query}
       updateQuery={mutator.query.update}
       hasLoaded={hasLoaded}
@@ -37,19 +37,19 @@ const JobsRoute = ({ stripes, resources, mutator, children }) => {
       onNeedMoreData={handleNeedMoreData}
     >
       {children}
-    </Jobs>
+    </Records>
   );
 };
 
 
-JobsRoute.manifest = Object.freeze({
+RecordsRoute.manifest = Object.freeze({
   query: {},
   resultCount: { initialValue: INITIAL_RESULT_COUNT },
-  jobs: {
+  records: {
     type: 'okapi',
-    path: 'harvester-admin/previous-jobs',
+    path: 'harvester-admin/previous-jobs/failed-records',
     throwErrors: false,
-    records: 'previousJobs',
+    records: 'failedRecords',
     recordsRequired: '%{resultCount}',
     perRequest: RESULT_COUNT_INCREMENT,
     params: {
@@ -65,13 +65,13 @@ JobsRoute.manifest = Object.freeze({
 });
 
 
-JobsRoute.propTypes = {
+RecordsRoute.propTypes = {
   stripes: PropTypes.shape({
     logger: PropTypes.object.isRequired,
   }).isRequired,
   resources: PropTypes.shape({
     query: PropTypes.object.isRequired,
-    jobs: PropTypes.shape({
+    records: PropTypes.shape({
       failed: PropTypes.oneOfType([
         PropTypes.bool,
         PropTypes.shape({
@@ -92,8 +92,8 @@ JobsRoute.propTypes = {
       update: PropTypes.func.isRequired,
     }).isRequired,
   }).isRequired,
-  children: PropTypes.object.isRequired,
+  children: PropTypes.object, // XXX may need to add .isRequired later
 };
 
 
-export default stripesConnect(JobsRoute);
+export default stripesConnect(RecordsRoute);
