@@ -37,6 +37,7 @@
   * When viewing the jobs associated with a harvestable, the Jobs tab (not the Harvestables tab) is highlighted.
   * In the filter panes for both harvestables and jobs, the Reset button is moved up above the filters.
   * The the sorted result lists for both harvestables and jobs, the currently sorted-by header is highlighted and the sort direction indicated.
+* "View log" button text is now "Current" or "Last" depending on status; "Old jobs" button added to harvestables list. Fixes UIHAADM-54.
 
 ## [0.1.0](https://github.com/folio-org/ui-harvester-admin/tree/v0.1.0) (2022-07-19)
 

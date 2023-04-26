@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { CalloutContext, IfPermission } from '@folio/stripes/core';
 import { Loading, Pane, Accordion, Button, Icon, ConfirmationModal } from '@folio/stripes/components';
+import viewLogTranslationTag from '../../util/viewLogTranslationTag';
 import ErrorMessage from '../../components/ErrorMessage';
 import GeneralSection from './GeneralSection';
 import OaiPmhSection from './OaiPmhSection';
@@ -169,7 +170,7 @@ const FullHarvestable = ({ defaultWidth, resources, mutator, match, deleteRecord
             }}
           >
             <Icon icon="report">
-              <FormattedMessage id="ui-harvester-admin.button.view-log" />
+              <FormattedMessage id={viewLogTranslationTag(rec)} />
             </Icon>
           </Button>
           <Button

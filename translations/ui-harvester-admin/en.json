@@ -23,6 +23,8 @@
     "button.edit": "Edit",
     "button.delete": "Delete",
     "button.view-log": "View log",
+    "button.view-log.current": "Current log",
+    "button.view-log.last": "Last log",
     "button.old-jobs": "Old jobs",
     "button.start-job": "Start job",
     "button.stop-job": "Stop job",

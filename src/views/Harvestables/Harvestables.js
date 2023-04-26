@@ -6,6 +6,7 @@ import { useStripes, IfPermission, AppIcon } from '@folio/stripes/core';
 import { LoadingPane, Paneset, Pane, MultiColumnList, PaneMenu, MenuSection, Button, Icon } from '@folio/stripes/components';
 import { parseFilters, ColumnManager, SearchAndSortQuery } from '@folio/stripes/smart-components';
 import { message2stats, summarizeStats } from '../../util/message2stats';
+import viewLogTranslationTag from '../../util/viewLogTranslationTag';
 import parseSort from '../../util/parseSort';
 import formatDateTime from '../../util/formatDateTime';
 import HarvestablesSearchPane from '../../search/HarvestablesSearchPane';
@@ -120,6 +121,7 @@ function Harvestables({
 
   if (stripes.hasPerm('harvester-admin.harvestables.log.get')) {
     columnMapping.logFile = <FormattedMessage id="ui-harvester-admin.harvestables.column.logFile" />;
+    columnMapping.oldJobs = '';
   }
 
   const harvestables = manuallyFilterAndSort(query, data.harvestables);
@@ -189,7 +191,19 @@ function Harvestables({
                             }}
                             marginBottom0
                           >
-                            <FormattedMessage id="ui-harvester-admin.button.view-log" />
+                            <FormattedMessage id={viewLogTranslationTag(r)} />
+                          </Button>
+                        ),
+                        oldJobs: r => (
+                          <Button
+                            id={`clickable-old-logs-${r.id}`}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              updateQuery({ _path: `${packageInfo.stripes.route}/harvestables/${r.id}/jobs` });
+                            }}
+                            marginBottom0
+                          >
+                            <FormattedMessage id="ui-harvester-admin.button.old-jobs" />
                           </Button>
                         ),
                       }}
