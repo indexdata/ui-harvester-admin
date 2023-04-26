@@ -105,8 +105,6 @@ function Harvestables({
   const intl = useIntl();
   const location = useLocation();
   const stripes = useStripes();
-  if (error) return <ErrorMessage message={error} />;
-  if (!hasLoaded) return <LoadingPane />;
 
   const columnMapping = {
     name: <FormattedMessage id="ui-harvester-admin.harvestables.column.name" />,
@@ -141,83 +139,87 @@ function Harvestables({
                 query={query}
                 updateQuery={updateQuery}
               />
-              <ColumnManager
-                id="harvestable-visible-columns"
-                columnMapping={columnMapping}
-                excludeKeys={['name']}
-                persist
-              >
-                {({ renderColumnsMenu, visibleColumns }) => (
-                  <Pane
-                    appIcon={<AppIcon app="harvester-admin" />}
-                    defaultWidth="fill"
-                    padContent={false}
-                    paneTitle={<FormattedMessage id="ui-harvester-admin.nav.harvestables" />}
-                    paneSub={<FormattedMessage id="ui-harvester-admin.resultCount" values={{ count: resultCount }} />}
-                    actionMenu={() => renderActionsMenu(location.search, renderColumnsMenu)}
+              {
+                error ? <ErrorMessage message={error} /> :
+                  !hasLoaded ? <LoadingPane /> :
+                  <ColumnManager
+                    id="harvestable-visible-columns"
+                    columnMapping={columnMapping}
+                    excludeKeys={['name']}
+                    persist
                   >
-                    <MultiColumnList
-                      autosize
-                      id="list-harvestables"
-                      virtualize
-                      visibleColumns={visibleColumns}
-                      columnMapping={columnMapping}
-                      columnWidths={{
-                        name: '400px',
-                        currentStatus: '90px',
-                        records: '90px',
-                        lastHarvestFinished: '210px',
-                        enabled: '80px',
-                        jobClass: '150px',
-                        id: '80px',
-                        message: '600px',
-                      }}
-                      formatter={{
-                        enabled: r => <FormattedMessage id={`ui-harvester-admin.harvestables.column.enabled.${r.enabled}`} />,
-                        jobClass: r => <FormattedMessage id={`ui-harvester-admin.harvestables.column.jobClass.${r.jobClass}`} />,
-                        currentStatus: r => <FormattedMessage id={`ui-harvester-admin.harvestables.column.currentStatus.${r.currentStatus}`} />,
-                        records: r => {
-                          const stats = message2stats(r.message);
-                          return stats?.instances?.loaded;
-                        },
-                        lastHarvestFinished: r => formatDateTime(r.lastHarvestFinished),
-                        message: r => (r.message?.match('Instances_processed') ? summarizeStats(intl, r.message) : r.message),
-                        logFile: r => (
-                          <Button
-                            id={`clickable-log-file-${r.id}`}
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              updateQuery({ _path: `${packageInfo.stripes.route}/harvestables/${r.id}/logs` });
-                            }}
-                            marginBottom0
-                          >
-                            <FormattedMessage id={viewLogTranslationTag(r)} />
-                          </Button>
-                        ),
-                        oldJobs: r => (
-                          <Button
-                            id={`clickable-old-logs-${r.id}`}
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              updateQuery({ _path: `${packageInfo.stripes.route}/harvestables/${r.id}/jobs` });
-                            }}
-                            marginBottom0
-                          >
-                            <FormattedMessage id="ui-harvester-admin.button.old-jobs" />
-                          </Button>
-                        ),
-                      }}
-                      contentData={harvestables}
-                      totalCount={resultCount}
-                      onHeaderClick={sasqParams.onSort}
-                      sortedColumn={sortedColumn}
-                      sortDirection={sortDirection}
-                      onNeedMoreData={onNeedMoreData}
-                      onRowClick={(event, rec) => updateQuery({ _path: `${packageInfo.stripes.route}/harvestables/${rec.id}` })}
-                    />
-                  </Pane>
-                )}
-              </ColumnManager>
+                    {({ renderColumnsMenu, visibleColumns }) => (
+                      <Pane
+                        appIcon={<AppIcon app="harvester-admin" />}
+                        defaultWidth="fill"
+                        padContent={false}
+                        paneTitle={<FormattedMessage id="ui-harvester-admin.nav.harvestables" />}
+                        paneSub={<FormattedMessage id="ui-harvester-admin.resultCount" values={{ count: resultCount }} />}
+                        actionMenu={() => renderActionsMenu(location.search, renderColumnsMenu)}
+                      >
+                        <MultiColumnList
+                          autosize
+                          id="list-harvestables"
+                          virtualize
+                          visibleColumns={visibleColumns}
+                          columnMapping={columnMapping}
+                          columnWidths={{
+                            name: '400px',
+                            currentStatus: '90px',
+                            records: '90px',
+                            lastHarvestFinished: '210px',
+                            enabled: '80px',
+                            jobClass: '150px',
+                            id: '80px',
+                            message: '600px',
+                          }}
+                          formatter={{
+                            enabled: r => <FormattedMessage id={`ui-harvester-admin.harvestables.column.enabled.${r.enabled}`} />,
+                            jobClass: r => <FormattedMessage id={`ui-harvester-admin.harvestables.column.jobClass.${r.jobClass}`} />,
+                            currentStatus: r => <FormattedMessage id={`ui-harvester-admin.harvestables.column.currentStatus.${r.currentStatus}`} />,
+                            records: r => {
+                              const stats = message2stats(r.message);
+                              return stats?.instances?.loaded;
+                            },
+                            lastHarvestFinished: r => formatDateTime(r.lastHarvestFinished),
+                            message: r => (r.message?.match('Instances_processed') ? summarizeStats(intl, r.message) : r.message),
+                            logFile: r => (
+                              <Button
+                                id={`clickable-log-file-${r.id}`}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  updateQuery({ _path: `${packageInfo.stripes.route}/harvestables/${r.id}/logs` });
+                                }}
+                                marginBottom0
+                              >
+                                <FormattedMessage id={viewLogTranslationTag(r)} />
+                              </Button>
+                            ),
+                            oldJobs: r => (
+                              <Button
+                                id={`clickable-old-logs-${r.id}`}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  updateQuery({ _path: `${packageInfo.stripes.route}/harvestables/${r.id}/jobs` });
+                                }}
+                                marginBottom0
+                              >
+                                <FormattedMessage id="ui-harvester-admin.button.old-jobs" />
+                              </Button>
+                            ),
+                          }}
+                          contentData={harvestables}
+                          totalCount={resultCount}
+                          onHeaderClick={sasqParams.onSort}
+                          sortedColumn={sortedColumn}
+                          sortDirection={sortDirection}
+                          onNeedMoreData={onNeedMoreData}
+                          onRowClick={(event, rec) => updateQuery({ _path: `${packageInfo.stripes.route}/harvestables/${rec.id}` })}
+                        />
+                      </Pane>
+                    )}
+                  </ColumnManager>
+              }
               {children}
             </Paneset>
           );

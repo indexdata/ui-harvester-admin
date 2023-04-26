@@ -22,8 +22,6 @@ function Records({
   children,
 }) {
   const [invalidSortKey, setInvalidSortKey] = useState();
-  if (error) return <ErrorMessage message={error} />;
-  if (!hasLoaded) return <LoadingPane />;
 
   const columnMapping = {
     recordNumber: <FormattedMessage id="ui-harvester-admin.failed-records.recordNumber" />,
@@ -65,56 +63,60 @@ function Records({
                 query={query}
                 updateQuery={updateQuery}
               />
-              <ColumnManager
-                id="records-visible-columns"
-                columnMapping={columnMapping}
-                excludeKeys={['name']}
-                persist
-              >
-                {({ renderColumnsMenu, visibleColumns }) => (
-                  <Pane
-                    appIcon={<AppIcon app="harvester-admin" />}
-                    defaultWidth="fill"
-                    padContent={false}
-                    paneTitle={paneTitle}
-                    paneSub={<FormattedMessage id="ui-harvester-admin.resultCount" values={{ count: resultCount }} />}
-                    actionMenu={() => renderColumnsMenu}
+              {
+                error ? <ErrorMessage message={error} /> :
+                  !hasLoaded ? <LoadingPane /> :
+                  <ColumnManager
+                    id="records-visible-columns"
+                    columnMapping={columnMapping}
+                    excludeKeys={['name']}
+                    persist
                   >
-                    <MultiColumnList
-                      autosize
-                      id="list-records"
-                      virtualize
-                      visibleColumns={visibleColumns}
-                      columnMapping={columnMapping}
-                      columnWidths={columnWidths}
-                      formatter={formatter}
-                      contentData={data.records}
-                      totalCount={resultCount}
-                      onHeaderClick={(event, headerMetadata) => {
-                        if (headerMetadata.name === 'seconds') {
-                          setInvalidSortKey(headerMetadata.name);
-                          return undefined;
-                        } else {
-                          return sasqParams.onSort(event, headerMetadata);
-                        }
-                      }}
-                      onNeedMoreData={onNeedMoreData}
-                      sortedColumn={sortedColumn}
-                      sortDirection={sortDirection}
-                      onRowClick={(event, rec) => updateQuery({ _path: `${packageInfo.stripes.route}/records/${rec.id}` })}
-                    />
-                    <ErrorModal
-                      open={!!invalidSortKey}
-                      label={<FormattedMessage id="ui-harvester-admin.error.invalidSort.label" />}
-                      content={<FormattedMessage
-                        id="ui-harvester-admin.error.invalidSort.content"
-                        values={{ name: invalidSortKey, code: s => <code>{s}</code> }}
-                      />}
-                      onClose={() => setInvalidSortKey(undefined)}
-                    />
-                  </Pane>
-                )}
-              </ColumnManager>
+                    {({ renderColumnsMenu, visibleColumns }) => (
+                      <Pane
+                        appIcon={<AppIcon app="harvester-admin" />}
+                        defaultWidth="fill"
+                        padContent={false}
+                        paneTitle={paneTitle}
+                        paneSub={<FormattedMessage id="ui-harvester-admin.resultCount" values={{ count: resultCount }} />}
+                        actionMenu={() => renderColumnsMenu}
+                      >
+                        <MultiColumnList
+                          autosize
+                          id="list-records"
+                          virtualize
+                          visibleColumns={visibleColumns}
+                          columnMapping={columnMapping}
+                          columnWidths={columnWidths}
+                          formatter={formatter}
+                          contentData={data.records}
+                          totalCount={resultCount}
+                          onHeaderClick={(event, headerMetadata) => {
+                            if (headerMetadata.name === 'seconds') {
+                              setInvalidSortKey(headerMetadata.name);
+                              return undefined;
+                            } else {
+                              return sasqParams.onSort(event, headerMetadata);
+                            }
+                          }}
+                          onNeedMoreData={onNeedMoreData}
+                          sortedColumn={sortedColumn}
+                          sortDirection={sortDirection}
+                          onRowClick={(event, rec) => updateQuery({ _path: `${packageInfo.stripes.route}/records/${rec.id}` })}
+                        />
+                        <ErrorModal
+                          open={!!invalidSortKey}
+                          label={<FormattedMessage id="ui-harvester-admin.error.invalidSort.label" />}
+                          content={<FormattedMessage
+                            id="ui-harvester-admin.error.invalidSort.content"
+                            values={{ name: invalidSortKey, code: s => <code>{s}</code> }}
+                          />}
+                          onClose={() => setInvalidSortKey(undefined)}
+                        />
+                      </Pane>
+                    )}
+                  </ColumnManager>
+              }
               {children}
             </Paneset>
           );
