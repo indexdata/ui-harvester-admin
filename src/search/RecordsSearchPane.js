@@ -96,7 +96,7 @@ function RecordsSearchPane(props) {
           </Button>
         </div>
 
-        {renderDateFilterPair(intl, filterStruct, updateQuery, 'timeStamp')}
+        {renderDateFilterPair(intl, filterStruct, updateQuery, 'timeStamp', true)}
 
       </form>
     </Pane>
