@@ -33,12 +33,12 @@ function renderSingleDateFilter(intl, filterStruct, updateQuery, field, boundary
 }
 
 
-function renderDateFilterPair(intl, filterStruct, updateQuery, field) {
+function renderDateFilterPair(intl, filterStruct, updateQuery, field, openByDefault) {
   return (
     <Accordion
       label={intl.formatMessage({ id: `ui-harvester-admin.filter.date.${field}` })}
       header={FilterAccordionHeader}
-      closedByDefault
+      closedByDefault={!openByDefault}
     >
       {renderSingleDateFilter(intl, filterStruct, updateQuery, field, 'from')}
       {renderSingleDateFilter(intl, filterStruct, updateQuery, field, 'to')}
