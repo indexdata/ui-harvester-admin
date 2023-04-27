@@ -63,6 +63,11 @@ const queryFunction = makeQueryFunction(
   'name="%{query.query}*"', // XXX cannot yet add: 'or id="%{query.query}" or harvestableId="%{query.query}"',
   sortMap,
   filterConfig,
+  0,
+  undefined,
+  {
+    rightTrunc: false,
+  }
 );
 
 export default queryFunction;
