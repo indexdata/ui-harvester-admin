@@ -27,7 +27,7 @@ function renderFilter(intl, filterStruct, updateQuery, qualifiedField, optionTag
         name={`multifilter-${field}`}
         label={intl.formatMessage({ id: `ui-harvester-admin.${transTag}` })}
         dataOptions={dataOptions}
-        selectedValues={filterStruct[field]}
+        selectedValues={filterStruct[field] || []}
         onChange={(group) => {
           const fs2 = { ...filterStruct, [field]: group.values };
           updateQuery({ filters: deparseFilters(fs2) });
@@ -43,7 +43,7 @@ function renderFilter(intl, filterStruct, updateQuery, qualifiedField, optionTag
         { value: NO_VALUE, label: intl.formatMessage({ id: 'ui-harvester-admin.no-value' }) },
         ...dataOptions
       ]}
-      value={filterStruct[field] && filterStruct[field][0]}
+      value={filterStruct[field] ? filterStruct[field][0] : ''}
       onChange={(e) => {
         const val = e.target.value;
         const fs2 = { ...filterStruct };

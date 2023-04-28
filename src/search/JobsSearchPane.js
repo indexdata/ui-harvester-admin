@@ -80,7 +80,7 @@ function JobsSearchPane(props) {
             buttonStyle="none"
             id="clickable-reset-all"
             disabled={false}
-            onClick={() => updateQuery({ qindex: undefined, query: undefined, sort: undefined, filters: undefined })}
+            onClick={() => updateQuery({ qindex: '', query: undefined, sort: undefined, filters: undefined })}
           >
             <Icon icon="times-circle-solid">
               <FormattedMessage id="stripes-smart-components.resetAll" />
