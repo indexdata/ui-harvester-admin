@@ -55,7 +55,8 @@ JobsRoute.manifest = Object.freeze({
     params: {
       // Modify the query-function to remove unwanted asterisks after ID searches
       query: (queryParams, pathComponents, rv, logger) => {
-        const res = queryFunction(queryParams, pathComponents, rv, logger);
+        const res = queryFunction('name="%{query.query}" or message="%{query.query}"',
+          queryParams, pathComponents, rv, logger);
         if (res === undefined) return undefined;
         const m = res.match(/^(\(?(id|harvestableId)=\"[^\"]*)\*"(.*)$/);
         return m ? `${m[1]}\"${m[3]}` : res;

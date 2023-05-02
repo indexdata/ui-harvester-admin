@@ -58,16 +58,24 @@ const filterConfig = [{
   values: [],
 }];
 
-const queryFunction = makeQueryFunction(
-  'cql.allRecords=1',
-  'name="%{query.query}*"', // XXX cannot yet add: 'or id="%{query.query}" or harvestableId="%{query.query}"',
-  sortMap,
-  filterConfig,
-  0,
-  undefined,
-  {
-    rightTrunc: false,
-  }
-);
+function queryFunction(defaultSearch, ...params) {
+  // console.log('*** queryFunction');
+  // console.log(`defaultSearch='${defaultSearch}'`);
+  // console.log('params=', params);
+
+  const fn = makeQueryFunction(
+    'cql.allRecords=1',
+    defaultSearch,
+    sortMap,
+    filterConfig,
+    0,
+    undefined,
+    {
+      rightTrunc: false,
+    }
+  );
+
+  return fn(...params);
+}
 
 export default queryFunction;
