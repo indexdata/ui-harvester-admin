@@ -42,6 +42,7 @@
 * Do not append asterisks to query terms. Fixes UIHAADM-58.
 * "Reset all" button now correctly causes query-index and filters to redisplay as unselected. Fixes UIHAADM-59.
 * Query index selection is now consistent, and supports all-index searches consistently. Fixes UIHAADM-60.
+* Aggregated view of failed records. Fixes UIHAADM-53.
 
 ## [0.1.0](https://github.com/folio-org/ui-harvester-admin/tree/v0.1.0) (2022-07-19)
 
