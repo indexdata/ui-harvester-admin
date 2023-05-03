@@ -45,6 +45,7 @@
 * Aggregated view of failed records. Fixes UIHAADM-53.
 * Failed-records page: default to today's reports. Fixes UIHAADM-57.
 * Add "Old jobs" column header above buttons in Harvestables view. Fixes UIHAADM-61.
+* Remove view-log page's first **Developer Information** accordion. Fixes UIHAADM-62.
 
 ## [0.1.0](https://github.com/folio-org/ui-harvester-admin/tree/v0.1.0) (2022-07-19)
 
