@@ -5,7 +5,7 @@ import { Button, ButtonGroup } from '@folio/stripes/components';
 
 function SwitchRoute({ location, children }) {
   const today = new Date();
-  const yesterday = new Date(today - 24*60*60*1000);
+  const yesterday = new Date(today - 24 * 60 * 60 * 1000);
   const isoString = yesterday.toISOString().substring(0, 10);
 
   const segments = [{
