@@ -119,7 +119,7 @@ function Harvestables({
 
   if (stripes.hasPerm('harvester-admin.harvestables.log.get')) {
     columnMapping.logFile = <FormattedMessage id="ui-harvester-admin.harvestables.column.logFile" />;
-    columnMapping.oldJobs = '';
+    columnMapping.oldJobs = <FormattedMessage id="ui-harvester-admin.harvestables.column.oldJobs" />;
   }
 
   const harvestables = manuallyFilterAndSort(query, data.harvestables);

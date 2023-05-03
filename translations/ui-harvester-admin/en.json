@@ -43,6 +43,7 @@
     "harvestables.column.id": "ID",
     "harvestables.column.message": "Message (processed/loaded/deleted/failed)",
     "harvestables.column.logFile": "Log file",
+    "harvestables.column.oldJobs": "Old jobs",
 
     "harvestables.column.enabled.true": "Yes",
     "harvestables.column.enabled.false": "No",

@@ -44,6 +44,7 @@
 * Query index selection is now consistent, and supports all-index searches consistently. Fixes UIHAADM-60.
 * Aggregated view of failed records. Fixes UIHAADM-53.
 * Failed-records page: default to today's reports. Fixes UIHAADM-57.
+* Add "Old jobs" column header above buttons in Harvestables view. Fixes UIHAADM-61.
 
 ## [0.1.0](https://github.com/folio-org/ui-harvester-admin/tree/v0.1.0) (2022-07-19)
 
