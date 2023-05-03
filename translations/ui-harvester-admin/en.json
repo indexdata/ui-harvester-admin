@@ -65,19 +65,19 @@
     "harvestables.index.id": "ID",
     "harvestables.index.message": "Message",
 
+    "jobs.index.all": "(All)",
     "jobs.index.name": "Name",
     "jobs.index.id": "ID",
     "jobs.index.harvestableId": "Harvestable ID",
     "jobs.index.message": "Message",
-    "jobs.index.all": "(All)",
 
+    "records.index.all": "(All)",
     "records.index.recordNumber": "Record number",
     "records.index.instanceHrid": "Instance hrid",
     "records.index.instanceTitle": "Instance title",
     "records.index.errors": "Errors",
     "records.index.timeStamp": "Time stamp",
     "records.index.harvestableName": "Harvestable name",
-    "records.index.all": "(All)",
 
     "searchInputLabel": "XXX searchInputLabel",
     "filter.date.started": "Date started",

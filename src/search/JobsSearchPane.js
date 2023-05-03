@@ -29,7 +29,7 @@ function JobsSearchPane(props) {
   };
 
   const intl = useIntl();
-  const searchableIndexes = ['name', 'id', 'harvestableId', 'message', 'all'].map(x => ({
+  const searchableIndexes = ['all', 'name', 'message'].map(x => ({
     value: x === 'all' ? '' : x,
     label: intl.formatMessage({ id: `ui-harvester-admin.jobs.index.${x}` }),
   }));
