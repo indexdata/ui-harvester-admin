@@ -95,7 +95,6 @@ function renderActionsMenu(search, renderedColumnsMenu) {
 function Harvestables({
   data,
   query,
-  resultCount,
   updateQuery,
   error,
   hasLoaded,
@@ -154,7 +153,7 @@ function Harvestables({
                         defaultWidth="fill"
                         padContent={false}
                         paneTitle={<FormattedMessage id="ui-harvester-admin.nav.harvestables" />}
-                        paneSub={<FormattedMessage id="ui-harvester-admin.resultCount" values={{ count: resultCount }} />}
+                        paneSub={<FormattedMessage id="ui-harvester-admin.resultCount" values={{ count: harvestables.length }} />}
                         actionMenu={() => renderActionsMenu(location.search, renderColumnsMenu)}
                       >
                         <MultiColumnList
@@ -209,7 +208,7 @@ function Harvestables({
                             ),
                           }}
                           contentData={harvestables}
-                          totalCount={resultCount}
+                          totalCount={harvestables.length}
                           onHeaderClick={sasqParams.onSort}
                           sortedColumn={sortedColumn}
                           sortDirection={sortDirection}
@@ -238,7 +237,6 @@ Harvestables.propTypes = {
     ).isRequired,
   }).isRequired,
   query: PropTypes.object.isRequired,
-  resultCount: PropTypes.number,
   updateQuery:PropTypes.func.isRequired,
   error: PropTypes.string,
   hasLoaded: PropTypes.bool.isRequired,
