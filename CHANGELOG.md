@@ -1,5 +1,9 @@
 # Change history for ui-harvester-admin
 
+## [1.0.1](https://github.com/folio-org/ui-harvester-admin/tree/v1.0.1) (2023-05-04)
+
+* Remove some invalid translations from `es_419.json` as they prevent the bundle from building.
+
 ## [1.0.0](https://github.com/folio-org/ui-harvester-admin/tree/v1.0.0) (2023-05-04)
 
 * Bump required `harvester-admin` interface to v1.0. Fixes UIHAADM-21.
