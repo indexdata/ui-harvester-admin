@@ -1,6 +1,6 @@
 # Change history for ui-harvester-admin
 
-## 1.0.0 (IN PROGRESS)
+## [1.0.0](https://github.com/folio-org/ui-harvester-admin/tree/v1.0.0) (2023-05-04)
 
 * Bump required `harvester-admin` interface to v1.0. Fixes UIHAADM-21.
 * Remove no-longer-needed resolution. Fixes UIHAADM-20.
