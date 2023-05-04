@@ -2,7 +2,6 @@
 
 ## 1.0.0 (IN PROGRESS)
 
-* First version to work with `harvester-admin` interface v1.x.
 * Bump required `harvester-admin` interface to v1.0. Fixes UIHAADM-21.
 * Remove no-longer-needed resolution. Fixes UIHAADM-20.
 * Tidy up Harvestable editing forms in accordance with GBV's requests. Fixes UIHAADM-11.
@@ -13,13 +12,16 @@
 * Display simple list of errors on the Logs page. Fixes UIHAADM-25.
 * Cope elegantly with absent logs on the Logs page. Fixes UIHAADM-26.
 * Add "View log" buttons to each row in list of harvestables. Fixes UIHAADM-27.
+* Add "records" column to harvestables summary. Fixes UIHAADM-28
+* Provide access to harvester logs from older jobs. Fixes UIHAADM-29.
 * Provide access to older harvester jobs across all harvestables. Fixes UIHAADM-30.
 * Create a search pane for the old-jobs page. Fixes UIHAADM-31.
 * Activate the search pane for the harvestable-specific old-jobs page. Fixes UIHAADM-34.
 * Minor quality-of-life improvements for Logs page. Fixes UIHAADM-37.
 * Single-line summary of stats from harvestable message. Fixes UIHAADM-38.
-* Rename various entites (Harvest Jobs -> Harvestables, Old Logs -> Old Jobs). Involves UI text, translation tag names, component names, function names, source file names, HTML element IDs and data-text-XXX attributes. Fixes UIHAADM-33. Next time, names things right the first time.
+* Rename various entites (Harvest Jobs -> Harvestables, Old Logs -> Old Jobs). Involves UI text, translation tag names, component names, function names, source file names, HTML element IDs and data-text-XXX attributes. Fixes UIHAADM-33. Next time, name things right the first time.
 * Searching jobs by ID or Harvestable ID now works correctly. Fixes UIHAADM-35.
+* On old-jobs page, add filters for date-started and date-finished. Fixes UIHAADM-36.
 * On the Logs page, move the plain-text log above the failed records. Fixes UIHAADM-40.
 * Remove the “source” data from all displays. Fixes UIHAADM-42.
 * View logs for a job that had an error no longer crashes the UI! Fixes UIHAADM-45.
@@ -31,7 +33,7 @@
 * Move Storage engines/Transformation pipelines/Transformation steps into settings (although they are not yet functional). Fixes UIHAADM-43.
 * Remove `currentStatus` from submitted records: this is both read-only (so ignored when correct) and controlled (so it causes problems when it is not). Fixes UIHAADM-49.
 * Prevent UI from attempting to sort Old Jobs on `seconds` column. Fixes UIHAADM-51.
-* Harvestables can now be correctly saved even when usedBy or managedBy is set, as these is now edited as lists. Fixes UIHAADM-48.
+* Harvestables can now be correctly saved even when `usedBy` or `managedBy` is set, as these is now edited as lists. Fixes UIHAADM-48.
 * Provide a full-record view for individual jobs. Fixes UIHAADM-32.
 * Minor UI changes decided. Fixes UIHAADM-52:
   * When viewing the jobs associated with a harvestable, the Jobs tab (not the Harvestables tab) is highlighted.
@@ -39,6 +41,7 @@
   * The the sorted result lists for both harvestables and jobs, the currently sorted-by header is highlighted and the sort direction indicated.
 * "View log" button text is now "Current" or "Last" depending on status; "Old jobs" button added to harvestables list. Fixes UIHAADM-54.
 * Politer error reporting. Fixes UIHAADM-56.
+* Search-pane interactions now work correctly (umbrella). Fixes UIHAADM-55.
 * Do not append asterisks to query terms. Fixes UIHAADM-58.
 * "Reset all" button now correctly causes query-index and filters to redisplay as unselected. Fixes UIHAADM-59.
 * Query index selection is now consistent, and supports all-index searches consistently. Fixes UIHAADM-60.
