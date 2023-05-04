@@ -24,7 +24,6 @@ const FullJobRoute = ({ resources, mutator, match }) => {
                      resources.failedRecords.isPending ||
                      typeof plainTextLog !== 'string');
 
-  // XXX note that the data key `harvestable` is misleading here
   return (
     <HarvestableLog
       isLoading={isLoading}

@@ -1,8 +1,8 @@
 import makeQueryFunction from '../util/makeQueryFunction';
 
 const sortMap = {
-  // XXX I _think_ all the headings are the names of sortable fields
-  // Verify this when server-side sorting starts to work
+  // All the headings are the names of sortable fields
+  // so no mapping is required.
 };
 
 function parseFilterValue(field, op, value) {

@@ -35,7 +35,7 @@ function RecordsSearchPane(props) {
     // 'instanceHrid', // XXX not yet supported
     // 'instanceTitle', // XXX not yet supported
     // 'errors', // XXX not yet supported
-    'harvestableName', // XXX works, but will not accept masking characters
+    'harvestableName',
   ];
   const searchableIndexes = indexNames.map(x => ({
     value: x === 'all' ? '' : x,

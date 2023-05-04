@@ -21,7 +21,7 @@ function HarvestablesRoute({ stripes, resources, mutator, children }) {
   const handleNeedMoreData = () => source.fetchMore(RESULT_COUNT_INCREMENT);
 
   const error = resources.harvestables.failed ? resources.harvestables.failed.message : undefined;
-  const hasLoaded = resources.harvestables.hasLoaded; // XXX may need to inspect .url instead
+  const hasLoaded = resources.harvestables.hasLoaded;
 
   return (
     <Harvestables
