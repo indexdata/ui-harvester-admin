@@ -3,7 +3,7 @@ name: sonarcloud-js
 
 env:
   SQ_EXCLUSIONS: "**/platform/alias-service.js,**/docs/**,**/node_modules/**,**/examples/**,**/artifacts/**,**/ci/**,Jenkinsfile,**/LICENSE,**/*.css,**/*.md,**/*.json,**/tests/**,**/stories/*.js,**/test/**,**/.stories.js,**/resources/bigtest/interactors/**,**/resources/bigtest/network/**,**/*-test.js,**/*.test.js,**/*-spec.js,**/karma.conf.js,**/jest.config.js"
-  SQ_ROOT_DIR: .
+  SQ_ROOT_DIR: ./src
 
 on:
   push:
@@ -19,9 +19,6 @@ jobs:
         with:
           fetch-depth: 0
 
-#      - name: Fetch branches for SonarCloud
-#        run: git fetch --no-tags ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY} +refs/heads/${{ env.DEFAULT_BRANCH }}:refs/remotes/origin/${{ env.DEFAULT_BRANCH }}
-#
       - name: Run SonarCloud scan
         uses: sonarsource/sonarcloud-github-action@master
         with:
