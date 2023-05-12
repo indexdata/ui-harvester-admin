@@ -19,9 +19,9 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Fetch branches for SonarCloud
-        run: git fetch --no-tags ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY} +refs/heads/${{ env.DEFAULT_BRANCH }}:refs/remotes/origin/${{ env.DEFAULT_BRANCH }}
-
+#      - name: Fetch branches for SonarCloud
+#        run: git fetch --no-tags ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY} +refs/heads/${{ env.DEFAULT_BRANCH }}:refs/remotes/origin/${{ env.DEFAULT_BRANCH }}
+#
       - name: Run SonarCloud scan
         uses: sonarsource/sonarcloud-github-action@master
         with:
