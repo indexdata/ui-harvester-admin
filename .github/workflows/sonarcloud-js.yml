@@ -6,7 +6,7 @@ env:
   SQ_ROOT_DIR: .
 
 on:
-  push
+  push:
   pull_request:
     types: [opened, synchronize, reopened]
 
