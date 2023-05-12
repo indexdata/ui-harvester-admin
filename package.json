@@ -1,12 +1,12 @@
 {
   "name": "@indexdata/harvester-admin",
-  "version": "0.0.1",
+  "version": "1.0.1",
   "description": "Admin console for the Index Data Harvester",
   "repository": "https://github.com/indexdata/ui-harvester-admin",
   "license": "Apache-2.0",
   "main": "src/index.js",
   "scripts": {
-    "start": "stripes serve --port 3003 --okapi http://ironman:9130",
+    "start": "stripes serve --port 3003 --okapi https://harvester-dev-okapi.folio-dev.indexdata.com --tenant harvester",
     "lint": "eslint -f unix .",
     "qlint": "eslint -f unix  --rule '{\"no-console\":\"off\"}' .",
     "build-mod-descriptor": "stripes mod descriptor --full --strict | jq '.[]' > module-descriptor.json",
@@ -28,7 +28,7 @@
       }
     ],
     "okapiInterfaces": {
-      "harvester-admin": "0.1"
+      "harvester-admin": "1.0"
     },
     "permissionSets": [
       {
@@ -43,6 +43,30 @@
           "settings.enabled"
         ],
         "visible": false
+      },
+      {
+        "permissionName": "ui-harvester-admin.settings.storage",
+        "displayName": "Settings (Harvester admin): manage storage engines",
+        "subPermissions": [
+          "settings.harvester-admin.enabled"
+        ],
+        "visible": true
+      },
+      {
+        "permissionName": "ui-harvester-admin.settings.pipeline",
+        "displayName": "Settings (Harvester admin): manage transformation pipelines",
+        "subPermissions": [
+          "settings.harvester-admin.enabled"
+        ],
+        "visible": true
+      },
+      {
+        "permissionName": "ui-harvester-admin.settings.step",
+        "displayName": "Settings (Harvester admin): manage transformation steps",
+        "subPermissions": [
+          "settings.harvester-admin.enabled"
+        ],
+        "visible": true
       },
       {
         "permissionName": "ui-harvester-admin.read-jobs",
@@ -94,16 +118,18 @@
     ]
   },
   "dependencies": {
-    "@indexdata/oai-pmh": "^0.0.1",
+    "@indexdata/oai-pmh": "^0.0.2",
     "final-form-arrays": "^3.0.2",
     "final-form-set-field-data": "^1.0.2",
     "lodash": "^4.17.0",
+    "query-string": "^6.0.0",
     "react-final-form": "^6.3.0",
     "react-final-form-arrays": "^3.1.3",
+    "react-inspector": "^5.1.0",
     "use-deep-compare": "^1.1.0"
   },
   "peerDependencies": {
-    "@folio/stripes": "^7.0.0",
+    "@folio/stripes": "^8.0.0",
     "prop-types": "*",
     "react": "*",
     "react-dom": "*",
@@ -114,18 +140,15 @@
   "devDependencies": {
     "@babel/eslint-parser": "^7.15.0",
     "@folio/eslint-config-stripes": "~6.1.0",
-    "@folio/stripes": "^7.0.0",
+    "@folio/stripes": "^8.0.0",
     "@folio/stripes-cli": "^2.4.0",
     "@formatjs/cli": "^4.2.20",
     "eslint": "^7.32.0",
     "eslint-import-resolver-alias": "^1.1.2",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
     "react-intl": "^5.7.0",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0"
-  },
-  "resolutions": {
-    "postcss-custom-properties": "12.0.0"
   }
 }

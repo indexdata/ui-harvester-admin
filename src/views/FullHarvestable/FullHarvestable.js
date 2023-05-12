@@ -1,8 +1,9 @@
 import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { CalloutContext, IfPermission } from '@folio/stripes/core';
 import { Loading, Pane, Accordion, Button, Icon, ConfirmationModal } from '@folio/stripes/components';
+import viewLogTranslationTag from '../../util/viewLogTranslationTag';
 import ErrorMessage from '../../components/ErrorMessage';
 import GeneralSection from './GeneralSection';
 import OaiPmhSection from './OaiPmhSection';
@@ -22,9 +23,13 @@ const specificSections = {
 
 
 const FullHarvestableContent = ({ rec }) => {
+  const intl = useIntl();
   const type = rec.type;
   const ErrorSection = () => <ErrorMessage message={`Unknown type '${type}'`} />;
   const SpecificSection = specificSections[type] || ErrorSection;
+
+  // eslint-disable-next-line react/prop-types
+  rec.__jobClass = intl.formatMessage({ id: `ui-harvester-admin.harvestables.field.jobClass.${rec.type}` });
 
   return (
     <>
@@ -152,6 +157,32 @@ const FullHarvestable = ({ defaultWidth, resources, mutator, match, deleteRecord
           >
             <Icon icon="times-circle-solid">
               <FormattedMessage id="ui-harvester-admin.button.stop-job" />
+            </Icon>
+          </Button>
+        </IfPermission>
+        <IfPermission perm="harvester-admin.harvestables.log.get">
+          <Button
+            buttonStyle="dropdownItem"
+            marginBottom0
+            id="clickable-view-log"
+            onClick={() => {
+              mutator.query.update({ _path: `${packageInfo.stripes.route}/harvestables/${match.params.recId}/logs` });
+            }}
+          >
+            <Icon icon="report">
+              <FormattedMessage id={viewLogTranslationTag(rec)} />
+            </Icon>
+          </Button>
+          <Button
+            buttonStyle="dropdownItem"
+            marginBottom0
+            id="clickable-jobs"
+            onClick={() => {
+              mutator.query.update({ _path: `${packageInfo.stripes.route}/harvestables/${match.params.recId}/jobs` });
+            }}
+          >
+            <Icon icon="list">
+              <FormattedMessage id="ui-harvester-admin.button.old-jobs" />
             </Icon>
           </Button>
         </IfPermission>

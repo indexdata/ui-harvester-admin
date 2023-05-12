@@ -1,5 +1,5 @@
 // The representation of harvestables in the mod-harvester-admin
-// web-service is referred to a "raw"; the form that is maintained in
+// web-service is referred to as "raw"; the form that is maintained in
 // forms in this app is "cooked". The two functions exported from this
 // file transform between the two representations.
 
@@ -63,6 +63,10 @@ export function cooked2raw(cooked) {
 
   if (cooked.type === 'xmlBulk') {
     raw.url = (cooked.url || []).join(' ');
+
+    // Really, mod-harvester-admin should never give us these fields, but it does. See MODHAADM-55.
+    delete raw.retryCount;
+    delete raw.retryWait;
   }
 
   booleanFields.forEach(tag => {
@@ -70,6 +74,8 @@ export function cooked2raw(cooked) {
       raw[tag] = cooked[tag] ? 'true' : 'false';
     }
   });
+
+  delete raw.currentStatus;
 
   return raw;
 }

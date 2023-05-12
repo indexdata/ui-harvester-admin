@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Pane } from '@folio/stripes/components';
 
-const NullSettings = ({ label }) => (
+const StepSettings = ({ label }) => (
   <Pane defaultWidth="fill" paneTitle={label}>
-    This is the null settings page
+    This is the step settings page
   </Pane>
 );
 
-NullSettings.propTypes = {
+StepSettings.propTypes = {
   label: PropTypes.object.isRequired,
 };
 
-export default NullSettings;
+export default StepSettings;

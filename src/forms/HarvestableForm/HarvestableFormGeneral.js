@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Field } from 'react-final-form';
 import { Accordion, Row, Col, Checkbox, TextArea, Select, TextField } from '@folio/stripes/components';
-import { RCF, CF, RCLF } from '../../components/CF';
+import { RCF, CF, RCLF, CLF } from '../../components/CF';
 
 const logLevels = ['TRACE', 'DEBUG', 'INFO', 'WARN', 'ERROR'].map(x => ({ value: x, label: x }));
 const mailLevels = ['OK', 'WARN', 'ERROR'].map(x => ({ value: x, label: x }));
@@ -30,8 +30,8 @@ const HarvestableFormGeneral = ({ data }) => {
         <CF tag="serviceProvider" xs={4} />
       </Row>
       <Row>
-        <CF tag="usedBy" xs={6} />
-        <CF tag="managedBy" xs={6} />
+        <CLF tag="usedBy" xs={6} />
+        <CLF tag="managedBy" xs={6} />
       </Row>
       <RCF tag="openAccess" component={Checkbox} type="checkbox" />
       <RCF tag="description" component={TextArea} rows="4" />
@@ -52,8 +52,11 @@ const HarvestableFormGeneral = ({ data }) => {
         <CF tag="cacheEnabled" xs={6} component={Checkbox} type="checkbox" />
         <CF tag="storeOriginal" xs={6} component={Checkbox} type="checkbox" />
       </Row>
-      <RCF tag="recordLimit" />
-      <RCF tag="timeout" />
+      <div style={{ marginTop: '1em' }} />
+      <Row>
+        <CF tag="recordLimit" xs={6} />
+        <CF tag="timeout" xs={6} />
+      </Row>
       <RCF tag="logLevel" component={Select} dataOptions={logLevels} />
       <RCF tag="failedRecordsLogging" component={Select} dataOptions={failedRecords} />
       <Row>
@@ -88,14 +91,14 @@ HarvestableFormGeneral.propTypes = {
   data: PropTypes.shape({
     transformationPipelines: PropTypes.arrayOf(
       PropTypes.shape({
-        enabled: PropTypes.bool.isRequired,
+        enabled: PropTypes.string.isRequired, // "true" or "false", so boolean in intent
         id: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
       }).isRequired,
     ).isRequired,
     storageEngines: PropTypes.arrayOf(
       PropTypes.shape({
-        enabled: PropTypes.bool.isRequired,
+        enabled: PropTypes.string.isRequired, // "true" or "false", so boolean in intent
         id: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
       }).isRequired,
