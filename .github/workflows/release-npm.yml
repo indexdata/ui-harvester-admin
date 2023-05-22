@@ -1,9 +1,13 @@
 name: release-npm
 
-on:
-  push:
-    tags:
-      - 'v[0-9]+.[0-9]+.[0-9]+'  # i.e. release tag only
+# NODEJS_VERSION: string; The relevant Node.js version.
+#  '16'
+#
+# FOLIO_NPM_REGISTRY: string: The registry from which to get FOLIO and ReShare dependencies.
+#  'https://repository.folio.org/repository/npm-folioci/'
+#
+# FOLIO_MD_REGISTRY: The ModuleDescriptor registry to post MDs.
+#  'https://registry.folio-dev.indexdata.com'
 
 env:
   NODEJS_VERSION: '16'
@@ -11,7 +15,12 @@ env:
   FOLIO_MD_REGISTRY: 'https://registry.folio-dev.indexdata.com'
   OKAPI_PULL_FOLIO: '{ "urls" : [ "https://folio-registry.dev.folio.org" ] }'
   OKAPI_PULL_INDEXDATA: '{ "urls" : [ "https://registry.folio-dev.indexdata.com" ] }'
-  COMPILE_TRANSLATION_FILES: 'true'
+  COMPILE_TRANSLATION_FILES: true
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'  # i.e. release tag only
 
 jobs:
   release-npm:
