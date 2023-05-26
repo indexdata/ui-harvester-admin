@@ -1,8 +1,10 @@
 # Change history for ui-harvester-admin
 
-## [1.0.2](https://github.com/folio-org/ui-harvester-admin/tree/v1.0.2) (IN PROGRESS)
+## [1.0.3](https://github.com/folio-org/ui-harvester-admin/tree/v1.0.3) (2023-05-26)
 
 * Error-summarising function tolerates more possible structures. Fixes UIHAADM-72.
+
+## 1.0.2 (does not exist due to CI problems)
 
 ## [1.0.1](https://github.com/folio-org/ui-harvester-admin/tree/v1.0.1) (2023-05-04)
 

@@ -1,12 +1,13 @@
 {
   "name": "@indexdata/harvester-admin",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Admin console for the Index Data Harvester",
   "repository": "https://github.com/indexdata/ui-harvester-admin",
   "license": "Apache-2.0",
   "main": "src/index.js",
   "scripts": {
     "start": "stripes serve --port 3003 --okapi https://harvester-dev-okapi.folio-dev.indexdata.com --tenant harvester",
+    "minerva3": "stripes serve --port 3004 --okapi https://okapi.gbv.de --tenant minerva3",
     "lint": "eslint -f unix .",
     "qlint": "eslint -f unix  --rule '{\"no-console\":\"off\"}' .",
     "build-mod-descriptor": "stripes mod descriptor --full --strict | jq '.[]' > module-descriptor.json",
