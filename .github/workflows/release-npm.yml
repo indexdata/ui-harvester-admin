@@ -87,6 +87,8 @@ jobs:
           url: "${{ env.FOLIO_MD_REGISTRY }}/authn/login"
           method: "POST"
           accept: 201
+          timeout: 5000
+          retries: 3
           headers: |
             {
               "content-type": "application/json",
@@ -174,6 +176,8 @@ jobs:
           url: "${{ env.FOLIO_MD_REGISTRY }}/_/proxy/modules"
           method: "POST"
           accept: 201
+          timeout: 5000
+          retries: 3
           headers: |
             {
               "content-type": "application/json",
