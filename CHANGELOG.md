@@ -1,5 +1,9 @@
 # Change history for ui-harvester-admin
 
+## [1.0.2](https://github.com/folio-org/ui-harvester-admin/tree/v1.0.2) (IN PROGRESS)
+
+* Error-summarising function tolerates more possible structures. Fixes UIHAADM-72.
+
 ## [1.0.1](https://github.com/folio-org/ui-harvester-admin/tree/v1.0.1) (2023-05-04)
 
 * Remove some invalid translations from `es_419.json` as they prevent the bundle from building.
