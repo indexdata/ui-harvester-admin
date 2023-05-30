@@ -69,7 +69,7 @@ function Records({
                   <ColumnManager
                     id="records-visible-columns"
                     columnMapping={columnMapping}
-                    excludeKeys={['name']}
+                    excludeKeys={['recordNumber']}
                     persist
                   >
                     {({ renderColumnsMenu, visibleColumns }) => (

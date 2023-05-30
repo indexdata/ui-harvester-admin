@@ -1,5 +1,9 @@
 # Change history for ui-harvester-admin
 
+## (IN PROGRESS)
+
+* In the Failed Records view, the "Record number" column can no longer be hidden. Fixes UIHAADM-71.
+
 ## [1.0.3](https://github.com/folio-org/ui-harvester-admin/tree/v1.0.3) (2023-05-26)
 
 * Error-summarising function tolerates more possible structures. Fixes UIHAADM-72.
