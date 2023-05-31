@@ -84,7 +84,7 @@ const HarvestableFormOaiPmh = ({ values }) => {
 
 HarvestableFormOaiPmh.propTypes = {
   values: PropTypes.shape({
-    url: PropTypes.string.isRequired,
+    url: PropTypes.string,
   }).isRequired,
 };
 
