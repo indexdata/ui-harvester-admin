@@ -46,7 +46,7 @@ function validate(values) {
     errors.storage = { id: requiredSelectMessage };
   }
 
-  console.log('  validate:', errors);
+  // console.log('validate:', errors);
   return errors;
 }
 

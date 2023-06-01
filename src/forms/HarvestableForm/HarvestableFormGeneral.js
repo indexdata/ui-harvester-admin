@@ -11,11 +11,15 @@ const rawFailedRecords = ['NO_STORE', 'CLEAN_DIRECTORY', 'CREATE_OVERWRITE', 'AD
 
 const HarvestableFormGeneral = ({ data }) => {
   const intl = useIntl();
+
+  const noValue = {
+    value: '',
+    label: intl.formatMessage({ id: 'ui-harvester-admin.selectValue' }),
+  };
   const failedRecords = rawFailedRecords.map(x => ({
     value: x,
     label: x + ' - ' + intl.formatMessage({ id: `ui-harvester-admin.harvestables.field.failedRecordsLogging.${x}` }),
   }));
-
   const transformationPipelines = data.transformationPipelines.map(x => ({ value: x.id, label: x.name }));
   const storageEngines = data.storageEngines.map(x => ({ value: x.id, label: `${x.name} [${x.description}]` }));
 
@@ -43,10 +47,10 @@ const HarvestableFormGeneral = ({ data }) => {
         <CF tag="enabled" xs={4} component={Checkbox} type="checkbox" />
         <CF tag="scheduleString" xs={8} />
       </Row>
-      <RCF tag="transformation.id" i18nTag="transformationPipeline" component={Select} dataOptions={transformationPipelines} required />
+      <RCF tag="transformation.id" i18nTag="transformationPipeline" component={Select} dataOptions={[noValue].concat(transformationPipelines)} required />
       <RCF tag="laxParsing" component={Checkbox} type="checkbox" />
       <RCF tag="encoding" />
-      <RCF tag="storage.id" i18nTag="storage.name" component={Select} dataOptions={storageEngines} required />
+      <RCF tag="storage.id" i18nTag="storage.name" component={Select} dataOptions={[noValue].concat(storageEngines)} required />
       <RCF tag="storageBatchLimit" />
       <Row>
         <CF tag="cacheEnabled" xs={6} component={Checkbox} type="checkbox" />
@@ -57,14 +61,14 @@ const HarvestableFormGeneral = ({ data }) => {
         <CF tag="recordLimit" xs={6} />
         <CF tag="timeout" xs={6} />
       </Row>
-      <RCF tag="logLevel" component={Select} dataOptions={logLevels} />
-      <RCF tag="failedRecordsLogging" component={Select} dataOptions={failedRecords} />
+      <RCF tag="logLevel" component={Select} dataOptions={[noValue].concat(logLevels)} />
+      <RCF tag="failedRecordsLogging" component={Select} dataOptions={[noValue].concat(failedRecords)} />
       <Row>
         <CF tag="maxSavedFailedRecordsPerRun" xs={6} type="number" />
         <CF tag="maxSavedFailedRecordsTotal" xs={6} type="number" />
       </Row>
       <RCLF tag="mailAddress" i18nTag="mailAddresses" />
-      <RCF tag="mailLevel" component={Select} dataOptions={mailLevels} />
+      <RCF tag="mailLevel" component={Select} dataOptions={[noValue].concat(mailLevels)} />
       <RCLF
         tag="constantFields"
         renderEntry={(name) => (
