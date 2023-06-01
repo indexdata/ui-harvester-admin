@@ -3,6 +3,8 @@
 
     "no-value": "-",
     "error": "Something went wrong",
+    "fillIn": "Please fill this in to continue",
+    "selectToContinue": "Please select to continue",
     "resultCount": "{count, number} {count, plural, one {record found} other {records found}}",
     "settings.storage": "Storage engines",
     "settings.pipeline": "Transformation pipelines",

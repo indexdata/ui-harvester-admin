@@ -26,7 +26,7 @@ const HarvestableFormGeneral = ({ data }) => {
     >
       <Row>
         <CF tag="id" xs={2} disabled />
-        <CF tag="name" xs={6} />
+        <CF tag="name" xs={6} required />
         <CF tag="serviceProvider" xs={4} />
       </Row>
       <Row>
@@ -43,10 +43,10 @@ const HarvestableFormGeneral = ({ data }) => {
         <CF tag="enabled" xs={4} component={Checkbox} type="checkbox" />
         <CF tag="scheduleString" xs={8} />
       </Row>
-      <RCF tag="transformation.id" i18nTag="transformationPipeline" component={Select} dataOptions={transformationPipelines} />
+      <RCF tag="transformation.id" i18nTag="transformationPipeline" component={Select} dataOptions={transformationPipelines} required />
       <RCF tag="laxParsing" component={Checkbox} type="checkbox" />
       <RCF tag="encoding" />
-      <RCF tag="storage.id" i18nTag="storage.name" component={Select} dataOptions={storageEngines} />
+      <RCF tag="storage.id" i18nTag="storage.name" component={Select} dataOptions={storageEngines} required />
       <RCF tag="storageBatchLimit" />
       <Row>
         <CF tag="cacheEnabled" xs={6} component={Checkbox} type="checkbox" />

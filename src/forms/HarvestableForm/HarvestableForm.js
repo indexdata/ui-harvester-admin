@@ -31,6 +31,26 @@ const handleKeyCommand = (handler, { disabled } = {}) => {
 };
 
 
+function validate(values) {
+  const errors = {};
+  const requiredTextMessage = <FormattedMessage id="ui-harvester-admin.fillIn" />;
+  const requiredSelectMessage = <FormattedMessage id="ui-harvester-admin.selectToContinue" />;
+
+  if (!values.name) {
+    errors.name = requiredTextMessage;
+  }
+  if (!values.transformation?.id) {
+    errors.transformation = { id: requiredSelectMessage };
+  }
+  if (!values.storage?.id) {
+    errors.storage = { id: requiredSelectMessage };
+  }
+
+  console.log('  validate:', errors);
+  return errors;
+}
+
+
 const HarvestableForm = (props) => {
   const {
     isLoading,
@@ -139,6 +159,7 @@ HarvestableForm.propTypes = {
 
 export default withStripes(stripesFinalForm({
   initialValuesEqual: (a, b) => isEqual(a, b),
+  validate,
   navigationCheck: true,
   subscription: {
     values: true,
