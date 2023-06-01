@@ -93,6 +93,9 @@
     "filter.date.timeStamp": "Time stamp",
     "filter.date.timeStamp.from": "From",
     "filter.date.timeStamp.to": "To",
+    "filter.numeric.records": "Records",
+    "filter.numeric.records.from": "At least",
+    "filter.numeric.records.to": "No more than",
 
     "accordion.devinfo": "Developer information",
 

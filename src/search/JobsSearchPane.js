@@ -5,6 +5,7 @@ import { Button, Icon, Pane, SearchField } from '@folio/stripes/components';
 import { parseFilters } from '@folio/stripes/smart-components';
 import renderFilter from './renderFilter';
 import renderDateFilterPair from './renderDateFilterPair';
+import renderNumericFilterPair from './renderNumericFilterPair';
 import searchPanePropTypes from './searchPanePropTypes';
 import css from './SearchPane.css';
 
@@ -97,6 +98,7 @@ function JobsSearchPane(props) {
         {/* XXX we need a filter for "some errors occurred during the run, which was OK overall" */}
         {renderFilter(intl, filterStruct, updateQuery, 'type/harvestables.field.jobClass',
           ['oaiPmh', 'xmlBulk', 'connector', 'status'])}
+        {renderNumericFilterPair(intl, filterStruct, updateQuery, 'records')}
         {renderDateFilterPair(intl, filterStruct, updateQuery, 'started')}
         {renderDateFilterPair(intl, filterStruct, updateQuery, 'finished')}
 

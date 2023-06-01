@@ -4,6 +4,7 @@
 
 * In the Failed Records view, the "Record number" column can no longer be hidden. Fixes UIHAADM-71.
 * Basic validation for new and edited harvestables. In particular: name, transformation pipeline and storage engine must all be provided before the form can be submitted. Fixes UIHAADM-70.
+* Add amountHarvested filtering for the Jobs pane. Fixes UIHAADM-65.
 
 ## [1.0.3](https://github.com/folio-org/ui-harvester-admin/tree/v1.0.3) (2023-05-26)
 
