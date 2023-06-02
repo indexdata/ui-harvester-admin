@@ -1,6 +1,6 @@
 # Change history for ui-harvester-admin
 
-## (IN PROGRESS)
+## 1.1.0 (IN PROGRESS)
 
 * In the Failed Records view, the "Record number" column can no longer be hidden. Fixes UIHAADM-71.
 * Basic validation for new and edited harvestables. In particular: name, transformation pipeline and storage engine must all be provided before the form can be submitted. Fixes UIHAADM-70.
