@@ -276,6 +276,8 @@
     "storage.field.name": "Name",
     "storage.field.description": "Description",
     "storage.field.enabled": "Enabled",
+    "storage.field.url": "URL",
+    "storage.field.json": "JSON configuration",
 
     "logs.plainTextLog.running": "Live plain text log for current running job",
     "logs.plainTextLog.previous": "Plain text log for last job",
