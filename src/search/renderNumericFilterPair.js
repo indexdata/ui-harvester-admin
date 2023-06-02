@@ -13,10 +13,10 @@ function renderSingleNumericFilter(intl, filterStruct, updateQuery, field, bound
       label={intl.formatMessage({ id: `ui-harvester-admin.filter.numeric.${field}.${boundary}` })}
       value={value}
       onChange={(e) => {
-        const value = e.target.value
+        const thisValue = e.target.value;
         const fs2 = { ...filterStruct };
-        if (value !== '') {
-          fs2[keyString] = [value];
+        if (thisValue !== '') {
+          fs2[keyString] = [thisValue];
         } else {
           delete fs2[keyString];
         }
