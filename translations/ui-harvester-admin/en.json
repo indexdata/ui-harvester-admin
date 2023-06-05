@@ -278,6 +278,7 @@
     "storage.field.enabled": "Enabled",
     "storage.field.url": "URL",
     "storage.field.json": "JSON configuration",
+    "storage.field.type": "Storage type:",
 
     "logs.plainTextLog.running": "Live plain text log for current running job",
     "logs.plainTextLog.previous": "Plain text log for last job",
