@@ -1,10 +1,4 @@
-# Internal notes on implementing log-file display
-
-To be deleted after
-[UIHAADM-5](https://issues.folio.org/browse/UIHAADM-5)
-and
-[UIHAADM-29](https://issues.folio.org/browse/UIHAADM-29)
-are complete.
+# Internal notes on ui-harvester-admin work
 
 
 ## Documentation
