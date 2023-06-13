@@ -14,6 +14,7 @@ const StorageSettings = (props) => {
   return (
     <EntryManager
       {...props}
+      resourcePath="harvester-admin/storages"
       parentMutator={mutator}
       entryList={sortBy((resources.entries || {}).records || [], ['name'])}
       detailComponent={StorageDetail}
@@ -27,6 +28,7 @@ const StorageSettings = (props) => {
         post: 'inventory-storage.instances.collection.get',
         delete: 'inventory-storage.instances.collection.get',
       }}
+      enableDetailsActionMenu
     />
   );
 };
