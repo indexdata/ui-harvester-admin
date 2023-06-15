@@ -77,5 +77,9 @@ export function cooked2raw(cooked) {
 
   delete raw.currentStatus;
 
+  if (cooked.json) {
+    raw.json = JSON.parse(cooked.json);
+  }
+
   return raw;
 }

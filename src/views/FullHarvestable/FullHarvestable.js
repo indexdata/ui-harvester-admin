@@ -129,7 +129,7 @@ const FullHarvestable = ({ defaultWidth, resources, mutator, match, deleteRecord
             buttonStyle="dropdownItem"
             data-test-actions-menu-delete
             id="clickable-delete-harvestable"
-            onClick={maybeDeleteRecord}
+            onClick={e => maybeDeleteRecord(e)}
           >
             <Icon icon="trash">
               <FormattedMessage id="ui-harvester-admin.button.delete" />

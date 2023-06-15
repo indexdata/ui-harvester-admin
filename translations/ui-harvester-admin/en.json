@@ -5,6 +5,7 @@
     "error": "Something went wrong",
     "selectValue": "Select a value",
     "fillIn": "Please fill this in to continue",
+    "invalidJSON": "Invalid JSON: {error}",
     "selectToContinue": "Please select to continue",
     "resultCount": "{count, number} {count, plural, one {record found} other {records found}}",
     "settings.storage": "Storage engines",
