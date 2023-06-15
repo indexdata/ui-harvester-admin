@@ -8,8 +8,11 @@
     "selectToContinue": "Please select to continue",
     "resultCount": "{count, number} {count, plural, one {record found} other {records found}}",
     "settings.storage": "Storage engines",
+    "settings.storage.heading": "Manage storage engines",
     "settings.pipeline": "Transformation pipelines",
+    "settings.pipeline.heading": "Manage transformation pipelines",
     "settings.step": "Transformation steps",
+    "settings.step.heading": "Manage transformation steps",
 
     "add": "Add",
     "actions.new": "New record",
@@ -269,6 +272,13 @@
     "harvestables.field.failedRecordsLogging.CLEAN_DIRECTORY": "Do save. Clean up directory first",
     "harvestables.field.failedRecordsLogging.CREATE_OVERWRITE": "Do save. Overwrite existing files",
     "harvestables.field.failedRecordsLogging.ADD_ALL": "Do save. Add numbered versions for existing files",
+
+    "storage.field.name": "Name",
+    "storage.field.description": "Description",
+    "storage.field.enabled": "Enabled",
+    "storage.field.url": "URL",
+    "storage.field.json": "JSON configuration",
+    "storage.field.type": "Storage type:",
 
     "logs.plainTextLog.running": "Live plain text log for current running job",
     "logs.plainTextLog.previous": "Plain text log for last job",
