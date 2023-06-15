@@ -1,18 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { stripesConnect } from '@folio/stripes/core';
 import { Col, Row, KeyValue, Accordion } from '@folio/stripes/components';
 
 
 const StorageDetail = (props) => {
-  let data = props.initialValues;
-  if (props.resources.storage.hasLoaded) {
-    data = props.resources.storage.records[0];
-  } else {
-    // Force a load of the full record
-    props.mutator.storageId.replace(data.id);
-  }
+  const data = props.initialValues;
 
   return (
     <>
@@ -91,33 +84,7 @@ StorageDetail.propTypes = {
     // currentStatus: string
     // customClass: string
   }).isRequired,
-  resources: PropTypes.shape({
-    storage: PropTypes.shape({
-      hasLoaded: PropTypes.bool.isRequired,
-      records: PropTypes.arrayOf(
-        PropTypes.shape({
-          // See above: ESLint does not check this
-        })
-      ),
-    }),
-  }).isRequired,
-  mutator: PropTypes.shape({
-    storageId: PropTypes.shape({
-      replace: PropTypes.func.isRequired,
-    }).isRequired,
-  }).isRequired,
 };
 
 
-StorageDetail.manifest = Object.freeze({
-  storageId: {
-    initialValue: null,
-  },
-  storage: {
-    type: 'okapi',
-    path: 'harvester-admin/storages/%{storageId}',
-  },
-});
-
-
-export default stripesConnect(StorageDetail);
+export default StorageDetail;
