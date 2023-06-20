@@ -22,6 +22,12 @@ function validate(values) {
     errors.type = requiredSelectMessage;
   }
 
+  try {
+    if (values.json && values.json !== '') JSON.parse(values.json);
+  } catch (e) {
+    errors.json = <FormattedMessage id="ui-harvester-admin.invalidJSON" values={{ error: e.toString() }} />;
+  }
+
   return errors;
 }
 

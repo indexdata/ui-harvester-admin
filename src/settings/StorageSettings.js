@@ -29,6 +29,14 @@ const StorageSettings = (props) => {
         delete: 'inventory-storage.instances.collection.get',
       }}
       enableDetailsActionMenu
+      parseInitialValues={values => {
+        if (!values.json) return values;
+        return { ...values, json: JSON.stringify(values.json, null, 2) };
+      }}
+      onBeforeSave={values => {
+        if (!values.json) return values;
+        return { ...values, json: JSON.parse(values.json) };
+      }}
     />
   );
 };

@@ -46,7 +46,7 @@ const StorageDetail = (props) => {
           <Col xs={12}>
             <KeyValue
               label={<FormattedMessage id="ui-harvester-admin.storage.field.json" />}
-              value={<pre>{JSON.stringify(data.json, null, 2)}</pre>}
+              value={data.json}
             />
           </Col>
         </Row>
@@ -77,7 +77,7 @@ StorageDetail.propTypes = {
     enabled: PropTypes.string, // "true" or "false"
     url: PropTypes.string,
     type: PropTypes.string,
-    json: PropTypes.object,
+    json: PropTypes.string,
     // Not used:
     // acl: string (readonly)
     // bulksize: string (deprecated)
