@@ -11,19 +11,19 @@ const HarvesterAdminSettings = (props) => {
       route: 'storage',
       label: <FormattedMessage id="ui-harvester-admin.settings.storage" />,
       component: StorageSettings,
-      // perm: 'ui-harvester-admin.settings.storage',
+      // perm: 'XXX',
     },
     {
       route: 'pipeline',
       label: <FormattedMessage id="ui-harvester-admin.settings.pipeline" />,
       component: PipelineSettings,
-      // perm: 'ui-harvester-admin.settings.pipeline',
+      // perm: 'XXX',
     },
     {
       route: 'step',
       label: <FormattedMessage id="ui-harvester-admin.settings.step" />,
       component: StepSettings,
-      // perm: 'ui-harvester-admin.settings.step',
+      // perm: 'XXX',
     },
   ];
 
