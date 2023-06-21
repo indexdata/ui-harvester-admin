@@ -88,7 +88,9 @@
         "subPermissions": [
           "module.harvester-admin.enabled",
           "harvester-admin.harvestables.collection.get",
-          "harvester-admin.harvestables.item.get"
+          "harvester-admin.harvestables.item.get",
+          "harvester-admin.harvestables.failed-records.collection.get",
+          "harvester-admin.harvestables.log.get"
         ],
         "visible": true
       },
