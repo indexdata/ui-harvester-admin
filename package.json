@@ -84,15 +84,13 @@
       },
       {
         "permissionName": "ui-harvester-admin.harvestables.view",
-        "displayName": "Harvester admin: View harvestables, start/stop jobs",
+        "displayName": "Harvester admin: View harvestables",
         "subPermissions": [
           "module.harvester-admin.enabled",
           "harvester-admin.harvestables.collection.get",
           "harvester-admin.harvestables.item.get",
           "harvester-admin.harvestables.failed-records.collection.get",
-          "harvester-admin.harvestables.log.get",
-          "harvester-admin.run-jobs",
-          "harvester-admin.stop-jobs"
+          "harvester-admin.harvestables.log.get"
         ],
         "visible": true
       },
@@ -103,7 +101,9 @@
           "ui-harvester-admin.harvestables.view",
           "harvester-admin.transformations.collection.get",
           "harvester-admin.storages.collection.get",
-          "harvester-admin.harvestables.item.put"
+          "harvester-admin.harvestables.item.put",
+          "harvester-admin.run-jobs",
+          "harvester-admin.stop-jobs"
         ],
         "visible": true
       },
