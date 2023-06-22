@@ -1,6 +1,6 @@
 {
   "name": "@indexdata/harvester-admin",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Admin console for the Index Data Harvester",
   "repository": "https://github.com/indexdata/ui-harvester-admin",
   "license": "Apache-2.0",
@@ -84,19 +84,21 @@
       },
       {
         "permissionName": "ui-harvester-admin.harvestables.view",
-        "displayName": "Harvester admin: View harvestables",
+        "displayName": "Harvester admin: View harvestables, start/stop jobs",
         "subPermissions": [
           "module.harvester-admin.enabled",
           "harvester-admin.harvestables.collection.get",
           "harvester-admin.harvestables.item.get",
           "harvester-admin.harvestables.failed-records.collection.get",
-          "harvester-admin.harvestables.log.get"
+          "harvester-admin.harvestables.log.get",
+          "harvester-admin.run-jobs",
+          "harvester-admin.stop-jobs"
         ],
         "visible": true
       },
       {
         "permissionName": "ui-harvester-admin.harvestables.view-edit",
-        "displayName": "Harvester admin: View, edit harvestables",
+        "displayName": "Harvester admin: View, edit harvestables, start/stop jobs",
         "subPermissions": [
           "ui-harvester-admin.harvestables.view",
           "harvester-admin.transformations.collection.get",
@@ -107,7 +109,7 @@
       },
       {
         "permissionName": "ui-harvester-admin.harvestables.view-edit-create",
-        "displayName": "Harvester admin: View, edit, create harvestables",
+        "displayName": "Harvester admin: View, edit, create harvestables, start/stop jobs",
         "subPermissions": [
           "ui-harvester-admin.harvestables.view-edit",
           "harvester-admin.harvestables.item.post"
@@ -116,7 +118,7 @@
       },
       {
         "permissionName": "ui-harvester-admin.harvestables.view-edit-create-delete",
-        "displayName": "Harvester admin: View, edit, create, delete harvestables",
+        "displayName": "Harvester admin: View, edit, create, delete harvestables, start/stop jobs",
         "subPermissions": [
           "ui-harvester-admin.harvestables.view-edit-create",
           "harvester-admin.harvestables.item.delete"
