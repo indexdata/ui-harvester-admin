@@ -49,7 +49,7 @@
         "permissionName": "ui-harvester-admin.settings.view",
         "displayName": "Harvester admin (Settings): View storage engines, transformation pipelines and transformation steps",
         "subPermissions": [
-          "module.harvester-admin.enabled",
+          "settings.harvester-admin.enabled",
           "harvester-admin.storages.collection.get",
           "harvester-admin.storages.item.get"
         ],
