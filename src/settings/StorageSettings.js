@@ -3,13 +3,23 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 import { EntryManager } from '@folio/stripes/smart-components';
-import { stripesConnect } from '@folio/stripes/core';
+import { useStripes, stripesConnect } from '@folio/stripes/core';
 
 import StorageDetail from './StorageDetail';
 import StorageForm from './StorageForm';
 
+const PERMS = {
+  put: 'harvester-admin.storages.item.put',
+  post: 'harvester-admin.storages.item.post',
+  delete: 'harvester-admin.storages.item.delete',
+};
+
 const StorageSettings = (props) => {
   const { mutator, resources, intl } = props;
+  const stripes = useStripes();
+
+  // When this is disabled <EntryManager> displays an Edit button, which there is no way to remove. See STSMACOM-764
+  const enableDetailsActionMenu = stripes.hasPerm(PERMS.put) || stripes.hasPerm(PERMS.post) || stripes.hasPerm(PERMS.delete);
 
   return (
     <EntryManager
@@ -22,13 +32,8 @@ const StorageSettings = (props) => {
       entryLabel={intl.formatMessage({ id: 'ui-harvester-admin.settings.storage.heading' })}
       entryFormComponent={StorageForm}
       nameKey="name"
-      permissions={{
-        // XXX Change these when we resolve the permissions plan for Harvester Admin
-        put: 'inventory-storage.instances.collection.get',
-        post: 'inventory-storage.instances.collection.get',
-        delete: 'inventory-storage.instances.collection.get',
-      }}
-      enableDetailsActionMenu
+      permissions={PERMS}
+      enableDetailsActionMenu={enableDetailsActionMenu}
       parseInitialValues={values => {
         if (!values.json) return values;
         return { ...values, json: JSON.stringify(values.json, null, 2) };
