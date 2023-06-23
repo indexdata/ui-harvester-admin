@@ -30,5 +30,3 @@ yarn stripes okapi login ${TENANT}_admin --okapi $OKAPI --tenant $TENANT
 
 XXX But this doesn't work because stripes-cli doesn't bother sending the Okapi token for for the various `mod` commands. So you have to run these commands using `env DEBUG=stripes-cli:okapi`, then copy-paste the emitted curl commands and manually add the necessary `-H 'X-Okapi-Token: 12345'` argument.
 
-Sheesh.
-
