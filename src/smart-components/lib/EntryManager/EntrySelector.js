@@ -172,7 +172,7 @@ class EntrySelector extends React.Component {
             </Button>
           </IfPermission>
         </IfPermission>
-        <IfPermission perm={permissions.post}>
+        <IfPermission perm={permissions.put}>
           <Button
             buttonStyle="dropdownItem"
             id="dropdown-clickable-edit-item"
