@@ -55,6 +55,9 @@ HarvesterAdminApp.propTypes = {
     path: PropTypes.string.isRequired,
   }).isRequired,
   actAs: PropTypes.string.isRequired,
+  stripes: PropTypes.shape({
+    hasPerm: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 export default HarvesterAdminApp;
