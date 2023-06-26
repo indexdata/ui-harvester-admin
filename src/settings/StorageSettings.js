@@ -2,8 +2,8 @@ import { sortBy } from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
-import { EntryManager } from '@folio/stripes/smart-components';
 import { useStripes, stripesConnect } from '@folio/stripes/core';
+import { EntryManager } from '../smart-components';
 
 import StorageDetail from './StorageDetail';
 import StorageForm from './StorageForm';
