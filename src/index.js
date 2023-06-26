@@ -17,6 +17,7 @@ import RecordsRoute from './routes/RecordsRoute';
 const HarvesterAdminApp = (props) => {
   const {
     actAs,
+    stripes,
     match: { path }
   } = props;
 
@@ -24,9 +25,12 @@ const HarvesterAdminApp = (props) => {
     return <Settings {...props} />;
   }
 
+  // Don't redirect to a page we don't have permission to view: see routes/SwitchRoute.js
+  const dest = stripes.hasPerm('ui-harvester-admin.harvestables.view') ? 'harvestables' : 'jobs';
+
   return (
     <Switch>
-      <Redirect exact from={path} to={`${path}/harvestables`} />
+      <Redirect exact from={path} to={`${path}/${dest}`} />
       <NestedRoute path={`${path}`} component={SwitchRoute}>
         <Switch>
           <NestedRoute path={`${path}/harvestables/create/:type`} exact component={CreateHarvestableRoute} />
