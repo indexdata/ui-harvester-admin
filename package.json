@@ -90,7 +90,8 @@
           "harvester-admin.harvestables.collection.get",
           "harvester-admin.harvestables.item.get",
           "harvester-admin.harvestables.failed-records.collection.get",
-          "harvester-admin.harvestables.log.get"
+          "harvester-admin.harvestables.log.get",
+          "harvester-admin.previous-jobs.collection.get"
         ],
         "visible": true
       },
