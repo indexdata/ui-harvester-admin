@@ -8,6 +8,12 @@ import { EntryManager } from '../smart-components';
 import StorageDetail from './StorageDetail';
 import StorageForm from './StorageForm';
 
+const PERMS = {
+  put: 'harvester-admin.storages.item.put',
+  post: 'harvester-admin.storages.item.post',
+  delete: 'harvester-admin.storages.item.delete',
+};
+
 const StorageSettings = (props) => {
   const { mutator, resources, intl } = props;
 
@@ -22,12 +28,7 @@ const StorageSettings = (props) => {
       entryLabel={intl.formatMessage({ id: 'ui-harvester-admin.settings.storage.heading' })}
       entryFormComponent={StorageForm}
       nameKey="name"
-      permissions={{
-        // XXX Change these when we resolve the permissions plan for Harvester Admin
-        put: 'inventory-storage.instances.collection.get',
-        post: 'inventory-storage.instances.collection.get',
-        delete: 'inventory-storage.instances.collection.get',
-      }}
+      permissions={PERMS}
       enableDetailsActionMenu
       parseInitialValues={values => {
         if (!values.json) return values;

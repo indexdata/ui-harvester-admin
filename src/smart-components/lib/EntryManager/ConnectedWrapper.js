@@ -35,7 +35,7 @@ ConnectedWrapper.propTypes = {
   resourcePath: PropTypes.string.isRequired,
   initialValues: PropTypes.shape({
     id: PropTypes.string,
-  }).isRequired,
+  }), // This is .isRequired really, but React sometimes complains that it's undefined when this component isn't even rendered
   underlyingComponent: PropTypes.func, // React component
 };
 

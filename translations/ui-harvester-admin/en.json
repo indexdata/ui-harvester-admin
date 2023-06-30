@@ -319,13 +319,6 @@
     "error.invalidSort.label": "Invalid sort criterion",
     "error.invalidSort.content": "It is not possible to sort on the <code>{name}</code> column due to implementation limitations.",
 
-    "permission.settings.storage": "Settings (Harvester admin): manage storage engines",
-    "permission.settings.pipeline": "Settings (Harvester admin): manage transformation pipelines",
-    "permission.settings.step": "Settings (Harvester admin): manage transformation steps",
-    "permission.read-jobs": "Harvester admin: see what jobs exist, their status, etc.",
-    "permission.maintain-jobs": "Harvester admin: see, start and stop jobs",
-    "permission.maintain-all-jobs": "Harvester admin: see, start and stop jobs for all customers",
-    "permission.maintain-pipelines": "Harvester admin: maintain pipeline stages and pipelines",
     "permission.all": "Harvester admin: All permissions",
 
     "SENTINEL": "SENTINEL"

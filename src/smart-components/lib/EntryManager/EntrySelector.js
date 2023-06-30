@@ -148,6 +148,12 @@ class EntrySelector extends React.Component {
       isEntryInUse,
     } = this.props;
 
+    if (!this.props.stripes.hasPerm(permissions.put) &&
+        !this.props.stripes.hasPerm(permissions.post) &&
+        !this.props.stripes.hasPerm(permissions.delete)) {
+      return undefined; // No action menu at all when there are no actions
+    }
+
     return (
       <>
         <IfPermission perm={permissions.post}>
@@ -166,7 +172,7 @@ class EntrySelector extends React.Component {
             </Button>
           </IfPermission>
         </IfPermission>
-        <IfPermission perm={permissions.post}>
+        <IfPermission perm={permissions.put}>
           <Button
             buttonStyle="dropdownItem"
             id="dropdown-clickable-edit-item"

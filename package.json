@@ -1,6 +1,6 @@
 {
   "name": "@indexdata/harvester-admin",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "Admin console for the Index Data Harvester",
   "repository": "https://github.com/indexdata/ui-harvester-admin",
   "license": "Apache-2.0",
@@ -46,63 +46,96 @@
         "visible": false
       },
       {
-        "permissionName": "ui-harvester-admin.settings.storage",
-        "displayName": "Settings (Harvester admin): manage storage engines",
+        "permissionName": "ui-harvester-admin.settings.view",
+        "displayName": "Harvester admin (Settings): View storage engines, transformation pipelines and transformation steps",
         "subPermissions": [
-          "settings.harvester-admin.enabled"
+          "settings.harvester-admin.enabled",
+          "harvester-admin.storages.collection.get",
+          "harvester-admin.storages.item.get"
         ],
         "visible": true
       },
       {
-        "permissionName": "ui-harvester-admin.settings.pipeline",
-        "displayName": "Settings (Harvester admin): manage transformation pipelines",
+        "permissionName": "ui-harvester-admin.settings.view-edit",
+        "displayName": "Harvester admin (Settings): View, edit storage engines, transformation pipelines and transformation steps",
         "subPermissions": [
-          "settings.harvester-admin.enabled"
+          "ui-harvester-admin.settings.view",
+          "harvester-admin.storages.item.put"
         ],
         "visible": true
       },
       {
-        "permissionName": "ui-harvester-admin.settings.step",
-        "displayName": "Settings (Harvester admin): manage transformation steps",
+        "permissionName": "ui-harvester-admin.settings.view-edit-create",
+        "displayName": "Harvester admin (Settings): View, edit, create storage engines, transformation pipelines and transformation steps",
         "subPermissions": [
-          "settings.harvester-admin.enabled"
+          "ui-harvester-admin.settings.view-edit",
+          "harvester-admin.storages.item.post"
         ],
         "visible": true
       },
       {
-        "permissionName": "ui-harvester-admin.read-jobs",
-        "displayName": "Harvester admin: see what jobs exist, their status, etc.",
+        "permissionName": "ui-harvester-admin.settings.view-edit-create-delete",
+        "displayName": "Harvester admin (Settings): View, edit, create, delete storage engines, transformation pipelines and transformation steps",
+        "subPermissions": [
+          "ui-harvester-admin.settings.view-edit-create",
+          "harvester-admin.storages.item.delete"
+        ],
+        "visible": true
+      },
+      {
+        "permissionName": "ui-harvester-admin.harvestables.view",
+        "displayName": "Harvester admin: View harvestables",
         "subPermissions": [
           "module.harvester-admin.enabled",
           "harvester-admin.harvestables.collection.get",
-          "harvester-admin.harvestables.item.get"
+          "harvester-admin.harvestables.item.get",
+          "harvester-admin.harvestables.failed-records.collection.get",
+          "harvester-admin.harvestables.log.get",
+          "harvester-admin.previous-jobs.collection.get"
         ],
         "visible": true
       },
       {
-        "permissionName": "ui-harvester-admin.maintain-jobs",
-        "displayName": "Harvester admin: see, start and stop jobs",
+        "permissionName": "ui-harvester-admin.harvestables.view-edit",
+        "displayName": "Harvester admin: View, edit harvestables, start/stop jobs",
         "subPermissions": [
-          "ui-harvester-admin.read-jobs",
+          "ui-harvester-admin.harvestables.view",
+          "harvester-admin.transformations.collection.get",
+          "harvester-admin.storages.collection.get",
           "harvester-admin.harvestables.item.put",
-          "harvester-admin.harvestables.item.delete",
+          "harvester-admin.run-jobs",
+          "harvester-admin.stop-jobs"
+        ],
+        "visible": true
+      },
+      {
+        "permissionName": "ui-harvester-admin.harvestables.view-edit-create",
+        "displayName": "Harvester admin: View, edit, create harvestables, start/stop jobs",
+        "subPermissions": [
+          "ui-harvester-admin.harvestables.view-edit",
           "harvester-admin.harvestables.item.post"
         ],
         "visible": true
       },
       {
-        "permissionName": "ui-harvester-admin.maintain-all-jobs",
-        "displayName": "Harvester admin: see, start and stop jobs for all customers",
+        "permissionName": "ui-harvester-admin.harvestables.view-edit-create-delete",
+        "displayName": "Harvester admin: View, edit, create, delete harvestables, start/stop jobs",
         "subPermissions": [
-          "ui-harvester-admin.maintain-jobs"
+          "ui-harvester-admin.harvestables.view-edit-create",
+          "harvester-admin.harvestables.item.delete"
         ],
         "visible": true
       },
       {
-        "permissionName": "ui-harvester-admin.maintain-pipelines",
-        "displayName": "Harvester admin: maintain pipeline stages and pipelines",
+        "permissionName": "ui-harvester-admin.jobs-and-failed-records.view",
+        "displayName": "Harvester admin: View jobs and failed records",
         "subPermissions": [
-          "module.harvester-admin.enabled"
+          "module.harvester-admin.enabled",
+          "harvester-admin.previous-jobs.collection.get",
+          "harvester-admin.previous-jobs.item.get",
+          "harvester-admin.previous-jobs.log.get",
+          "harvester-admin.previous-jobs.failed-records.collection.get",
+          "harvester-admin.previous-jobs.failed-records.item.get"
         ],
         "visible": true
       },
@@ -110,9 +143,17 @@
         "permissionName": "ui-harvester-admin.all",
         "displayName": "Harvester admin: All permissions",
         "subPermissions": [
-          "ui-harvester-admin.maintain-all-jobs",
-          "ui-harvester-admin.maintain-pipelines",
-          "settings.harvester-admin.enabled"
+          "module.harvester-admin.enabled",
+          "settings.harvester-admin.enabled",
+          "ui-harvester-admin.settings.view",
+          "ui-harvester-admin.settings.view-edit",
+          "ui-harvester-admin.settings.view-edit-create",
+          "ui-harvester-admin.settings.view-edit-create-delete",
+          "ui-harvester-admin.harvestables.view",
+          "ui-harvester-admin.harvestables.view-edit",
+          "ui-harvester-admin.harvestables.view-edit-create",
+          "ui-harvester-admin.harvestables.view-edit-create-delete",
+          "ui-harvester-admin.jobs-and-failed-records.view"
         ],
         "visible": true
       }
