@@ -1,6 +1,6 @@
 {
   "name": "@indexdata/harvester-admin",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Admin console for the Index Data Harvester",
   "repository": "https://github.com/indexdata/ui-harvester-admin",
   "license": "Apache-2.0",
@@ -130,6 +130,7 @@
         "permissionName": "ui-harvester-admin.jobs-and-failed-records.view",
         "displayName": "Harvester admin: View jobs and failed records",
         "subPermissions": [
+          "module.harvester-admin.enabled",
           "harvester-admin.previous-jobs.collection.get",
           "harvester-admin.previous-jobs.item.get",
           "harvester-admin.previous-jobs.log.get",
