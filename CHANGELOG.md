@@ -11,6 +11,7 @@
 * Switch to local fixed copy of `<EntryManager>`. Fixes UIHAADM-76.
 * `<EntryManager>` displays no action menu when no actions are permitted. Fixes UIHAADM-79.
 * `<EntryManager>` checks correct permission for editing (PUT not POST). Fixes UIHAADM-77.
+* Add permission guards to hide inoperative parts of the UI. Fixes Fixes UIHAADM-75.
 
 ## [1.0.3](https://github.com/folio-org/ui-harvester-admin/tree/v1.0.3) (2023-05-26)
 
