@@ -20,13 +20,8 @@ const FullJobRoute = ({ resources, mutator, match }) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(load, [setPlainTextLog, match.params.recId, logFetchCount]);
 
-  const isLoading = (resources.job.isPending ||
-                     resources.failedRecords.isPending ||
-                     typeof plainTextLog !== 'string');
-
   return (
     <HarvestableLog
-      isLoading={isLoading}
       data={{
         record: resources.job.records[0],
         failedRecords: resources.failedRecords.records[0],

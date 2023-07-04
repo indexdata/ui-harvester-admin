@@ -20,14 +20,13 @@ const handleKeyCommand = (handler, { disabled } = {}) => {
 
 const HarvestableLog = (props) => {
   const {
-    isLoading,
     data,
     handlers,
     refreshLog,
   } = props;
 
   const record = data.record;
-  if (isLoading || !record) return <LoadingPane />;
+  if (!record) return <LoadingPane />;
   const title = record.name;
   const status = record.currentStatus;
 
@@ -89,7 +88,6 @@ HarvestableLog.propTypes = {
   handlers: PropTypes.shape({
     onClose: PropTypes.func.isRequired,
   }),
-  isLoading: PropTypes.bool,
   refreshLog: PropTypes.func.isRequired,
 };
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { Accordion, NoValue, Button, Icon } from '@folio/stripes/components';
+import { Accordion, Loading, NoValue, Button, Icon } from '@folio/stripes/components';
 
 
 const HarvestableLogPlainText = ({ record, log, refreshLog }) => {
@@ -38,9 +38,10 @@ const HarvestableLogPlainText = ({ record, log, refreshLog }) => {
         </Icon>
       </Button>
 
-      <pre>
-        {log || <NoValue />}
-      </pre>
+      {typeof log === 'undefined' ? <Loading /> :
+        !log ? <NoValue /> :
+        <pre>{log}</pre>
+      }
     </Accordion>
   );
 };
