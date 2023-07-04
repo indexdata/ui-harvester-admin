@@ -104,6 +104,22 @@ const FullHarvestable = ({ defaultWidth, resources, mutator, match, deleteRecord
           />
         ),
       });
+    }).catch((res) => {
+      res.text().then((error) => {
+        callout.sendCallout({
+          type: 'error',
+          message: (
+            <FormattedMessage
+              id={`ui-harvester-admin.op.${op}.error`}
+              values={{
+                name: rec.name,
+                error: error.toString(),
+                b: text => <b>{text}</b>,
+              }}
+            />
+          ),
+        });
+      });
     });
   }
 

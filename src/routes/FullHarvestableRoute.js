@@ -21,6 +21,7 @@ FullHarvestableRoute.manifest = Object.freeze({
     type: 'okapi',
     path: 'harvester-admin/jobs/run/:{recId}',
     fetch: false,
+    throwErrors: false,
     PUT: {
       headers: {
         'Accept': 'application/json'
@@ -31,6 +32,7 @@ FullHarvestableRoute.manifest = Object.freeze({
     type: 'okapi',
     path: 'harvester-admin/jobs/stop/:{recId}',
     fetch: false,
+    throwErrors: false,
     PUT: {
       headers: {
         'Accept': 'application/json'

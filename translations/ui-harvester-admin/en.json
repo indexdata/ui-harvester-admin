@@ -40,6 +40,8 @@
     "op.delete.completed": "Record <b>{name}</b> deleted",
     "op.run.completed": "Job <b>{name}</b> started",
     "op.stop.completed": "Job <b>{name}</b> stopped",
+    "op.run.error": "Could not start job <b>{name}</b>: {error}",
+    "op.stop.error": "Could not stop job <b>{name}</b>: {error}",
 
     "harvestables.column.name": "Name",
     "harvestables.column.currentStatus": "Status",
