@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import ObjectInspector from 'react-inspector';
-import { MultiColumnList, Accordion } from '@folio/stripes/components';
+import { Loading, MultiColumnList, Accordion } from '@folio/stripes/components';
 import summarizeErrors from '../../util/summarizeErrors';
 
 
@@ -28,33 +28,37 @@ const HarvestableLogFailedRecords = ({ failedRecords }) => {
       id="logs-failed"
       label={<FormattedMessage
         id="ui-harvester-admin.logs.countFailedRecords"
-        values={{ count: failedRecords.failedRecords.length }}
+        values={{ count: failedRecords?.failedRecords.length }}
       />}
     >
-      <MultiColumnList
-        id="harvest-failedRecords-table"
-        columnIdPrefix="harvest-failedRecords-table"
-        visibleColumns={visibleColumns}
-        columnMapping={columnMapping}
-        columnWidths={{
-          recordNumber: '150px',
-          instanceHrid: '120px',
-          instanceTitle: '300px',
-        }}
-        contentData={failedRecords.failedRecords}
-        formatter={resultsFormatter}
-      />
-      <Accordion
-        id="harvest-failedRecords-devinfo"
-        label={<FormattedMessage id="ui-harvester-admin.accordion.devinfo" />}
-        closedByDefault
-      >
-        <ObjectInspector
-          data={failedRecords}
-          expandLevel={2}
-          sortObjectKeys
+      {!failedRecords ? <Loading /> :
+      <>
+        <MultiColumnList
+          id="harvest-failedRecords-table"
+          columnIdPrefix="harvest-failedRecords-table"
+          visibleColumns={visibleColumns}
+          columnMapping={columnMapping}
+          columnWidths={{
+            recordNumber: '150px',
+            instanceHrid: '120px',
+            instanceTitle: '300px',
+          }}
+          contentData={failedRecords.failedRecords}
+          formatter={resultsFormatter}
         />
-      </Accordion>
+        <Accordion
+          id="harvest-failedRecords-devinfo"
+          label={<FormattedMessage id="ui-harvester-admin.accordion.devinfo" />}
+          closedByDefault
+        >
+          <ObjectInspector
+            data={failedRecords}
+            expandLevel={2}
+            sortObjectKeys
+          />
+        </Accordion>
+      </>
+      }
     </Accordion>
   );
 };

@@ -22,12 +22,8 @@ const HarvestableLogRoute = ({ resources, mutator, match }) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(load, [setPlainTextLog, match.params.recId, logFetchCount]);
 
-  const isLoading = (resources.harvestable.isPending ||
-                     resources.failedRecords.isPending ||
-                     typeof plainTextLog !== 'string');
   return (
     <HarvestableLog
-      isLoading={isLoading}
       data={{
         record: resources.harvestable.records[0],
         failedRecords: resources.failedRecords.records[0],
