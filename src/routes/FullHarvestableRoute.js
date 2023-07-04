@@ -16,6 +16,7 @@ FullHarvestableRoute.manifest = Object.freeze({
   harvestable: {
     type: 'okapi',
     path: 'harvester-admin/harvestables/:{recId}',
+    shouldRefresh: () => false,
   },
   run: {
     type: 'okapi',
