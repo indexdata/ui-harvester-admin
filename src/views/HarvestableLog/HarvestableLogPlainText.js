@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
+import Download from '@axetroy/react-download';
 import { Accordion, Loading, NoValue, Button, Icon } from '@folio/stripes/components';
 
 
@@ -37,6 +38,20 @@ const HarvestableLogPlainText = ({ record, log, refreshLog }) => {
           <FormattedMessage id="ui-harvester-admin.logs.plainTextLog.refresh" />
         </Icon>
       </Button>
+
+      &nbsp;&nbsp;
+
+      <Download file="harvester-log.txt" content={log}>
+        <Button
+          data-test-download-logs
+          id="clickable-download-logs"
+          marginBottom0
+        >
+          <Icon icon="download">
+            <FormattedMessage id="ui-harvester-admin.logs.plainTextLog.download" />
+          </Icon>
+        </Button>
+      </Download>
 
       {typeof log === 'undefined' ? <Loading /> :
         !log ? <NoValue /> :

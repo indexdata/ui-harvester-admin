@@ -286,6 +286,7 @@
     "logs.plainTextLog.running": "Live plain text log for current running job",
     "logs.plainTextLog.previous": "Plain text log for last job",
     "logs.plainTextLog.refresh": "Refresh",
+    "logs.plainTextLog.download": "Download",
     "logs.countFailedRecords": "{count, number} {count, plural, one {failed record} other {failed records}}",
 
     "summary-table.summary": "Summary",
