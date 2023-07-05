@@ -10,6 +10,7 @@
 
 ## Services
 
+* [Legacy harvester-admin UI](https://harvester-admin.folio-dev-us-east-1-1.folio-dev.indexdata.com/harvester-admin/jobs/list.xhtml)
 * [Local development server](http://localhost:3003/ha/harvestables)
 * [Demo server](https://harvester-dev.folio-dev.indexdata.com/)
 (GitHub action to [rebuild UI](https://github.com/indexdata/platform-harvester-dev/actions/workflows/bundle-deploy.yml))
