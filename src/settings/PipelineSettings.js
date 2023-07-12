@@ -6,12 +6,12 @@ import { stripesConnect } from '@folio/stripes/core';
 import { EntryManager } from '../smart-components';
 
 import PipelineDetail from './PipelineDetail';
-import PipelineForm from './StorageForm';
+import PipelineForm from './PipelineForm';
 
 const PERMS = {
-  put: 'harvester-admin.storages.item.put',
-  post: 'harvester-admin.storages.item.post',
-  delete: 'harvester-admin.storages.item.delete',
+  put: 'harvester-admin.transformations.item.put',
+  post: 'harvester-admin.transformations.item.post',
+  delete: 'harvester-admin.transformations.item.delete',
 };
 
 const PipelineSettings = (props) => {
@@ -30,13 +30,9 @@ const PipelineSettings = (props) => {
       nameKey="name"
       permissions={PERMS}
       enableDetailsActionMenu
-      parseInitialValues={values => {
-        if (!values.json) return values;
-        return { ...values, json: JSON.stringify(values.json, null, 2) };
-      }}
       onBeforeSave={values => {
-        if (!values.json) return values;
-        return { ...values, json: JSON.parse(values.json) };
+        if (values.type) return values;
+        return { ...values, type: 'basicTransformation' };
       }}
     />
   );
