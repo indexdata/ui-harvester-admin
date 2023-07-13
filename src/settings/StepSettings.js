@@ -4,7 +4,7 @@ import { injectIntl } from 'react-intl';
 import { stripesConnect } from '@folio/stripes/core';
 import { EntryManager } from '../smart-components';
 
-import StepDetail from './PipelineDetail';
+import StepDetail from './StepDetail';
 import StepForm from './PipelineForm';
 
 const PERMS = {
