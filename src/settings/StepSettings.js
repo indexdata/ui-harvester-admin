@@ -5,7 +5,7 @@ import { stripesConnect } from '@folio/stripes/core';
 import { EntryManager } from '../smart-components';
 
 import StepDetail from './StepDetail';
-import StepForm from './PipelineForm';
+import StepForm from './StepForm';
 
 const PERMS = {
   put: 'harvester-admin.steps.item.put',
@@ -59,8 +59,11 @@ StepSettings.manifest = Object.freeze({
   entries: {
     type: 'okapi',
     records: 'transformationSteps',
-    path: 'harvester-admin/steps?limit=1000', // XXX will this always be enough?
+    path: 'harvester-admin/steps',
     throwErrors: false,
+    GET: {
+      path: 'harvester-admin/steps?limit=1000', // XXX will this always be enough?
+    },
   },
 });
 
