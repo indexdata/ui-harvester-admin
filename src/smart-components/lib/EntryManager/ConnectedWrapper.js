@@ -9,7 +9,7 @@ function ConnectedWrapper({ resourcePath, initialValues, underlyingComponent, ..
   const Component = underlyingComponent;
 
   useEffect(() => {
-    if (initialValues.id) {
+    if (initialValues?.id) {
       okapiKy(`${resourcePath}/${initialValues.id}`)
         .then(res => res.json().then(rec => {
           setRecord(rec);
@@ -17,9 +17,9 @@ function ConnectedWrapper({ resourcePath, initialValues, underlyingComponent, ..
     }
     // If `okpaiKy` is included in the dependency list, the effect fires on every render.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [initialValues.id, resourcePath]);
+  }, [initialValues?.id, resourcePath]);
 
-  if (!initialValues.id) {
+  if (!initialValues?.id) {
     // Creating a new record: pass through
     return <Component initialValues={initialValues} {...rest} />;
   }
