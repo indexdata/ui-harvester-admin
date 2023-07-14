@@ -38,6 +38,7 @@ const StepForm = (props) => {
     label: intl.formatMessage({ id: 'ui-harvester-admin.selectValue' }),
   };
   const types = ['XmlTransformStep', 'CustomTransformStep'].map(x => ({ value: x, label: x }));
+  const formats = ['XML', 'JSON', 'Other'].map(x => ({ value: x, label: x }));
 
   const title = props.initialValues?.name;
 
@@ -58,6 +59,10 @@ const StepForm = (props) => {
           </Row>
           <RCF tag="description" domain="step" component={TextArea} rows="4" />
           <RCF tag="enabled" domain="storage" component={Checkbox} type="checkbox" />
+          <Row>
+            <CF tag="inputFormat" domain="step" xs={6} component={Select} dataOptions={[noValue].concat(formats)} required />
+            <CF tag="outputFormat" domain="step" xs={6} component={Select} dataOptions={[noValue].concat(formats)} required />
+          </Row>
           <RCF tag="script" domain="step" component={TextArea} rows="4" />
           <RCF tag="testData" domain="step" component={TextArea} rows="4" />
           <RCF tag="testOutput" domain="step" component={TextArea} rows="4" />
