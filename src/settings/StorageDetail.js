@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Col, Row, KeyValue, Accordion } from '@folio/stripes/components';
+import { bool2display } from './transformBooleans';
 
 
 const StorageDetail = (props) => {
@@ -29,7 +30,7 @@ const StorageDetail = (props) => {
         <Col xs={12}>
           <KeyValue
             label={<FormattedMessage id="ui-harvester-admin.storage.field.enabled" />}
-            value={data.enabled}
+            value={bool2display(data.enabled)}
           />
         </Col>
       </Row>
@@ -74,7 +75,7 @@ StorageDetail.propTypes = {
     // ESLint's dumb proptypes-checking thinks all fields are in initialValues, not resources.storage.record
     name: PropTypes.string,
     description: PropTypes.string,
-    enabled: PropTypes.string, // "true" or "false"
+    enabled: PropTypes.bool,
     url: PropTypes.string,
     type: PropTypes.string,
     json: PropTypes.string,

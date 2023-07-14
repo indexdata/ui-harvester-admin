@@ -43,7 +43,7 @@ const StorageForm = (props) => {
   };
   const types = ['inventoryStorage', 'solrStorage'].map(x => ({ value: x, label: x }));
 
-  const title = props.initialValues.name;
+  const title = props.initialValues?.name;
 
   return (
     <Pane
