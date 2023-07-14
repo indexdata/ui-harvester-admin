@@ -71,6 +71,13 @@ StepSettings.manifest = Object.freeze({
     GET: {
       path: 'harvester-admin/steps?limit=1000', // XXX will this always be enough?
     },
+    PUT: {
+      headers: {
+        // For some reason, this is needed for PUT and not POST
+        // And also for some reason, it's needed to PUT steps, but not storages or pipelines
+        'Accept': 'application/json'
+      }
+    }
   },
 });
 
