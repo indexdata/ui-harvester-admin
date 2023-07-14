@@ -27,7 +27,7 @@ function validate(values) {
 const PipelineForm = (props) => {
   const { handleSubmit, onCancel, pristine, submitting } = props;
 
-  const title = props.initialValues.name;
+  const title = props.initialValues?.name;
 
   return (
     <Pane
