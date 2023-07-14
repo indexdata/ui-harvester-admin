@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Col, Row, KeyValue, MultiColumnList, Accordion } from '@folio/stripes/components';
+import { bool2display } from './transformBooleans';
 
 
 const PipelineDetail = (props) => {
@@ -29,7 +30,7 @@ const PipelineDetail = (props) => {
         <Col xs={12}>
           <KeyValue
             label={<FormattedMessage id="ui-harvester-admin.pipeline.field.enabled" />}
-            value={data.enabled}
+            value={bool2display(data.enabled)}
           />
         </Col>
       </Row>
@@ -37,7 +38,7 @@ const PipelineDetail = (props) => {
         <Col xs={12}>
           <KeyValue
             label={<FormattedMessage id="ui-harvester-admin.pipeline.field.parallel" />}
-            value={data.parallel}
+            value={bool2display(data.parallel)}
           />
         </Col>
       </Row>
@@ -80,8 +81,8 @@ PipelineDetail.propTypes = {
     // No properties seem to be mandatory
     name: PropTypes.string,
     description: PropTypes.string,
-    enabled: PropTypes.string, // "true" or "false"
-    parallel: PropTypes.string, // "true" or "false"
+    enabled: PropTypes.bool,
+    parallel: PropTypes.bool,
     stepAssociations: PropTypes.arrayOf(
       PropTypes.shape({
       }).isRequired,

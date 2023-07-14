@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 import { stripesConnect } from '@folio/stripes/core';
 import { EntryManager } from '../smart-components';
-
+import { boolValues2string, stringValues2bool } from './transformBooleans';
 import PipelineDetail from './PipelineDetail';
 import PipelineForm from './PipelineForm';
 
@@ -30,9 +30,14 @@ const PipelineSettings = (props) => {
       nameKey="name"
       permissions={PERMS}
       enableDetailsActionMenu
+      parseInitialValues={values => {
+        if (!values) return values; // Necessary if the edit-form is reloaded, for some reason
+        return boolValues2string(values, ['enabled', 'parallel']);
+      }}
       onBeforeSave={values => {
-        if (values.type) return values;
-        return { ...values, type: 'basicTransformation' };
+        const newValues = stringValues2bool(values, ['enabled', 'parallel']);
+        if (!newValues.type) newValues.type = 'basicTransformation';
+        return newValues;
       }}
     />
   );
