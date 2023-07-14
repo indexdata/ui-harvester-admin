@@ -23,17 +23,13 @@ function validate(values) {
     errors.type = requiredSelectMessage;
   }
 
-  try {
-    if (values.json && values.json !== '') JSON.parse(values.json);
-  } catch (e) {
-    errors.json = <FormattedMessage id="ui-harvester-admin.invalidJSON" values={{ error: e.toString() }} />;
-  }
+  // XXX should validate XML as StorageForm.js does for JSON
 
   return errors;
 }
 
 
-const StorageForm = (props) => {
+const StepForm = (props) => {
   const { handleSubmit, onCancel, pristine, submitting } = props;
   const intl = useIntl();
 
@@ -41,7 +37,8 @@ const StorageForm = (props) => {
     value: '',
     label: intl.formatMessage({ id: 'ui-harvester-admin.selectValue' }),
   };
-  const types = ['inventoryStorage', 'solrStorage'].map(x => ({ value: x, label: x }));
+  const types = ['XmlTransformStep', 'CustomTransformStep'].map(x => ({ value: x, label: x }));
+  const formats = ['XML', 'JSON', 'Other'].map(x => ({ value: x, label: x }));
 
   const title = props.initialValues?.name;
 
@@ -50,20 +47,26 @@ const StorageForm = (props) => {
       centerContent
       defaultWidth="60%"
       footer={renderPaneFooter(handleSubmit, onCancel, pristine, submitting)}
-      id="pane-storage-form"
+      id="pane-step-form"
       paneTitle={title}
     >
       <TitleManager record={title}>
-        <form id="form-storage">
+        <form id="form-step">
           <Row>
             <CF tag="id" xs={2} disabled />
-            <CF tag="type" domain="storage" xs={2} component={Select} dataOptions={[noValue].concat(types)} required />
+            <CF tag="type" domain="step" xs={2} component={Select} dataOptions={[noValue].concat(types)} required />
             <CF tag="name" xs={8} required />
           </Row>
-          <RCF tag="description" domain="storage" component={TextArea} rows="4" />
+          <RCF tag="description" domain="step" component={TextArea} rows="4" />
           <RCF tag="enabled" domain="storage" component={Checkbox} type="checkbox" />
-          <RCF tag="url" />
-          <RCF tag="json" component={TextArea} rows="4" />
+          <Row>
+            <CF tag="inputFormat" domain="step" xs={6} component={Select} dataOptions={[noValue].concat(formats)} required />
+            <CF tag="outputFormat" domain="step" xs={6} component={Select} dataOptions={[noValue].concat(formats)} required />
+          </Row>
+          <RCF tag="script" domain="step" component={TextArea} rows="4" />
+          <RCF tag="testData" domain="step" component={TextArea} rows="4" />
+          <RCF tag="testOutput" domain="step" component={TextArea} rows="4" />
+          <RCF tag="customClass" domain="step" />
         </form>
       </TitleManager>
     </Pane>
@@ -71,7 +74,7 @@ const StorageForm = (props) => {
 };
 
 
-StorageForm.propTypes = {
+StepForm.propTypes = {
   initialValues: PropTypes.object,
   handleSubmit: PropTypes.func.isRequired,
   onCancel: PropTypes.func,
@@ -88,4 +91,4 @@ export default stripesFinalForm({
     values: true,
   },
   mutators: { setFieldData, ...arrayMutators }
-})(StorageForm);
+})(StepForm);

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 import { stripesConnect } from '@folio/stripes/core';
 import { EntryManager } from '../smart-components';
-
+import { boolValues2string, stringValues2bool } from './transformBooleans';
 import StorageDetail from './StorageDetail';
 import StorageForm from './StorageForm';
 
@@ -31,12 +31,15 @@ const StorageSettings = (props) => {
       permissions={PERMS}
       enableDetailsActionMenu
       parseInitialValues={values => {
-        if (!values.json) return values;
-        return { ...values, json: JSON.stringify(values.json, null, 2) };
+        if (!values) return values; // Necessary if the edit-form is reloaded, for some reason
+        const newValues = boolValues2string(values, ['enabled']);
+        if (values.json) newValues.json = JSON.stringify(values.json, null, 2);
+        return newValues;
       }}
       onBeforeSave={values => {
-        if (!values.json) return values;
-        return { ...values, json: JSON.parse(values.json) };
+        const newValues = stringValues2bool(values, ['enabled']);
+        if (values.json) newValues.json = JSON.parse(values.json);
+        return newValues;
       }}
     />
   );
