@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 import { stripesConnect } from '@folio/stripes/core';
 import { EntryManager } from '../smart-components';
-
+import { boolValues2string, stringValues2bool } from './transformBooleans';
 import StepDetail from './StepDetail';
 import StepForm from './StepForm';
 
@@ -35,6 +35,13 @@ const StepSettings = (props) => {
       nameKey="virtualName"
       permissions={PERMS}
       enableDetailsActionMenu
+      parseInitialValues={values => {
+        if (!values) return values; // Necessary if the edit-form is reloaded, for some reason
+        return boolValues2string(values, ['enabled']);
+      }}
+      onBeforeSave={values => {
+        return stringValues2bool(values, ['enabled']);
+      }}
     />
   );
 };

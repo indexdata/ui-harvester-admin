@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Col, Row, KeyValue, Accordion } from '@folio/stripes/components';
+import { bool2display } from './transformBooleans';
 
 
 const StepDetail = (props) => {
@@ -29,7 +30,7 @@ const StepDetail = (props) => {
         <Col xs={12}>
           <KeyValue
             label={<FormattedMessage id="ui-harvester-admin.step.field.enabled" />}
-            value={data.enabled}
+            value={bool2display(data.enabled)}
           />
         </Col>
       </Row>
@@ -110,7 +111,7 @@ StepDetail.propTypes = {
     // See https://github.com/indexdata/mod-harvester-admin/blob/master/src/main/resources/openapi/schemas/step.json
     name: PropTypes.string.isRequired,
     description: PropTypes.string,
-    enabled: PropTypes.string, // "true" or "false"
+    enabled: PropTypes.bool,
     type: PropTypes.string.isRequired,
     inputFormat: PropTypes.string,
     outputFormat: PropTypes.string,
