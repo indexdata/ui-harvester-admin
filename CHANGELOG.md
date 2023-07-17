@@ -17,6 +17,7 @@
 * Starting an already-running job, or stopping one that's not running, is now reported politely. Fixes UIHAADM-84.
 * Deleting a harvestable no longer causes a benign alertbox about attempting to re-fetch the deleted object. Fixes UIHAADM-81.
 * Provide ability to download last log for local analysis. Fixes UIHAADM-82.
+* Support management of transformation steps. Fixes UIHAADM-9.
 
 ## [1.0.3](https://github.com/folio-org/ui-harvester-admin/tree/v1.0.3) (2023-05-26)
 
