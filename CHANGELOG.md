@@ -18,6 +18,7 @@
 * Deleting a harvestable no longer causes a benign alertbox about attempting to re-fetch the deleted object. Fixes UIHAADM-81.
 * Provide ability to download last log for local analysis. Fixes UIHAADM-82.
 * Support management of transformation steps. Fixes UIHAADM-9.
+* Fix duplicate-step operation (previously failed with "Provided object contains unexpected additional property: virtualName"). Fixes UIHAADM-86.
 
 ## [1.0.3](https://github.com/folio-org/ui-harvester-admin/tree/v1.0.3) (2023-05-26)
 

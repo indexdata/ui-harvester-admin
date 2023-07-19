@@ -40,7 +40,9 @@ const StepSettings = (props) => {
         return boolValues2string(values, ['enabled']);
       }}
       onBeforeSave={values => {
-        return stringValues2bool(values, ['enabled']);
+        const v = stringValues2bool(values, ['enabled']);
+        delete v.virtualName;
+        return v;
       }}
     />
   );
