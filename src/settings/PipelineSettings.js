@@ -26,7 +26,7 @@ const PipelineSettings = (props) => {
       detailComponent={PipelineDetail}
       paneTitle={intl.formatMessage({ id: 'ui-harvester-admin.settings.pipeline' })}
       entryLabel={intl.formatMessage({ id: 'ui-harvester-admin.settings.pipeline.heading' })}
-      entryFormComponent={PipelineForm}
+      entryFormComponent={(p2) => <PipelineForm {...p2} steps={resources.steps.records} />}
       nameKey="name"
       permissions={PERMS}
       enableDetailsActionMenu
@@ -48,6 +48,9 @@ PipelineSettings.propTypes = {
     entries: PropTypes.shape({
       records: PropTypes.arrayOf(PropTypes.object),
     }),
+    steps: PropTypes.shape({
+      records: PropTypes.arrayOf(PropTypes.object),
+    }),
   }).isRequired,
   mutator: PropTypes.shape({
     entries: PropTypes.shape({
@@ -65,6 +68,11 @@ PipelineSettings.manifest = Object.freeze({
     records: 'transformations',
     path: 'harvester-admin/transformations',
     throwErrors: false,
+  },
+  steps: {
+    type: 'okapi',
+    path: 'harvester-admin/steps?limit=1000',
+    records: 'transformationSteps',
   },
 });
 
