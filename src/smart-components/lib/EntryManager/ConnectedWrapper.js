@@ -13,6 +13,7 @@ function ConnectedWrapper({ resourcePath, initialValues, underlyingComponent, cl
     if (idToLoad) {
       okapiKy(`${resourcePath}/${idToLoad}`)
         .then(res => res.json().then(rec => {
+          if (clonedRecordId) delete rec.id;
           setRecord(rec);
         }));
     }
