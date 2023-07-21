@@ -303,6 +303,7 @@ export default class EntryWrapper extends React.Component {
                 deleteDisabledMessage={this.props.deleteDisabledMessage || ''}
                 resourcePath={this.props.resourcePath}
                 underlyingComponent={EntryFormComponentWithParsing}
+                clonedRecordId={cloning ? selectedId : undefined}
               />
             </Layer>
           )}
