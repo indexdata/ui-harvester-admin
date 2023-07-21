@@ -20,6 +20,7 @@
 * Support management of transformation steps. Fixes UIHAADM-9.
 * Fix duplicate-step operation (previously failed with "Provided object contains unexpected additional property: virtualName"). Fixes UIHAADM-86.
 * Duplication of records includes fields from full record, not just summary. Fixes UIHAADM-88.
+* Changes made when editing a record in settings now immediately appear in the right pane. Fixes UIHAADM-85.
 
 ## [1.0.3](https://github.com/folio-org/ui-harvester-admin/tree/v1.0.3) (2023-05-26)
 

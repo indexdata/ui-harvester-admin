@@ -89,7 +89,10 @@ export default class EntryWrapper extends React.Component {
     const reMatches = new RegExp(re).exec(props.location.pathname);
     const selectedId = (reMatches) ? reMatches[1] : null;
 
-    this.state = { selectedId };
+    this.state = {
+      selectedId,
+      editCount: 0, // When incremented, forced <ConnectedWrapper> to re-load the full record
+    };
     this.callout = null;
   }
 
@@ -128,7 +131,10 @@ export default class EntryWrapper extends React.Component {
 
     this.props.parentMutator[rk][action](normalizedEntry)
       .then(data => this.goTo(data))
-      .then(() => this.showCalloutMessage(entry[this.props.nameKey], action))
+      .then(() => {
+        this.setState(oldState => ({ editCount: oldState.editCount + 1 }));
+        this.showCalloutMessage(entry[this.props.nameKey], action);
+      })
       .catch(this.handleSaveError);
   }
 
@@ -218,7 +224,7 @@ export default class EntryWrapper extends React.Component {
       resourcePath,
       nameKey
     } = this.props;
-    const { selectedId } = this.state;
+    const { selectedId, editCount } = this.state;
 
     const query = location.search ? queryString.parse(location.search) : {};
     const defaultEntry = this.props.defaultEntry || {};
@@ -281,6 +287,7 @@ export default class EntryWrapper extends React.Component {
         detailPaneTitle={selectedItem ? selectedItem[nameKey] : entryLabel}
         paneWidth="70%"
         addMenu={this.props.addMenu || addMenu}
+        editCount={editCount}
       >
         <FormattedMessage id="stripes-core.label.editEntry" values={{ entry: entryLabel }}>
           {([contentLabel]) => (
