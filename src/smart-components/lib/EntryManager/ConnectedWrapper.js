@@ -9,14 +9,10 @@ function ConnectedWrapper({ resourcePath, initialValues, underlyingComponent, cl
   const Component = underlyingComponent;
   const idToLoad = clonedRecordId || initialValues?.id;
 
-  console.log(`in ConnectedWrapper: clonedRecordId=${clonedRecordId}, idToLoad=${idToLoad}`);
   useEffect(() => {
-    console.log(' in ConnectedWrapper: useEffect');
     if (idToLoad) {
-      console.log('  in ConnectedWrapper: fetching');
       okapiKy(`${resourcePath}/${idToLoad}`)
         .then(res => res.json().then(rec => {
-          console.log('   in ConnectedWrapper: setting record', rec);
           setRecord(rec);
         }));
     }
