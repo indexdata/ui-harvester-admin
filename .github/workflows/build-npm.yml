@@ -1,13 +1,13 @@
 name: build-npm
 
 # NODEJS_VERSION: string; The relevant Node.js version.
-#  '16'
+#  '18'
 #
 # FOLIO_NPM_REGISTRY: string: The registry from which to get FOLIO and ReShare dependencies.
 #  'https://repository.folio.org/repository/npm-folioci/'
 
 env:
-  NODEJS_VERSION: '16'
+  NODEJS_VERSION: '18'
   FOLIO_NPM_REGISTRY: 'https://repository.folio.org/repository/npm-folioci/'
   COMPILE_TRANSLATION_FILES: true
 
