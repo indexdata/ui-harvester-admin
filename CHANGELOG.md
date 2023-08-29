@@ -1,7 +1,9 @@
 # Change history for ui-harvester-admin
 
-## 1.1.0 (IN PROGRESS)
+## 2.0.0 (IN PROGRESS)
 
+* BREAKING: upgrade React to v18. Fixes UIHAADM-90.
+* Update Node.js to v18 in GitHub Actions. Fixes UIHAADM-89.
 * In the Failed Records view, the "Record number" column can no longer be hidden. Fixes UIHAADM-71.
 * Basic validation for new and edited harvestables. In particular: name, transformation pipeline and storage engine must all be provided before the form can be submitted. Fixes UIHAADM-70.
 * Add amountHarvested filtering for the Jobs pane. Fixes UIHAADM-65.
@@ -21,7 +23,6 @@
 * Fix duplicate-step operation (previously failed with "Provided object contains unexpected additional property: virtualName"). Fixes UIHAADM-86.
 * Duplication of records includes fields from full record, not just summary. Fixes UIHAADM-88.
 * Changes made when editing a record in settings now immediately appear in the right pane. Fixes UIHAADM-85.
-* Update Node.js to v18 in GitHub Actions. Fixes UIHAADM-89.
 
 ## [1.0.3](https://github.com/folio-org/ui-harvester-admin/tree/v1.0.3) (2023-05-26)
 
