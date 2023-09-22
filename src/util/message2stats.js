@@ -1,6 +1,6 @@
 function message2stats(message) {
   const stats = {};
-  if (!message) return stats;
+  if (!message || message === 'No records harvested') return stats;
 
   message.split(' ').forEach(row => {
     const matchData = row.match(/(.*?)_.*:_+([^_]*)_+([^_]*)_+([^_]*)_+([^_]*)/);
@@ -10,7 +10,7 @@ function message2stats(message) {
       stats[name.toLowerCase()] = { processed, loaded, deleted, failed };
     } else {
       // eslint-disable-next-line no-console
-      console.warn('message2stats: no match for row:', row);
+      if (row) console.warn('message2stats: no match for row:', row);
     }
   });
 
@@ -25,7 +25,7 @@ console.log(stats);
 */
 
 function summarizeLine(statLine) {
-  return ['processed', 'loaded', 'deleted', ',failed']
+  return ['processed', 'loaded', 'deleted', 'failed']
     .map(entry => statLine?.[entry] || '')
     .join('/');
 }
