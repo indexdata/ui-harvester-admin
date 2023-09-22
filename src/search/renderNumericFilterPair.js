@@ -22,7 +22,6 @@ function renderSingleNumericFilter(intl, filterStruct, updateQuery, field, bound
         }
         updateQuery({ filters: deparseFilters(fs2) });
       }}
-      useInput
     />
   );
 }
