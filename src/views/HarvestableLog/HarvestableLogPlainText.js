@@ -41,7 +41,7 @@ const HarvestableLogPlainText = ({ record, log, refreshLog }) => {
 
       &nbsp;&nbsp;
 
-      <Download file="harvester-log.txt" content={log}>
+      <Download file="harvester-log.txt" content={log || ''}>
         <Button
           data-test-download-logs
           id="clickable-download-logs"
