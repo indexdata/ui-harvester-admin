@@ -1,6 +1,6 @@
 # Change history for ui-harvester-admin
 
-## 2.0.0 (IN PROGRESS)
+## [2.0.0](https://github.com/folio-org/ui-harvester-admin/tree/v2.0.0) (2023-10-13)
 
 * BREAKING: upgrade React to v18. Fixes UIHAADM-90.
 * Update Node.js to v18 in GitHub Actions. Fixes UIHAADM-89.
