@@ -1,4 +1,5 @@
 import React from 'react';
+import { omit } from 'lodash';
 import { Accordion, FilterAccordionHeader, Datepicker } from '@folio/stripes/components';
 import { deparseFilters } from '@folio/stripes/smart-components';
 
@@ -14,17 +15,14 @@ function renderSingleDateFilter(intl, filterStruct, updateQuery, field, boundary
   return (
     <Datepicker
       label={intl.formatMessage({ id: `ui-harvester-admin.filter.date.${field}.${boundary}` })}
+      backendDateStandard="YYYY-MM-DD"
       value={value}
       onChange={(e) => {
         const isoDateTime = e.target.value;
-        if (isoDateTime === '') {
-          // This can happen when navigating away to Settings then hitting the back button.
-          // I have no idea why doing so activates the click-handler, but it does.
-          // In this case, we will not break the query string by setting the empty value into it.
-          return;
-        }
-        const isoDate = isoDateTime.substring(0, 10);
-        const fs2 = { ...filterStruct, [keyString]: [isoDate] };
+        const fs2 = (!isoDateTime) ?
+          omit(filterStruct, keyString) :
+          { ...filterStruct, [keyString]: [e.target.value] };
+
         updateQuery({ filters: deparseFilters(fs2) });
       }}
       useInput
