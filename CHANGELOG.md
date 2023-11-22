@@ -2,6 +2,7 @@
 
 ## [2.1.0] IN PROGRESS
 
+* Sort jobs in descending order by start date. Fixes UIHAADM-94.
 * Paginate list of jobs. Fixes UIHAADM-95.
 
 ## [2.0.0](https://github.com/folio-org/ui-harvester-admin/tree/v2.0.0) (2023-10-13)
