@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useIntl, FormattedMessage } from 'react-intl';
 import { AppIcon } from '@folio/stripes/core';
-import { LoadingPane, Paneset, Pane, MultiColumnList, ErrorModal } from '@folio/stripes/components';
+import { LoadingPane, Paneset, Pane, MultiColumnList, ErrorModal, MCLPagingTypes } from '@folio/stripes/components';
 import { ColumnManager, SearchAndSortQuery } from '@folio/stripes/smart-components';
 import parseSort from '../../util/parseSort';
 import formatDateTime from '../../util/formatDateTime';
@@ -97,6 +97,7 @@ function Jobs({
                         appIcon={<AppIcon app="harvester-admin" />}
                         defaultWidth="fill"
                         padContent={false}
+                        height="92%"
                         paneTitle={paneTitle}
                         paneSub={<FormattedMessage id="ui-harvester-admin.resultCount" values={{ count: resultCount }} />}
                         actionMenu={() => renderColumnsMenu}
@@ -104,7 +105,6 @@ function Jobs({
                         <MultiColumnList
                           autosize
                           id="list-jobs"
-                          virtualize
                           visibleColumns={visibleColumns}
                           columnMapping={columnMapping}
                           columnWidths={columnWidths}
@@ -122,6 +122,7 @@ function Jobs({
                           onNeedMoreData={onNeedMoreData}
                           sortedColumn={sortedColumn}
                           sortDirection={sortDirection}
+                          pagingType={MCLPagingTypes.PREV_NEXT}
                           onRowClick={(event, rec) => updateQuery({ _path: `${packageInfo.stripes.route}/jobs/${rec.id}` })}
                         />
                         <ErrorModal
