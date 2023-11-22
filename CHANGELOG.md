@@ -1,5 +1,9 @@
 # Change history for ui-harvester-admin
 
+## [2.1.0] IN PROGRESS
+
+* Paginate list of jobs. Fixes UIHAADM-95.
+
 ## [2.0.0](https://github.com/folio-org/ui-harvester-admin/tree/v2.0.0) (2023-10-13)
 
 * BREAKING: upgrade React to v18. Fixes UIHAADM-90.
