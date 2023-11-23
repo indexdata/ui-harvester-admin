@@ -16,6 +16,7 @@ function SwitchRoute({ location, children }) {
   }, {
     name: 'jobs',
     perm: 'ui-harvester-admin.jobs-and-failed-records.view',
+    params: 'sort=-started'
   }, {
     name: 'records',
     perm: 'ui-harvester-admin.jobs-and-failed-records.view',
