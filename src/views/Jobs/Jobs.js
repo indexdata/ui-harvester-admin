@@ -37,14 +37,14 @@ function Jobs({
   };
 
   const columnWidths = {
-    name: '400px',
-    status: '90px',
+    name: '20%',
+    status: '80px',
     amountHarvested: '110px',
-    seconds: '100px',
-    started: '210px',
-    finished: '210px',
-    type: '150px',
-    message: '600px',
+    seconds: '70px',
+    started: '200px',
+    finished: '200px',
+    type: '110px',
+    message: '450px',
   };
 
   const formatter = {
@@ -103,7 +103,6 @@ function Jobs({
                         actionMenu={() => renderColumnsMenu}
                       >
                         <MultiColumnList
-                          autosize
                           id="list-jobs"
                           visibleColumns={visibleColumns}
                           columnMapping={columnMapping}
