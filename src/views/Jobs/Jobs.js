@@ -79,7 +79,7 @@ function Jobs({
             <Paneset id="jobs-paneset">
               <JobsSearchPane
                 {...sasqParams}
-                defaultWidth="25%"
+                defaultWidth="20%"
                 query={query}
                 updateQuery={updateQuery}
               />
