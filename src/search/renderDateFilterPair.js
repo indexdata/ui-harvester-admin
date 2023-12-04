@@ -26,6 +26,8 @@ function renderSingleDateFilter(intl, filterStruct, updateQuery, field, boundary
         updateQuery({ filters: deparseFilters(fs2) });
       }}
       useInput
+      usePortal
+      placement="right"
     />
   );
 }
