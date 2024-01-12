@@ -9,7 +9,7 @@ function message2stats(message) {
       const [_matched, name, processed, loaded, deleted, failed] = matchData;
       stats[name.toLowerCase()] = { processed, loaded, deleted, failed };
     } else {
-      // eslint-disable-next-line no-console
+      // eslint-disable-next-line no-console, no-lonely-if
       if (row) console.warn('message2stats: no match for row:', row);
     }
   });

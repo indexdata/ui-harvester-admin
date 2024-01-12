@@ -41,7 +41,8 @@ const HarvestableLog = (props) => {
   const paneTitle = (
     <>
       {record.name}
-      ({formatDateTime(record.lastHarvestFinished)})
+      &nbsp;
+      ({formatDateTime(record.started)})
       {status &&
         <>
           {' '}&mdash;{' '}
@@ -79,7 +80,7 @@ HarvestableLog.propTypes = {
   data: PropTypes.shape({
     record: PropTypes.shape({
       name: PropTypes.string.isRequired,
-      lastHarvestFinished: PropTypes.string,
+      started: PropTypes.string,
       currentStatus: PropTypes.string, // .isRequired for harvestable, not for previous-job
     }),
     plainTextLog: PropTypes.string,
