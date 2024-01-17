@@ -7,6 +7,7 @@
 * Improve DatePicker setup. Fixes UIHAADM-69.
 * Display `<Datepicker>` in full view by using `usePortal`. Fixes UIHAADM-98.
 * Full display of a job now includes start time in header instead of current time. Fixes UIHAADM-103.
+* When trying to delete an in-use step, this is rejected with a polite error message. Fixes last part of UIHAADM-9.
 
 ## [2.0.0](https://github.com/folio-org/ui-harvester-admin/tree/v2.0.0) (2023-10-13)
 
