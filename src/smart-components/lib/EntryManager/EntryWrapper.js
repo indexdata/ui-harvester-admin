@@ -121,7 +121,10 @@ export default class EntryWrapper extends React.Component {
     return this.props.parentMutator[rk].DELETE(entry).then(() => {
       this.showCalloutMessage(entry[this.props.nameKey]);
       this.hideLayer();
-    }).catch(this.handleSaveError);
+    }).catch(err => {
+      console.log("caught error: ", err);
+      this.handleSaveError(err);
+    });
   }
 
   onSave(entry) {
