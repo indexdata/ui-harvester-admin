@@ -29,7 +29,7 @@ const StepSettings = (props) => {
       parentMutator={mutator}
       entryList={entriesWithVirtualName}
       detailComponent={StepDetail}
-      paneTitle={intl.formatMessage({ id: 'ui-harvester-admin.settings.step' })}
+      paneTitle={"XXX"}
       entryLabel={intl.formatMessage({ id: 'ui-harvester-admin.settings.step.heading' })}
       entryFormComponent={StepForm}
       nameKey="virtualName"
