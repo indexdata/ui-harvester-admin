@@ -14,13 +14,13 @@ const ListField = ({ name, label, renderEntry, component, emptyValue }) => {
           <>
             {fields.map((subname, index) => (
               <Row>
-                <Col xs={11}>
+                <Col xs={8}>
                   {renderEntry ?
                     renderEntry(subname) :
                     <Field name={subname} component={component || TextField} />
                   }
                 </Col>
-                <Col xs={1}>
+                <Col xs={4}>
                   <IconButton icon="arrow-up" disabled={index === 0} onClick={() => fields.swap(index - 1, index)} />
                   <IconButton icon="arrow-down" disabled={index === fields.length - 1} onClick={() => fields.swap(index, index + 1)} />
                   <IconButton icon="trash" onClick={() => fields.remove(index)} />
