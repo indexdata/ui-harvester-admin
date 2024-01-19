@@ -4,5 +4,6 @@
 }
 
 .field {
-    width: 70%
+    flex: auto;
+    padding-right: 1em;
 }
