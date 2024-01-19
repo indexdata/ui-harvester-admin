@@ -4,6 +4,8 @@ import { FormattedMessage } from 'react-intl';
 import { Field } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
 import { Row, Col, TextField, Label, IconButton, Button } from '@folio/stripes/components';
+import css from './ListField.css';
+
 
 const ListField = ({ name, label, renderEntry, component, emptyValue }) => {
   return (
@@ -13,19 +15,19 @@ const ListField = ({ name, label, renderEntry, component, emptyValue }) => {
         {({ fields }) => (
           <>
             {fields.map((subname, index) => (
-              <Row>
-                <Col xs={8}>
+              <div key={index} className={css.row}>
+                <div className={css.field}>
                   {renderEntry ?
                     renderEntry(subname) :
                     <Field name={subname} component={component || TextField} />
                   }
-                </Col>
-                <Col xs={4}>
+                </div>
+                <div>
                   <IconButton icon="arrow-up" disabled={index === 0} onClick={() => fields.swap(index - 1, index)} />
                   <IconButton icon="arrow-down" disabled={index === fields.length - 1} onClick={() => fields.swap(index, index + 1)} />
                   <IconButton icon="trash" onClick={() => fields.remove(index)} />
-                </Col>
-              </Row>
+                </div>
+              </div>
             ))}
             <Button onClick={() => fields.push(emptyValue || '')}>
               <FormattedMessage id="ui-harvester-admin.add" />
