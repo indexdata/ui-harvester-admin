@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Field } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
-import { Row, Col, TextField, Label, IconButton, Button } from '@folio/stripes/components';
+import { TextField, Label, IconButton, Button } from '@folio/stripes/components';
 import css from './ListField.css';
 
 
