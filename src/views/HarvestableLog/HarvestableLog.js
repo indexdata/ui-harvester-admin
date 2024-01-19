@@ -82,6 +82,7 @@ HarvestableLog.propTypes = {
       name: PropTypes.string.isRequired,
       started: PropTypes.string,
       currentStatus: PropTypes.string, // .isRequired for harvestable, not for previous-job
+      status: PropTypes.string // Sometimes we get this instead of currentStatus
     }),
     plainTextLog: PropTypes.string,
     failedRecords: PropTypes.shape({}),
