@@ -28,7 +28,7 @@ const HarvestableLog = (props) => {
   const record = data.record;
   if (!record) return <LoadingPane />;
   const title = record.name;
-  const status = record.currentStatus;
+  const status = record.currentStatus || record.status;
 
   const shortcuts = [
     {
