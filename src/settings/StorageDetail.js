@@ -5,8 +5,37 @@ import { Col, Row, KeyValue, Accordion } from '@folio/stripes/components';
 import { bool2display } from './transformBooleans';
 
 
+function censorPasswords(val) {
+  if (Array.isArray(val)) {
+    return val.map(x => censorPasswords(x));
+  } else if (typeof val === 'object') {
+    const censored = {};
+    Object.keys(val).forEach(key => {
+      if (typeof val[key] === 'string' &&
+          (key.match(/^(pw|pass)/i) ||
+           key.match(/(pw|password)$/i))) {
+        censored[key] = '***censored***';
+      } else {
+        censored[key] = censorPasswords(val[key]);
+      }
+    });
+    return censored;
+  }
+
+  return val;
+}
+
+
 const StorageDetail = (props) => {
   const data = props.initialValues;
+
+  let jval;
+  try {
+    jval = JSON.parse(data.json);
+  } catch (e) {
+    jval = '[unparseable JSON]';
+  }
+  const censoredJson = censorPasswords(jval);
 
   return (
     <>
@@ -47,7 +76,7 @@ const StorageDetail = (props) => {
           <Col xs={12}>
             <KeyValue
               label={<FormattedMessage id="ui-harvester-admin.storage.field.json" />}
-              value={data.json}
+              value={JSON.stringify(censoredJson, null, 2)}
             />
           </Col>
         </Row>
