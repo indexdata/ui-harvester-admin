@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useIntl, FormattedMessage } from 'react-intl';
 import arrayMutators from 'final-form-arrays';
-import { Pane, Row, Select, Checkbox, TextArea } from '@folio/stripes/components';
+import { Pane, Row, Col, Select, Checkbox, TextArea, Button } from '@folio/stripes/components';
 import { TitleManager } from '@folio/stripes/core';
 import stripesFinalForm from '@folio/stripes/final-form';
 import { isEqual } from 'lodash';
@@ -30,7 +30,7 @@ function validate(values) {
 
 
 const StepForm = (props) => {
-  const { handleSubmit, onCancel, pristine, submitting } = props;
+  const { form, handleSubmit, onCancel, pristine, submitting } = props;
   const intl = useIntl();
 
   const noValue = {
@@ -39,6 +39,7 @@ const StepForm = (props) => {
   };
   const types = ['XmlTransformStep', 'CustomTransformStep'].map(x => ({ value: x, label: x }));
   const formats = ['XML', 'JSON', 'Other'].map(x => ({ value: x, label: x }));
+  const ccXML2JSON = 'com.indexdata.masterkey.localindices.harvest.messaging.InstanceXmlToInstanceJsonTransformerRouter';
 
   const title = props.initialValues?.name;
 
@@ -66,7 +67,16 @@ const StepForm = (props) => {
           <RCF tag="script" domain="step" component={TextArea} rows="4" />
           <RCF tag="testData" domain="step" component={TextArea} rows="4" />
           <RCF tag="testOutput" domain="step" component={TextArea} rows="4" />
-          <RCF tag="customClass" domain="step" />
+          <Row>
+            <CF tag="customClass" domain="step" xs={9} />
+            <Col xs={3}>
+              <div style={{ marginTop: '1.9em' }}>
+                <Button marginBottom0 onClick={() => form.change('customClass', ccXML2JSON)}>
+                  <FormattedMessage id="ui-harvester-admin.set-to-xml2json" />
+                </Button>
+              </div>
+            </Col>
+          </Row>
         </form>
       </TitleManager>
     </Pane>
@@ -75,6 +85,9 @@ const StepForm = (props) => {
 
 
 StepForm.propTypes = {
+  form: PropTypes.shape({
+    change: PropTypes.func.isRequired,
+  }).isRequired,
   initialValues: PropTypes.object,
   handleSubmit: PropTypes.func.isRequired,
   onCancel: PropTypes.func,

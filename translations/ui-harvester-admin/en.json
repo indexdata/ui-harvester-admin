@@ -8,6 +8,7 @@
     "invalidJSON": "Invalid JSON: {error}",
     "selectToContinue": "Please select to continue",
     "resultCount": "{count, number} {count, plural, one {record found} other {records found}}",
+    "set-to-xml2json": "Choose XML-to-JSON",
     "settings.storage": "Storage engines",
     "settings.storage.heading": "Manage storage engines",
     "settings.pipeline": "Transformation pipelines",
