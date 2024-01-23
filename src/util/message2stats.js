@@ -10,7 +10,8 @@ function message2stats(message) {
       stats[name.toLowerCase()] = { processed, loaded, deleted, failed };
     } else {
       // eslint-disable-next-line no-console, no-lonely-if
-      if (row) console.warn('message2stats: no match for row:', row);
+      // We won't do this, as each line now generates a stack-trace or something equally noisy
+      // if (row) console.warn('message2stats: no match for row:', row);
     }
   });
 

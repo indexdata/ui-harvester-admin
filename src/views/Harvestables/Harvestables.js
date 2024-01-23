@@ -67,7 +67,7 @@ function renderActionsMenu(search, renderedColumnsMenu) {
       <IfPermission perm="harvester-admin.harvestables.item.post">
         <MenuSection id="actions-menu-section" label={<FormattedMessage id="ui-harvester-admin.actions.new" />}>
           {['oaiPmh', 'xmlBulk', 'connector', 'status'].map(type => (
-            <FormattedMessage id={`ui-harvester-admin.actions.new.harvestable.${type}`}>
+            <FormattedMessage key={type} id={`ui-harvester-admin.actions.new.harvestable.${type}`}>
               {ariaLabel => (
                 <Button
                   id={`clickable-new-harvestable-${type}`}
