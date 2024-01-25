@@ -60,8 +60,9 @@ jobs:
       - name: Print FOLIO module descriptor
         run: cat module-descriptor.json
       - name: Publish yarn.lock
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: yarn.lock
           path: yarn.lock
+          overwrite: true
           retention-days: 5
