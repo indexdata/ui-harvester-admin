@@ -1,14 +1,32 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { AppIcon } from '@folio/stripes/core';
-import { LoadingPane, Paneset, Pane, MultiColumnList, ErrorModal } from '@folio/stripes/components';
+import { Button, LoadingPane, Paneset, Pane, MultiColumnList, ErrorModal, exportToCsv } from '@folio/stripes/components';
 import { ColumnManager, SearchAndSortQuery } from '@folio/stripes/smart-components';
 import parseSort from '../../util/parseSort';
 import summarizeErrors from '../../util/summarizeErrors';
 import RecordsSearchPane from '../../search/RecordsSearchPane';
 import ErrorMessage from '../../components/ErrorMessage';
 import packageInfo from '../../../package';
+
+
+function renderActionMenu(onToggle, intl, data, renderedColumnsMenu) {
+  return (
+    <div>
+      <Button
+        aria-label={intl.formatMessage({ id: 'ui-harvester-admin.export-csv' })}
+        disabled={data.records.length === 0}
+        buttonStyle="dropdownItem"
+        onClick={() => { exportToCsv(data.records, {}); onToggle(); }}
+      >
+        <FormattedMessage id="ui-harvester-admin.export-csv" />
+      </Button>
+      <hr />
+      {renderedColumnsMenu}
+    </div>
+  );
+}
 
 
 function Records({
@@ -21,6 +39,7 @@ function Records({
   onNeedMoreData,
   children,
 }) {
+  const intl = useIntl();
   const [invalidSortKey, setInvalidSortKey] = useState();
 
   const columnMapping = {
@@ -79,7 +98,7 @@ function Records({
                         padContent={false}
                         paneTitle={paneTitle}
                         paneSub={<FormattedMessage id="ui-harvester-admin.resultCount" values={{ count: resultCount }} />}
-                        actionMenu={() => renderColumnsMenu}
+                        actionMenu={({ onToggle }) => renderActionMenu(onToggle, intl, data, renderColumnsMenu)}
                       >
                         <MultiColumnList
                           autosize
