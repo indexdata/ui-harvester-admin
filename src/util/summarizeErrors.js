@@ -11,7 +11,7 @@ function summarizeErrors(errors) {
           const mm = message.message;
 
           if (errorList) {
-            return errorList.map(x => <li>{x.message}</li>);
+            return errorList.map((x, i) => <li key={i}>{x.message}</li>);
           } else if (mm) {
             return mm;
           } else {
