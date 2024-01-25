@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Get version from package.json
         id: package_version
         uses: notiz-dev/github-action-json-property@release
@@ -60,8 +60,9 @@ jobs:
       - name: Print FOLIO module descriptor
         run: cat module-descriptor.json
       - name: Publish yarn.lock
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: yarn.lock
           path: yarn.lock
+          overwrite: true
           retention-days: 5
