@@ -12,6 +12,7 @@
 * Status is once more displayed in Job pane-title. Fixes UIHAADM-120.
 * When viewing a Storage Engine, obscure possible passwords in JSON configuration. Fixes UIHAADM-107.
 * When editing a Transformation Step, a button allows "Custom class" to be set to the XML-to-JSON class. Fixes UIHAADM-111.
+* Ability to export failed records as CSV, including summary of errors. Fixes UIHAADM-106.
 
 ## [2.0.0](https://github.com/folio-org/ui-harvester-admin/tree/v2.0.0) (2023-10-13)
 

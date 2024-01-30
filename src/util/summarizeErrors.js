@@ -1,7 +1,7 @@
 import React from 'react';
 import css from '../views/Styles.css';
 
-function summarizeErrors(errors) {
+function errors2react(errors) {
   return (
     <ul className={css.noDot}>
       {
@@ -23,4 +23,22 @@ function summarizeErrors(errors) {
   );
 }
 
-export default summarizeErrors;
+function errors2string(errors) {
+  return (
+    errors.map(error => {
+      const message = error.error?.message;
+      const errorList = message?.errors;
+      const mm = message.message;
+
+      if (errorList) {
+        return errorList.map(x => x.message).join(' / ');
+      } else if (mm) {
+        return mm;
+      } else {
+        return error.error?.label;
+      }
+    }).join(' // ')
+  );
+}
+
+export { errors2react, errors2string };

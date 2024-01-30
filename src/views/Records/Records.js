@@ -5,7 +5,7 @@ import { AppIcon } from '@folio/stripes/core';
 import { Button, LoadingPane, Paneset, Pane, MultiColumnList, ErrorModal, exportToCsv } from '@folio/stripes/components';
 import { ColumnManager, SearchAndSortQuery } from '@folio/stripes/smart-components';
 import parseSort from '../../util/parseSort';
-import summarizeErrors from '../../util/summarizeErrors';
+import { errors2react, errors2string } from '../../util/summarizeErrors';
 import RecordsSearchPane from '../../search/RecordsSearchPane';
 import ErrorMessage from '../../components/ErrorMessage';
 import packageInfo from '../../../package';
@@ -18,7 +18,14 @@ function renderActionMenu(onToggle, intl, data, renderedColumnsMenu) {
         aria-label={intl.formatMessage({ id: 'ui-harvester-admin.export-csv' })}
         disabled={data.records.length === 0}
         buttonStyle="dropdownItem"
-        onClick={() => { exportToCsv(data.records, {}); onToggle(); }}
+        onClick={() => {
+          const expanded = data.records.map(r => ({
+            ...r,
+            errors: errors2string(r.recordErrors),
+          }));
+          exportToCsv(expanded, {});
+          onToggle();
+        }}
       >
         <FormattedMessage id="ui-harvester-admin.export-csv" />
       </Button>
@@ -61,7 +68,7 @@ function Records({
   const formatter = {
     instanceHrid: r => r.transformedRecord?.instance?.hrid,
     instanceTitle: r => r.transformedRecord?.instance?.title,
-    errors: r => summarizeErrors(r.recordErrors),
+    errors: r => errors2react(r.recordErrors),
   };
 
   const paneTitle = <FormattedMessage id="ui-harvester-admin.nav.records" />;

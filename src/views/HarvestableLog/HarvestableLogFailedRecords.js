@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import ObjectInspector from 'react-inspector';
 import { Loading, MultiColumnList, Accordion } from '@folio/stripes/components';
-import summarizeErrors from '../../util/summarizeErrors';
+import { errors2react } from '../../util/summarizeErrors';
 
 
 const HarvestableLogFailedRecords = ({ failedRecords }) => {
@@ -20,7 +20,7 @@ const HarvestableLogFailedRecords = ({ failedRecords }) => {
   const resultsFormatter = {
     instanceHrid: r => r.transformedRecord?.instance?.hrid,
     instanceTitle: r => r.transformedRecord?.instance?.title,
-    errors: r => summarizeErrors(r.recordErrors),
+    errors: r => errors2react(r.recordErrors),
   };
 
   return (
