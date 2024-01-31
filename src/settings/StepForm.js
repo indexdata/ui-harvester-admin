@@ -9,6 +9,7 @@ import { isEqual } from 'lodash';
 import setFieldData from 'final-form-set-field-data'; // XXX do we need this?
 import { RCF, CF } from '../components/CF';
 import renderPaneFooter from './renderPaneFooter';
+import ScriptOK from './ScriptOK';
 
 
 function validate(values) {
@@ -32,6 +33,15 @@ function validate(values) {
 const StepForm = (props) => {
   const { form, handleSubmit, onCancel, pristine, submitting } = props;
   const intl = useIntl();
+
+  /*
+  console.log('xform = ', form);
+  console.log('getRegisteredFields =', form.getRegisteredFields());
+  const getFieldState = form.getFieldState
+  console.log('getFieldState = ', getFieldState);
+  const scriptField = getFieldState('script');
+  console.log('scriptField = ', form.scriptField);
+  */
 
   const noValue = {
     value: '',
@@ -65,6 +75,7 @@ const StepForm = (props) => {
             <CF tag="outputFormat" domain="step" xs={6} component={Select} dataOptions={[noValue].concat(formats)} required />
           </Row>
           <RCF tag="script" domain="step" component={TextArea} rows="4" />
+          <ScriptOK xslText={form.getState().values.script} />
           <RCF tag="testData" domain="step" component={TextArea} rows="4" />
           <RCF tag="testOutput" domain="step" component={TextArea} rows="4" />
           <Row>
