@@ -14,6 +14,7 @@
     "set-to-xml2json": "Choose XML-to-JSON",
     "reports": "Reports",
     "export-csv": "Export CSV",
+    "transform": "Transform",
     "settings.storage": "Storage engines",
     "settings.storage.heading": "Manage storage engines",
     "settings.pipeline": "Transformation pipelines",

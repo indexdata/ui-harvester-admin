@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useIntl, FormattedMessage } from 'react-intl';
 import arrayMutators from 'final-form-arrays';
@@ -9,7 +9,9 @@ import { isEqual } from 'lodash';
 import setFieldData from 'final-form-set-field-data'; // XXX do we need this?
 import { RCF, CF } from '../components/CF';
 import renderPaneFooter from './renderPaneFooter';
-import ScriptOK from './ScriptOK';
+import compileXML from './compileXML';
+import { compileXSLT, BAD_XML, BAD_XSLT, GOOD_XSLT } from './compileXSLT';
+import css from './StepForm.css';
 
 
 function validate(values) {
@@ -33,6 +35,7 @@ function validate(values) {
 const StepForm = (props) => {
   const { form, handleSubmit, onCancel, pristine, submitting } = props;
   const intl = useIntl();
+  const [xmlError, setXMLError] = useState();
 
   const noValue = {
     value: '',
@@ -43,6 +46,7 @@ const StepForm = (props) => {
   const ccXML2JSON = 'com.indexdata.masterkey.localindices.harvest.messaging.InstanceXmlToInstanceJsonTransformerRouter';
 
   const title = props.initialValues?.name;
+  const [xsltStatus, xsltValue] = compileXSLT(form.getState().values.script);
 
   return (
     <Pane
@@ -66,8 +70,37 @@ const StepForm = (props) => {
             <CF tag="outputFormat" domain="step" xs={6} component={Select} dataOptions={[noValue].concat(formats)} required />
           </Row>
           <RCF tag="script" domain="step" component={TextArea} rows="4" />
-          <ScriptOK xslText={form.getState().values.script} />
+          {
+            (xsltStatus === BAD_XML) ?
+              <div className={css.badXML}><FormattedMessage id="ui-harvester-admin.invalidXML" values={{ error: xsltValue }} /></div> :
+              (xsltStatus === BAD_XSLT) ?
+                <div className={css.badXSLT}><FormattedMessage id="ui-harvester-admin.invalidXSLT" /></div> :
+                (xsltStatus === GOOD_XSLT) ?
+                  <div className={css.good}><FormattedMessage id="ui-harvester-admin.validXSLT" /></div> :
+                  null
+          }
+
           <RCF tag="testData" domain="step" component={TextArea} rows="4" />
+          <Button
+            disabled={xsltStatus !== GOOD_XSLT || form.getState().values.testData === ''}
+            onClick={() => {
+              const [xmlDOM, errorMessage] = compileXML(form.getState().values.testData);
+              if (!xmlDOM) {
+                setXMLError(errorMessage);
+              } else {
+                setXMLError(undefined);
+                const outDOM = xsltValue.transformToDocument(xmlDOM);
+                const str = new XMLSerializer().serializeToString(outDOM);
+                form.change('testOutput', str);
+              }
+            }}
+          >
+            <FormattedMessage id="ui-harvester-admin.transform" />
+          </Button>
+          {xmlError &&
+            <div className={css.badXML}><FormattedMessage id="ui-harvester-admin.invalidXML" values={{ error: xmlError }} /></div>
+          }
+
           <RCF tag="testOutput" domain="step" component={TextArea} rows="4" />
           <Row>
             <CF tag="customClass" domain="step" xs={9} />
