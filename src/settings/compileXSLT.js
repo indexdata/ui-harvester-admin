@@ -18,7 +18,6 @@ function compileXSLT(xslText) {
   }
 
   const parser = new DOMParser();
-  const xsltProcessor = new XSLTProcessor();
 
   const xslStylesheet = parser.parseFromString(xslText, 'application/xml');
   const errorNode = xslStylesheet.querySelector('parsererror');
@@ -30,6 +29,7 @@ function compileXSLT(xslText) {
     return [BAD_XML, errorMessage];
   }
 
+  const xsltProcessor = new XSLTProcessor();
   try {
     xsltProcessor.importStylesheet(xslStylesheet);
   } catch (e) {
