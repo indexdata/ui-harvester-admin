@@ -12,6 +12,7 @@
     "selectToContinue": "Please select to continue",
     "resultCount": "{count, number} {count, plural, one {record found} other {records found}}",
     "set-to-xml2json": "Choose XML-to-JSON",
+    "reports": "Reports",
     "export-csv": "Export CSV",
     "settings.storage": "Storage engines",
     "settings.storage.heading": "Manage storage engines",

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { AppIcon } from '@folio/stripes/core';
-import { Button, LoadingPane, Paneset, Pane, MultiColumnList, ErrorModal, exportToCsv } from '@folio/stripes/components';
+import { MenuSection, Button, Icon, LoadingPane, Paneset, Pane, MultiColumnList, ErrorModal, exportToCsv } from '@folio/stripes/components';
 import { ColumnManager, SearchAndSortQuery } from '@folio/stripes/smart-components';
 import parseSort from '../../util/parseSort';
 import { errors2react, errors2string } from '../../util/summarizeErrors';
@@ -14,22 +14,25 @@ import packageInfo from '../../../package';
 function renderActionMenu(onToggle, intl, data, renderedColumnsMenu) {
   return (
     <div>
-      <Button
-        aria-label={intl.formatMessage({ id: 'ui-harvester-admin.export-csv' })}
-        disabled={data.records.length === 0}
-        buttonStyle="dropdownItem"
-        onClick={() => {
-          const expanded = data.records.map(r => ({
-            ...r,
-            errors: errors2string(r.recordErrors),
-          }));
-          exportToCsv(expanded, {});
-          onToggle();
-        }}
-      >
-        <FormattedMessage id="ui-harvester-admin.export-csv" />
-      </Button>
-      <hr />
+      <MenuSection label={intl.formatMessage({ id: 'ui-harvester-admin.reports' })}>
+        <Button
+          aria-label={intl.formatMessage({ id: 'ui-harvester-admin.export-csv' })}
+          disabled={data.records.length === 0}
+          buttonStyle="dropdownItem"
+          onClick={() => {
+            const expanded = data.records.map(r => ({
+              ...r,
+              errors: errors2string(r.recordErrors),
+            }));
+            exportToCsv(expanded, {});
+            onToggle();
+          }}
+        >
+          <Icon icon="download">
+            <FormattedMessage id="ui-harvester-admin.export-csv" />
+          </Icon>
+        </Button>
+      </MenuSection>
       {renderedColumnsMenu}
     </div>
   );
