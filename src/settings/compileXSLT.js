@@ -1,3 +1,5 @@
+import compileXML from './compileXML';
+
 const NO_TEXT = 1;
 const BAD_XML = 2;
 const BAD_XSLT = 3;
@@ -17,15 +19,8 @@ function compileXSLT(xslText) {
     return [NO_TEXT];
   }
 
-  const parser = new DOMParser();
-
-  const xslStylesheet = parser.parseFromString(xslText, 'application/xml');
-  const errorNode = xslStylesheet.querySelector('parsererror');
-  if (errorNode) {
-    let errorMessage = errorNode.textContent.trim();
-    // This is often of the form:
-    // XML Parsing Error: syntax error Location: http://localhost:3000/settings/ha/step/10010?layer=edit Line Number 1, Column 1
-    errorMessage = errorMessage.replace(/Location: https?:[^ ]+/, '');
+  const [xslStylesheet, errorMessage] = compileXML(xslText);
+  if (!xslStylesheet) {
     return [BAD_XML, errorMessage];
   }
 
