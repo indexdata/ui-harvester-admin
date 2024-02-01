@@ -9,6 +9,7 @@ import { isEqual } from 'lodash';
 import setFieldData from 'final-form-set-field-data'; // XXX do we need this?
 import { RCF, CF } from '../components/CF';
 import renderPaneFooter from './renderPaneFooter';
+import ScriptOK from './ScriptOK';
 
 
 function validate(values) {
@@ -23,7 +24,7 @@ function validate(values) {
     errors.type = requiredSelectMessage;
   }
 
-  // XXX should validate XML as StorageForm.js does for JSON
+  // Due to react-final-form oddities, validation of XSLT here does not work. See below
 
   return errors;
 }
@@ -65,6 +66,7 @@ const StepForm = (props) => {
             <CF tag="outputFormat" domain="step" xs={6} component={Select} dataOptions={[noValue].concat(formats)} required />
           </Row>
           <RCF tag="script" domain="step" component={TextArea} rows="4" />
+          <ScriptOK xslText={form.getState().values.script} />
           <RCF tag="testData" domain="step" component={TextArea} rows="4" />
           <RCF tag="testOutput" domain="step" component={TextArea} rows="4" />
           <Row>
@@ -86,6 +88,7 @@ const StepForm = (props) => {
 
 StepForm.propTypes = {
   form: PropTypes.shape({
+    getState: PropTypes.func.isRequired,
     change: PropTypes.func.isRequired,
   }).isRequired,
   initialValues: PropTypes.object,
