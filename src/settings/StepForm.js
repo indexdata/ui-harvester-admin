@@ -97,6 +97,7 @@ const StepForm = (props) => {
 
 StepForm.propTypes = {
   form: PropTypes.shape({
+    getState: PropTypes.func.isRequired,
     change: PropTypes.func.isRequired,
   }).isRequired,
   initialValues: PropTypes.object,
