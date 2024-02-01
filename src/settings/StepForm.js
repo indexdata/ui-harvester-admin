@@ -90,10 +90,7 @@ const StepForm = (props) => {
               } else {
                 setXMLError(undefined);
                 const outDOM = xsltValue.transformToDocument(xmlDOM);
-                console.log('outDOM =', outDOM);
-                const serializer = new XMLSerializer();
-                console.log('serializer =', serializer);
-                const str = serializer.serializeToString(outDOM);
+                const str = new XMLSerializer().serializeToString(outDOM);
                 form.change('testOutput', str);
               }
             }}

@@ -5,7 +5,7 @@ const BAD_XML = 2;
 const BAD_XSLT = 3;
 const GOOD_XSLT = 4;
 
-// Tries to compile `xslText` into an XSLT processor configured with an executable stylesheet.
+// Tries to compile `xsltText` into an XSLT processor configured with an executable stylesheet.
 // Returns a tuple of [status, value].
 // Status can be:
 //      NO_TEXT -- text is empty, so there is no stylesheet to compile
@@ -14,19 +14,19 @@ const GOOD_XSLT = 4;
 //      GOOD_XSLT -- text is a valid XSLT stylesheet: value is the XSLT processor
 // There is no value for the NO_TEXT and BAD_XSLT statuses.
 //
-function compileXSLT(xslText) {
-  if (xslText === '') {
+function compileXSLT(xsltText) {
+  if (xsltText === '') {
     return [NO_TEXT];
   }
 
-  const [xslStylesheet, errorMessage] = compileXML(xslText);
-  if (!xslStylesheet) {
+  const [xsltStylesheet, errorMessage] = compileXML(xsltText);
+  if (!xsltStylesheet) {
     return [BAD_XML, errorMessage];
   }
 
   const xsltProcessor = new XSLTProcessor();
   try {
-    xsltProcessor.importStylesheet(xslStylesheet);
+    xsltProcessor.importStylesheet(xsltStylesheet);
   } catch (e) {
     // No value to the exception: it's effectively a boolean (thrown or not)
     return [BAD_XSLT];
