@@ -1,0 +1,20 @@
+.badXML {
+    color: darkred;
+    font-weight: bold;
+    margin-top: -0.5em;
+    margin-bottom: 1em;
+}
+
+.badXSLT {
+    color: orange;
+    font-weight: bold;
+    margin-top: -0.5em;
+    margin-bottom: 1em;
+}
+
+.good {
+    color: darkgreen;
+    font-weight: bold;
+    margin-top: -0.5em;
+    margin-bottom: 1em;
+}
