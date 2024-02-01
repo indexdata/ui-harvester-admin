@@ -9,7 +9,8 @@ import { isEqual } from 'lodash';
 import setFieldData from 'final-form-set-field-data'; // XXX do we need this?
 import { RCF, CF } from '../components/CF';
 import renderPaneFooter from './renderPaneFooter';
-import ScriptOK from './ScriptOK';
+import { compileXSLT, BAD_XML, BAD_XSLT, GOOD_XSLT } from './compileXSLT';
+import css from './ScriptOK.css';
 
 
 function validate(values) {
@@ -43,6 +44,7 @@ const StepForm = (props) => {
   const ccXML2JSON = 'com.indexdata.masterkey.localindices.harvest.messaging.InstanceXmlToInstanceJsonTransformerRouter';
 
   const title = props.initialValues?.name;
+  const [status, value] = compileXSLT(form.getState().values.script);
 
   return (
     <Pane
@@ -66,7 +68,15 @@ const StepForm = (props) => {
             <CF tag="outputFormat" domain="step" xs={6} component={Select} dataOptions={[noValue].concat(formats)} required />
           </Row>
           <RCF tag="script" domain="step" component={TextArea} rows="4" />
-          <ScriptOK xslText={form.getState().values.script} />
+          {
+            (status === BAD_XML) ?
+              <div className={css.badXML}><FormattedMessage id="ui-harvester-admin.invalidXML" values={{ error: value }} /></div> :
+              (status === BAD_XSLT) ?
+                <div className={css.badXSLT}><FormattedMessage id="ui-harvester-admin.invalidXSLT" /></div> :
+                (status === GOOD_XSLT) ?
+                  <div className={css.good}><FormattedMessage id="ui-harvester-admin.validXSLT" /></div> :
+                  null
+          }
           <RCF tag="testData" domain="step" component={TextArea} rows="4" />
           <RCF tag="testOutput" domain="step" component={TextArea} rows="4" />
           <Row>
