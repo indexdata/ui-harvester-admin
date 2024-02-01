@@ -24,7 +24,7 @@ function validate(values) {
     errors.type = requiredSelectMessage;
   }
 
-  // XXX should validate XML as StorageForm.js does for JSON
+  // Due to react-final-form oddities, validation of XSLT here does not work. See below
 
   return errors;
 }
@@ -33,15 +33,6 @@ function validate(values) {
 const StepForm = (props) => {
   const { form, handleSubmit, onCancel, pristine, submitting } = props;
   const intl = useIntl();
-
-  /*
-  console.log('xform = ', form);
-  console.log('getRegisteredFields =', form.getRegisteredFields());
-  const getFieldState = form.getFieldState
-  console.log('getFieldState = ', getFieldState);
-  const scriptField = getFieldState('script');
-  console.log('scriptField = ', form.scriptField);
-  */
 
   const noValue = {
     value: '',
