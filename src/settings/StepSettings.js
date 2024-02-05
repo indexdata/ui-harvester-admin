@@ -69,6 +69,7 @@ StepSettings.manifest = Object.freeze({
     type: 'okapi',
     records: 'transformationSteps',
     path: 'harvester-admin/steps',
+    clientGeneratePk: false,
     throwErrors: false,
     GET: {
       path: 'harvester-admin/steps?limit=1000', // XXX will this always be enough?

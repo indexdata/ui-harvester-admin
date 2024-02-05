@@ -67,6 +67,7 @@ PipelineSettings.manifest = Object.freeze({
     type: 'okapi',
     records: 'transformations',
     path: 'harvester-admin/transformations',
+    clientGeneratePk: false,
     throwErrors: false,
   },
   steps: {

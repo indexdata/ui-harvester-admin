@@ -15,6 +15,7 @@
 * Ability to export failed records as CSV, including summary of errors. Fixes UIHAADM-106.
 * When editing a Transformation Step, validate XSLT. Fixes UIHAADM-109.
 * When viewing/editing a Transformation Step, offer option to transform sample data via XSLT. Fixes UIHAADM-110.
+* When creating a new Storage, Step or Pipeline, do not try to set ID. Fixes UIHAADM-123.
 
 ## [2.0.0](https://github.com/folio-org/ui-harvester-admin/tree/v2.0.0) (2023-10-13)
 

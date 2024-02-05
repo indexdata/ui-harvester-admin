@@ -66,6 +66,7 @@ StorageSettings.manifest = Object.freeze({
     type: 'okapi',
     records: 'storages',
     path: 'harvester-admin/storages',
+    clientGeneratePk: false,
     throwErrors: false,
   },
 });
