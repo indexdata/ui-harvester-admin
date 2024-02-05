@@ -120,14 +120,8 @@ function Records({
                           formatter={formatter}
                           contentData={data.records}
                           totalCount={resultCount}
-                          onHeaderClick={(event, headerMetadata) => {
-                            if (headerMetadata.name === 'seconds') {
-                              setInvalidSortKey(headerMetadata.name);
-                              return undefined;
-                            } else {
-                              return sasqParams.onSort(event, headerMetadata);
-                            }
-                          }}
+                          onHeaderClick={sasqParams.onSort}
+                          nonInteractiveHeaders={['instanceHrid', 'instanceTitle', 'errors']}
                           onNeedMoreData={onNeedMoreData}
                           sortedColumn={sortedColumn}
                           sortDirection={sortDirection}

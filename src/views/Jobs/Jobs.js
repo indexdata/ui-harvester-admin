@@ -110,14 +110,8 @@ function Jobs({
                           formatter={formatter}
                           contentData={data.jobs}
                           totalCount={resultCount}
-                          onHeaderClick={(event, headerMetadata) => {
-                            if (headerMetadata.name === 'seconds') {
-                              setInvalidSortKey(headerMetadata.name);
-                              return undefined;
-                            } else {
-                              return sasqParams.onSort(event, headerMetadata);
-                            }
-                          }}
+                          onHeaderClick={sasqParams.onSort}
+                          nonInteractiveHeaders={['seconds']}
                           onNeedMoreData={onNeedMoreData}
                           sortedColumn={sortedColumn}
                           sortDirection={sortDirection}
