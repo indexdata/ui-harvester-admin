@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import arrayMutators from 'final-form-arrays';
 import { HasCommand, Button, LoadingPane, Pane, PaneFooter, checkScope } from '@folio/stripes/components';
-import { AppIcon, TitleManager, withStripes } from '@folio/stripes/core';
+import { AppIcon, TitleManager } from '@folio/stripes/core';
 import stripesFinalForm from '@folio/stripes/final-form';
 import { isEqual } from 'lodash';
 import setFieldData from 'final-form-set-field-data'; // XXX do we need this?
@@ -155,15 +155,10 @@ HarvestableForm.propTypes = {
   pristine: PropTypes.bool,
   submitting: PropTypes.bool,
   values: PropTypes.object,
-  stripes: PropTypes.shape({
-    config: PropTypes.shape({
-      showDevInfo: PropTypes.bool,
-    }).isRequired,
-  }).isRequired,
 };
 
 
-export default withStripes(stripesFinalForm({
+export default stripesFinalForm({
   initialValuesEqual: (a, b) => isEqual(a, b),
   validate,
   navigationCheck: true,
@@ -171,4 +166,4 @@ export default withStripes(stripesFinalForm({
     values: true,
   },
   mutators: { setFieldData, ...arrayMutators }
-})(HarvestableForm));
+})(HarvestableForm);
