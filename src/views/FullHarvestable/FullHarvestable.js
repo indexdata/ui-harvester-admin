@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { CalloutContext, IfPermission } from '@folio/stripes/core';
+import { CalloutContext, IfPermission, useStripes } from '@folio/stripes/core';
 import { Loading, Pane, Accordion, Button, Icon, ConfirmationModal } from '@folio/stripes/components';
 import viewLogTranslationTag from '../../util/viewLogTranslationTag';
 import ErrorMessage from '../../components/ErrorMessage';
@@ -24,6 +24,7 @@ const specificSections = {
 
 const FullHarvestableContent = ({ rec }) => {
   const intl = useIntl();
+  const stripes = useStripes();
   const type = rec.type;
   const ErrorSection = () => <ErrorMessage message={`Unknown type '${type}'`} />;
   const SpecificSection = specificSections[type] || ErrorSection;
@@ -37,15 +38,17 @@ const FullHarvestableContent = ({ rec }) => {
       {type !== 'status' && <GeneralSection rec={rec} />}
       <SpecificSection rec={rec} />
 
-      <Accordion
-        id="harvestable-section-devinfo"
-        label={<FormattedMessage id="ui-harvester-admin.accordion.devinfo" />}
-        closedByDefault
-      >
-        <pre>
-          {JSON.stringify(rec, null, 2)}
-        </pre>
-      </Accordion>
+      {stripes.config.showDevInfo &&
+        <Accordion
+          id="harvestable-section-devinfo"
+          label={<FormattedMessage id="ui-harvester-admin.accordion.devinfo" />}
+          closedByDefault
+        >
+          <pre>
+            {JSON.stringify(rec, null, 2)}
+          </pre>
+        </Accordion>
+      }
     </>
   );
 };
