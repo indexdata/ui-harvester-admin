@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
+import { useStripes } from '@folio/stripes/core';
 import { Col, Row, KeyValue, Accordion } from '@folio/stripes/components';
 import { bool2display } from './transformBooleans';
 
@@ -27,6 +28,7 @@ function censorPasswords(val) {
 
 
 const StorageDetail = (props) => {
+  const stripes = useStripes();
   const data = props.initialValues;
 
   let jval;
@@ -82,15 +84,17 @@ const StorageDetail = (props) => {
         </Row>
       }
 
-      <Accordion
-        id="storage-devinfo"
-        label={<FormattedMessage id="ui-harvester-admin.accordion.devinfo" />}
-        closedByDefault
-      >
-        <pre>
-          {JSON.stringify(data, null, 2)}
-        </pre>
-      </Accordion>
+      {stripes.config.showDevInfo &&
+        <Accordion
+          id="storage-devinfo"
+          label={<FormattedMessage id="ui-harvester-admin.accordion.devinfo" />}
+          closedByDefault
+        >
+          <pre>
+            {JSON.stringify(data, null, 2)}
+          </pre>
+        </Accordion>
+      }
     </>
   );
 };

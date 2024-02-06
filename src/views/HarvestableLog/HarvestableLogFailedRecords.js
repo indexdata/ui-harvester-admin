@@ -2,11 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import ObjectInspector from 'react-inspector';
+import { useStripes } from '@folio/stripes/core';
 import { Loading, MultiColumnList, Accordion } from '@folio/stripes/components';
 import { errors2react } from '../../util/summarizeErrors';
 
 
 const HarvestableLogFailedRecords = ({ failedRecords }) => {
+  const stripes = useStripes();
   const visibleColumns = ['recordNumber', 'instanceHrid', 'instanceTitle', 'errors', 'timeStamp'];
 
   const columnMapping = {
@@ -46,17 +48,19 @@ const HarvestableLogFailedRecords = ({ failedRecords }) => {
           contentData={failedRecords.failedRecords}
           formatter={resultsFormatter}
         />
-        <Accordion
-          id="harvest-failedRecords-devinfo"
-          label={<FormattedMessage id="ui-harvester-admin.accordion.devinfo" />}
-          closedByDefault
-        >
-          <ObjectInspector
-            data={failedRecords}
-            expandLevel={2}
-            sortObjectKeys
-          />
-        </Accordion>
+        {stripes.config.showDevInfo &&
+          <Accordion
+            id="harvest-failedRecords-devinfo"
+            label={<FormattedMessage id="ui-harvester-admin.accordion.devinfo" />}
+            closedByDefault
+          >
+            <ObjectInspector
+              data={failedRecords}
+              expandLevel={2}
+              sortObjectKeys
+            />
+          </Accordion>
+        }
       </>
       }
     </Accordion>

@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
+import { useStripes } from '@folio/stripes/core';
 import { Col, Row, KeyValue, Accordion } from '@folio/stripes/components';
 import { bool2display } from './transformBooleans';
 
 
 const StepDetail = (props) => {
+  const stripes = useStripes();
   const data = props.initialValues;
 
   return (
@@ -91,15 +93,17 @@ const StepDetail = (props) => {
         </Col>
       </Row>
 
-      <Accordion
-        id="step-devinfo"
-        label={<FormattedMessage id="ui-harvester-admin.accordion.devinfo" />}
-        closedByDefault
-      >
-        <pre>
-          {JSON.stringify(data, null, 2)}
-        </pre>
-      </Accordion>
+      {stripes.config.showDevInfo &&
+        <Accordion
+          id="step-devinfo"
+          label={<FormattedMessage id="ui-harvester-admin.accordion.devinfo" />}
+          closedByDefault
+        >
+          <pre>
+            {JSON.stringify(data, null, 2)}
+          </pre>
+        </Accordion>
+      }
     </>
   );
 };
