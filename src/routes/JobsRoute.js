@@ -11,7 +11,7 @@ const INITIAL_RESULT_COUNT = 200;
 const RESULT_COUNT_INCREMENT = 200;
 
 
-const JobsRoute = ({ stripes, resources, mutator, children }) => {
+function JobsRoute({ stripes, resources, mutator, children }) {
   let [source, setSource] = useState(); // eslint-disable-line prefer-const
   if (!source) {
     source = new StripesConnectedSource({ resources, mutator }, stripes.logger, 'reportTitles');
@@ -28,25 +28,25 @@ const JobsRoute = ({ stripes, resources, mutator, children }) => {
     }
   };
 
-  const hasLoaded = resources.jobs.hasLoaded;
   const error = resources.jobs.failed ? resources.jobs.failed.message : undefined;
+  const hasLoaded = resources.jobs.hasLoaded;
 
   return (
     <Jobs
       data={{
         jobs: resources.jobs.records,
       }}
-      resultCount={resources.jobs.other?.totalRecords}
       query={resources.query}
+      resultCount={resources.jobs.other?.totalRecords}
       updateQuery={mutator.query.update}
-      hasLoaded={hasLoaded}
       error={error}
+      hasLoaded={hasLoaded}
       onNeedMoreData={handleNeedMoreData}
     >
       {children}
     </Jobs>
   );
-};
+}
 
 
 JobsRoute.manifest = Object.freeze({

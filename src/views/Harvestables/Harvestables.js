@@ -121,6 +121,42 @@ function Harvestables({
     columnMapping.oldJobs = <FormattedMessage id="ui-harvester-admin.harvestables.column.oldJobs" />;
   }
 
+  const formatter = {
+    enabled: r => <FormattedMessage id={`ui-harvester-admin.harvestables.column.enabled.${r.enabled}`} />,
+    jobClass: r => <FormattedMessage id={`ui-harvester-admin.harvestables.column.jobClass.${r.jobClass}`} />,
+    currentStatus: r => <FormattedMessage id={`ui-harvester-admin.harvestables.column.currentStatus.${r.currentStatus}`} />,
+    records: r => {
+      const stats = message2stats(r.message);
+      return stats?.instances?.loaded;
+    },
+    lastHarvestFinished: r => formatDateTime(r.lastHarvestFinished),
+    message: r => (r.message?.match('Instances_processed') ? summarizeStats(intl, r.message) : r.message),
+    logFile: r => (
+      <Button
+        id={`clickable-log-file-${r.id}`}
+        onClick={(e) => {
+          e.stopPropagation();
+          updateQuery({ _path: `${packageInfo.stripes.route}/harvestables/${r.id}/logs` });
+        }}
+        marginBottom0
+      >
+        <FormattedMessage id={viewLogTranslationTag(r)} />
+      </Button>
+    ),
+    oldJobs: r => (
+      <Button
+        id={`clickable-old-logs-${r.id}`}
+        onClick={(e) => {
+          e.stopPropagation();
+          updateQuery({ _path: `${packageInfo.stripes.route}/harvestables/${r.id}/jobs` });
+        }}
+        marginBottom0
+      >
+        <FormattedMessage id="ui-harvester-admin.button.old-jobs" />
+      </Button>
+    ),
+  };
+
   const harvestables = manuallyFilterAndSort(query, data.harvestables);
   const sortKeys = parseSort(query.sort);
   const sortedColumn = sortKeys[0]?.key;
@@ -172,41 +208,7 @@ function Harvestables({
                             id: '80px',
                             message: '600px',
                           }}
-                          formatter={{
-                            enabled: r => <FormattedMessage id={`ui-harvester-admin.harvestables.column.enabled.${r.enabled}`} />,
-                            jobClass: r => <FormattedMessage id={`ui-harvester-admin.harvestables.column.jobClass.${r.jobClass}`} />,
-                            currentStatus: r => <FormattedMessage id={`ui-harvester-admin.harvestables.column.currentStatus.${r.currentStatus}`} />,
-                            records: r => {
-                              const stats = message2stats(r.message);
-                              return stats?.instances?.loaded;
-                            },
-                            lastHarvestFinished: r => formatDateTime(r.lastHarvestFinished),
-                            message: r => (r.message?.match('Instances_processed') ? summarizeStats(intl, r.message) : r.message),
-                            logFile: r => (
-                              <Button
-                                id={`clickable-log-file-${r.id}`}
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  updateQuery({ _path: `${packageInfo.stripes.route}/harvestables/${r.id}/logs` });
-                                }}
-                                marginBottom0
-                              >
-                                <FormattedMessage id={viewLogTranslationTag(r)} />
-                              </Button>
-                            ),
-                            oldJobs: r => (
-                              <Button
-                                id={`clickable-old-logs-${r.id}`}
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  updateQuery({ _path: `${packageInfo.stripes.route}/harvestables/${r.id}/jobs` });
-                                }}
-                                marginBottom0
-                              >
-                                <FormattedMessage id="ui-harvester-admin.button.old-jobs" />
-                              </Button>
-                            ),
-                          }}
+                          formatter={formatter}
                           contentData={harvestables}
                           totalCount={harvestables.length}
                           onHeaderClick={sasqParams.onSort}

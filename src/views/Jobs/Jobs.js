@@ -4,9 +4,9 @@ import { useIntl, FormattedMessage } from 'react-intl';
 import { AppIcon } from '@folio/stripes/core';
 import { LoadingPane, Paneset, Pane, MultiColumnList, MCLPagingTypes } from '@folio/stripes/components';
 import { ColumnManager, SearchAndSortQuery } from '@folio/stripes/smart-components';
+import { message2stats, summarizeStats } from '../../util/message2stats';
 import parseSort from '../../util/parseSort';
 import formatDateTime from '../../util/formatDateTime';
-import { message2stats, summarizeStats } from '../../util/message2stats';
 import JobsSearchPane from '../../search/JobsSearchPane';
 import ErrorMessage from '../../components/ErrorMessage';
 import packageInfo from '../../../package';
@@ -33,17 +33,6 @@ function Jobs({
     finished: <FormattedMessage id="ui-harvester-admin.jobs.column.finished" />,
     type: <FormattedMessage id="ui-harvester-admin.jobs.column.type" />,
     message: <FormattedMessage id="ui-harvester-admin.jobs.column.message" />,
-  };
-
-  const columnWidths = {
-    name: '20%',
-    status: '80px',
-    amountHarvested: '110px',
-    seconds: '70px',
-    started: '200px',
-    finished: '200px',
-    type: '110px',
-    message: '450px',
   };
 
   const formatter = {
@@ -105,7 +94,16 @@ function Jobs({
                           id="list-jobs"
                           visibleColumns={visibleColumns}
                           columnMapping={columnMapping}
-                          columnWidths={columnWidths}
+                          columnWidths={{
+                            name: '20%',
+                            status: '80px',
+                            amountHarvested: '110px',
+                            seconds: '70px',
+                            started: '200px',
+                            finished: '200px',
+                            type: '110px',
+                            message: '450px',
+                          }}
                           formatter={formatter}
                           contentData={data.jobs}
                           totalCount={resultCount}
