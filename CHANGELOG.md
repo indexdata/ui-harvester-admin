@@ -18,6 +18,7 @@
 * When creating a new Storage, Step or Pipeline, do not try to set ID. Fixes UIHAADM-123.
 * In result lists, use unclickable headers for unsortable columns. Fixes UIHAADM-116.
 * Show developer information only when `showDevInfo` config item is set. Fixes UIHAADM-122.
+* Widths of columns in Jobs tab revert after closing a full Job record. Fixes UIHAADM-121.
 
 ## [2.0.0](https://github.com/folio-org/ui-harvester-admin/tree/v2.0.0) (2023-10-13)
 

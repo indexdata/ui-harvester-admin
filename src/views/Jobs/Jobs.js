@@ -91,6 +91,7 @@ function Jobs({
                         actionMenu={() => renderColumnsMenu}
                       >
                         <MultiColumnList
+                          autosize
                           id="list-jobs"
                           visibleColumns={visibleColumns}
                           columnMapping={columnMapping}
