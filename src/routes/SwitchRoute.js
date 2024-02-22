@@ -1,10 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { useLocation } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { useStripes } from '@folio/stripes/core';
 import { Button, ButtonGroup } from '@folio/stripes/components';
 
-function SwitchRoute({ location, children }) {
+function SwitchRoute() {
+  const location = useLocation();
   const stripes = useStripes();
   const today = new Date();
   const yesterday = new Date(today - 24 * 60 * 60 * 1000);
@@ -21,6 +22,9 @@ function SwitchRoute({ location, children }) {
     name: 'records',
     perm: 'ui-harvester-admin.jobs-and-failed-records.view',
     params: `filters=timeStamp_from.${isoString}`,
+  }, {
+    name: 'mike',
+    perm: 'ui-harvester-admin.harvestables.view',
   }];
 
   return (
@@ -46,17 +50,8 @@ function SwitchRoute({ location, children }) {
           }
         </ButtonGroup>
       </div>
-      <hr />
-      { children }
     </>
   );
 }
-
-SwitchRoute.propTypes = {
-  location: PropTypes.shape({
-    pathname: PropTypes.string.isRequired,
-  }).isRequired,
-  children: PropTypes.object.isRequired,
-};
 
 export default SwitchRoute;

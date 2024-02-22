@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Redirect } from 'react-router-dom';
 import { Route as NestedRoute } from '@folio/stripes/core';
+import { Layout } from '@folio/stripes/components';
 import Settings from './settings';
 import SwitchRoute from './routes/SwitchRoute';
 import HarvestablesRoute from './routes/HarvestablesRoute';
@@ -13,6 +14,9 @@ import HarvestableJobsRoute from './routes/HarvestableJobsRoute';
 import JobsRoute from './routes/JobsRoute';
 import FullJobRoute from './routes/FullJobRoute';
 import RecordsRoute from './routes/RecordsRoute';
+import MikeRoute from './routes/MikeRoute';
+import css from './index.css';
+
 
 const HarvesterAdminApp = (props) => {
   const {
@@ -29,10 +33,15 @@ const HarvesterAdminApp = (props) => {
   const dest = stripes.hasPerm('ui-harvester-admin.harvestables.view') ? 'harvestables' : 'jobs';
 
   return (
-    <Switch>
-      <Redirect exact from={path} to={`${path}/${dest}`} />
-      <NestedRoute path={`${path}`} component={SwitchRoute}>
+    <div className={css.container}>
+      <Layout className={`${css.header} display-flex full padding-top-gutter padding-start-gutter padding-end-gutter`}>
+        <div /> {/* Empty start item so we can get centre/end aligned */}
+	<SwitchRoute />
+      </Layout>
+      <div className={css.body}>
         <Switch>
+          <Redirect exact from={path} to={`${path}/${dest}`} />
+          <NestedRoute path={`${path}/mike`} exact component={MikeRoute} />
           <NestedRoute path={`${path}/harvestables/create/:type`} exact component={CreateHarvestableRoute} />
           <NestedRoute path={`${path}/harvestables/:recId/logs`} exact component={HarvestableLogRoute} />
           <NestedRoute path={`${path}/harvestables/:recId/jobs`} exact component={HarvestableJobsRoute} />
@@ -45,8 +54,8 @@ const HarvesterAdminApp = (props) => {
           </NestedRoute>
           <NestedRoute path={`${path}/records`} component={RecordsRoute} />
         </Switch>
-      </NestedRoute>
-    </Switch>
+      </div>
+    </div>
   );
 };
 
