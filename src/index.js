@@ -4,7 +4,6 @@ import { Switch, Redirect } from 'react-router-dom';
 import { Route as NestedRoute } from '@folio/stripes/core';
 import { Layout } from '@folio/stripes/components';
 import Settings from './settings';
-import SwitchRoute from './routes/SwitchRoute';
 import HarvestablesRoute from './routes/HarvestablesRoute';
 import CreateHarvestableRoute from './routes/CreateHarvestableRoute';
 import FullHarvestableRoute from './routes/FullHarvestableRoute';
@@ -15,6 +14,7 @@ import JobsRoute from './routes/JobsRoute';
 import FullJobRoute from './routes/FullJobRoute';
 import RecordsRoute from './routes/RecordsRoute';
 import MikeRoute from './routes/MikeRoute';
+import Tabs from './Tabs';
 import css from './index.css';
 
 
@@ -29,14 +29,14 @@ const HarvesterAdminApp = (props) => {
     return <Settings {...props} />;
   }
 
-  // Don't redirect to a page we don't have permission to view: see routes/SwitchRoute.js
+  // Don't redirect to a page we don't have permission to view: see Tabs.js
   const dest = stripes.hasPerm('ui-harvester-admin.harvestables.view') ? 'harvestables' : 'jobs';
 
   return (
     <div className={css.container}>
       <Layout className={`${css.header} display-flex full padding-top-gutter padding-start-gutter padding-end-gutter`}>
         <div /> {/* Empty start item so we can get centre/end aligned */}
-	<SwitchRoute />
+        <Tabs />
       </Layout>
       <div className={css.body}>
         <Switch>
