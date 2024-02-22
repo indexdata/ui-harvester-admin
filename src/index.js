@@ -34,10 +34,9 @@ const HarvesterAdminApp = (props) => {
 
   return (
     <div className={css.container}>
-      <Layout className={`${css.header} display-flex full padding-top-gutter padding-start-gutter padding-end-gutter`}>
-        <div /> {/* Empty start item so we can get centre/end aligned */}
+      <div className={css.header}>
         <Tabs />
-      </Layout>
+      </div>
       <div className={css.body}>
         <Switch>
           <Redirect exact from={path} to={`${path}/${dest}`} />
