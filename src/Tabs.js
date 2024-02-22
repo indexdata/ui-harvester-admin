@@ -22,9 +22,11 @@ function SwitchRoute() {
     name: 'records',
     perm: 'ui-harvester-admin.jobs-and-failed-records.view',
     params: `filters=timeStamp_from.${isoString}`,
+    /*
   }, {
     name: 'mike',
     perm: 'ui-harvester-admin.harvestables.view',
+    */
   }];
 
   return (
