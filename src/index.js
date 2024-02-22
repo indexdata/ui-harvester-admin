@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Redirect } from 'react-router-dom';
 import { Route as NestedRoute } from '@folio/stripes/core';
-import { Layout } from '@folio/stripes/components';
 import Settings from './settings';
 import HarvestablesRoute from './routes/HarvestablesRoute';
 import CreateHarvestableRoute from './routes/CreateHarvestableRoute';
