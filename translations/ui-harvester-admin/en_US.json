@@ -246,7 +246,7 @@
     "filter.date.finished.to": "To",
     "error.invalidSort.label": "Invalid sort criterion",
     "error.invalidSort.content": "It is not possible to sort on the <code>{name}</code> column due to implementation limitations.",
-    "jobs.index.name": "Name",
+    "jobs.index.name": "Harvestable name",
     "jobs.index.id": "ID",
     "jobs.index.harvestableId": "Harvestable ID",
     "jobs.index.message": "Message",

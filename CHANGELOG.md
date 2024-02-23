@@ -20,6 +20,8 @@
 * Show developer information only when `showDevInfo` config item is set. Fixes UIHAADM-122.
 * Widths of columns in Jobs tab revert after closing a full Job record. Fixes UIHAADM-121.
 * Improve the situation with keeping all tabs on the page. Addresses but does not fully fix UIHAADM-99.
+* Remove the "(All)" index from the Jobs tab and rename "Name" to "Harvestable name". Fixes UIHAADM-113.
+* Remove the "(All)" index from the Failed Records tab. Fixes UIHAADM-114.
 
 ## [2.0.0](https://github.com/folio-org/ui-harvester-admin/tree/v2.0.0) (2023-10-13)
 

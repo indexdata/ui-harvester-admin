@@ -30,7 +30,6 @@ function RecordsSearchPane(props) {
   const intl = useIntl();
 
   const indexNames = [
-    'all',
     'recordNumber',
     // 'instanceHrid', // XXX not yet supported
     // 'instanceTitle', // XXX not yet supported
@@ -38,7 +37,7 @@ function RecordsSearchPane(props) {
     'harvestableName',
   ];
   const searchableIndexes = indexNames.map(x => ({
-    value: x === 'all' ? '' : x,
+    value: x,
     label: intl.formatMessage({ id: `ui-harvester-admin.records.index.${x}` }),
   }));
 
