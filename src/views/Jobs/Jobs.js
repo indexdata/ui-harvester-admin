@@ -85,7 +85,7 @@ function Jobs({
                         appIcon={<AppIcon app="harvester-admin" />}
                         defaultWidth="fill"
                         padContent={false}
-                        height="92%"
+                        height="100%"
                         paneTitle={paneTitle}
                         paneSub={<FormattedMessage id="ui-harvester-admin.resultCount" values={{ count: resultCount }} />}
                         actionMenu={() => renderColumnsMenu}

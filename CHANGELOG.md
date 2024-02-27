@@ -19,7 +19,7 @@
 * In result lists, use unclickable headers for unsortable columns. Fixes UIHAADM-116.
 * Show developer information only when `showDevInfo` config item is set. Fixes UIHAADM-122.
 * Widths of columns in Jobs tab revert after closing a full Job record. Fixes UIHAADM-121.
-* Improve the situation with keeping all tabs on the page. Addresses but does not fully fix UIHAADM-99.
+* Keep the tab-switching bar on the page as the user scrolls. Fixes UIHAADM-99.
 * Remove the "(All)" index from the Jobs tab and rename "Name" to "Harvestable name". Fixes UIHAADM-113.
 * Remove the "(All)" index from the Failed Records tab. Fixes UIHAADM-114.
 
