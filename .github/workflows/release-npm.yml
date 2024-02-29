@@ -32,7 +32,8 @@ jobs:
         run: echo "TAG_VERSION=$(echo ${GITHUB_REF#refs/tags/v})" >> $GITHUB_ENV
       - name: Get version from package.json
         id: package_version
-        uses: notiz-dev/github-action-json-property@release
+        # uses: notiz-dev/github-action-json-property@release
+        uses: Srxzwei/github-action-json-property@1.0.0
         with:
           path: 'package.json'
           prop_path: 'version'
