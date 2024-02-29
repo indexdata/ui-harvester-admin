@@ -23,7 +23,7 @@ jobs:
       - name: Get version from package.json
         id: package_version
         # uses: notiz-dev/github-action-json-property@release
-        uses: Srxzwei/github-action-json-property@v1
+        uses: Srxzwei/github-action-json-property@v1.0.0
         with:
           path: 'package.json'
           prop_path: 'version'
