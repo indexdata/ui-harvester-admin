@@ -155,7 +155,7 @@ jobs:
             }
           body: ${{ steps.moduleDescriptor.outputs.content }}
       - name: Setup NPM for publish
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODEJS_VERSION }}
           check-latest: true
