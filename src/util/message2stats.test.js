@@ -1,5 +1,6 @@
 import { message2stats } from './message2stats';
 
+
 const testCases = [
   {
     name: 'old format',
@@ -22,6 +23,7 @@ const testCases = [
     }
   },
 ];
+
 
 for (let i = 0; i < testCases.length; i++) {
   const testCase = testCases[i];
