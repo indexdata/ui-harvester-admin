@@ -3,6 +3,7 @@
 ## 2.2.0 (IN PROGRESS)
 
 * Failed-record error messages should use detailed "message", when present, instead of label. Fixes UIHAADM-125.
+* Verify that stats-message parsing works for new format, add test suite. Fixes UIHAADM-124.
 
 ## [2.1.0](https://github.com/folio-org/ui-harvester-admin/tree/v2.1.0) (2024-02-28)
 
