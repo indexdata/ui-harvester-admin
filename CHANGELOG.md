@@ -1,5 +1,9 @@
 # Change history for ui-harvester-admin
 
+## 2.2.0 (IN PROGRESS)
+
+* Failed-record error messages should use detailed "message", when present, instead of label. Fixes UIHAADM-125.
+
 ## [2.1.0](https://github.com/folio-org/ui-harvester-admin/tree/v2.1.0) (2024-02-28)
 
 * Sort jobs in descending order by start date. Fixes UIHAADM-94.

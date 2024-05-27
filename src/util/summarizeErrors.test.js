@@ -97,5 +97,5 @@ const errorsString = `[
 const errorsData = JSON.parse(errorsString);
 
 test('summarizes simple error', () => {
-  expect(errors2string(errorsData)).toBe('Error encountered during upsert of Inventory record set');
+  expect(errors2string(errorsData)).toBe('ERROR: Cannot update record c352fe11-51e2-4e8b-87d6-578d6dedec8b because it has been changed (optimistic locking): Stored _version is 4, _version of request is 1 (23F09)');
 });
