@@ -8,7 +8,7 @@ function errors2react(errors) {
         errors.map(error => {
           const message = error.error?.message;
           const errorList = message?.errors;
-          const mm = message.message;
+          const mm = message?.message;
 
           if (errorList) {
             return errorList.map((x, i) => <li key={i}>{x.message}</li>);
@@ -30,7 +30,7 @@ function errors2string(errors) {
     errors.map(error => {
       const message = error.error?.message;
       const errorList = message?.errors;
-      const mm = message.message;
+      const mm = message?.message;
 
       if (errorList) {
         return errorList.map(x => x.message).join(' / ');
