@@ -13,6 +13,7 @@ env:
   NODEJS_VERSION: '18'
   FOLIO_NPM_REGISTRY: 'https://repository.folio.org/repository/npm-folioci/'
   FOLIO_MD_REGISTRY: 'https://registry.folio-dev.indexdata.com'
+  OK_SESSION: 'session1'
   OKAPI_PULL_FOLIO: '{ "urls" : [ "https://folio-registry.dev.folio.org" ] }'
   OKAPI_PULL_INDEXDATA: '{ "urls" : [ "https://registry.folio-dev.indexdata.com" ] }'
   COMPILE_TRANSLATION_FILES: true
@@ -52,6 +53,18 @@ jobs:
         run: |
           echo "Git tag version '${{ env.TAG_VERSION }}' does not match package.json version '${{ env.PACKAGE_VERSION }}'."
           exit 1
+      - name: Prepare okclient
+        run: git clone https://github.com/indexdata/okclient
+      - name: Ensure OK and FOLIO login
+        # So do not proceed with other workflow steps if not available.
+        run: |
+          source okclient/ok.sh
+          OK -S ${{ env.OK_SESSION }} \
+            -h ${{ env.FOLIO_MD_REGISTRY }} \
+            -t ${{ secrets.FOLIO_REGISTRY_TENANT }} \
+            -u ${{ secrets.FOLIO_REGISTRY_USERNAME }} \
+            -p ${{ secrets.FOLIO_REGISTRY_PASSWORD }}
+          OK -S ${{ env.OK_SESSION }} -x
       - name: Setup kernel for react native, increase watchers
         run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
       - name: Setup NPM for install
@@ -81,28 +94,6 @@ jobs:
         uses: juliangruber/read-file-action@v1
         with:
           path: ./module-descriptor.json
-      - name: Login ModuleDescriptor registry
-        id: login-md-registry
-        uses: cyberman54/curl@v1.3
-        with:
-          url: "${{ env.FOLIO_MD_REGISTRY }}/authn/login"
-          method: "POST"
-          accept: 201
-          timeout: 5000
-          retries: 3
-          headers: |
-            {
-              "content-type": "application/json",
-              "x-okapi-tenant": "${{ secrets.FOLIO_REGISTRY_TENANT }}"
-            }
-          body: |
-            {
-              "username": "${{ secrets.FOLIO_REGISTRY_USERNAME }}",
-              "password": "${{ secrets.FOLIO_REGISTRY_PASSWORD }}"
-            }
-      - name: Get the MD registry login token
-        run: |
-          echo "TOKEN_MD_REGISTRY=${{ fromJSON(steps.login-md-registry.outputs.response).headers['x-okapi-token'] }}" >> $GITHUB_ENV
       - name: Docker registry login
         uses: docker/login-action@v3
         with:
@@ -171,21 +162,21 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN_NPMJS }}
       - name: Publish ModuleDescriptor to MD registry
-        id: result-md-registry
-        uses: cyberman54/curl@v1.3
-        with:
-          url: "${{ env.FOLIO_MD_REGISTRY }}/_/proxy/modules"
-          method: "POST"
-          accept: 201
-          timeout: 5000
-          retries: 3
-          headers: |
-            {
-              "content-type": "application/json",
-              "x-okapi-tenant": "${{ secrets.FOLIO_REGISTRY_TENANT }}",
-              "x-okapi-token": "${{ env.TOKEN_MD_REGISTRY }}"
-            }
-          body: ${{ steps.moduleDescriptor.outputs.content }}
+        run: |
+          source okclient/ok.sh
+          echo "Do login ..."
+          OK -S ${{ env.OK_SESSION }} \
+            -h ${{ env.FOLIO_MD_REGISTRY }} \
+            -t ${{ secrets.FOLIO_REGISTRY_TENANT }} \
+            -u ${{ secrets.FOLIO_REGISTRY_USERNAME }} \
+            -p ${{ secrets.FOLIO_REGISTRY_PASSWORD }}
+          echo "Post the MD and report the response status ..."
+          OK -S ${{ env.OK_SESSION }} _/proxy/modules \
+            -X post -f ./module-descriptor.json
+          declare -n NAMEREF_STATUS=${{ env.OK_SESSION }}_HTTPStatus
+          echo "Response status: $NAMEREF_STATUS"
+          echo "Do logout ..."
+          OK -S ${{ env.OK_SESSION }} -x
       - name: Publish yarn.lock
         uses: actions/upload-artifact@v4
         with:
