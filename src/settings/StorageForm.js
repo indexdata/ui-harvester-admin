@@ -23,10 +23,14 @@ function validate(values) {
     errors.type = requiredSelectMessage;
   }
 
-  try {
-    if (values.json && values.json !== '') JSON.parse(values.json);
-  } catch (e) {
-    errors.json = <FormattedMessage id="ui-harvester-admin.invalidJSON" values={{ error: e.toString() }} />;
+  if (!values.json) {
+    errors.json = requiredSelectMessage;
+  } else {
+    try {
+      if (values.json && values.json !== '') JSON.parse(values.json);
+    } catch (e) {
+      errors.json = <FormattedMessage id="ui-harvester-admin.invalidJSON" values={{ error: e.toString() }} />;
+    }
   }
 
   return errors;
@@ -63,7 +67,7 @@ const StorageForm = (props) => {
           <RCF tag="description" domain="storage" component={TextArea} rows="4" />
           <RCF tag="enabled" domain="storage" component={Checkbox} type="checkbox" />
           <RCF tag="url" />
-          <RCF tag="json" component={TextArea} rows="4" />
+          <RCF tag="json" component={TextArea} rows="4" required />
         </form>
       </TitleManager>
     </Pane>
