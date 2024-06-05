@@ -6,7 +6,7 @@ const sortMap = {
 };
 
 function parseFilterValue(field, op, value, appendToTerm) {
-  let res = `${field}${op}${value}`;
+  const res = `${field}${op}${value}`;
   if (appendToTerm === undefined) {
     return res;
   } else {
