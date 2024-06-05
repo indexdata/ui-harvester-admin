@@ -5,14 +5,21 @@ const sortMap = {
   // so no mapping is required.
 };
 
-function parseFilterValue(field, op, value) {
-  return `${field}${op}${value}`;
+function parseFilterValue(field, op, value, appendToTerm) {
+  let res = `${field}${op}${value}`;
+  if (appendToTerm === undefined) {
+    return res;
+  } else {
+    return res + appendToTerm;
+  }
 }
 
-function makePFV(field, op) {
-  return (value) => parseFilterValue(field, op, value);
+function makePFV(field, op, appendToTerm) {
+  return (value) => parseFilterValue(field, op, value, appendToTerm);
 }
 
+const startOfDay = 'T00:00:00';
+const endOfDay = 'T23:59:59';
 const filterConfig = [{
   name: 'status',
   cql: 'status',
@@ -25,32 +32,32 @@ const filterConfig = [{
   name: 'started_from',
   cql: 'started_from',
   values: [],
-  parse: makePFV('started', '>='),
+  parse: makePFV('started', '>=', startOfDay),
 }, {
   name: 'started_to',
   cql: 'started_to',
   values: [],
-  parse: makePFV('started', '<='),
+  parse: makePFV('started', '<=', endOfDay),
 }, {
   name: 'finished_from',
   cql: 'finished_from',
   values: [],
-  parse: makePFV('finished', '>='),
+  parse: makePFV('finished', '>=', startOfDay),
 }, {
   name: 'finished_to',
   cql: 'finished_to',
   values: [],
-  parse: makePFV('finished', '<='),
+  parse: makePFV('finished', '<=', endOfDay),
 }, {
   name: 'timeStamp_from',
   cql: 'timeStamp_from',
   values: [],
-  parse: makePFV('timeStamp', '>='),
+  parse: makePFV('timeStamp', '>=', startOfDay),
 }, {
   name: 'timeStamp_to',
   cql: 'timeStamp_to',
   values: [],
-  parse: makePFV('timeStamp', '<='),
+  parse: makePFV('timeStamp', '<=', endOfDay),
 }, {
   name: 'records_from',
   cql: 'records_from',
