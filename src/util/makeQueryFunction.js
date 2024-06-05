@@ -1,3 +1,6 @@
+// XXX I don't think we need this copy, which seems more or less identical to what's in stripes-smart-components
+// See UIHAADM-35 for the history of how it got here
+
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { compilePathTemplate } from '@folio/stripes-connect/RESTResource/RESTResource';
 import { filters2cql } from '@folio/stripes/components';
