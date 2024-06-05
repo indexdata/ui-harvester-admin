@@ -1,18 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import { stripesConnect, useOkapiKy } from '@folio/stripes/core';
 import HarvestableLog from '../views/HarvestableLog';
-import packageInfo from '../../package';
 import loadPlainTextLog from '../util/loadPlainTextLog';
 
 
-const HarvestableLogRoute = ({ resources, mutator, match }) => {
+const HarvestableLogRoute = ({ resources, match }) => {
   const okapiKy = useOkapiKy();
   const [logFetchCount, setLogFetchCount] = useState(0);
   const [plainTextLog, setPlainTextLog] = useState();
+  const history = useHistory();
 
   const handleClose = () => {
-    mutator.query.update({ _path: `${packageInfo.stripes.route}/harvestables/${match.params.recId}` });
+    // In general, I don't like to use "back" for navigation buttons
+    // as it messes with the history. But for a close button I guess
+    // its OK. And it gets us back to either the list of harvestables
+    // or the detailed view depending on where we came from, which is
+    // what we want (see UIHAADM-129).
+    history.go(-1);
   };
 
   // We can't use stripes-connect for plainTextLog, as it assumes JSON responses: see the code at
