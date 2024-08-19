@@ -246,7 +246,7 @@
     "filter.date.finished.to": "到",
     "error.invalidSort.label": "排序标准无效",
     "error.invalidSort.content": "由于实施限制，无法对<code> {name} </code>列进行排序。",
-    "jobs.index.name": "名称",
+    "jobs.index.name": "可收割名称",
     "jobs.index.id": "ID",
     "jobs.index.harvestableId": "可收割ID",
     "jobs.index.message": "消息",
@@ -314,5 +314,13 @@
     "step.field.testOutput": "测试输出",
     "step.field.customClass": "定制类",
     "harvestables.field.statusJobEnabled.help": "空",
-    "harvestables.field.customMailAddresses.help": "空"
+    "harvestables.field.customMailAddresses.help": "空",
+    "set-to-xml2json": "选择 XML 转 JSON",
+    "export-csv": "导出 CSV",
+    "invalidXML": "无效的 XML： {error}",
+    "invalidXSLT": "有效的 XML，但不是 XSLT 样式表",
+    "validXSLT": "有效的 XSLT 样式表",
+    "reports": "报告",
+    "transform": "转换",
+    "nav.mike": "Mike"
 }
