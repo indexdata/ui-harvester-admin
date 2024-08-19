@@ -314,5 +314,13 @@
     "step.field.testOutput": "Test output",
     "step.field.customClass": "Custom class",
     "harvestables.field.statusJobEnabled.help": "",
-    "harvestables.field.customMailAddresses.help": ""
+    "harvestables.field.customMailAddresses.help": "",
+    "set-to-xml2json": "Choose XML-to-JSON",
+    "export-csv": "Export CSV",
+    "invalidXML": "Invalid XML: {error}",
+    "invalidXSLT": "Valid XML, but not an XSLT stylesheet",
+    "validXSLT": "Valid XSLT stylesheet",
+    "reports": "Reports",
+    "transform": "Transform",
+    "nav.mike": "Mike"
 }
