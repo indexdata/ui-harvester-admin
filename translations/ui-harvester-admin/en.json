@@ -58,7 +58,7 @@
     "harvestables.column.enabled": "Enabled?",
     "harvestables.column.jobClass": "Job class",
     "harvestables.column.id": "ID",
-    "harvestables.column.message": "Message (processed/loaded/deleted/failed)",
+    "harvestables.column.message": "Message (processed/loaded/deleted(skipped)/failed)",
     "harvestables.column.logFile": "Log file",
     "harvestables.column.oldJobs": "Old jobs",
 
@@ -325,7 +325,7 @@
 
     "summary-label.processed": "Processed",
     "summary-label.loaded": "Loaded",
-    "summary-label.deleted": "Deleted",
+    "summary-label.deleted": "Deleted(skipped)",
     "summary-label.failed": "Failed",
 
     "failed-records.recordNumber": "Record number",
@@ -342,7 +342,7 @@
     "jobs.column.started": "Started",
     "jobs.column.finished": "Finished",
     "jobs.column.type": "Job class",
-    "jobs.column.message": "Message (processed/loaded/deleted/failed)",
+    "jobs.column.message": "Message (processed/loaded/deleted(skipped)/failed)",
 
     "stats.instances": "Instances",
     "stats.holdings": "Holdings",
