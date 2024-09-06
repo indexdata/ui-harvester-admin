@@ -66,7 +66,7 @@ HarvestableJobsRoute.manifest = Object.freeze({
       query: (queryParams, pathComponents, rv, logger) => {
         const extraFilter = `harvestableId.${pathComponents.recId}`;
         const allFilters = rv.query.filters ? `${rv.query.filters},${extraFilter}` : extraFilter;
-        rv.query = { ...rv.query, filters: allFilters };
+        rv.query = { sort: '-started', ...rv.query, filters: allFilters };
         const res = queryFunction('name="%{query.query}" or message="%{query.query}"',
           queryParams, pathComponents, rv, logger);
         if (res === undefined) return undefined;

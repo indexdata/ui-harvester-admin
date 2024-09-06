@@ -8,6 +8,7 @@
 * Close button on last-logs page returns to harvestables list or detail page depending on where it came from. Fixes UIHAADM-129.
 * The "Extra configuration" textarea in the Storage form is now mandatory. Fixes UIHAADM-127.
 * Update jobs column heading and jobs detail view text. Fixes UIHAADM-131.
+* The list of a single harvester's recent jobs is sorted in reverse chonological order, like the list of all jobs. Fixes UIHAADM-133.
 
 ## [2.1.0](https://github.com/folio-org/ui-harvester-admin/tree/v2.1.0) (2024-02-28)
 
