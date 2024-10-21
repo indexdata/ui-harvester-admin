@@ -10,6 +10,7 @@
 * Update jobs column heading and jobs detail view text. Fixes UIHAADM-131.
 * The list of a single harvester's recent jobs is sorted in reverse chonological order, like the list of all jobs. Fixes UIHAADM-133.
 * Update permission names to encompass logfile-deletion threshold. Fixes UIHAADM-135.
+* Set up internationalization for permission names. Fixes UIHAADM-138.
 
 ## [2.1.0](https://github.com/folio-org/ui-harvester-admin/tree/v2.1.0) (2024-02-28)
 
