@@ -48,7 +48,7 @@
       },
       {
         "permissionName": "ui-harvester-admin.settings.view",
-        "displayName": "Harvester admin (Settings): View storage engines, transformation pipelines and transformation steps",
+        "displayName": "Harvester admin (Settings): View storage engines, transformation pipelines and transformation steps, and log-file deletion threshold",
         "subPermissions": [
           "settings.harvester-admin.enabled",
           "harvester-admin.storages.collection.get",
@@ -58,7 +58,7 @@
       },
       {
         "permissionName": "ui-harvester-admin.settings.view-edit",
-        "displayName": "Harvester admin (Settings): View, edit storage engines, transformation pipelines and transformation steps",
+        "displayName": "Harvester admin (Settings): View, edit storage engines, transformation pipelines and transformation steps, and log-file deletion threshold",
         "subPermissions": [
           "ui-harvester-admin.settings.view",
           "harvester-admin.storages.item.put"
