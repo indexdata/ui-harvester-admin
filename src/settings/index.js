@@ -4,6 +4,7 @@ import { Settings } from '@folio/stripes/smart-components';
 import StorageSettings from './StorageSettings';
 import PipelineSettings from './PipelineSettings';
 import StepSettings from './StepSettings';
+import LogSettings from './LogSettings';
 
 const HarvesterAdminSettings = (props) => {
   const pages = [
@@ -23,6 +24,12 @@ const HarvesterAdminSettings = (props) => {
       route: 'step',
       label: <FormattedMessage id="ui-harvester-admin.settings.step" />,
       component: StepSettings,
+      // perm: 'XXX',
+    },
+    {
+      route: 'logs',
+      label: <FormattedMessage id="ui-harvester-admin.settings.logs" />,
+      component: LogSettings,
       // perm: 'XXX',
     },
   ];
