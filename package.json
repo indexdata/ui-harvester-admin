@@ -52,7 +52,9 @@
         "subPermissions": [
           "settings.harvester-admin.enabled",
           "harvester-admin.storages.collection.get",
-          "harvester-admin.storages.item.get"
+          "harvester-admin.storages.item.get",
+          "mod-settings.entries.collection.get",
+          "mod-settings.global.read.mod-harvester-admin"
         ],
         "visible": true
       },
@@ -61,7 +63,10 @@
         "displayName": "Harvester admin (Settings): View, edit storage engines, transformation pipelines and transformation steps, and log-file deletion threshold",
         "subPermissions": [
           "ui-harvester-admin.settings.view",
-          "harvester-admin.storages.item.put"
+          "harvester-admin.storages.item.put",
+          "mod-settings.entries.item.put",
+          "mod-settings.entries.item.post",
+          "mod-settings.global.write.mod-harvester-admin"
         ],
         "visible": true
       },
