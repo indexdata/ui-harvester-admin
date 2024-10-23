@@ -1,6 +1,6 @@
 # Change history for ui-harvester-admin
 
-## 2.2.0 (IN PROGRESS)
+## [2.2.0](https://github.com/folio-org/ui-harvester-admin/tree/v2.2.0) (2024-10-23)
 
 * Failed-record error messages should use detailed "message", when present, instead of label. Fixes UIHAADM-125.
 * Verify that stats-message parsing works for new format, add test suite. Fixes UIHAADM-124.
@@ -8,9 +8,10 @@
 * Close button on last-logs page returns to harvestables list or detail page depending on where it came from. Fixes UIHAADM-129.
 * The "Extra configuration" textarea in the Storage form is now mandatory. Fixes UIHAADM-127.
 * Update jobs column heading and jobs detail view text. Fixes UIHAADM-131.
-* The list of a single harvester's recent jobs is sorted in reverse chonological order, like the list of all jobs. Fixes UIHAADM-133.
+* The list of a single harvester's recent jobs is sorted in reverse chronological order, like the list of all jobs. Fixes UIHAADM-133.
 * Update permission names to encompass logfile-deletion threshold. Fixes UIHAADM-135.
 * Set up internationalization for permission names. Fixes UIHAADM-138.
+* Add Settings page for log-file time-deletion threshold. Fixes UIHAADM-136.
 
 ## [2.1.0](https://github.com/folio-org/ui-harvester-admin/tree/v2.1.0) (2024-02-28)
 
