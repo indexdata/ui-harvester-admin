@@ -1,5 +1,10 @@
 # Change history for ui-harvester-admin
 
+## [2.3.0](https://github.com/folio-org/ui-harvester-admin/tree/v2.3.0) (IN PROGRESS)
+
+* Explicit paging for list of failed records. Fixes UIHAADM-141.
+* Explicit paging for list of harvestables. Fixes UIHAADM-142.
+
 ## [2.2.0](https://github.com/folio-org/ui-harvester-admin/tree/v2.2.0) (2024-10-23)
 
 * Failed-record error messages should use detailed "message", when present, instead of label. Fixes UIHAADM-125.
@@ -12,7 +17,6 @@
 * Update permission names to encompass logfile-deletion threshold. Fixes UIHAADM-135.
 * Set up internationalization for permission names. Fixes UIHAADM-138.
 * Add Settings page for log-file time-deletion threshold. Fixes UIHAADM-136.
-* Explicit paging for list of failed records. Fixes UIHAADM-141.
 
 ## [2.1.0](https://github.com/folio-org/ui-harvester-admin/tree/v2.1.0) (2024-02-28)
 

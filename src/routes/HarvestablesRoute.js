@@ -18,7 +18,14 @@ function HarvestablesRoute({ stripes, resources, mutator, children }) {
     source.update({ resources, mutator }, 'reportTitles');
   }
 
-  const handleNeedMoreData = () => source.fetchMore(RESULT_COUNT_INCREMENT);
+  const handleNeedMoreData = (_askAmount, index) => {
+    if (index >= 0) {
+      source.fetchOffset(index);
+    } else {
+      source.fetchMore(RESULT_COUNT_INCREMENT);
+    }
+  };
+
 
   const error = resources.harvestables.failed ? resources.harvestables.failed.message : undefined;
   const hasLoaded = resources.harvestables.hasLoaded;
@@ -44,13 +51,17 @@ function HarvestablesRoute({ stripes, resources, mutator, children }) {
 HarvestablesRoute.manifest = Object.freeze({
   query: { initialValue: {} },
   resultCount: { initialValue: INITIAL_RESULT_COUNT },
+  resultOffset: { initialValue: 0 },
   harvestables: {
     type: 'okapi',
     path: 'harvester-admin/harvestables',
     throwErrors: false,
     records: 'harvestables',
     recordsRequired: '%{resultCount}',
+    resultOffset: '%{resultOffset}',
     perRequest: RESULT_COUNT_INCREMENT,
+    resultDensity: 'sparse',
+    accumulate: 'true',
     params: {
       query: (qp) => {
         const conditions = [];
