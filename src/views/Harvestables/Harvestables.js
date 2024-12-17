@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useIntl, FormattedMessage } from 'react-intl';
 import { useLocation } from 'react-router-dom';
 import { useStripes, IfPermission, AppIcon } from '@folio/stripes/core';
-import { LoadingPane, Paneset, Pane, MultiColumnList, PaneMenu, MenuSection, Button, Icon } from '@folio/stripes/components';
+import { LoadingPane, Paneset, Pane, MultiColumnList, PaneMenu, MenuSection, Button, Icon, MCLPagingTypes } from '@folio/stripes/components';
 import { parseFilters, ColumnManager, SearchAndSortQuery } from '@folio/stripes/smart-components';
 import { message2stats, summarizeStats } from '../../util/message2stats';
 import viewLogTranslationTag from '../../util/viewLogTranslationTag';
@@ -195,7 +195,6 @@ function Harvestables({
                         <MultiColumnList
                           autosize
                           id="list-harvestables"
-                          virtualize
                           visibleColumns={visibleColumns}
                           columnMapping={columnMapping}
                           columnWidths={{
@@ -215,6 +214,7 @@ function Harvestables({
                           sortedColumn={sortedColumn}
                           sortDirection={sortDirection}
                           onNeedMoreData={onNeedMoreData}
+                          pagingType={MCLPagingTypes.PREV_NEXT}
                           onRowClick={(event, rec) => updateQuery({ _path: `${packageInfo.stripes.route}/harvestables/${rec.id}` })}
                         />
                       </Pane>
