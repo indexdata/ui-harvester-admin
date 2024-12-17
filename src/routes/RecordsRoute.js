@@ -19,7 +19,13 @@ const RecordsRoute = ({ stripes, resources, mutator, children }) => {
     source.update({ resources, mutator }, 'reportTitles');
   }
 
-  const handleNeedMoreData = () => source.fetchMore(RESULT_COUNT_INCREMENT);
+  const handleNeedMoreData = (_askAmount, index, _firstIndex, _direction) => {
+    if (index >= 0) {
+      source.fetchOffset(index);
+    } else {
+      source.fetchMore(RESULT_COUNT_INCREMENT);
+    }
+  };
 
   const hasLoaded = resources.records.hasLoaded;
   const error = resources.records.failed ? resources.records.failed.message : undefined;
@@ -45,13 +51,17 @@ const RecordsRoute = ({ stripes, resources, mutator, children }) => {
 RecordsRoute.manifest = Object.freeze({
   query: {},
   resultCount: { initialValue: INITIAL_RESULT_COUNT },
+  resultOffset: { initialValue: 0 },
   records: {
     type: 'okapi',
     path: 'harvester-admin/previous-jobs/failed-records',
     throwErrors: false,
     records: 'failedRecords',
     recordsRequired: '%{resultCount}',
+    resultOffset: '%{resultOffset}',
     perRequest: RESULT_COUNT_INCREMENT,
+    resultDensity: 'sparse',
+    accumulate: 'true',
     params: {
       // Modify the query-function to remove unwanted asterisks after ID searches
       query: (queryParams, pathComponents, rv, logger) => {
