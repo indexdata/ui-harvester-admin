@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { AppIcon } from '@folio/stripes/core';
-import { MenuSection, Button, Icon, LoadingPane, Paneset, Pane, MultiColumnList, ErrorModal, exportToCsv } from '@folio/stripes/components';
+import { MenuSection, Button, Icon, LoadingPane, Paneset, Pane, MultiColumnList, ErrorModal, exportToCsv, MCLPagingTypes } from '@folio/stripes/components';
 import { ColumnManager, SearchAndSortQuery } from '@folio/stripes/smart-components';
 import parseSort from '../../util/parseSort';
 import { errors2react, errors2string } from '../../util/summarizeErrors';
@@ -113,7 +113,6 @@ function Records({
                         <MultiColumnList
                           autosize
                           id="list-records"
-                          virtualize
                           visibleColumns={visibleColumns}
                           columnMapping={columnMapping}
                           columnWidths={columnWidths}
@@ -125,6 +124,7 @@ function Records({
                           onNeedMoreData={onNeedMoreData}
                           sortedColumn={sortedColumn}
                           sortDirection={sortDirection}
+                          pagingType={MCLPagingTypes.PREV_NEXT}
                           onRowClick={(event, rec) => updateQuery({ _path: `${packageInfo.stripes.route}/records/${rec.id}` })}
                         />
                         <ErrorModal
