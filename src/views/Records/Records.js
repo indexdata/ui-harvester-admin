@@ -11,22 +11,25 @@ import ErrorMessage from '../../components/ErrorMessage';
 import packageInfo from '../../../package';
 
 
-function renderActionMenu(onToggle, intl, data, renderedColumnsMenu) {
+function exportAllRecords(data) {
+  const expanded = data.records.filter(r => r !== undefined).map(r => ({
+    ...r,
+    errors: errors2string(r.recordErrors),
+  }));
+  console.log('expanded =', expanded);
+  exportToCsv(expanded, {});
+}
+
+
+function renderActionMenu(onToggle, intl, data, resultCount, renderedColumnsMenu) {
   return (
     <div>
       <MenuSection label={intl.formatMessage({ id: 'ui-harvester-admin.reports' })}>
         <Button
           aria-label={intl.formatMessage({ id: 'ui-harvester-admin.export-csv' })}
-          disabled={data.records.length === 0}
+          disabled={!resultCount}
           buttonStyle="dropdownItem"
-          onClick={() => {
-            const expanded = data.records.map(r => ({
-              ...r,
-              errors: errors2string(r.recordErrors),
-            }));
-            exportToCsv(expanded, {});
-            onToggle();
-          }}
+          onClick={() => { exportAllRecords(data); onToggle(); }}
         >
           <Icon icon="download">
             <FormattedMessage id="ui-harvester-admin.export-csv" />
@@ -108,7 +111,7 @@ function Records({
                         padContent={false}
                         paneTitle={paneTitle}
                         paneSub={<FormattedMessage id="ui-harvester-admin.resultCount" values={{ count: resultCount }} />}
-                        actionMenu={({ onToggle }) => renderActionMenu(onToggle, intl, data, renderColumnsMenu)}
+                        actionMenu={({ onToggle }) => renderActionMenu(onToggle, intl, data, resultCount, renderColumnsMenu)}
                       >
                         <MultiColumnList
                           autosize
