@@ -11,17 +11,27 @@ import ErrorMessage from '../../components/ErrorMessage';
 import packageInfo from '../../../package';
 
 
-function exportAllRecords(data) {
-  const expanded = data.records.filter(r => r !== undefined).map(r => ({
-    ...r,
-    errors: errors2string(r.recordErrors),
-  }));
-  console.log('expanded =', expanded);
-  exportToCsv(expanded, {});
+function exportAllRecords(resultCount, getMoreRecords) {
+  const RCI = 100;   // Probably keep in sync with RESULT_COUNT_INCREMENT from RecordsRoute.js
+
+  const p = [];
+  for (let offset = 0; offset < resultCount; offset += RCI) {
+    p.push(getMoreRecords({ params: { offset, limit: RCI } }));
+  }
+
+  Promise.all(p).then(res => {
+    const records = res.flat().filter(r => r !== undefined).map(r => ({
+      ...r,
+      errors: errors2string(r.recordErrors),
+      originalRecord: undefined,
+    }));
+
+    exportToCsv(records, {});
+  });
 }
 
 
-function renderActionMenu(onToggle, intl, data, resultCount, renderedColumnsMenu) {
+function renderActionMenu(onToggle, intl, data, resultCount, getMoreRecords, renderedColumnsMenu) {
   return (
     <div>
       <MenuSection label={intl.formatMessage({ id: 'ui-harvester-admin.reports' })}>
@@ -29,7 +39,7 @@ function renderActionMenu(onToggle, intl, data, resultCount, renderedColumnsMenu
           aria-label={intl.formatMessage({ id: 'ui-harvester-admin.export-csv' })}
           disabled={!resultCount}
           buttonStyle="dropdownItem"
-          onClick={() => { exportAllRecords(data); onToggle(); }}
+          onClick={() => { exportAllRecords(resultCount, getMoreRecords); onToggle(); }}
         >
           <Icon icon="download">
             <FormattedMessage id="ui-harvester-admin.export-csv" />
@@ -50,6 +60,7 @@ function Records({
   error,
   hasLoaded,
   onNeedMoreData,
+  getMoreRecords,
   children,
 }) {
   const intl = useIntl();
@@ -111,7 +122,7 @@ function Records({
                         padContent={false}
                         paneTitle={paneTitle}
                         paneSub={<FormattedMessage id="ui-harvester-admin.resultCount" values={{ count: resultCount }} />}
-                        actionMenu={({ onToggle }) => renderActionMenu(onToggle, intl, data, resultCount, renderColumnsMenu)}
+                        actionMenu={({ onToggle }) => renderActionMenu(onToggle, intl, data, resultCount, getMoreRecords, renderColumnsMenu)}
                       >
                         <MultiColumnList
                           autosize
@@ -167,6 +178,7 @@ Records.propTypes = {
   error: PropTypes.string,
   hasLoaded: PropTypes.bool.isRequired,
   onNeedMoreData: PropTypes.func.isRequired,
+  getMoreRecords: PropTypes.func.isRequired,
   children: PropTypes.oneOfType([
     PropTypes.object.isRequired,
     PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,

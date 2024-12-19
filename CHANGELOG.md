@@ -4,6 +4,7 @@
 
 * Explicit paging for list of failed records. Fixes UIHAADM-141.
 * Explicit paging for list of harvestables. Fixes UIHAADM-142.
+* When downloading Failed Records, provide all records in the result set, not just the currently visible page. Fixes UIHAADM-140.
 
 ## [2.2.0](https://github.com/folio-org/ui-harvester-admin/tree/v2.2.0) (2024-10-23)
 
