@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { AppIcon } from '@folio/stripes/core';
+import { AppIcon, useOkapiKy } from '@folio/stripes/core';
 import { MenuSection, Button, Icon, LoadingPane, Paneset, Pane, MultiColumnList, ErrorModal, exportToCsv, MCLPagingTypes } from '@folio/stripes/components';
 import { ColumnManager, SearchAndSortQuery } from '@folio/stripes/smart-components';
 import parseSort from '../../util/parseSort';
@@ -11,28 +11,31 @@ import ErrorMessage from '../../components/ErrorMessage';
 import packageInfo from '../../../package';
 
 
-function exportAllRecords(resultCount, recordsMutator) {
+function exportAllRecords(resultCount, okapiKy) {
   const RCI = 100;   // Probably keep in sync with RESULT_COUNT_INCREMENT from RecordsRoute.js
 
   const p = [];
   for (let offset = 0; offset < resultCount; offset += RCI) {
-    p.push(recordsMutator.GET({ params: { offset, limit: RCI } }));
+    p.push(okapiKy(`harvester-admin/previous-jobs/failed-records?offset=${offset}&limit=${RCI}`)
+      .then(res => res.json()));
   }
 
-  Promise.all(p).then(res => {
-    recordsMutator.reset();
-    const records = res.flat().filter(r => r !== undefined).map(r => ({
-      ...r,
-      errors: errors2string(r.recordErrors),
-      originalRecord: undefined,
-    }));
+  Promise.all(p).then(responses => {
+    const records = responses
+      .map(response => response.failedRecords)
+      .flat()
+      .filter(r => r !== undefined).map(r => ({
+        ...r,
+        errors: errors2string(r.recordErrors),
+        originalRecord: undefined,
+      }));
 
     exportToCsv(records, {});
   });
 }
 
 
-function renderActionMenu(onToggle, intl, data, resultCount, recordsMutator, renderedColumnsMenu) {
+function renderActionMenu(onToggle, intl, data, resultCount, okapiKy, renderedColumnsMenu) {
   return (
     <div>
       <MenuSection label={intl.formatMessage({ id: 'ui-harvester-admin.reports' })}>
@@ -40,7 +43,7 @@ function renderActionMenu(onToggle, intl, data, resultCount, recordsMutator, ren
           aria-label={intl.formatMessage({ id: 'ui-harvester-admin.export-csv' })}
           disabled={!resultCount}
           buttonStyle="dropdownItem"
-          onClick={() => { exportAllRecords(resultCount, recordsMutator); onToggle(); }}
+          onClick={() => { exportAllRecords(resultCount, okapiKy); onToggle(); }}
         >
           <Icon icon="download">
             <FormattedMessage id="ui-harvester-admin.export-csv" />
@@ -61,11 +64,11 @@ function Records({
   error,
   hasLoaded,
   onNeedMoreData,
-  recordsMutator,
   children,
 }) {
   const intl = useIntl();
   const [invalidSortKey, setInvalidSortKey] = useState();
+  const okapiKy = useOkapiKy();
 
   const columnMapping = {
     recordNumber: <FormattedMessage id="ui-harvester-admin.failed-records.recordNumber" />,
@@ -123,7 +126,7 @@ function Records({
                         padContent={false}
                         paneTitle={paneTitle}
                         paneSub={<FormattedMessage id="ui-harvester-admin.resultCount" values={{ count: resultCount }} />}
-                        actionMenu={({ onToggle }) => renderActionMenu(onToggle, intl, data, resultCount, recordsMutator, renderColumnsMenu)}
+                        actionMenu={({ onToggle }) => renderActionMenu(onToggle, intl, data, resultCount, okapiKy, renderColumnsMenu)}
                       >
                         <MultiColumnList
                           autosize
@@ -179,10 +182,6 @@ Records.propTypes = {
   error: PropTypes.string,
   hasLoaded: PropTypes.bool.isRequired,
   onNeedMoreData: PropTypes.func.isRequired,
-  recordsMutator: PropTypes.shape({
-    GET: PropTypes.func.isRequired,
-    reset: PropTypes.func.isRequired,
-  }).isRequired,
   children: PropTypes.oneOfType([
     PropTypes.object.isRequired,
     PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
