@@ -41,7 +41,7 @@ const RecordsRoute = ({ stripes, resources, mutator, children }) => {
       hasLoaded={hasLoaded}
       error={error}
       onNeedMoreData={handleNeedMoreData}
-      getMoreRecords={mutator.records.GET}
+      recordsMutator={mutator.records}
     >
       {children}
     </Records>
