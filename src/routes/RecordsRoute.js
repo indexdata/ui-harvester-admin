@@ -41,6 +41,7 @@ const RecordsRoute = ({ stripes, resources, mutator, children }) => {
       hasLoaded={hasLoaded}
       error={error}
       onNeedMoreData={handleNeedMoreData}
+      recordsMutator={mutator.records}
     >
       {children}
     </Records>
@@ -101,6 +102,9 @@ RecordsRoute.propTypes = {
   mutator: PropTypes.shape({
     query: PropTypes.shape({
       update: PropTypes.func.isRequired,
+    }).isRequired,
+    records: PropTypes.shape({
+      GET: PropTypes.func.isRequired,
     }).isRequired,
   }).isRequired,
   children: PropTypes.object, // XXX may need to add .isRequired later

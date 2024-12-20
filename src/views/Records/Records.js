@@ -11,22 +11,36 @@ import ErrorMessage from '../../components/ErrorMessage';
 import packageInfo from '../../../package';
 
 
-function renderActionMenu(onToggle, intl, data, renderedColumnsMenu) {
+function exportAllRecords(resultCount, recordsMutator) {
+  const RCI = 100;   // Probably keep in sync with RESULT_COUNT_INCREMENT from RecordsRoute.js
+
+  const p = [];
+  for (let offset = 0; offset < resultCount; offset += RCI) {
+    p.push(recordsMutator.GET({ params: { offset, limit: RCI } }));
+  }
+
+  Promise.all(p).then(res => {
+    recordsMutator.reset();
+    const records = res.flat().filter(r => r !== undefined).map(r => ({
+      ...r,
+      errors: errors2string(r.recordErrors),
+      originalRecord: undefined,
+    }));
+
+    exportToCsv(records, {});
+  });
+}
+
+
+function renderActionMenu(onToggle, intl, data, resultCount, recordsMutator, renderedColumnsMenu) {
   return (
     <div>
       <MenuSection label={intl.formatMessage({ id: 'ui-harvester-admin.reports' })}>
         <Button
           aria-label={intl.formatMessage({ id: 'ui-harvester-admin.export-csv' })}
-          disabled={data.records.length === 0}
+          disabled={!resultCount}
           buttonStyle="dropdownItem"
-          onClick={() => {
-            const expanded = data.records.map(r => ({
-              ...r,
-              errors: errors2string(r.recordErrors),
-            }));
-            exportToCsv(expanded, {});
-            onToggle();
-          }}
+          onClick={() => { exportAllRecords(resultCount, recordsMutator); onToggle(); }}
         >
           <Icon icon="download">
             <FormattedMessage id="ui-harvester-admin.export-csv" />
@@ -47,6 +61,7 @@ function Records({
   error,
   hasLoaded,
   onNeedMoreData,
+  recordsMutator,
   children,
 }) {
   const intl = useIntl();
@@ -108,7 +123,7 @@ function Records({
                         padContent={false}
                         paneTitle={paneTitle}
                         paneSub={<FormattedMessage id="ui-harvester-admin.resultCount" values={{ count: resultCount }} />}
-                        actionMenu={({ onToggle }) => renderActionMenu(onToggle, intl, data, renderColumnsMenu)}
+                        actionMenu={({ onToggle }) => renderActionMenu(onToggle, intl, data, resultCount, recordsMutator, renderColumnsMenu)}
                       >
                         <MultiColumnList
                           autosize
@@ -164,6 +179,10 @@ Records.propTypes = {
   error: PropTypes.string,
   hasLoaded: PropTypes.bool.isRequired,
   onNeedMoreData: PropTypes.func.isRequired,
+  recordsMutator: PropTypes.shape({
+    GET: PropTypes.func.isRequired,
+    reset: PropTypes.func.isRequired,
+  }).isRequired,
   children: PropTypes.oneOfType([
     PropTypes.object.isRequired,
     PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
