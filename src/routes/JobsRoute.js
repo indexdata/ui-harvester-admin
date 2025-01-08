@@ -7,8 +7,8 @@ import queryFunction from '../search/queryFunction';
 import Jobs from '../views/Jobs';
 
 
-const INITIAL_RESULT_COUNT = 200;
-const RESULT_COUNT_INCREMENT = 200;
+const INITIAL_RESULT_COUNT = 100;
+const RESULT_COUNT_INCREMENT = 100;
 
 
 function JobsRoute({ stripes, resources, mutator, children }) {
@@ -21,11 +21,7 @@ function JobsRoute({ stripes, resources, mutator, children }) {
   }
 
   const handleNeedMoreData = (_askAmount, index) => {
-    if (index >= 0) {
-      source.fetchOffset(index);
-    } else {
-      source.fetchMore(RESULT_COUNT_INCREMENT);
-    }
+    source.fetchOffset(index);
   };
 
   const error = resources.jobs.failed ? resources.jobs.failed.message : undefined;
@@ -41,6 +37,7 @@ function JobsRoute({ stripes, resources, mutator, children }) {
       updateQuery={mutator.query.update}
       error={error}
       hasLoaded={hasLoaded}
+      pageAmount={RESULT_COUNT_INCREMENT}
       onNeedMoreData={handleNeedMoreData}
     >
       {children}
