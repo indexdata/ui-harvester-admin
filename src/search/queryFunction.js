@@ -1,4 +1,5 @@
-import makeQueryFunction from '../util/makeQueryFunction';
+import { makeQueryFunction } from '@folio/stripes/smart-components';
+
 
 const sortMap = {
   // All the headings are the names of sortable fields
