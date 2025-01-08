@@ -98,6 +98,7 @@ function Harvestables({
   updateQuery,
   error,
   hasLoaded,
+  pageAmount,
   onNeedMoreData,
   children,
 }) {
@@ -213,6 +214,7 @@ function Harvestables({
                           onHeaderClick={sasqParams.onSort}
                           sortedColumn={sortedColumn}
                           sortDirection={sortDirection}
+                          pageAmount={pageAmount}
                           onNeedMoreData={onNeedMoreData}
                           pagingType={MCLPagingTypes.PREV_NEXT}
                           onRowClick={(event, rec) => updateQuery({ _path: `${packageInfo.stripes.route}/harvestables/${rec.id}` })}
@@ -242,6 +244,7 @@ Harvestables.propTypes = {
   updateQuery:PropTypes.func.isRequired,
   error: PropTypes.string,
   hasLoaded: PropTypes.bool.isRequired,
+  pageAmount: PropTypes.number.isRequired,
   onNeedMoreData: PropTypes.func.isRequired,
   children: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
 };
