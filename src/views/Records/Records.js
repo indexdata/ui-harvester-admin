@@ -63,6 +63,7 @@ function Records({
   updateQuery,
   error,
   hasLoaded,
+  pageAmount,
   onNeedMoreData,
   children,
 }) {
@@ -139,6 +140,7 @@ function Records({
                           totalCount={resultCount}
                           onHeaderClick={sasqParams.onSort}
                           nonInteractiveHeaders={['instanceHrid', 'instanceTitle', 'errors']}
+                          pageAmount={pageAmount}
                           onNeedMoreData={onNeedMoreData}
                           sortedColumn={sortedColumn}
                           sortDirection={sortDirection}
@@ -181,6 +183,7 @@ Records.propTypes = {
   updateQuery:PropTypes.func.isRequired,
   error: PropTypes.string,
   hasLoaded: PropTypes.bool.isRequired,
+  pageAmount: PropTypes.number.isRequired,
   onNeedMoreData: PropTypes.func.isRequired,
   children: PropTypes.oneOfType([
     PropTypes.object.isRequired,

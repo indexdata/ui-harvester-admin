@@ -6,6 +6,7 @@
 * Explicit paging for list of harvestables. Fixes UIHAADM-142.
 * When downloading Failed Records, provide all records in the result set, not just the currently visible page. Fixes UIHAADM-140.
 * When running in development (`yarn start`) use the Stripes CLI's `--startProxy` argument. Fixes UIHAADM-144.
+* Explicitly specify paging size for Harvestables, Jobs and Failed Records. Fixes UIHAADM-145.
 
 ## [2.2.0](https://github.com/folio-org/ui-harvester-admin/tree/v2.2.0) (2024-10-23)
 

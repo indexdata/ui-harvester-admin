@@ -20,11 +20,7 @@ const RecordsRoute = ({ stripes, resources, mutator, children }) => {
   }
 
   const handleNeedMoreData = (_askAmount, index, _firstIndex, _direction) => {
-    if (index >= 0) {
-      source.fetchOffset(index);
-    } else {
-      source.fetchMore(RESULT_COUNT_INCREMENT);
-    }
+    source.fetchOffset(index);
   };
 
   const hasLoaded = resources.records.hasLoaded;
@@ -40,6 +36,7 @@ const RecordsRoute = ({ stripes, resources, mutator, children }) => {
       updateQuery={mutator.query.update}
       hasLoaded={hasLoaded}
       error={error}
+      pageAmount={RESULT_COUNT_INCREMENT}
       onNeedMoreData={handleNeedMoreData}
     >
       {children}

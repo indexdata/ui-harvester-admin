@@ -5,8 +5,8 @@ import { StripesConnectedSource } from '@folio/stripes/smart-components';
 import Harvestables from '../views/Harvestables';
 
 
-const INITIAL_RESULT_COUNT = 500;
-const RESULT_COUNT_INCREMENT = 500;
+const INITIAL_RESULT_COUNT = 100;
+const RESULT_COUNT_INCREMENT = 100;
 
 
 function HarvestablesRoute({ stripes, resources, mutator, children }) {
@@ -19,11 +19,7 @@ function HarvestablesRoute({ stripes, resources, mutator, children }) {
   }
 
   const handleNeedMoreData = (_askAmount, index) => {
-    if (index >= 0) {
-      source.fetchOffset(index);
-    } else {
-      source.fetchMore(RESULT_COUNT_INCREMENT);
-    }
+    source.fetchOffset(index);
   };
 
 
@@ -40,6 +36,7 @@ function HarvestablesRoute({ stripes, resources, mutator, children }) {
       updateQuery={mutator.query.update}
       error={error}
       hasLoaded={hasLoaded}
+      pageAmount={RESULT_COUNT_INCREMENT}
       onNeedMoreData={handleNeedMoreData}
     >
       {children}

@@ -19,6 +19,7 @@ function Jobs({
   updateQuery,
   error,
   hasLoaded,
+  pageAmount,
   onNeedMoreData,
   children,
 }) {
@@ -110,6 +111,7 @@ function Jobs({
                           totalCount={resultCount}
                           onHeaderClick={sasqParams.onSort}
                           nonInteractiveHeaders={['seconds']}
+                          pageAmount={pageAmount}
                           onNeedMoreData={onNeedMoreData}
                           sortedColumn={sortedColumn}
                           sortDirection={sortDirection}
@@ -146,6 +148,7 @@ Jobs.propTypes = {
   updateQuery:PropTypes.func.isRequired,
   error: PropTypes.string,
   hasLoaded: PropTypes.bool.isRequired,
+  pageAmount: PropTypes.number.isRequired,
   onNeedMoreData: PropTypes.func.isRequired,
   children: PropTypes.oneOfType([
     PropTypes.object.isRequired,
