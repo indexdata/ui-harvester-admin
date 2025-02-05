@@ -19,8 +19,8 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Run SonarCloud scan
-        uses: sonarsource/sonarcloud-github-action@v4
+      - name: Run Sonar scan
+        uses: sonarsource/sonarqube-scan-action@v4
         with:
           args: >
             -Dsonar.organization=indexdata
