@@ -1,6 +1,6 @@
 # Change history for ui-harvester-admin
 
-## [3.0.0](https://github.com/folio-org/ui-harvester-admin/tree/v3.0.0) (IN PROGRESS)
+## [3.0.0](https://github.com/folio-org/ui-harvester-admin/tree/v3.0.0) (2025-03-11)
 
 * **BREAKING**: migrate Stripes dependencies to their Sunflower versions. Fixes UIHAADM-150.
 * **BREAKING**: upgrade to react-intl v7.1.5. Fixes UIHAADM-149.
