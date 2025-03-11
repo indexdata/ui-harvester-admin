@@ -1,7 +1,8 @@
 # Change history for ui-harvester-admin
 
-## [2.3.0](https://github.com/folio-org/ui-harvester-admin/tree/v2.3.0) (IN PROGRESS)
+## [3.0.0](https://github.com/folio-org/ui-harvester-admin/tree/v3.0.0) (IN PROGRESS)
 
+* **BREAKING**: migrate Stripes dependencies to their Sunflower versions. Fixes UIHAADM-150.
 * Explicit paging for list of failed records. Fixes UIHAADM-141.
 * Explicit paging for list of harvestables. Fixes UIHAADM-142.
 * When downloading Failed Records, provide all records in the result set, not just the currently visible page. Fixes UIHAADM-140.

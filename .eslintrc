@@ -3,6 +3,7 @@
   "parser": "@babel/eslint-parser",
   "ignorePatterns": ["*.test.js"],
   "rules": {
-    "no-useless-escape": "off"
+    "no-useless-escape": "off",
+    "react/forbid-prop-types": "off"
   }
 }
