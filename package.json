@@ -182,7 +182,7 @@
     "prop-types": "*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-intl": "*",
+    "react-intl": "^7.1.5",
     "react-router": "*",
     "react-router-dom": "*"
   },
@@ -197,7 +197,7 @@
     "eslint-import-resolver-alias": "^1.1.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-intl": "^6.6.0",
+    "react-intl": "^7.1.5",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0"
   }

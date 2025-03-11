@@ -3,6 +3,7 @@
 ## [3.0.0](https://github.com/folio-org/ui-harvester-admin/tree/v3.0.0) (IN PROGRESS)
 
 * **BREAKING**: migrate Stripes dependencies to their Sunflower versions. Fixes UIHAADM-150.
+* **BREAKING**: upgrade to react-intl v7.1.5. Fixes UIHAADM-149.
 * Explicit paging for list of failed records. Fixes UIHAADM-141.
 * Explicit paging for list of harvestables. Fixes UIHAADM-142.
 * When downloading Failed Records, provide all records in the result set, not just the currently visible page. Fixes UIHAADM-140.
