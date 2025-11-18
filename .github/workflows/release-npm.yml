@@ -68,7 +68,7 @@ jobs:
       - name: Setup kernel for react native, increase watchers
         run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
       - name: Setup NPM for install
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ env.NODEJS_VERSION }}
           check-latest: true
@@ -147,7 +147,7 @@ jobs:
             }
           body: ${{ steps.moduleDescriptor.outputs.content }}
       - name: Setup NPM for publish
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ env.NODEJS_VERSION }}
           check-latest: true
