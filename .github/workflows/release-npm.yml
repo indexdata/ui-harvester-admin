@@ -10,7 +10,7 @@ name: release-npm
 #  'https://registry.folio-dev.indexdata.com'
 
 env:
-  NODEJS_VERSION: '18'
+  NODEJS_VERSION: '20'
   FOLIO_NPM_REGISTRY: 'https://repository.folio.org/repository/npm-folioci/'
   FOLIO_MD_REGISTRY: 'https://registry.folio-dev.indexdata.com'
   OK_SESSION: 'session1'

@@ -7,7 +7,7 @@ name: build-npm
 #  'https://repository.folio.org/repository/npm-folioci/'
 
 env:
-  NODEJS_VERSION: '18'
+  NODEJS_VERSION: '20'
   FOLIO_NPM_REGISTRY: 'https://repository.folio.org/repository/npm-folioci/'
   COMPILE_TRANSLATION_FILES: true
 
