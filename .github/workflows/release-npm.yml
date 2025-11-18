@@ -178,7 +178,7 @@ jobs:
           echo "Do logout ..."
           OK -S ${{ env.OK_SESSION }} -x
       - name: Publish yarn.lock
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: yarn.lock
           path: yarn.lock
