@@ -1,6 +1,6 @@
 # ui-harvester-admin
 
-Copyright (C) 2022 Index Data Aps.
+Copyright (C) 2022-2025 Index Data Aps.
 
 This software is distributed under the terms of the Apache License, Version 2.0. See the file "[LICENSE](LICENSE)" for more information.
 
