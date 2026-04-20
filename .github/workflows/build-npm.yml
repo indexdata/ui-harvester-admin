@@ -23,7 +23,7 @@ jobs:
       - name: Get version from package.json
         id: package_version
         # uses: notiz-dev/github-action-json-property@release
-        uses: Srxzwei/github-action-json-property@1.0.0
+        uses: srxzwei/github-action-json-property@2.0.0
         with:
           path: 'package.json'
           prop_path: 'version'
@@ -61,7 +61,7 @@ jobs:
       - name: Print FOLIO module descriptor
         run: cat module-descriptor.json
       - name: Publish yarn.lock
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v7
         with:
           name: yarn.lock
           path: yarn.lock
