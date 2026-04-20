@@ -43,7 +43,6 @@ jobs:
         with:
           node-version: ${{ env.NODEJS_VERSION }}
           check-latest: true
-          always-auth: true
       - name: Set yarn config
         run: yarn config set @folio:registry $FOLIO_NPM_REGISTRY
       - name: Run yarn install

@@ -72,7 +72,6 @@ jobs:
         with:
           node-version: ${{ env.NODEJS_VERSION }}
           check-latest: true
-          always-auth: true
       - name: Set yarn config
         run: yarn config set @folio:registry $FOLIO_NPM_REGISTRY
       - name: Run yarn install
@@ -151,7 +150,6 @@ jobs:
         with:
           node-version: ${{ env.NODEJS_VERSION }}
           check-latest: true
-          always-auth: true
           registry-url: "https://registry.npmjs.org"
       - name: Exclude some CI-generated artifacts in package
         run: |
